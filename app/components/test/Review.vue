@@ -4,8 +4,6 @@ import type { LangCode } from '~/types/lang'
 import { I18N_TO_DB } from '~/types/lang'
 const { locale } = useI18n()
 
-const store = usePlayerStore()
-
 const { userAnswers, testLyrics, lang, selectedQuizType, translationGameLang } =
   defineProps<{
     userAnswers: { cAnswer: string; uAnswer: string }[]
@@ -31,7 +29,6 @@ const emit = defineEmits<{
         <div class="flex items-center space-x-5">
           <button
             class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#FFE5E5] text-[#F9595F] transition-all hover:bg-[#F9595F] hover:text-white active:scale-90 md:h-12 md:w-12"
-            :disabled="store.isPlaying"
             @click="emit('playSegment', { start: lyric.start, end: lyric.end })"
           >
             <i class="fa-solid fa-play ml-0.5 text-xs"></i>

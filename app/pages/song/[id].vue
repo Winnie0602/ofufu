@@ -6,9 +6,16 @@ import type { LangCode } from '~/types/lang'
 const route = useRoute()
 const { t } = useI18n()
 
-const store = usePlayerStore()
-
 const videoId = computed(() => route.params.id as string)
+
+const {
+  currentTime,
+  isPlaying,
+  createPlayer,
+  play,
+  pause,
+  seekTo,
+} = useYoutubePlayer(videoId.value)
 
 // 該歌api資料
 const { data: currentSong, pending } = await useFetch<SongData | null>(
@@ -86,7 +93,7 @@ const findLyricIndexByTime = (time: number, lyrics: LyricData[]) => {
 
 const currentLineIndex = computed(() => {
   if (!currentSong.value?.lyrics || !hasTimeStamp.value) return -1
-  return findLyricIndexByTime(store.currentTime, currentSong.value.lyrics)
+  return findLyricIndexByTime(currentTime.value, currentSong.value.lyrics)
 })
 
 // 現在播放的歌詞的nanoid
@@ -100,7 +107,6 @@ const currentNanoid = computed(() => {
   return currentSong.value.lyrics[currentLineIndex.value]?.nanoid
 })
 
-// ＊＊＊＊＊＊＊
 
 const { data: otherSongs } = await useFetch<{ songs: SongsList[] }>(
   '/api/list/songs',
@@ -113,29 +119,33 @@ const { data: otherSongs } = await useFetch<{ songs: SongsList[] }>(
 )
 
 watch(
-  videoId,
-  (id) => {
-    store.loadVideo(id)
-  },
-  { immediate: true },
-)
-
-watch(
   currentSong,
   (song) => {
     if (!song) return
 
-    store.setSongInfo(song.title, song.artist)
     showTranslations.value = song.translation_langs
   },
   { immediate: true },
 )
+
+onMounted(async () => {
+  await nextTick()
+  createPlayer('song-player')
+})
 </script>
 
 <template>
   <div
     class="mx-auto my-4 w-full px-4 md:my-6 md:max-w-[1280px] lg:px-5 xl:px-0"
   >
+    <ClientOnly>
+      <div
+        class="mb-6 h-[210px] w-full overflow-hidden rounded-2xl bg-black shadow-sm md:h-[520px]"
+      >
+        <div id="song-player" class="h-full w-full" />
+      </div>
+    </ClientOnly>
+
     <div class="flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-10">
       <!-- 左邊區塊 -->
       <div class="min-h-[600px] w-full lg:w-2/3">
@@ -188,15 +198,20 @@ watch(
                 artist: currentSong.artist,
               }"
               :current-line-index="currentLineIndex"
-              :song-lang="currentSong.language || ['']"
+              :song-lang="currentSong.language || 'en'"
               :show-translations="showTranslations"
               :has-time-stamp="hasTimeStamp"
+              :current-time="currentTime"
+              @seek="seekTo"
             />
 
             <!-- 單字 -->
             <SongWords
               :song="currentSong"
               :current-nanoid="currentNanoid ?? ''"
+              :is-playing="isPlaying"
+              @pause="pause"
+              @play="play"
             />
           </div>
         </div>

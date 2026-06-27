@@ -3,8 +3,6 @@ import type { LangCode } from '~/types/lang'
 import type { SongData, LyricData } from '~/types/song'
 import emblaCarouselVue from 'embla-carousel-vue'
 
-const store = usePlayerStore()
-
 const { currentSong, testLyrics, translationGameLang, selectedQuizType } =
   defineProps<{
     currentSong: SongData
@@ -45,13 +43,16 @@ const isAllAnswered = computed(
 
 // 聆聽生命蘋果 共三次機會
 const life = ref<0 | 1 | 2 | 3>(3)
+const isPreviewPlaying = ref(false)
 
 // 題目下方的播放鍵邏輯
 const handlePlay = (lyric?: LyricData) => {
-  if (!lyric || store.isPlaying) return
+  if (!lyric || isPreviewPlaying.value) return
 
-  // 播放當前歌詞的段落
-  store.playSegmentRequest(lyric.start, lyric.end)
+  isPreviewPlaying.value = true
+  window.setTimeout(() => {
+    isPreviewPlaying.value = false
+  }, 500)
 
   // 如果還沒全部作答完，就扣聆聽生命蘋果
   if (!isAllAnswered.value) {
@@ -85,11 +86,6 @@ const handleNextTest = (index: number) => {
   nowIndex.value = Math.min(index + 1, testLyrics.length - 1)
 }
 
-// 一進來頁面就播放第一句
-onMounted(() => {
-  store.playSegmentRequest(testLyrics[0]?.start ?? 0, testLyrics[0]?.end ?? 0)
-})
-
 // 監聽題目切換，切到下一題就播放下一段歌詞，並恢復聆聽生命蘋果
 watch(nowIndex, (index) => {
   life.value = 3
@@ -99,11 +95,6 @@ watch(nowIndex, (index) => {
   }
 
   emblaApi.value?.scrollTo(index)
-
-  store.playSegmentRequest(
-    testLyrics[index]?.start ?? 0,
-    testLyrics[index]?.end ?? 0,
-  )
 })
 
 // 重新同步目前的 swiper index
@@ -194,16 +185,16 @@ watchEffect((onCleanup) => {
           <button
             class="group flex h-12 w-12 items-center justify-center rounded-full transition-all active:scale-90 md:h-16 md:w-16"
             :class="
-              store.isPlaying || (!isAllAnswered && life < 1)
+              isPreviewPlaying || (!isAllAnswered && life < 1)
                 ? 'cursor-not-allowed bg-gray-100'
                 : 'bg-[#FFE5E5] shadow-md shadow-red-100 hover:bg-[#ffd9d9]'
             "
-            :disabled="store.isPlaying || (!isAllAnswered && life < 1)"
+            :disabled="isPreviewPlaying || (!isAllAnswered && life < 1)"
             @click="handlePlay(testLyrics[nowIndex])"
           >
             <i
               class="fa-solid fa-play text-xl transition-transform group-hover:scale-110 md:text-2xl"
-              :class="store.isPlaying ? 'text-gray-300' : 'text-[#F9595F]'"
+              :class="isPreviewPlaying ? 'text-gray-300' : 'text-[#F9595F]'"
             />
           </button>
         </div>

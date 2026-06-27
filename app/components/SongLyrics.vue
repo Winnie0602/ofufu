@@ -9,6 +9,7 @@ const {
   songLang,
   showTranslations,
   hasTimeStamp,
+  currentTime,
 } = defineProps<{
   lyrics: LyricData[]
   songData: { title: string; artist: string }
@@ -16,9 +17,12 @@ const {
   songLang: LangCode
   showTranslations: LangCode[] | undefined
   hasTimeStamp: boolean
+  currentTime: number
 }>()
 
-const store = usePlayerStore()
+const emit = defineEmits<{
+  (e: 'seek', value: number): void
+}>()
 
 // 每句歌詞dom陣列
 const lyricsRefs = ref<HTMLElement[]>([])
@@ -49,7 +53,7 @@ const clickLyric = (start: number, index: number) => {
   // 點擊歌詞後currentLineIndex先使用假值
   tempIndex.value = index
 
-  store.seekToRequest(start)
+  emit('seek', start)
 }
 
 // 上一次已經處理過的歌詞index
@@ -77,7 +81,7 @@ watch(
 ) // 確保 DOM 更新後再執行
 
 watch(
-  () => store.currentTime,
+  () => currentTime,
   (time) => {
     if (tempIndex.value === null) return
 

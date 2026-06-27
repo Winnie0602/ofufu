@@ -4,12 +4,16 @@ import type { DisplayAPIResult } from '~/types/tatoeba'
 import { LANG_CONFIG_MAP, I18N_TO_DB } from '~/types/lang'
 const { locale } = useI18n()
 
-const { song, currentNanoid } = defineProps<{
+const { song, currentNanoid, isPlaying } = defineProps<{
   song: SongData
   currentNanoid: string
+  isPlaying: boolean
 }>()
 
-const store = usePlayerStore()
+const emit = defineEmits<{
+  (e: 'play'): void
+  (e: 'pause'): void
+}>()
 
 // 底下例句panel打開狀態
 const isPanelOpen = ref(false)
@@ -41,17 +45,17 @@ const openPanel = async (word: string) => {
   selectedWord.value = word
 
   // 記住打開前的播放狀態
-  wasListening = store.isPlaying
+  wasListening = isPlaying
 
   isPanelOpen.value = true
-  store.pause()
+  emit('pause')
 
   tatoebaSentenses.value = await getTatoebaResult(selectedWord.value)
 }
 
 watch(isPanelOpen, (open) => {
   if (!open && wasListening) {
-    store.play()
+    emit('play')
   }
 })
 

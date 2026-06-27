@@ -3,8 +3,6 @@ import type { SongData } from '~/types/song'
 import type { LangCode } from '~/types/lang'
 import { languageMapCodeLabel } from '~/types/lang'
 
-const store = usePlayerStore()
-
 const { currentSong } = defineProps<{
   currentSong: SongData
 }>()
@@ -18,6 +16,7 @@ const emit = defineEmits<{
 
 // 目前的播放速度
 const currentSpeed = ref(1)
+const isPreviewPlaying = ref(false)
 
 // 語言翻譯遊戲 選擇的語言
 const translationGameLang = ref<LangCode | null>(null)
@@ -38,24 +37,10 @@ const handleSliderChange = (e: Event) => {
   const value = Number((e.target as HTMLInputElement).value)
 
   currentSpeed.value = value
-
-  // 設定播放器速度(test mode)
-  store.setPlaybackRate(currentSpeed.value)
-
-  // 播放第一句到第五句歌詞，讓使用者可以即時聽到速度變化的效果
-  store.playSegmentRequest(
-    currentSong.lyrics[0]?.start ?? 0,
-    currentSong.lyrics[5]?.end ?? 0,
-  )
 }
 
-const handlePlay = (isPlaying: boolean) => {
-  if (isPlaying) {
-    store.play()
-    return
-  }
-
-  store.pause()
+const handlePlay = () => {
+  isPreviewPlaying.value = !isPreviewPlaying.value
 }
 
 // 題型更換時開啟特效
@@ -94,11 +79,11 @@ onMounted(() => {
             </div>
             <button
               class="flex h-12 w-12 flex-none items-center justify-center rounded-full border-2 border-pink-200 bg-white shadow-md"
-              @click="handlePlay(!store.isPlaying)"
+              @click="handlePlay"
             >
               <i
                 class="fa-solid text-lg text-[#F9595F]"
-                :class="store.isPlaying ? 'fa-pause' : 'fa-play'"
+                :class="isPreviewPlaying ? 'fa-pause' : 'fa-play'"
               ></i>
             </button>
           </div>
@@ -299,12 +284,7 @@ onMounted(() => {
                         </span>
                         <button
                           class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-pink-100 bg-white text-[#F9595F] shadow-sm"
-                          @click="
-                            store.playSegmentRequest(
-                              currentSong.lyrics[5]?.start ?? 0,
-                              currentSong.lyrics[5]?.end ?? 0,
-                            )
-                          "
+                          @click="handlePlay"
                         >
                           <i class="fa-solid fa-volume-high text-sm"></i>
                         </button>

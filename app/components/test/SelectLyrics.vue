@@ -5,8 +5,6 @@ const { locale } = useI18n()
 
 const { show } = useToast()
 
-const store = usePlayerStore()
-
 const { currentSong, translationGameLang } = defineProps<{
   currentSong: SongData
   translationGameLang: LangCode | null
@@ -112,8 +110,8 @@ const toggleDisclosure = (id: string) => {
               >
                 <!-- 播放 -->
                 <button
+                  type="button"
                   class="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-full border border-[#F9595F] bg-[#F9595F]/90 px-4 py-1.5 text-xs font-medium text-white transition-all hover:bg-[#e8484e] md:flex-none md:rounded-md md:px-4 md:text-sm"
-                  @click="store.playSegmentRequest(lyric.start, lyric.end)"
                 >
                   <i class="fa-solid fa-play"></i>
                   <span>{{ $t('preview') }}</span>

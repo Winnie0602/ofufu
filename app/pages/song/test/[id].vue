@@ -4,8 +4,6 @@ import SelectTestType from '~/components/test/SelectTestType.vue'
 import type { LangCode } from '~/types/lang'
 import type { SongData, LyricData } from '~/types/song'
 
-const store = usePlayerStore()
-
 const route = useRoute()
 
 const router = useRouter()
@@ -15,8 +13,6 @@ const { t } = useI18n()
 const { show } = useToast()
 
 const videoId = computed(() => route.params.id as string)
-
-store.setTestVideoId(videoId.value)
 
 // 該歌詞
 const { data: currentSong, pending } = await useFetch<SongData | null>(
@@ -172,17 +168,10 @@ watch(step, async (newStep) => {
       userAnswers.value = []
       break
     case 4:
-      store.setPlaybackRate(1)
       break
     case 2:
-      store.isPlaying = false
       break
   }
-})
-
-// 頁面載入完時，預設播放第一句歌詞
-onMounted(() => {
-  store.seekToRequest(currentSong.value?.lyrics[0]?.start ?? 0)
 })
 </script>
 
@@ -244,7 +233,7 @@ onMounted(() => {
         v-if="currentSong && step === 3"
         :current-song="currentSong"
         :test-lyrics="selectedLyrics"
-        :is-playing="store.isPlaying"
+        :is-playing="false"
         :selected-quiz-type="selectedQuizType"
         :translation-game-lang="translationGameLang"
         @set-answers="(ans) => (userAnswers = ans)"
@@ -259,10 +248,6 @@ onMounted(() => {
         :selected-quiz-type="selectedQuizType"
         :translation-game-lang="
           translationGameLang || currentSong.translation_langs.at(0) || 'en'
-        "
-        @play-segment="
-          (e: { start: number; end: number }) =>
-            store.playSegmentRequest(e.start, e.end)
         "
       />
     </div>

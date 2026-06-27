@@ -58,7 +58,7 @@ declare global {
       setVolume(suggestedRate: number): void
       setPlaybackRate(suggestedRate: number): void
       getPlaybackRate(): number
-      getAvailablePlaybackRates(): array
+      getAvailablePlaybackRates(): number[]
       getDuration(): number
       loadVideoById(videoId: string, startSeconds: number): void
       cueVideoById(videoId: string, startSeconds: number): void
