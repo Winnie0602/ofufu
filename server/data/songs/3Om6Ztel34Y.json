@@ -1,0 +1,96 @@
+{
+  "id": "3Om6Ztel34Y",
+  "title": "Bluebird",
+  "artist": "落日飛車",
+  "language": "en",
+  "vocabularies": [
+    {
+      "vocabulary": "purple",
+      "zh": "紫色",
+      "en": "",
+      "kr": ""
+    },
+    {
+      "vocabulary": "cheeks",
+      "zh": "臉頰",
+      "en": "",
+      "kr": ""
+    }
+  ],
+  "lyrics": [
+    {
+      "start": "13",
+      "end": "16",
+      "en": "Don't tell me that you love me",
+      "zh": "不要告訴我你愛我"
+    },
+    {
+      "start": "19",
+      "end": "22",
+      "en": "Put purple on my cheeks",
+      "zh": "在我的臉頰抹上紫色"
+    },
+    {
+      "start": "26",
+      "end": "31",
+      "en": "Just let my blue lips softly speak to you",
+      "zh": "只要讓我藍色的雙唇輕聲對你訴說"
+    },
+
+    {
+      "start": "32",
+      "end": "34",
+      "en": "Put grey on my wings",
+      "zh": "在我的翅膀上染上灰色"
+    },
+
+    {
+      "start": "35",
+      "end": "38",
+      "en": "I'll fly to where you are",
+      "zh": "我會飛向你所在的地方"
+    },
+    {
+      "start": "38",
+      "end": "40",
+      "en": "Flying under the sun",
+      "zh": "在陽光之下飛翔"
+    },
+    {
+      "start": "41",
+      "end": "44",
+      "en": "Flying with my golden heart",
+      "zh": "帶著我金色的心飛翔"
+    },
+    {
+      "start": "44",
+      "end": "46",
+      "en": "Flying into your arms",
+      "zh": "飛進你的懷裡"
+    },
+    {
+      "start": "48",
+      "end": "50",
+      "en": "The sky couldn't stop",
+      "zh": "天空也無法阻止"
+    },
+    {
+      "start": "51",
+      "end": "56",
+      "en": "Me from flying to your love",
+      "zh": "我飛向你的愛"
+    },
+    {
+      "start": "56",
+      "end": "59",
+      "en": "My tears have all dropped",
+      "zh": "我的眼淚早已落盡"
+    },
+    {
+      "start": "59",
+      "end": "62",
+      "en": "I'll fly through the dark",
+      "zh": "我會飛過黑暗"
+    }
+  ]
+}

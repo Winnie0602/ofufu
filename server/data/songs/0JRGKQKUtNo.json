@@ -1,0 +1,340 @@
+{
+  "id": "0JRGKQKUtNo",
+  "title": "고백",
+  "artist": "Hot Potato",
+  "language": "kr",
+  "lyrics": [
+    {
+      "start": "16",
+      "end": "23",
+      "kr": [
+        { "surface": "달이", "meaning": "月亮" },
+        { "surface": "차고", "meaning": "盈滿、變圓", "origin": "차다" },
+        { "surface": "내", "meaning": "我的" },
+        { "surface": "마음도", "meaning": "心也" },
+        { "surface": "차고", "meaning": "滿溢", "origin": "차다" }
+      ],
+      "zh": "月亮漸漸圓滿，我的心也跟著滿了起來"
+    },
+    {
+      "start": "24",
+      "end": "31",
+      "kr": [
+        { "surface": "이대로", "meaning": "就這樣" },
+        { "surface": "담아", "meaning": "裝進、藏住", "origin": "담다" },
+        { "surface": "두기엔", "meaning": "一直放著的話" },
+        { "surface": "너무", "meaning": "太過於" },
+        { "surface": "안타까워", "meaning": "可惜、令人惋惜" }
+      ],
+      "zh": "就這樣藏在心裡，實在太可惜了"
+    },
+    {
+      "start": "32",
+      "end": "38",
+      "kr": [
+        { "surface": "너를", "meaning": "你（受詞）" },
+        { "surface": "향해", "meaning": "朝向" },
+        { "surface": "가는데", "meaning": "正在走去", "origin": "가다" }
+      ],
+      "zh": "我正朝著你走去"
+    },
+    {
+      "start": "41",
+      "end": "48",
+      "kr": [
+        { "surface": "달은", "meaning": "月亮" },
+        { "surface": "내게", "meaning": "對我" },
+        { "surface": "오라", "meaning": "過來吧" },
+        { "surface": "손짓하고", "meaning": "招手示意", "origin": "손짓하다" }
+      ],
+      "zh": "月亮卻向我招手，要我過去"
+    },
+    {
+      "start": "49",
+      "end": "62",
+      "kr": [
+        { "surface": "귓속에", "meaning": "在耳邊" },
+        { "surface": "얘길", "meaning": "低語、話語" },
+        { "surface": "하네", "meaning": "說著", "origin": "하다" },
+        { "surface": "지금", "meaning": "現在" },
+        { "surface": "이", "meaning": "這" },
+        { "surface": "순간이", "meaning": "瞬間" },
+        { "surface": "바로", "meaning": "正是" },
+        { "surface": "그", "meaning": "那個" },
+        { "surface": "순간이야", "meaning": "瞬間啊" }
+      ],
+      "zh": "它在我耳邊低語：就是現在，這一刻"
+    },
+
+    {
+      "start": "65",
+      "end": "73",
+      "kr": [
+        { "surface": "제일", "meaning": "最" },
+        { "surface": "마음에", "meaning": "合心意" },
+        { "surface": "드는", "meaning": "喜歡的", "origin": "들다" },
+        { "surface": "옷을", "meaning": "衣服" },
+        { "surface": "입고", "meaning": "穿上", "origin": "입다" },
+        { "surface": "노란", "meaning": "黃色的" },
+        { "surface": "꽃", "meaning": "花" },
+        { "surface": "한", "meaning": "一" },
+        { "surface": "송이를", "meaning": "朵（量詞）" },
+        { "surface": "손에", "meaning": "在手中" },
+        { "surface": "들고", "meaning": "拿著", "origin": "들다" }
+      ],
+      "zh": "穿上我最喜歡的衣服，手裡拿著一朵黃色的花"
+    },
+    {
+      "start": "74",
+      "end": "80",
+      "kr": [
+        { "surface": "널", "meaning": "你（受詞）" },
+        { "surface": "바라보다", "meaning": "望著", "origin": "바라보다" },
+        { "surface": "그만", "meaning": "不小心" },
+        { "surface": "나도", "meaning": "我也" },
+        { "surface": "모르게", "meaning": "在不知不覺中" },
+        {
+          "surface": "웃어버렸네",
+          "meaning": "笑了出來",
+          "origin": "웃어버리다"
+        }
+      ],
+      "zh": "看著你，我不知不覺就笑了出來"
+    },
+
+    {
+      "start": "80",
+      "end": "88",
+      "kr": [
+        { "surface": "이게", "meaning": "這樣" },
+        { "surface": "아닌데", "meaning": "不是這樣的" },
+        { "surface": "내", "meaning": "我的" },
+        { "surface": "마음은", "meaning": "心" },
+        { "surface": "이게", "meaning": "這樣" },
+        { "surface": "아닌데", "meaning": "不是這樣的" }
+      ],
+      "zh": "不是這樣的，我的心不是這樣的"
+    },
+    {
+      "start": "89",
+      "end": "97",
+      "kr": [
+        { "surface": "널", "meaning": "為了你" },
+        { "surface": "위해", "meaning": "為了" },
+        { "surface": "준비한", "meaning": "準備好的", "origin": "준비하다" },
+        { "surface": "오백가지", "meaning": "五百種" },
+        { "surface": "멋진", "meaning": "美好的" },
+        { "surface": "말이", "meaning": "話語" },
+        { "surface": "남았는데", "meaning": "還留著" }
+      ],
+      "zh": "為你準備的五百種美好話語，明明都還沒說出口"
+    },
+    {
+      "start": "97",
+      "end": "105",
+      "kr": [
+        { "surface": "사랑", "meaning": "愛" },
+        { "surface": "한다는", "meaning": "說愛的", "origin": "사랑하다" },
+        { "surface": "그", "meaning": "那種" },
+        { "surface": "흔한", "meaning": "老套的" },
+        { "surface": "말이", "meaning": "話" },
+        { "surface": "아니야", "meaning": "不是" }
+      ],
+      "zh": "不是那種隨口就說的『我愛你』"
+    },
+    {
+      "start": "105",
+      "end": "115",
+      "kr": [
+        { "surface": "그", "meaning": "那樣" },
+        { "surface": "보단", "meaning": "相比之下" },
+        { "surface": "더욱더", "meaning": "更加" },
+        { "surface": "로맨틱하고", "meaning": "浪漫的" },
+        { "surface": "달콤한", "meaning": "甜美的" },
+        { "surface": "말을", "meaning": "話語" },
+        { "surface": "준비했단", "meaning": "準備好了", "origin": "준비하다" },
+        { "surface": "말이야", "meaning": "這麼說的" }
+      ],
+      "zh": "而是比那更浪漫、更甜美的話，我早就準備好了"
+    },
+    {
+      "start": "132",
+      "end": "139",
+      "kr": [
+        { "surface": "숨이", "meaning": "呼吸" },
+        { "surface": "차고", "meaning": "急促、喘", "origin": "차다" },
+        { "surface": "밤", "meaning": "夜晚" },
+        { "surface": "공기도", "meaning": "空氣也" },
+        { "surface": "차고", "meaning": "寒冷", "origin": "차다" }
+      ],
+      "zh": "呼吸變得急促，夜晚的空氣也很冰冷"
+    },
+    {
+      "start": "139",
+      "end": "147",
+      "kr": [
+        { "surface": "두", "meaning": "兩" },
+        { "surface": "눈을", "meaning": "眼睛（受詞）" },
+        { "surface": "감아야만", "meaning": "只有閉上才", "origin": "감다" },
+        { "surface": "네", "meaning": "你的" },
+        { "surface": "모습이", "meaning": "模樣" },
+        { "surface": "보여", "meaning": "看得見", "origin": "보다" }
+      ],
+      "zh": "只有閉上雙眼，才能看見你的模樣"
+    },
+    {
+      "start": "149",
+      "end": "152",
+      "kr": [
+        { "surface": "걸을", "meaning": "走" },
+        { "surface": "수가", "meaning": "能夠（可能性）" },
+        { "surface": "없는데", "meaning": "卻不能", "origin": "없다" }
+      ],
+      "zh": "明明連走路都做不到"
+    },
+
+    {
+      "start": "157",
+      "end": "164",
+      "kr": [
+        { "surface": "구름", "meaning": "雲" },
+        { "surface": "위를", "meaning": "在……之上" },
+        {
+          "surface": "걷는다는",
+          "meaning": "走著的這種說法",
+          "origin": "걷다"
+        },
+        { "surface": "말이", "meaning": "話" },
+        { "surface": "과장이", "meaning": "誇張" },
+        { "surface": "아니란", "meaning": "並不是", "origin": "아니다" },
+        { "surface": "걸", "meaning": "這件事" },
+        { "surface": "알게", "meaning": "知道了" },
+        { "surface": "됐어", "meaning": "變成了", "origin": "되다" }
+      ],
+      "zh": "我才明白，所謂走在雲端並不是誇張的說法"
+    },
+    {
+      "start": "165",
+      "end": "172",
+      "kr": [
+        { "surface": "널", "meaning": "你（受詞）" },
+        { "surface": "알게", "meaning": "認識" },
+        { "surface": "된", "meaning": "之後", "origin": "되다" },
+        { "surface": "후부터", "meaning": "從那之後" },
+        { "surface": "나의", "meaning": "我的" },
+        { "surface": "모든", "meaning": "所有" },
+        { "surface": "건", "meaning": "事情" },
+        { "surface": "다", "meaning": "全部" },
+        { "surface": "달라졌어", "meaning": "改變了", "origin": "달라지다" }
+      ],
+      "zh": "自從認識你之後，我的一切都改變了"
+    },
+
+    {
+      "start": "172",
+      "end": "179",
+      "kr": [
+        { "surface": "이게", "meaning": "這樣" },
+        { "surface": "아닌데", "meaning": "不是這樣的" },
+        { "surface": "내", "meaning": "我的" },
+        { "surface": "마음은", "meaning": "心" },
+        { "surface": "이게", "meaning": "這樣" },
+        { "surface": "아닌데", "meaning": "不是這樣的" }
+      ],
+      "zh": "不是這樣的，我的心不是這樣的"
+    },
+    {
+      "start": "180",
+      "end": "185",
+      "kr": [
+        { "surface": "널", "meaning": "你（受詞）" },
+        { "surface": "위해", "meaning": "為了" },
+        { "surface": "준비한", "meaning": "準備好的", "origin": "준비하다" },
+        { "surface": "오백가지", "meaning": "五百種" }
+      ],
+      "zh": "為你準備的五百種"
+    },
+    {
+      "start": "185",
+      "end": "188",
+      "kr": [
+        { "surface": "멋진", "meaning": "美好的" },
+        { "surface": "말이", "meaning": "話語" },
+        { "surface": "남았는데", "meaning": "還留著", "origin": "남다" }
+      ],
+      "zh": "那些美好的話語明明都還沒說完"
+    },
+    {
+      "start": "189",
+      "end": "196",
+      "kr": [
+        { "surface": "사랑", "meaning": "愛" },
+        { "surface": "한다는", "meaning": "說愛的", "origin": "사랑하다" },
+        { "surface": "그", "meaning": "那種" },
+        { "surface": "흔한", "meaning": "老套的" },
+        { "surface": "말이", "meaning": "話" },
+        { "surface": "아니야", "meaning": "不是" }
+      ],
+      "zh": "不是那種隨口就說的『我愛你』"
+    },
+    {
+      "start": "197",
+      "end": "205",
+      "kr": [
+        { "surface": "그", "meaning": "那樣" },
+        { "surface": "보단", "meaning": "相比之下" },
+        { "surface": "더욱더", "meaning": "更加" },
+        { "surface": "로맨틱하고", "meaning": "浪漫的" },
+        { "surface": "달콤한", "meaning": "甜美的" },
+        { "surface": "말을", "meaning": "話語" },
+        { "surface": "준비했단", "meaning": "準備好了", "origin": "준비하다" },
+        { "surface": "말이야", "meaning": "我是說" }
+      ],
+      "zh": "而是比那更浪漫、更甜美的話，我早就準備好了"
+    },
+
+    {
+      "start": "206",
+      "end": "208",
+      "kr": [
+        { "surface": "나를", "meaning": "我（受詞）" },
+        { "surface": "봐줘요", "meaning": "請看看我", "origin": "보다" }
+      ],
+      "zh": "請看看我"
+    },
+    {
+      "start": "208",
+      "end": "212",
+      "kr": [
+        { "surface": "내", "meaning": "我的" },
+        { "surface": "말을", "meaning": "話" },
+        { "surface": "들어봐", "meaning": "聽聽看", "origin": "듣다" },
+        { "surface": "줘요", "meaning": "請" }
+      ],
+      "zh": "請聽聽我說的話"
+    },
+    {
+      "start": "212",
+      "end": "219",
+      "kr": [
+        { "surface": "아무리", "meaning": "無論怎麼" },
+        { "surface": "생각을", "meaning": "思考" },
+        { "surface": "하고", "meaning": "做著" },
+        { "surface": "또", "meaning": "又" },
+        { "surface": "해도", "meaning": "即使如此" }
+      ],
+      "zh": "不管怎麼想、反覆去想"
+    },
+    {
+      "start": "219",
+      "end": "222",
+      "kr": [
+        { "surface": "믿어지지", "meaning": "無法相信" },
+        { "surface": "않을", "meaning": "不會" },
+        { "surface": "만큼", "meaning": "到……程度" },
+        { "surface": "사랑해", "meaning": "我愛你", "origin": "사랑하다" }
+      ],
+      "zh": "依然愛你愛到難以置信"
+    }
+  ]
+}

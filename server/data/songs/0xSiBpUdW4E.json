@@ -1,0 +1,112 @@
+{
+  "id": "0xSiBpUdW4E",
+  "title": "マリーゴールド",
+  "artist": "あいみょん",
+  "language": "ja",
+  "vocabularies": [
+    {
+      "vocabulary": "風",
+      "zh": "風",
+      "en": "wind",
+      "kr": "바람"
+    },
+    {
+      "vocabulary": "強さ",
+      "zh": "強度",
+      "en": "strength",
+      "kr": "강도"
+    }
+  ],
+  "lyrics": [
+    {
+      "start": 20,
+      "end": 28,
+      "ja": "風の強さがちょっと心を揺さぶりすぎて",
+      "zh": "風的強度有點過頭地動搖了我的心",
+      "en": "The strength of the wind shakes my heart a little too much",
+      "kr": "바람의 세기가 내 마음을 조금 너무 흔들어 놓아서",
+      "ruby": "<ruby>風<rt>かぜ</rt></ruby>の<ruby>強さ<rt>つよさ</rt></ruby>がちょっと<ruby>心<rt>こころ</rt></ruby>を<ruby>揺さぶり<rt>ゆさぶり</rt></ruby>すぎて"
+    },
+    {
+      "start": 29,
+      "end": 38,
+      "ja": "真面目に見つめた君が恋しい",
+      "zh": "那個認真凝視著的你，讓我好想念",
+      "en": "I miss the way you looked at me so sincerely",
+      "kr": "진지하게 바라보던 네가 그리워",
+      "ruby": "<ruby>真面目<rt>まじめ</rt></ruby>に<ruby>見<rt>み</rt></ruby>つめた君が<ruby>恋<rt>こい</rt></ruby>しい"
+    },
+    {
+      "start": 39,
+      "end": 46,
+      "ja": "でんぐり返しの日々可哀想なふりをして",
+      "zh": "在顛倒混亂的日子裡，裝出一副可憐的樣子",
+      "en": "In these topsy-turvy days, pretending to be pitiful",
+      "kr": "뒤죽박죽인 나날 속에서 불쌍한 척을 하며",
+      "ruby": "<ruby>でんぐり返し<rt>でんぐりがえし</rt></ruby>の<ruby>日々<rt>ひび</rt></ruby>可哀想な<ruby>ふり<rt>ふり</rt></ruby>をして"
+    },
+    {
+      "start": 48,
+      "end": 56,
+      "ja": "だらけてみたけど希望の光は",
+      "zh": "試著放縱自己，但希望的光芒",
+      "en": "I tried lazing around, but the light of hope",
+      "kr": "게으르게 지내 보았지만 희망의 빛은",
+      "ruby": "だらけてみたけど<ruby>希望<rt>きぼう</rt></ruby>の<ruby>光<rt>ひかり</rt></ruby>は"
+    },
+    {
+      "start": 57,
+      "end": 61,
+      "ja": "目の前でずっと輝いている",
+      "zh": "一直在我眼前閃耀著",
+      "en": "keeps shining right in front of me",
+      "kr": "내 눈앞에서 계속 빛나고 있어",
+      "ruby": "<ruby>目<rt>め</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>でずっと<ruby>輝<rt>かがや</rt></ruby>いている"
+    },
+    {
+      "start": 61,
+      "end": 64,
+      "ja": "幸せだ",
+      "zh": "這就是幸福",
+      "en": "I feel happy",
+      "kr": "행복해",
+      "ruby": "<ruby>幸<rt>しあわ</rt></ruby>せだ"
+    },
+    {
+      "start": 65,
+      "end": 69,
+      "ja": "麦わらの帽子の君が",
+      "zh": "戴著草帽的你",
+      "en": "You wearing a straw hat",
+      "kr": "밀짚모자를 쓴 너는",
+      "ruby": "<ruby>麦わら<rt>むぎわら</rt></ruby>の<ruby>帽子<rt>ぼうし</rt></ruby>の君が"
+    },
+    {
+      "start": 69,
+      "end": 74,
+      "ja": "揺れたマリーゴールドに似てる",
+      "zh": "就像隨風搖曳的萬壽菊一樣",
+      "en": "look like a swaying marigold",
+      "kr": "흔들리는 마리골드와 닮았어",
+      "ruby": "<ruby>揺<rt>ゆ</rt></ruby>れたマリーゴールドに似てる"
+    },
+    {
+      "start": 75,
+      "end": 79,
+      "ja": "あれは空がまだ青い夏のこと",
+      "zh": "那是天空還很藍的夏天",
+      "en": "That was in a summer when the sky was still blue",
+      "kr": "그건 하늘이 아직 파랗던 여름의 일이야",
+      "ruby": "あれは<ruby>空<rt>そら</rt></ruby>がまだ<ruby>青<rt>あお</rt></ruby>い<ruby>夏<rt>なつ</rt></ruby>のこと"
+    },
+    {
+      "start": 79,
+      "end": 83,
+      "ja": "懐かしいと笑えたあの日の恋",
+      "zh": "能笑著說出「真令人懷念」的那一天的戀情",
+      "en": "The love from that day that we can now smile and call nostalgic",
+      "kr": "이제는 그립다며 웃을 수 있는 그날의 사랑",
+      "ruby": "<ruby>懐<rt>なつ</rt></ruby>かしいと<ruby>笑<rt>わら</rt></ruby>えたあの日の<ruby>恋<rt>こい</rt></ruby>"
+    }
+  ]
+}

@@ -1,0 +1,776 @@
+{
+  "id": "7zBeQezaz4U",
+  "title": "クリスマスソング",
+  "artist": "Back Number",
+  "language": "ja",
+  "lyrics": [
+    {
+      "start": 38,
+      "end": 43,
+      "ja": [
+        { "surface": "どこかで" },
+        { "surface": "鐘", "reading": "かね", "meaning": "鐘聲" },
+        { "surface": "が" },
+        {
+          "surface": "鳴って",
+          "reading": "なって",
+          "meaning": "正在響",
+          "origin": "鳴る"
+        }
+      ],
+      "zh": "不知在何處的鐘聲響起",
+      "ori": "どこかでかねがなって"
+    },
+    {
+      "start": 44,
+      "end": 49,
+      "ja": [
+        { "surface": "らしくない", "meaning": "不像…的樣子" },
+        { "surface": "言葉", "reading": "ことば", "meaning": "話語" },
+        { "surface": "が" },
+        {
+          "surface": "浮かんで",
+          "reading": "うかんで",
+          "meaning": "漂浮著",
+          "origin": "浮かぶ"
+        }
+      ],
+      "zh": "和平常不同的話語浮現在腦中",
+      "ori": "らしくないことばがうかんで"
+    },
+    {
+      "start": 50,
+      "end": 55,
+      "ja": [
+        { "surface": "寒さ", "reading": "さむさ", "meaning": "寒冷的感覺" },
+        { "surface": "心地", "reading": "ここち", "meaning": "感覺、心情" },
+        { "surface": "よくて" }
+      ],
+      "zh": "冷冷的感覺很舒服",
+      "ori": "さむさここちよくて"
+    },
+    {
+      "start": 56,
+      "end": 61,
+      "ja": [
+        { "surface": "あれ" },
+        { "surface": "なんで" },
+        { "surface": "恋", "reading": "こい", "meaning": "戀愛" },
+        { "surface": "なんかしてんだろう" }
+      ],
+      "zh": "嗯？ 為什麼會陷入戀愛呢",
+      "ori": "あれなんでこいなんかしてんだろう"
+    },
+    {
+      "start": 62,
+      "end": 68,
+      "ja": [
+        { "surface": "聖夜", "reading": "せいや", "meaning": "聖誕夜" },
+        { "surface": "だなんだと" },
+        { "surface": "繰り返す", "reading": "くりかえす", "meaning": "重複" },
+        { "surface": "歌", "reading": "うた", "meaning": "歌曲" },
+        { "surface": "と" }
+      ],
+      "zh": "也許是反覆播放的聖誕夜歌曲",
+      "ori": "せいやだなんだとくりかえすうたと"
+    },
+    {
+      "start": 68,
+      "end": 74,
+      "ja": [
+        { "surface": "わざとらしく", "meaning": "故意地" },
+        { "surface": "きらめく", "meaning": "閃爍、閃亮" },
+        { "surface": "街", "reading": "まち", "meaning": "街道" },
+        { "surface": "のせいかな", "meaning": "是不是因為…的原因呢？" }
+      ],
+      "zh": "或者是刻意裝飾得格外閃耀的街道造成的吧",
+      "ori": "わざとらしくきらめくまちのせいかな"
+    },
+    {
+      "start": 74,
+      "end": 78,
+      "ja": [
+        { "surface": "会いたい", "meaning": "想要見" },
+        { "surface": "と思う", "meaning": "覺得" },
+        { "surface": "回数", "reading": "かいすう", "meaning": "次數" },
+        { "surface": "が" }
+      ],
+      "zh": "想見你的次數",
+      "ori": "あいたいとおもうかいすうが"
+    },
+    {
+      "start": 78,
+      "end": 81,
+      "ja": [
+        { "surface": "会えない", "meaning": "見不到" },
+        { "surface": "と", "meaning": "一...就..." },
+        { "surface": "痛い", "reading": "いたい", "meaning": "痛的" },
+        { "surface": "この" },
+        { "surface": "胸", "reading": "むね" },
+        { "surface": "が" }
+      ],
+      "zh": "見不到你時胸口的疼痛",
+      "ori": "あえないといたいこのむねが"
+    },
+    {
+      "start": 81,
+      "end": 86,
+      "ja": [
+        { "surface": "君", "reading": "きみ", "meaning": "你" },
+        { "surface": "の" },
+        { "surface": "事", "reading": "こと", "meaning": "事情" },
+        { "surface": "どう" },
+        { "surface": "思う", "reading": "おもう" },
+        { "surface": "か" },
+        {
+          "surface": "教え",
+          "reading": "おしえ",
+          "meaning": "教、告訴",
+          "origin": "教える"
+        },
+        { "surface": "よう" },
+        { "surface": "としてる" }
+      ],
+      "zh": "都在試著教會我如何去思念你",
+      "ori": "きみのことどうおもうかおしえようとしてる"
+    },
+
+    {
+      "start": 87,
+      "end": 93,
+      "ja": [
+        { "surface": "いいよ" },
+        { "surface": "そんな" },
+        { "surface": "事", "reading": "こと", "meaning": "事情" },
+        { "surface": "自分", "reading": "じぶん", "meaning": "自己" },
+        { "surface": "で" },
+        {
+          "surface": "分かってる",
+          "reading": "わかってる",
+          "meaning": "知道",
+          "origin": "分かる"
+        },
+        { "surface": "よ" }
+      ],
+      "zh": "算了，那種事情我自己也會知道",
+      "ori": "いいよそんなことじぶんでわかってるよ"
+    },
+
+    {
+      "start": 94,
+      "end": 99,
+      "ja": [
+        { "surface": "サンタ" },
+        { "surface": "とやら" },
+        { "surface": "に" },
+        {
+          "surface": "頼んで",
+          "reading": "たのんで",
+          "meaning": "拜託",
+          "origin": "頼む"
+        },
+        { "surface": "も" },
+        { "surface": "仕方", "reading": "しかた", "meaning": "辦法" },
+        { "surface": "ない" },
+        { "surface": "よなぁ" }
+      ],
+      "zh": "這種事就算拜託聖誕老人也無濟於事",
+      "ori": "さんたとやらにたのんでもしかたないよなぁ"
+    },
+
+    {
+      "start": 100,
+      "end": 103,
+      "ja": [
+        { "surface": "できれば" },
+        { "surface": "横" },
+        { "surface": "に" },
+        { "surface": "いて", "origin": "いる" },
+        { "surface": "欲しくて", "reading": "ほしくて" }
+      ],
+      "zh": "如果可以的話希望你能在身邊",
+      "ori": "できればよこにいてほしくて"
+    },
+
+    {
+      "start": 103,
+      "end": 106,
+      "ja": [
+        { "surface": "どこにも" },
+        { "surface": "行って", "reading": "いって", "origin": "行く" },
+        { "surface": "欲し", "reading": "ほし", "origin": "欲しい" },
+        { "surface": "くなくて" }
+      ],
+      "zh": "希望你哪裡都不要去",
+      "ori": "どこにもいってほしくなくて"
+    },
+
+    {
+      "start": 106,
+      "end": 112,
+      "ja": [
+        { "surface": "僕", "reading": "ぼく" },
+        { "surface": "の" },
+        { "surface": "事", "reading": "こと" },
+        { "surface": "だけ" },
+        { "surface": "を" },
+        { "surface": "ずっと" },
+        { "surface": "考えていて" },
+        { "surface": "欲しい", "reading": "ほしい" }
+      ],
+      "zh": "希望你始終想著我",
+      "ori": "ぼくのことだけをずっとかんがえていてほしい"
+    },
+
+    {
+      "start": 112,
+      "end": 118,
+      "ja": [
+        { "surface": "でも" },
+        { "surface": "こんな" },
+        { "surface": "事", "reading": "こと" },
+        { "surface": "を" },
+        { "surface": "伝え", "reading": "つたえ", "origin": "伝える" },
+        { "surface": "たら" },
+        { "surface": "格好悪い", "reading": "かっこうわるい" },
+        { "surface": "し" }
+      ],
+      "zh": "但這種話跟你說的話就太遜了",
+      "ori": "でもこんなことをつたえたらかっこうわるいし"
+    },
+
+    {
+      "start": 119,
+      "end": 123,
+      "ja": [
+        { "surface": "長く", "reading": "ながく" },
+        { "surface": "なる" },
+        { "surface": "だけ" },
+        { "surface": "だから" },
+        { "surface": "まとめる" },
+        { "surface": "よ" }
+      ],
+      "zh": "想說的話太多了，所以簡短來說",
+      "ori": "ながくなるだけだからまとめるよ"
+    },
+
+    {
+      "start": 123,
+      "end": 126,
+      "ja": [
+        { "surface": "君", "reading": "きみ" },
+        { "surface": "が" },
+        { "surface": "好き", "reading": "すき" },
+        { "surface": "だ" }
+      ],
+      "zh": "我喜歡你",
+      "ori": "きみがすきだ"
+    },
+    {
+      "start": 142,
+      "end": 146,
+      "ja": [
+        { "surface": "はしゃぐ", "meaning": "嬉鬧、興奮" },
+        { "surface": "恋人達", "reading": "こいびとたち", "meaning": "戀人們" },
+        { "surface": "は" }
+      ],
+      "ori": "はしゃぐこいびとたちは",
+      "zh": "嬉鬧著的戀人們"
+    },
+    {
+      "start": 148,
+      "end": 154,
+      "ja": [
+        { "surface": "トナカイ", "meaning": "馴鹿" },
+        { "surface": "の" },
+        { "surface": "ツノ", "meaning": "角" },
+        { "surface": "なんか", "meaning": "之類的（輕視語氣）" },
+        {
+          "surface": "生やして",
+          "reading": "はやして",
+          "meaning": "戴著、長出",
+          "origin": "生やす"
+        }
+      ],
+      "ori": "となかいのつのなんかはやして",
+      "zh": "戴著什麼馴鹿角之類的裝扮"
+    },
+    {
+      "start": 155,
+      "end": 160,
+      "ja": [
+        { "surface": "よく", "meaning": "真敢、居然" },
+        { "surface": "人前", "reading": "ひとまえ", "meaning": "眾人面前" },
+        { "surface": "で" },
+        { "surface": "出来る", "reading": "できる", "meaning": "做得到、敢做" },
+        { "surface": "なぁ" }
+      ],
+      "ori": "よくひとまえでできるなぁ",
+      "zh": "還真敢在大家面前那樣做啊"
+    },
+    {
+      "start": 161,
+      "end": 165,
+      "ja": [
+        { "surface": "いや" },
+        {
+          "surface": "羨ましく",
+          "reading": "うらやましく",
+          "meaning": "羨慕地"
+        },
+        { "surface": "なんて" },
+        { "surface": "ない", "meaning": "沒有" },
+        { "surface": "けど" }
+      ],
+      "ori": "いやうらやましくなんてないけど",
+      "zh": "不是啦，也沒有羨慕什麼的"
+    },
+    {
+      "start": 167,
+      "end": 172,
+      "ja": [
+        { "surface": "君", "reading": "きみ", "meaning": "你" },
+        { "surface": "が" },
+        {
+          "surface": "喜ぶ",
+          "reading": "よろこぶ",
+          "meaning": "開心、感到高興"
+        },
+        { "surface": "プレゼント", "meaning": "禮物" },
+        { "surface": "って" },
+        { "surface": "なんだろう" }
+      ],
+      "ori": "きみがよろこぶぷれぜんとってなんだろう",
+      "zh": "能讓你真正開心的禮物會是什麼呢"
+    },
+    {
+      "start": 173,
+      "end": 178,
+      "ja": [
+        { "surface": "僕", "reading": "ぼく", "meaning": "我" },
+        { "surface": "だけ", "meaning": "只有" },
+        { "surface": "が" },
+        {
+          "surface": "あげられる",
+          "reading": "あげられる",
+          "meaning": "能夠給予",
+          "origin": "あげる"
+        },
+        { "surface": "もの", "meaning": "東西" },
+        { "surface": "って" },
+        { "surface": "なんだろう" }
+      ],
+      "ori": "ぼくだけがあげられるものってなんだろう",
+      "zh": "只有我才能送給你的東西到底是什麼呢"
+    },
+    {
+      "start": 179,
+      "end": 181,
+      "ja": [
+        { "surface": "大好き", "reading": "だいすき", "meaning": "最喜歡" },
+        { "surface": "だ", "meaning": "是" },
+        { "surface": "と" },
+        {
+          "surface": "言った",
+          "reading": "いった",
+          "meaning": "說了",
+          "origin": "言う"
+        },
+        { "surface": "返事", "reading": "へんじ", "meaning": "回覆" },
+        { "surface": "が" }
+      ],
+      "ori": "だいすきだといったへんじが",
+      "zh": "我說了「最喜歡你」之後得到的回應"
+    },
+    {
+      "start": 182,
+      "end": 185,
+      "ja": [
+        {
+          "surface": "思ってた",
+          "reading": "おもってた",
+          "meaning": "原本以為",
+          "origin": "思う"
+        },
+        { "surface": "の", "meaning": "名詞化" },
+        { "surface": "とは" },
+        {
+          "surface": "違って",
+          "reading": "ちがって",
+          "meaning": "不同",
+          "origin": "違う"
+        },
+        { "surface": "も" }
+      ],
+      "ori": "おもってたのとはちがっても",
+      "zh": "就算和我原本想像的不一樣"
+    },
+    {
+      "start": 185,
+      "end": 191,
+      "ja": [
+        { "surface": "それ", "meaning": "那樣" },
+        { "surface": "だけ", "meaning": "僅僅" },
+        { "surface": "で" },
+        { "surface": "嫌い", "reading": "きらい", "meaning": "討厭" },
+        { "surface": "に" },
+        { "surface": "なんて" },
+        { "surface": "なれやしない", "meaning": "也不可能變成" },
+        { "surface": "から" }
+      ],
+      "ori": "それだけできらいになんてなれやしないから",
+      "zh": "我也不可能只因為那樣就討厭你"
+    },
+    {
+      "start": 192,
+      "end": 197,
+      "ja": [
+        { "surface": "星", "reading": "ほし", "meaning": "星星" },
+        { "surface": "に" },
+        { "surface": "願い", "reading": "ねがい", "meaning": "願望" },
+        { "surface": "を" },
+        { "surface": "なんて" },
+        { "surface": "さ" },
+        { "surface": "柄", "reading": "がら", "meaning": "性格、作風" },
+        { "surface": "じゃない", "meaning": "不是" },
+        { "surface": "けど" }
+      ],
+      "ori": "ほしにねがいをなんてさがらじゃないけど",
+      "zh": "向星星許願這種事，雖然一點也不像我"
+    },
+    {
+      "start": 198,
+      "end": 202,
+      "ja": [
+        { "surface": "結局", "reading": "けっきょく", "meaning": "到頭來" },
+        { "surface": "君", "reading": "きみ", "meaning": "你" },
+        { "surface": "じゃない", "meaning": "不是你" },
+        { "surface": "と" },
+        { "surface": "いや", "meaning": "不行、不願意" },
+        { "surface": "なんだ", "meaning": "就是" },
+        { "surface": "って" }
+      ],
+      "ori": "けっきょくきみじゃないといやなんだって",
+      "zh": "可到頭來，如果不是你的話我就是不行"
+    },
+    {
+      "start": 203,
+      "end": 206,
+      "ja": [
+        {
+          "surface": "見上げてる",
+          "reading": "みあげてる",
+          "meaning": "正抬頭看",
+          "origin": "見上げる"
+        },
+        { "surface": "んだ" }
+      ],
+      "ori": "みあげてるんだ",
+      "zh": "我只是這樣抬頭望著天空"
+    },
+    {
+      "start": 220,
+      "end": 222,
+      "ja": [
+        { "surface": "あの", "meaning": "那個" },
+        { "surface": "時", "reading": "とき", "meaning": "時候" },
+        { "surface": "君", "reading": "きみ", "meaning": "你" },
+        { "surface": "に" }
+      ],
+      "ori": "あのとききみに",
+      "zh": "在那個時候遇見你"
+    },
+    {
+      "start": 223,
+      "end": 225,
+      "ja": [
+        {
+          "surface": "出会って",
+          "reading": "であって",
+          "meaning": "相遇",
+          "origin": "出会う"
+        },
+        { "surface": "ただ", "meaning": "僅僅、只是" },
+        { "surface": "それ", "meaning": "那件事" },
+        { "surface": "だけ", "meaning": "而已" },
+        { "surface": "で" }
+      ],
+      "ori": "であってただそれだけで",
+      "zh": "只是和你相遇了而已"
+    },
+    {
+      "start": 226,
+      "end": 232,
+      "ja": [
+        { "surface": "自分", "reading": "じぶん", "meaning": "自己" },
+        { "surface": "も", "meaning": "連…也" },
+        {
+          "surface": "知らなかった",
+          "reading": "しらなかった",
+          "meaning": "不知道的",
+          "origin": "知る"
+        },
+        { "surface": "自分", "reading": "じぶん", "meaning": "自己" },
+        { "surface": "が" },
+        {
+          "surface": "次から次に",
+          "reading": "つぎからつぎに",
+          "meaning": "接連不斷地"
+        }
+      ],
+      "ori": "じぶんもしらなかったじぶんがつぎからつぎに",
+      "zh": "連我自己都不知道的一面，一個接一個地出現"
+    },
+    {
+      "start": 237,
+      "end": 239,
+      "ja": [
+        { "surface": "会いたい", "meaning": "想見你" },
+        { "surface": "と" },
+        { "surface": "毎日", "reading": "まいにち", "meaning": "每天" },
+        {
+          "surface": "思ってて",
+          "reading": "おもってて",
+          "meaning": "一直想著",
+          "origin": "思う"
+        }
+      ],
+      "ori": "あいたいとまいにちおもってて",
+      "zh": "每天都在想著，好想見你"
+    },
+    {
+      "start": 240,
+      "end": 243,
+      "ja": [
+        { "surface": "それ", "meaning": "那件事" },
+        { "surface": "を" },
+        { "surface": "君", "reading": "きみ", "meaning": "你" },
+        { "surface": "に" },
+        {
+          "surface": "知って",
+          "reading": "しって",
+          "meaning": "知道",
+          "origin": "知る"
+        },
+        { "surface": "欲しくて", "meaning": "希望你…" }
+      ],
+      "ori": "それをきみにしってほしくて",
+      "zh": "也好想讓你知道我這樣的心情"
+    },
+    {
+      "start": 243,
+      "end": 248,
+      "ja": [
+        {
+          "surface": "すれ違う",
+          "reading": "すれちがう",
+          "meaning": "擦身而過"
+        },
+        { "surface": "人混み", "reading": "ひとごみ", "meaning": "人群" },
+        { "surface": "に" },
+        { "surface": "君", "reading": "きみ", "meaning": "你" },
+        { "surface": "を" },
+        {
+          "surface": "探している",
+          "reading": "さがしている",
+          "meaning": "正在尋找",
+          "origin": "探す"
+        }
+      ],
+      "ori": "すれちがうひとごみにきみをさがしている",
+      "zh": "在擦身而過的人群之中，不自覺地找著你"
+    },
+    {
+      "start": 249,
+      "end": 255,
+      "ja": [
+        { "surface": "こんな", "meaning": "這樣的" },
+        { "surface": "日", "reading": "ひ", "meaning": "日子" },
+        { "surface": "は" },
+        { "surface": "他", "reading": "ほか", "meaning": "其他" },
+        { "surface": "の" },
+        { "surface": "誰か", "reading": "だれか", "meaning": "某個人" },
+        { "surface": "と" },
+        {
+          "surface": "笑ってる",
+          "reading": "わらってる",
+          "meaning": "正在笑著",
+          "origin": "笑う"
+        },
+        { "surface": "かな", "meaning": "是不是呢（自問）" }
+      ],
+      "ori": "こんなひはほかのだれかとわらってるかな",
+      "zh": "像這樣的日子裡，你是不是正和別的誰一起笑著呢"
+    },
+    {
+      "start": 256,
+      "end": 261,
+      "ja": [
+        { "surface": "胸", "reading": "むね", "meaning": "胸口" },
+        { "surface": "の" },
+        { "surface": "奥", "reading": "おく", "meaning": "深處" },
+        { "surface": "の" },
+        { "surface": "奥", "reading": "おく", "meaning": "最深處" },
+        { "surface": "が" },
+        {
+          "surface": "苦しく",
+          "reading": "くるしく",
+          "meaning": "痛苦地",
+          "origin": "苦しい"
+        },
+        { "surface": "なる", "meaning": "變得" }
+      ],
+      "ori": "むねのおくのおくがくるしくなる",
+      "zh": "胸口最深最深的地方，忽然變得好痛"
+    },
+    {
+      "start": 262,
+      "end": 265,
+      "ja": [
+        { "surface": "できれば", "meaning": "如果可以的話" },
+        { "surface": "横", "reading": "よこ", "meaning": "身旁" },
+        { "surface": "に" },
+        {
+          "surface": "いて",
+          "reading": "いて",
+          "meaning": "待在",
+          "origin": "いる"
+        },
+        { "surface": "欲しくて", "meaning": "希望你…" }
+      ],
+      "ori": "できればよこにいてほしくて",
+      "zh": "如果可以的話，希望你能待在我身邊"
+    },
+    {
+      "start": 265,
+      "end": 268,
+      "ja": [
+        { "surface": "どこ" },
+        { "surface": "にも" },
+        {
+          "surface": "行って",
+          "reading": "いって",
+          "meaning": "去",
+          "origin": "行く"
+        },
+        { "surface": "欲しく" },
+        { "surface": "なくて" }
+      ],
+      "ori": "どこにもいってほしくなくて",
+      "zh": "哪裡都不想讓你離開"
+    },
+    {
+      "start": 268,
+      "end": 274,
+      "ja": [
+        { "surface": "僕", "reading": "ぼく", "meaning": "我" },
+        { "surface": "の" },
+        { "surface": "事", "reading": "こと", "meaning": "事情" },
+        { "surface": "だけ" },
+        { "surface": "を" },
+        { "surface": "ずっと" },
+        {
+          "surface": "考えて",
+          "reading": "かんがえて",
+          "meaning": "想著",
+          "origin": "考える"
+        },
+        { "surface": "いて", "origin": "いる" },
+        { "surface": "欲しい" }
+      ],
+      "ori": "ぼくのことだけをずっとかんがえていてほしい",
+      "zh": "只希望你能一直想著我"
+    },
+    {
+      "start": 275,
+      "end": 280,
+      "ja": [
+        { "surface": "やっぱり" },
+        { "surface": "こんな" },
+        { "surface": "事", "reading": "こと", "meaning": "事情" },
+        {
+          "surface": "伝えたら",
+          "reading": "つたえたら",
+          "meaning": "如果說出口",
+          "origin": "伝える"
+        },
+        { "surface": "格好", "reading": "かっこう", "meaning": "樣子、形象" },
+        { "surface": "悪い", "reading": "わるい", "meaning": "不好、難看" },
+        { "surface": "し" }
+      ],
+      "ori": "やっぱりこんなことつたえたらかっこうわるいし",
+      "zh": "果然啊，把這種話說出口真的很遜"
+    },
+    {
+      "start": 281,
+      "end": 285,
+      "ja": [
+        {
+          "surface": "長く",
+          "reading": "ながく",
+          "meaning": "變長",
+          "origin": "長い"
+        },
+        { "surface": "なる" },
+        { "surface": "だけ" },
+        { "surface": "だから" },
+        {
+          "surface": "まとめる",
+          "reading": "まとめる",
+          "meaning": "簡單說、總結"
+        },
+        { "surface": "よ" }
+      ],
+      "ori": "ながくなるだけだからまとめるよ",
+      "zh": "反正只會越說越長，我就簡單說了"
+    },
+    {
+      "start": 286,
+      "end": 288,
+      "ja": [
+        { "surface": "君", "reading": "きみ", "meaning": "你" },
+        { "surface": "が" },
+        { "surface": "好き", "reading": "すき", "meaning": "喜歡" },
+        { "surface": "だ" }
+      ],
+      "ori": "きみがすきだ",
+      "zh": "我喜歡你"
+    },
+    {
+      "start": 292,
+      "end": 296,
+      "ja": [
+        {
+          "surface": "聞こえる",
+          "reading": "きこえる",
+          "meaning": "聽得見",
+          "origin": "聞こえる"
+        },
+        { "surface": "まで" },
+        { "surface": "何度", "reading": "なんど", "meaning": "幾次" },
+        { "surface": "だって" },
+        {
+          "surface": "言う",
+          "reading": "いう",
+          "meaning": "說",
+          "origin": "言う"
+        },
+        { "surface": "よ" }
+      ],
+      "ori": "きこえるまでなんどだっていうよ",
+      "zh": "直到你親耳聽見為止，不管幾次我都會說"
+    },
+    {
+      "start": 296,
+      "end": 299,
+      "ja": [
+        { "surface": "君", "reading": "きみ", "meaning": "你" },
+        { "surface": "が" },
+        { "surface": "好き", "reading": "すき", "meaning": "喜歡" },
+        { "surface": "だ" }
+      ],
+      "ori": "きみがすきだ",
+      "zh": "我真的很喜歡你"
+    }
+  ]
+}

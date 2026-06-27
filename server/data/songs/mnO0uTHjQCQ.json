@@ -1,0 +1,317 @@
+{
+  "id": "mnO0uTHjQCQ",
+  "title": "ひとりごつ",
+  "artist": "ちいかわ",
+  "language": "ja",
+  "lyrics": [
+    {
+      "start": 0,
+      "end": 4,
+      "ja": [
+        { "surface": "なんだ" },
+        { "surface": "もう" },
+        { "surface": "朝", "reading": "あさ", "meaning": "早晨" },
+        { "surface": "か" },
+        { "surface": "と" }
+      ],
+      "zh": "原來～已經早上了呀！",
+      "ori": "なんだもうあさかと"
+    },
+    {
+      "start": 5,
+      "end": 9,
+      "ja": [
+        {
+          "surface": "ひとりごつ",
+          "origin": "独り言つ",
+          "meaning": "自言自語",
+          "ori": "ひとりごつ"
+        }
+      ],
+      "zh": "一個人自言自語"
+    },
+    {
+      "start": 10,
+      "end": 14,
+      "ja": [
+        {
+          "surface": "焼けた",
+          "reading": "やけた",
+          "origin": "焼ける",
+          "meaning": "烤好的"
+        },
+        {
+          "surface": "パン",
+          "meaning": "麵包"
+        },
+        { "surface": "に" },
+        {
+          "surface": "バター",
+          "meaning": "奶油"
+        },
+        {
+          "surface": "ヌリヌリ",
+          "meaning": "塗抹的樣子（擬態語）"
+        }
+      ],
+      "zh": "烤好的麵幫，配上奶油，塗啊塗"
+    },
+    {
+      "start": 15,
+      "end": 20,
+      "ja": [
+        {
+          "surface": "止んだ",
+          "reading": "やんだ",
+          "origin": "止む",
+          "meaning": "停止（雨停了）"
+        },
+        {
+          "surface": "雨",
+          "reading": "あめ",
+          "meaning": "雨"
+        },
+        { "surface": "は" },
+        { "surface": "なんか" },
+        {
+          "surface": "湿って",
+          "reading": "しめって",
+          "origin": "湿る",
+          "meaning": "潮濕"
+        }
+      ],
+      "zh": "下雨後，有種潮濕的感覺"
+    },
+    {
+      "start": 20,
+      "end": 24,
+      "ja": [
+        {
+          "surface": "生乾き",
+          "reading": "なまがわき",
+          "meaning": "半乾、未全乾的狀態"
+        }
+      ],
+      "zh": "沒有乾透..."
+    },
+
+    {
+      "start": 25,
+      "end": 30,
+      "ja": [
+        {
+          "surface": "変な",
+          "reading": "へんな",
+          "meaning": "奇怪的"
+        },
+        {
+          "surface": "足跡",
+          "reading": "あしあと",
+          "meaning": "腳印"
+        },
+        { "surface": "だ" },
+        { "surface": "と" },
+        {
+          "surface": "思ったら",
+          "reading": "おもったら",
+          "origin": "思う",
+          "meaning": "正想著～結果卻"
+        }
+      ],
+      "zh": "正想著怎麼有奇怪的腳印"
+    },
+    {
+      "start": 30,
+      "end": 37,
+      "ja": [
+        {
+          "surface": "昨日",
+          "reading": "きのう",
+          "meaning": "昨天"
+        },
+        {
+          "surface": "晩",
+          "reading": "ばん",
+          "meaning": "晚上"
+        },
+        { "surface": "に" },
+        {
+          "surface": "付けた",
+          "reading": "つけた",
+          "origin": "付ける",
+          "meaning": "留下、沾上"
+        },
+        {
+          "surface": "足跡",
+          "reading": "あしあと",
+          "meaning": "腳印"
+        }
+      ],
+      "zh": "原來是昨晚留下的腳印"
+    },
+    {
+      "start": 37,
+      "end": 42,
+      "ja": [
+        {
+          "surface": "やけに",
+          "meaning": "異常地、特別地"
+        },
+        {
+          "surface": "土",
+          "reading": "つち",
+          "meaning": "泥土"
+        },
+        { "surface": "が" },
+        {
+          "surface": "水",
+          "reading": "みず",
+          "meaning": "水"
+        },
+        { "surface": "を" },
+        {
+          "surface": "含んで",
+          "reading": "ふくんで",
+          "origin": "含む",
+          "meaning": "含有、吸收"
+        }
+      ],
+      "zh": "土壤還含著好多水"
+    },
+    {
+      "start": 43,
+      "end": 48,
+      "ja": [
+        {
+          "surface": "生乾き",
+          "reading": "なまがわき",
+          "meaning": "半乾、未全乾的狀態"
+        }
+      ],
+      "zh": "沒有乾透..."
+    },
+
+    {
+      "start": 49,
+      "end": 55,
+      "ja": [
+        { "surface": "あーあー" },
+        {
+          "surface": "キンと",
+          "meaning": "刺骨地、瞬間冰冷（擬態語）"
+        },
+        {
+          "surface": "冷えている",
+          "reading": "ひえている",
+          "origin": "冷える",
+          "meaning": "冰冷著"
+        }
+      ],
+      "zh": "啊～冰到了骨子裡面"
+    },
+    {
+      "start": 57,
+      "end": 60,
+      "ja": [
+        {
+          "surface": "缶",
+          "reading": "かん",
+          "meaning": "罐子"
+        },
+        {
+          "surface": "カン",
+          "meaning": "金屬罐（擬聲重疊）"
+        },
+        { "surface": "が" }
+      ],
+      "zh": "罐裝飲料"
+    },
+    {
+      "start": 61,
+      "end": 64,
+      "ja": [
+        { "surface": "あーあ" },
+        { "surface": "なんか" },
+        {
+          "surface": "冷たくって",
+          "reading": "つめたくって",
+          "origin": "冷たい",
+          "meaning": "冰冷而～"
+        }
+      ],
+      "zh": "啊～感覺有點冰冰的"
+    },
+    {
+      "start": 66,
+      "end": 70,
+      "ja": [
+        { "surface": "あーあ" },
+        {
+          "surface": "汗",
+          "reading": "あせ",
+          "meaning": "汗"
+        },
+        { "surface": "と" },
+        {
+          "surface": "結露",
+          "reading": "けつろ",
+          "meaning": "冷凝水"
+        },
+        { "surface": "が" },
+        {
+          "surface": "混じって",
+          "reading": "まじって",
+          "origin": "混じる",
+          "meaning": "混在"
+        }
+      ],
+      "zh": "啊～汗跟凝結的水混在一起"
+    },
+    {
+      "start": 71,
+      "end": 74,
+      "ja": [
+        { "surface": "あーあ" },
+        {
+          "surface": "靴",
+          "reading": "くつ",
+          "meaning": "鞋子"
+        },
+        { "surface": "を" },
+        {
+          "surface": "濡らしてる",
+          "reading": "ぬらしてる",
+          "origin": "濡らす",
+          "meaning": "弄濕"
+        }
+      ],
+      "zh": "啊～把我的鞋子弄濕了"
+    },
+
+    {
+      "start": 75,
+      "end": 77,
+      "ja": [
+        {
+          "surface": "湿ってる",
+          "reading": "しめってる",
+          "origin": "湿る",
+          "meaning": "潮濕著"
+        }
+      ],
+      "zh": "弄濕掉了"
+    },
+    {
+      "start": 77,
+      "end": 79,
+      "ja": [
+        {
+          "surface": "生乾き",
+          "reading": "なまがわき",
+          "meaning": "半乾、未全乾的狀態"
+        }
+      ],
+      "zh": "沒有乾透..."
+    }
+  ]
+}

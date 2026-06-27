@@ -1,0 +1,533 @@
+{
+  "id": "3Om6Ztel34Y",
+  "title": "Bluebird",
+  "artist": "落日飛車",
+  "language": "en",
+  "lyrics": [
+    {
+      "start": "13",
+      "end": "16",
+      "en": [
+        { "surface": "Don't", "meaning": "不要" },
+        { "surface": "tell", "meaning": "告訴" },
+        { "surface": "me", "meaning": "我" },
+        { "surface": "that", "meaning": "那樣的事" },
+        { "surface": "you", "meaning": "你" },
+        { "surface": "love", "meaning": "愛" },
+        { "surface": "me", "meaning": "我" }
+      ],
+      "zh": "不要告訴我你愛我"
+    },
+    {
+      "start": "19",
+      "end": "22",
+      "en": [
+        { "surface": "Put", "meaning": "抹上" },
+        { "surface": "purple", "meaning": "紫色" },
+        { "surface": "on", "meaning": "在……上" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "cheeks", "meaning": "臉頰" }
+      ],
+      "zh": "在我的臉頰抹上紫色"
+    },
+    {
+      "start": "26",
+      "end": "29",
+      "en": [
+        { "surface": "Just", "meaning": "只是" },
+        { "surface": "let", "meaning": "讓" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "blue", "meaning": "藍色的" },
+        { "surface": "lips", "meaning": "嘴唇" },
+        { "surface": "softly", "meaning": "輕柔地" },
+        { "surface": "speak", "meaning": "說話" }
+      ],
+      "zh": "只要讓我藍色的雙唇輕聲訴說"
+    },
+    {
+      "start": "30",
+      "end": "31",
+      "en": [
+        { "surface": "To", "meaning": "對著" },
+        { "surface": "you", "meaning": "你" }
+      ],
+      "zh": "對你"
+    },
+    {
+      "start": "32",
+      "end": "34",
+      "en": [
+        { "surface": "Put", "meaning": "灑上" },
+        { "surface": "grey", "meaning": "灰色" },
+        { "surface": "on", "meaning": "在……上" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "wings", "meaning": "翅膀" }
+      ],
+      "zh": "在我的翅膀上染上灰色"
+    },
+
+    {
+      "start": "35",
+      "end": "38",
+      "en": [
+        { "surface": "I'll", "meaning": "我將" },
+        { "surface": "fly", "meaning": "飛" },
+        { "surface": "to", "meaning": "到" },
+        { "surface": "where", "meaning": "那個地方" },
+        { "surface": "you", "meaning": "你" },
+        { "surface": "are", "meaning": "所在" }
+      ],
+      "zh": "我會飛向你所在的地方"
+    },
+    {
+      "start": "38",
+      "end": "40",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "under", "meaning": "在……之下" },
+        { "surface": "the", "meaning": "那片" },
+        { "surface": "sun", "meaning": "太陽" }
+      ],
+      "zh": "在陽光之下飛翔"
+    },
+    {
+      "start": "41",
+      "end": "44",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "with", "meaning": "帶著" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "golden", "meaning": "金色的" },
+        { "surface": "heart", "meaning": "心" }
+      ],
+      "zh": "帶著我金色的心飛翔"
+    },
+    {
+      "start": "44",
+      "end": "46",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "into", "meaning": "投入" },
+        { "surface": "your", "meaning": "你的" },
+        { "surface": "arms", "meaning": "懷抱" }
+      ],
+      "zh": "飛進你的懷裡"
+    },
+    {
+      "start": "48",
+      "end": "50",
+      "en": [
+        { "surface": "The", "meaning": "這片" },
+        { "surface": "sky", "meaning": "天空" },
+        { "surface": "couldn't", "meaning": "無法" },
+        { "surface": "stop", "meaning": "阻止" }
+      ],
+      "zh": "天空也無法阻止"
+    },
+    {
+      "start": "51",
+      "end": "56",
+      "en": [
+        { "surface": "Me", "meaning": "我" },
+        { "surface": "from", "meaning": "去" },
+        { "surface": "flying", "meaning": "飛向" },
+        { "surface": "to", "meaning": "前往" },
+        { "surface": "your", "meaning": "你的" },
+        { "surface": "love", "meaning": "愛" }
+      ],
+      "zh": "我飛向你的愛"
+    },
+    {
+      "start": "56",
+      "end": "59",
+      "en": [
+        { "surface": "My", "meaning": "我的" },
+        { "surface": "tears", "meaning": "眼淚" },
+        { "surface": "have", "meaning": "已經" },
+        { "surface": "all", "meaning": "全部" },
+        { "surface": "dropped", "meaning": "落下" }
+      ],
+      "zh": "我的眼淚早已落盡"
+    },
+    {
+      "start": "59",
+      "end": "62",
+      "en": [
+        { "surface": "I'll", "meaning": "我會" },
+        { "surface": "fly", "meaning": "飛越" },
+        { "surface": "through", "meaning": "穿過" },
+        { "surface": "the", "meaning": "那片" },
+        { "surface": "dark", "meaning": "黑暗" }
+      ],
+      "zh": "我會飛過黑暗"
+    },
+    {
+      "start": "69",
+      "end": "72",
+      "en": [
+        { "surface": "Don't", "meaning": "不要" },
+        { "surface": "tell", "meaning": "告訴" },
+        { "surface": "me", "meaning": "我" },
+        { "surface": "that", "meaning": "那樣的事" },
+        { "surface": "you", "meaning": "你" },
+        { "surface": "miss", "meaning": "想念" },
+        { "surface": "me", "meaning": "我" }
+      ],
+      "zh": "不要告訴我你想我"
+    },
+    {
+      "start": "75",
+      "end": "78",
+      "en": [
+        { "surface": "Put", "meaning": "抹上" },
+        { "surface": "yellow", "meaning": "黃色" },
+        { "surface": "on", "meaning": "在……上" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "cheeks", "meaning": "臉頰" }
+      ],
+      "zh": "在我的臉頰抹上黃色"
+    },
+    {
+      "start": "81",
+      "end": "85",
+      "en": [
+        { "surface": "Just", "meaning": "只是" },
+        { "surface": "let", "meaning": "讓" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "green", "meaning": "綠色的" },
+        { "surface": "eyes", "meaning": "眼睛" },
+        { "surface": "softly", "meaning": "輕柔地" },
+        { "surface": "blink", "meaning": "眨動" }
+      ],
+      "zh": "只要讓我綠色的眼睛輕輕眨動"
+    },
+    {
+      "start": "85",
+      "end": "87",
+      "en": [
+        { "surface": "At", "meaning": "朝向" },
+        { "surface": "you", "meaning": "你" }
+      ],
+      "zh": "朝著你"
+    },
+    {
+      "start": "87",
+      "end": "90",
+      "en": [
+        { "surface": "Put", "meaning": "灑上" },
+        { "surface": "ash", "meaning": "灰燼、灰色" },
+        { "surface": "on", "meaning": "在……上" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "wings", "meaning": "翅膀" }
+      ],
+      "zh": "在我的翅膀上灑上灰燼"
+    },
+
+    {
+      "start": "91",
+      "end": "94",
+      "en": [
+        { "surface": "I'll", "meaning": "我將" },
+        { "surface": "fly", "meaning": "飛" },
+        { "surface": "to", "meaning": "到" },
+        { "surface": "where", "meaning": "那個地方" },
+        { "surface": "you", "meaning": "你" },
+        { "surface": "are", "meaning": "所在" }
+      ],
+      "zh": "我會飛向你所在的地方"
+    },
+    {
+      "start": "94",
+      "end": "96",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "under", "meaning": "在……之下" },
+        { "surface": "the", "meaning": "那片" },
+        { "surface": "sun", "meaning": "太陽" }
+      ],
+      "zh": "在陽光之下飛翔"
+    },
+    {
+      "start": "96",
+      "end": "100",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "with", "meaning": "帶著" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "golden", "meaning": "金色的" },
+        { "surface": "heart", "meaning": "心" }
+      ],
+      "zh": "帶著我金色的心飛翔"
+    },
+    {
+      "start": "100",
+      "end": "103",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "into", "meaning": "投入" },
+        { "surface": "your", "meaning": "你的" },
+        { "surface": "arms", "meaning": "懷抱" }
+      ],
+      "zh": "飛進你的懷裡"
+    },
+    {
+      "start": "104",
+      "end": "106",
+      "en": [
+        { "surface": "The", "meaning": "這片" },
+        { "surface": "sky", "meaning": "天空" },
+        { "surface": "couldn't", "meaning": "無法" },
+        { "surface": "stop", "meaning": "阻止" }
+      ],
+      "zh": "天空也無法阻止"
+    },
+    {
+      "start": "107",
+      "end": "112",
+      "en": [
+        { "surface": "Me", "meaning": "我" },
+        { "surface": "from", "meaning": "去" },
+        { "surface": "flying", "meaning": "飛向" },
+        { "surface": "to", "meaning": "前往" },
+        { "surface": "your", "meaning": "你的" },
+        { "surface": "love", "meaning": "愛" }
+      ],
+      "zh": "我飛向你的愛"
+    },
+    {
+      "start": "113",
+      "end": "115",
+      "en": [
+        { "surface": "My", "meaning": "我的" },
+        { "surface": "tears", "meaning": "眼淚" },
+        { "surface": "have", "meaning": "已經" },
+        { "surface": "all", "meaning": "全部" },
+        { "surface": "dropped", "meaning": "落下" }
+      ],
+      "zh": "我的眼淚早已落盡"
+    },
+    {
+      "start": "116",
+      "end": "119",
+      "en": [
+        { "surface": "I'll", "meaning": "我會" },
+        { "surface": "fly", "meaning": "飛越" },
+        { "surface": "through", "meaning": "穿過" },
+        { "surface": "the", "meaning": "那片" },
+        { "surface": "dark", "meaning": "黑暗" }
+      ],
+      "zh": "我會飛過黑暗"
+    },
+    {
+      "start": "132",
+      "end": "134",
+      "en": [
+        { "surface": "Thousands", "meaning": "成千上萬" },
+        { "surface": "of", "meaning": "的" },
+        { "surface": "feathers", "meaning": "羽毛" }
+      ],
+      "zh": "成千上萬的羽毛"
+    },
+    {
+      "start": "135",
+      "end": "137",
+      "en": [
+        { "surface": "Surrounding", "meaning": "環繞著" },
+        { "surface": "lovers", "meaning": "戀人們" }
+      ],
+      "zh": "環繞著戀人"
+    },
+    {
+      "start": "138",
+      "end": "143",
+      "en": [
+        { "surface": "In", "meaning": "在" },
+        { "surface": "the", "meaning": "那個" },
+        { "surface": "red", "meaning": "紅色的" },
+        { "surface": "chamber", "meaning": "房間" },
+        { "surface": "I", "meaning": "我" },
+        { "surface": "dream", "meaning": "做夢" }
+      ],
+      "zh": "在紅色的房間裡，我做著夢"
+    },
+    {
+      "start": "144",
+      "end": "146",
+      "en": [
+        { "surface": "I'll", "meaning": "我將" },
+        { "surface": "fly", "meaning": "飛" },
+        { "surface": "to", "meaning": "到" },
+        { "surface": "where", "meaning": "那個地方" },
+        { "surface": "you", "meaning": "你" },
+        { "surface": "are", "meaning": "所在" }
+      ],
+      "zh": "我會飛向你所在的地方"
+    },
+    {
+      "start": "147",
+      "end": "149",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "under", "meaning": "在……之下" },
+        { "surface": "the", "meaning": "那片" },
+        { "surface": "sun", "meaning": "太陽" }
+      ],
+      "zh": "在陽光之下飛翔"
+    },
+    {
+      "start": "150",
+      "end": "153",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "with", "meaning": "帶著" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "golden", "meaning": "金色的" },
+        { "surface": "heart", "meaning": "心" }
+      ],
+      "zh": "帶著我金色的心飛翔"
+    },
+    {
+      "start": "154",
+      "end": "156",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "into", "meaning": "投入" },
+        { "surface": "your", "meaning": "你的" },
+        { "surface": "arms", "meaning": "懷抱" }
+      ],
+      "zh": "飛進你的懷裡"
+    },
+    {
+      "start": "156",
+      "end": "159",
+      "en": [
+        { "surface": "The", "meaning": "這片" },
+        { "surface": "sky", "meaning": "天空" },
+        { "surface": "couldn't", "meaning": "無法" },
+        { "surface": "stop", "meaning": "阻止" }
+      ],
+      "zh": "天空也無法阻止"
+    },
+    {
+      "start": "160",
+      "end": "165",
+      "en": [
+        { "surface": "Me", "meaning": "我" },
+        { "surface": "from", "meaning": "去" },
+        { "surface": "flying", "meaning": "飛向" },
+        { "surface": "to", "meaning": "前往" },
+        { "surface": "your", "meaning": "你的" },
+        { "surface": "love", "meaning": "愛" }
+      ],
+      "zh": "我飛向你的愛"
+    },
+    {
+      "start": "166",
+      "end": "168",
+      "en": [
+        { "surface": "My", "meaning": "我的" },
+        { "surface": "fears", "meaning": "恐懼" },
+        { "surface": "have", "meaning": "已經" },
+        { "surface": "all", "meaning": "全部" },
+        { "surface": "gone", "meaning": "消失" }
+      ],
+      "zh": "我的恐懼已經全部消失"
+    },
+
+    {
+      "start": "169",
+      "end": "172",
+      "en": [
+        { "surface": "I'll", "meaning": "我將" },
+        { "surface": "fly", "meaning": "飛" },
+        { "surface": "to", "meaning": "到" },
+        { "surface": "where", "meaning": "那個地方" },
+        { "surface": "you", "meaning": "你" },
+        { "surface": "are", "meaning": "所在" }
+      ],
+      "zh": "我會再次飛向你所在的地方"
+    },
+    {
+      "start": "172",
+      "end": "174",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "under", "meaning": "在……之下" },
+        { "surface": "the", "meaning": "那片" },
+        { "surface": "sun", "meaning": "太陽" }
+      ],
+      "zh": "在陽光之下飛翔"
+    },
+    {
+      "start": "175",
+      "end": "178",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "with", "meaning": "帶著" },
+        { "surface": "my", "meaning": "我的" },
+        { "surface": "golden", "meaning": "金色的" },
+        { "surface": "heart", "meaning": "心" }
+      ],
+      "zh": "帶著我金色的心飛翔"
+    },
+    {
+      "start": "179",
+      "end": "181",
+      "en": [
+        { "surface": "Flying", "meaning": "飛翔著" },
+        { "surface": "into", "meaning": "投入" },
+        { "surface": "your", "meaning": "你的" },
+        { "surface": "arms", "meaning": "懷抱" }
+      ],
+      "zh": "飛進你的懷裡"
+    },
+    {
+      "start": "181",
+      "end": "184",
+      "en": [
+        { "surface": "The", "meaning": "這片" },
+        { "surface": "sky", "meaning": "天空" },
+        { "surface": "couldn't", "meaning": "無法" },
+        { "surface": "stop", "meaning": "阻止" }
+      ],
+      "zh": "天空依然無法阻止"
+    },
+    {
+      "start": "185",
+      "end": "190",
+      "en": [
+        { "surface": "Me", "meaning": "我" },
+        { "surface": "from", "meaning": "去" },
+        { "surface": "flying", "meaning": "飛向" },
+        { "surface": "to", "meaning": "前往" },
+        { "surface": "your", "meaning": "你的" },
+        { "surface": "love", "meaning": "愛" }
+      ],
+      "zh": "我飛向你的愛"
+    },
+    {
+      "start": "191",
+      "end": "193",
+      "en": [
+        { "surface": "My", "meaning": "我的" },
+        { "surface": "fears", "meaning": "恐懼" },
+        { "surface": "have", "meaning": "已經" },
+        { "surface": "all", "meaning": "全部" },
+        { "surface": "gone", "meaning": "消失" }
+      ],
+      "zh": "我的恐懼已經全部消失"
+    },
+    {
+      "start": "194",
+      "end": "197",
+      "en": [
+        { "surface": "I'll", "meaning": "我會" },
+        { "surface": "fly", "meaning": "飛越" },
+        { "surface": "through", "meaning": "穿過" },
+        { "surface": "the", "meaning": "那片" },
+        { "surface": "dark", "meaning": "黑暗" }
+      ],
+      "zh": "我會飛過黑暗"
+    }
+  ]
+}

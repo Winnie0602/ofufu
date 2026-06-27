@@ -1,0 +1,350 @@
+{
+  "id": "V-gxqhWEbxI",
+  "title": "そんなbitterな話",
+  "artist": "Vaundy",
+  "language": "ja",
+  "lyrics": [
+    {
+      "start": 19,
+      "end": 21,
+      "ja": [
+        { "surface": "思い出す", "reading": "おもいだす", "meaning": "回想起" },
+        { "surface": "ような" },
+        { "surface": "midnight" }
+      ],
+      "zh": "彷彿勾起回憶般的午夜時分"
+    },
+    {
+      "start": 22,
+      "end": 24,
+      "ja": [
+        { "surface": "苦い", "reading": "にがい", "meaning": "苦澀的" },
+        { "surface": "思い出", "reading": "おもいで", "meaning": "回憶" },
+        { "surface": "も" },
+        { "surface": "blue" }
+      ],
+      "zh": "苦澀的回憶與憂鬱"
+    },
+    {
+      "start": 25,
+      "end": 27,
+      "ja": [
+        { "surface": "僕ら", "reading": "ぼくら", "meaning": "我們" },
+        {
+          "surface": "離れても",
+          "reading": "はなれても",
+          "meaning": "即使分開"
+        },
+        { "surface": "案外", "reading": "あんがい", "meaning": "出乎意料地" }
+      ],
+      "zh": "即使我們分開了"
+    },
+    {
+      "start": 27,
+      "end": 29,
+      "ja": [
+        {
+          "surface": "隠し",
+          "reading": "かくし",
+          "origin": "隠す",
+          "meaning": "隱藏"
+        },
+        { "surface": "持ってる", "meaning": "暗自懷揣著" }
+      ],
+      "zh": "也出乎意料地暗自懷揣著"
+    },
+
+    {
+      "start": 30,
+      "end": 32,
+      "ja": [
+        {
+          "surface": "言い合った",
+          "reading": "いいあった",
+          "origin": "言い合う",
+          "meaning": "互相說"
+        },
+        { "surface": "よね" },
+        { "surface": "good night" }
+      ],
+      "zh": "我們曾互相道過晚安呢"
+    },
+    {
+      "start": 33,
+      "end": 35,
+      "ja": [
+        { "surface": "そんな" },
+        { "surface": "退屈な", "reading": "たいくつな", "meaning": "無聊的" },
+        { "surface": "flow" },
+        { "surface": "も" }
+      ],
+      "zh": "連那樣乏味的流動"
+    },
+    {
+      "start": 35,
+      "end": 37,
+      "ja": [
+        { "surface": "僕ら" },
+        { "surface": "ここまで" },
+        { "surface": "案外" }
+      ],
+      "zh": "我們也出乎意料"
+    },
+    {
+      "start": 38,
+      "end": 40,
+      "ja": [
+        { "surface": "うまく", "meaning": "順利地" },
+        { "surface": "やってた", "origin": "やる" },
+        { "surface": "よね" }
+      ],
+      "zh": "順利地度過了呢"
+    },
+
+    {
+      "start": 41,
+      "end": 43,
+      "ja": [
+        { "surface": "こんな", "meaning": "這樣的" },
+        { "surface": "こと", "reading": "こと" },
+        { "surface": "じゃあ" }
+      ],
+      "zh": "早知如此"
+    },
+    {
+      "start": 43,
+      "end": 46,
+      "ja": [
+        { "surface": "出会わ", "origin": "出会う", "meaning": "相遇" },
+        { "surface": "なきゃ" },
+        { "surface": "よかった", "meaning": "就好了" },
+        { "surface": "な" }
+      ],
+      "zh": "若是最初不曾相遇就好了"
+    },
+    {
+      "start": 46,
+      "end": 48,
+      "ja": [
+        { "surface": "そんな" },
+        { "surface": "こと", "meaning": "事情" },
+        { "surface": "じゃあ" }
+      ],
+      "zh": "若是這樣"
+    },
+    {
+      "start": 49,
+      "end": 51,
+      "ja": [
+        { "surface": "ラブコメ", "meaning": "戀愛喜劇" },
+        { "surface": "みたいな", "meaning": "像是～一樣的" },
+        { "surface": "くだり", "meaning": "橋段、情節" },
+        { "surface": "で" }
+      ],
+      "zh": "就如同戀愛喜劇般的橋段"
+    },
+    {
+      "start": 51,
+      "end": 57,
+      "ja": [
+        {
+          "surface": "間違えて",
+          "reading": "まちがえて",
+          "meaning": "誤打誤撞地",
+          "origin": "間違える"
+        },
+        { "surface": "運命", "reading": "うんめい", "meaning": "命運" },
+        { "surface": "の" },
+        { "surface": "誰か", "meaning": "某個人" },
+        {
+          "surface": "に"
+        },
+        {
+          "surface": "会って",
+          "reading": "あって",
+          "meaning": "相遇",
+          "origin": "会う"
+        }
+      ],
+      "zh": "誤打誤撞地邂逅命中注定的某人"
+    },
+    {
+      "start": 58,
+      "end": 62,
+      "ja": [
+        { "surface": "恋しちゃう", "origin": "恋する", "meaning": "墜入愛河" },
+        { "surface": "ような" },
+        { "surface": "甘み", "reading": "あまみ", "meaning": "甜味" },
+        { "surface": "だが" }
+      ],
+      "zh": "雖是令人墜入情網的甜蜜"
+    },
+    {
+      "start": 62,
+      "end": 67,
+      "ja": [
+        { "surface": "ほろ苦い", "reading": "ほろにがい", "meaning": "微苦的" },
+        { "surface": "そう" },
+        { "surface": "苦い", "reading": "にがい", "meaning": "苦澀的" }
+      ],
+      "zh": "嚐起來微微苦澀 無比苦澀"
+    },
+    {
+      "start": 67,
+      "end": 73,
+      "ja": [
+        { "surface": "僕たち", "reading": "ぼくたち", "meaning": "我們" },
+        { "surface": "の" },
+        { "surface": "望む", "reading": "のぞむ", "meaning": "期盼" },
+        { "surface": "愛", "reading": "あい", "meaning": "愛" },
+        { "surface": "やら" },
+        { "surface": "出口", "reading": "でぐち", "meaning": "出口" }
+      ],
+      "zh": "我們所期盼的 名為愛的出口"
+    },
+    {
+      "start": 73,
+      "end": 78,
+      "ja": [
+        {
+          "surface": "消える",
+          "reading": "きえる",
+          "meaning": "消失"
+        },
+        { "surface": "こと" },
+        { "surface": "も" },
+        {
+          "surface": "見える",
+          "reading": "みえる",
+          "meaning": "能看見"
+        },
+        { "surface": "こと" },
+        { "surface": "も" }
+      ],
+      "zh": "彷彿不曾消失，也無法看見"
+    },
+    {
+      "start": 78,
+      "end": 83,
+      "ja": [
+        {
+          "surface": "忘れる",
+          "reading": "わすれる",
+          "meaning": "忘記"
+        },
+        { "surface": "こと" },
+        { "surface": "も" },
+        {
+          "surface": "できぬ",
+          "meaning": "無法做到（文語）"
+        },
+        { "surface": "ように" }
+      ],
+      "zh": "彷彿連忘懷都做不到"
+    },
+    {
+      "start": 84,
+      "end": 88,
+      "ja": [
+        {
+          "surface": "ほろ苦い",
+          "reading": "ほろにがい",
+          "meaning": "微苦的"
+        },
+        { "surface": "、" },
+        { "surface": "そう" },
+        {
+          "surface": "苦い",
+          "reading": "にがい",
+          "meaning": "苦澀的"
+        }
+      ],
+      "zh": "微微苦澀，沒錯，是那樣的苦澀"
+    },
+    {
+      "start": 89,
+      "end": 95,
+      "ja": [
+        {
+          "surface": "僕たち",
+          "reading": "ぼくたち",
+          "meaning": "我們"
+        },
+        { "surface": "の" },
+        {
+          "surface": "思う",
+          "reading": "おもう",
+          "meaning": "認為、相信"
+        },
+        {
+          "surface": "愛",
+          "reading": "あい",
+          "meaning": "愛"
+        },
+        { "surface": "やら" },
+        { "surface": "の" },
+        {
+          "surface": "未来",
+          "reading": "みらい",
+          "meaning": "未來"
+        },
+        { "surface": "は" }
+      ],
+      "zh": "我們所相信的，那名為愛之類的未來"
+    },
+    {
+      "start": 95,
+      "end": 100,
+      "ja": [
+        {
+          "surface": "消える",
+          "reading": "きえる",
+          "meaning": "消失"
+        },
+        { "surface": "こと" },
+        { "surface": "も" },
+        {
+          "surface": "見える",
+          "reading": "みえる",
+          "meaning": "能看見"
+        },
+        { "surface": "こと" },
+        { "surface": "も" }
+      ],
+      "zh": "彷彿不曾消失，也無法看見"
+    },
+    {
+      "start": 100,
+      "end": 105,
+      "ja": [
+        {
+          "surface": "忘れる",
+          "reading": "わすれる",
+          "meaning": "忘記"
+        },
+        { "surface": "こと" },
+        { "surface": "も" },
+        {
+          "surface": "できぬ",
+          "meaning": "無法做到（文語）"
+        },
+        { "surface": "ように" }
+      ],
+      "zh": "彷彿連忘懷都做不到一般"
+    },
+    {
+      "start": 105,
+      "end": 109,
+      "ja": [
+        {
+          "surface": "愛おしい",
+          "reading": "いとおしい",
+          "meaning": "令人珍愛、令人憐惜的"
+        },
+        { "surface": "の" },
+        { "surface": "さ" }
+      ],
+      "zh": "卻依然令人愛憐啊"
+    }
+  ]
+}
