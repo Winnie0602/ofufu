@@ -1,96 +1,139 @@
 <script setup lang="ts">
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+const isMobileNavOpen = ref(false)
 
-const { locales, locale, setLocale } = useI18n()
+const navItems = [
+  { label: '文章閱讀', href: '#' },
+  { label: '文法學習', href: '#' },
+  { label: '單字學習', href: '#' },
+  { label: '歌曲學習', href: '#' },
+  { label: '小測驗專區', href: '#' },
+  { label: '關於本站', href: '#' },
+  { label: '加入方案', href: '#' },
+]
 
-const showComingSoon = ref(false)
+const openMobileNav = () => {
+  isMobileNavOpen.value = true
+}
 
-watch(showComingSoon, () => {
-  setTimeout(() => {
-    showComingSoon.value = false
-  }, 2000)
-})
+const closeMobileNav = () => {
+  isMobileNavOpen.value = false
+}
 </script>
 
 <template>
-  <div class="w-full font-medium tracking-wide">
+  <header class="w-full bg-white/95 shadow-sm backdrop-blur">
     <nav
-      class="relative flex h-12 items-center border-b border-gray-200 bg-white px-3 md:h-14 md:px-5"
+      class="mx-auto flex h-15 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
+      aria-label="Main navigation"
     >
       <NuxtLink
-        class="text-lg font-semibold tracking-wide text-gray-900"
         to="/"
+        class="inline-flex shrink-0 items-center"
+        aria-label="Ofufu"
       >
-        {{ $t('karaoke_site') }} 〜
-        <span class="ml-1 text-[#F9595F]">♪</span>
+        <img
+          src="/logo-default.png"
+          alt="Ofufu"
+          class="h-9 w-auto object-contain"
+        />
       </NuxtLink>
 
-      <div class="ml-auto flex items-center gap-2">
-        <Menu as="div" class="relative inline-block text-left">
-          <div>
-            <MenuButton
-              class="flex items-center gap-1 rounded-md px-1.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none md:px-3"
-            >
-              <i class="fa-solid fa-globe md:text-xl"></i>
-              <span class="text-sm md:text-base">Language</span>
-            </MenuButton>
-          </div>
+      <ul
+        class="menu ofufu-menu menu-horizontal hidden p-0 text-base font-semibold lg:flex"
+      >
+        <li v-for="item in navItems" :key="item.label">
+          <a :href="item.href" class="px-4 py-2">
+            {{ item.label }}
+          </a>
+        </li>
+      </ul>
 
-          <transition
-            enter-active-class="transition duration-100 ease-out"
-            enter-from-class="transform scale-95 opacity-0"
-            enter-to-class="transform scale-100 opacity-100"
-            leave-active-class="transition duration-75 ease-in"
-            leave-from-class="transform scale-100 opacity-100"
-            leave-to-class="transform scale-95 opacity-0"
-          >
-            <MenuItems
-              class="absolute right-0 z-50 mt-2 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
-            >
-              <div class="px-1 py-1">
-                <MenuItem
-                  v-for="lang in locales"
-                  :key="lang.code"
-                  v-slot="{ active }"
-                >
-                  <button
-                    :class="[
-                      locale === lang.code
-                        ? 'bg-[#F9595F]/60 text-white'
-                        : active
-                          ? 'bg-gray-300 text-gray-900'
-                          : 'text-gray-900',
-                      'group flex w-full items-center rounded-md px-3 py-2 text-sm transition-colors',
-                    ]"
-                    @click="setLocale(lang.code)"
-                  >
-                    <span class="mr-2 text-base">{{ lang.flag }}</span>
-                    {{ lang.name }}
-                  </button>
-                </MenuItem>
-              </div>
-            </MenuItems>
-          </transition>
-        </Menu>
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          class="btn btn-text btn-circle text-dark hidden md:inline-flex"
+          aria-label="搜尋"
+        >
+          <span class="icon-[tabler--language-hiragana] size-7"></span>
+        </button>
 
-        <!-- 登入按鈕 -->
-        <div class="group profile-container relative flex items-center">
-          <button
-            class="rounded-full px-2.5 py-1 transition-colors hover:bg-gray-200"
-            @click="showComingSoon = !showComingSoon"
-          >
-            <i class="fa-regular fa-user text-gray-700 md:text-lg"></i>
-          </button>
+        <NuxtLink
+          to="/login"
+          class="btn btn-error h-9 min-h-9 px-6 text-sm font-semibold max-md:hidden"
+        >
+          登入
+        </NuxtLink>
 
-          <span
-            class="pointer-events-none absolute top-1.5 -right-1.5 flex-col items-center justify-center rounded-md bg-[#F9595F]/80 px-1.5 py-1 text-[9px] font-medium text-white shadow-sm ring-1 ring-white"
-            :class="[showComingSoon ? 'flex' : 'hidden', 'md:group-hover:flex']"
-          >
-            <span class="text-[7px] leading-none">COMING</span>
-            <span class="mt-[2px] text-[7px] leading-none">SOON</span>
-          </span>
-        </div>
+        <button
+          type="button"
+          class="btn btn-text text-dark btn-circle lg:hidden"
+          aria-haspopup="dialog"
+          :aria-expanded="isMobileNavOpen"
+          aria-controls="site-mobile-navigation"
+          aria-label="開啟選單"
+          @click="openMobileNav"
+        >
+          <span class="icon-[tabler--menu-2] size-6"></span>
+        </button>
       </div>
     </nav>
-  </div>
+
+    <Teleport to="body">
+      <button
+        v-show="isMobileNavOpen"
+        type="button"
+        class="fixed inset-0 z-20 bg-neutral-950/40 lg:hidden"
+        aria-label="關閉選單"
+        @click="closeMobileNav"
+      ></button>
+
+      <aside
+        id="site-mobile-navigation"
+        class="fixed inset-y-0 inset-s-0 z-20 flex w-full max-w-72 flex-col bg-white shadow-xl transition-transform duration-300 ease-in-out lg:hidden"
+        :class="isMobileNavOpen ? 'translate-x-0' : '-translate-x-full'"
+        tabindex="-1"
+        role="dialog"
+        :aria-hidden="!isMobileNavOpen"
+        aria-label="Mobile navigation"
+      >
+        <div class="drawer-header border-b border-neutral-100">
+          <img
+            src="/logo-default.png"
+            alt="Ofufu"
+            class="h-9 w-auto object-contain"
+          />
+          <button
+            type="button"
+            class="btn btn-text btn-circle btn-sm absolute inset-e-3 top-3"
+            aria-label="關閉選單"
+            @click="closeMobileNav"
+          >
+            <span class="icon-[tabler--x] size-5"></span>
+          </button>
+        </div>
+
+        <div class="drawer-body py-5">
+          <ul
+            class="menu ofufu-mobile-menu w-full p-0 text-base font-semibold text-neutral-900"
+          >
+            <li v-for="item in navItems" :key="item.label">
+              <a :href="item.href" @click="closeMobileNav">
+                {{ item.label }}
+              </a>
+            </li>
+          </ul>
+
+          <div class="mt-6 w-full">
+            <NuxtLink
+              to="/login"
+              class="btn btn-error w-full"
+              @click="closeMobileNav"
+            >
+              登入
+            </NuxtLink>
+          </div>
+        </div>
+      </aside>
+    </Teleport>
+  </header>
 </template>

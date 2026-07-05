@@ -2,7 +2,7 @@
 const { isModalOpen, title, content, type, confirm, cancel } = useCheckConfirm()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
-const siteName = 'Karaoke Lab'
+const siteName = 'Ofufu'
 const siteUrl = config.public.siteUrl.replace(/\/+$/, '')
 
 useHead(() => ({

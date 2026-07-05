@@ -136,7 +136,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="mx-auto my-4 w-full px-4 md:my-6 md:max-w-[1280px] lg:px-5 xl:px-0"
+    class="mx-auto my-4 w-full px-4 md:my-6 md:max-w-7xl lg:px-5 xl:px-0"
   >
     <ClientOnly>
       <div
@@ -217,7 +217,7 @@ onMounted(async () => {
         </div>
       </div>
       <!-- 右邊區塊 -->
-      <div class="min-h-[400px] w-full lg:w-1/3 lg:min-w-[402px]">
+      <div class="min-h-[400px] w-full lg:w-1/3 lg:min-w-100.5">
         <div
           class="mb-4 border-b-4 border-[#A66B6B] text-xl font-medium text-[#A66B6B] md:text-2xl"
         >

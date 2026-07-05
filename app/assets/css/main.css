@@ -1,3 +1,75 @@
+@import 'tailwindcss';
+@plugin 'flyonui';
+@plugin 'tailwindcss-motion';
+@import 'flyonui/variants.css';
+@import 'tailwindcss-intersect';
+@source '../../../node_modules/flyonui/dist/index.js';
+@plugin '@iconify/tailwind4';
+
+@theme {
+  --font-sans: 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
+  --color-dark: var(--ofufu-black);
+  --color-soft-red: var(--soft-red);
+}
+
+:root {
+  --ofufu-red: #c61b29;
+  --ofufu-blue: #114099;
+  --ofufu-black: #171717;
+  --soft-red: #ffe8ec;
+
+  --color-primary: var(--ofufu-blue);
+  --color-primary-content: #ffffff;
+  --color-error: var(--ofufu-red);
+  --color-error-content: #ffffff;
+  --color-dark: var(--ofufu-black);
+  --color-base-100: #ffffff;
+  --color-base-content: var(--ofufu-black);
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.section-title h2 {
+  font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.section-title-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--ofufu-black);
+  flex: 0 0 auto;
+  font-size: 1.4rem;
+}
+
+.ofufu-menu {
+  --menu-hover-bg: transparent;
+  --menu-hover-fg: var(--color-error);
+}
+
+.ofufu-menu :where(li:not(.menu-title, .menu-disabled)) {
+  color: var(--color-neutral-700);
+}
+
+.ofufu-mobile-menu {
+  --menu-hover-bg: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  --menu-hover-fg: var(--color-primary);
+}
+
+.ofufu-mobile-menu :where(li:not(.menu-title, .menu-disabled)) {
+  color: var(--color-neutral-900);
+}
+
 @keyframes toast-progress {
   from {
     width: 100%;
