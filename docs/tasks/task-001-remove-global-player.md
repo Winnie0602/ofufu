@@ -2,7 +2,16 @@
 
 ## 狀態
 
-`Planned`
+`Completed`
+
+## 完成後決策備註
+
+- 全站背景播放器已移除，Song 詳情頁改用 route-local YouTube player。
+- 舊 Song Quiz 不再補回 YouTube 播放能力，也不作為新版測驗的實作基礎。
+- 舊測驗目前以歌曲歌詞翻譯選擇題為核心，題型與音訊來源都不符合新版產品方向，後續應全面重寫。
+- 新版測驗的音訊應引用教材或題目的 Audio Asset，例如預先產生並儲存在 Cloudflare R2 的 Google TTS 音檔；不得依賴 YouTube 時間軸或全站 player state。
+- 新版題型方向以 `/test-index` 的首頁示意為參考：聽力選擇題、閱讀選擇題、讀音選擇題、單字選擇題與句子重組。
+- 舊 Song Quiz 頁的 preview、作答與 review 播放目前不列入維護範圍；正式測驗 Feature 開始時，應重新定義 Question、Audio Asset、作答與結果流程。
 
 ## 目標
 
@@ -117,7 +126,8 @@
 1. 暫時在舊 Song Quiz 頁掛載局部 legacy player；或
 2. 將 Song Quiz 標記為暫停使用，等待後續 segment audio 重構。
 
-本 task 建議採用方案 1，以維持既有功能。
+實作後決策採用方案 2：舊 Song Quiz 視為 legacy 功能，不再補回 YouTube
+播放器。正式測驗將依新版教材與 Question Bank 方向全面重寫。
 
 ## 暫時不應刪除
 
@@ -153,7 +163,7 @@
 - [ ] Song 頁仍可播放、暫停與 seek。
 - [ ] Song 頁的同步歌詞仍可依目前播放時間更新。
 - [ ] 點擊有時間戳的歌詞仍可播放或跳至對應位置。
-- [ ] 舊 Song Quiz 仍能播放指定歌詞片段，或已有明確的暫時停用決策。
+- [x] 舊 Song Quiz 已有明確的 legacy／暫停維護決策，等待新版測驗全面重寫。
 - [ ] 離開 Song 頁後不會繼續背景播放。
 - [ ] 不修改 MongoDB schema 或歌曲資料。
 - [ ] 不刪除仍被 Song、Quiz 或 Admin 使用的 legacy player 程式。
@@ -185,5 +195,6 @@
 
 ## 完成定義
 
-Task 完成時，全站 layout 不再擁有任何 YouTube player instance；Song 與 legacy Song Quiz 可在各自頁面內建立並銷毀播放器，其他頁面與播放器狀態完全解耦。
-
+Task 完成時，全站 layout 不再擁有任何 YouTube player instance；Song 在自己的
+頁面內建立並銷毀播放器，其他頁面與播放器狀態完全解耦。legacy Song Quiz
+不再維持 YouTube 播放能力，等待新版測驗以教材／題目 Audio Asset 全面重寫。
