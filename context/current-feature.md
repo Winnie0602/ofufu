@@ -2,11 +2,11 @@
 
 ## Feature Name
 
-單字教材前台探索
+Footer 手機版精簡
 
 ## Branch
 
-尚未確認；開始實作前檢查目前 Git branch，必要時由開發者建立 Feature branch。
+`dev`
 
 ## Status
 
@@ -22,11 +22,11 @@
 - 確認單字詳細內容採同頁 Accordion，由 `activeVocabularyId` 控制，不使用 Drawer。
 - 確認程度使用單選 Badge，並以 `level`、`page` route query 保存狀態。
 - 完成並驗收 Task 002：依確認的桌面／手機方向建立單字列表視覺原型、30 筆 mock data、每字 3 句可供 TTS 使用的結構化例句、型別與響應式互動。
+- 完成並驗收 Task 003：手機與平板隱藏 Footer「學習內容」、平板採三欄、桌面保留四欄，並將主要內容置中。
 
 ## Todo
 
-- 建立 Footer 手機版精簡 Task，縮短全站手機版 Footer 高度。
-- Footer 完成後建立單字教材即時 TTS 播放 Task。
+- 建立單字教材即時 TTS 播放 Task。
 
 ## Notes
 

@@ -4,7 +4,7 @@
   >
     <div class="mx-auto w-full max-w-7xl px-6 py-10 lg:px-8">
       <div
-        class="grid gap-10 text-center md:grid-cols-2 md:text-left lg:grid-cols-[1.6fr_1fr_1fr_1fr]"
+        class="mx-auto grid w-full gap-10 text-center md:max-w-2xl md:grid-cols-[1.6fr_1fr_1fr] md:text-left lg:max-w-6xl lg:grid-cols-[1.6fr_1fr_1fr_1fr]"
       >
         <section>
           <img
@@ -49,7 +49,7 @@
           </div>
         </section>
 
-        <nav>
+        <nav class="hidden lg:block">
           <h3 class="text-base font-black">學習內容</h3>
           <ul class="mt-5 space-y-3 text-sm font-medium text-neutral-600">
             <li>
@@ -59,7 +59,9 @@
               <a href="#" class="hover:text-error transition">文法學習</a>
             </li>
             <li>
-              <a href="#" class="hover:text-error transition">單字學習</a>
+              <NuxtLink to="/vocabulary" class="hover:text-error transition">
+                單字學習
+              </NuxtLink>
             </li>
             <li>
               <a href="#" class="hover:text-error transition">歌曲學習</a>
