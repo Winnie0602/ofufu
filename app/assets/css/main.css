@@ -31,6 +31,44 @@ body {
   font-family: var(--font-sans);
 }
 
+.hide-vocabulary-ruby rt {
+  visibility: hidden;
+}
+
+.vocabulary-hero-bg {
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: url('/hero-bg3.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+.vocabulary-hero-bg::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 150px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgb(255 255 255 / 0), #fff 82%);
+  content: '';
+}
+
+@media (min-width: 1024px) {
+  .vocabulary-hero-bg {
+    background-size: cover;
+  }
+}
+
+@media (max-width: 767px) {
+  .vocabulary-hero-bg {
+    background-position: left top;
+    background-size: cover;
+  }
+}
+
 .section-title {
   display: flex;
   align-items: center;
