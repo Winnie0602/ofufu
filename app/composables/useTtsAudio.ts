@@ -8,6 +8,10 @@ interface PlayTtsAudioPayload {
   text: string
 }
 
+type PlayAudioOptions = {
+  toggleWhenActive: boolean
+}
+
 export const useTtsAudio = (
   lang: TtsLanguageConfig | (() => TtsLanguageConfig),
 ) => {
@@ -17,6 +21,7 @@ export const useTtsAudio = (
   let audio: HTMLAudioElement | null = null
   // 每次停止或切換播放都遞增，讓較早完成的 TTS response 自動失效。
   let requestVersion = 0
+  let sequenceVersion = 0
   let removeAudioListeners: (() => void) | null = null
 
   const audioState = (audioId: string): AudioPlaybackState => {
@@ -25,7 +30,7 @@ export const useTtsAudio = (
     return 'idle'
   }
 
-  const stopAudio = () => {
+  const stopCurrentAudio = () => {
     requestVersion += 1
 
     // 移除上一段音訊的事件，避免它回頭修改目前按鈕的狀態。
@@ -42,16 +47,26 @@ export const useTtsAudio = (
     playingAudioId.value = null
   }
 
-  const playAudio = async ({ audioId, text }: PlayTtsAudioPayload) => {
+  const stopAudio = () => {
+    sequenceVersion += 1
+    stopCurrentAudio()
+  }
+
+  const requestAudio = async (
+    { audioId, text }: PlayTtsAudioPayload,
+    { toggleWhenActive }: PlayAudioOptions,
+  ) => {
     if (
       loadingAudioId.value === audioId ||
       playingAudioId.value === audioId
     ) {
-      stopAudio()
-      return
+      if (toggleWhenActive) {
+        stopCurrentAudio()
+        return false
+      }
     }
 
-    stopAudio()
+    stopCurrentAudio()
     const currentRequestVersion = requestVersion
     loadingAudioId.value = audioId
 
@@ -102,8 +117,55 @@ export const useTtsAudio = (
 
       audio.src = `data:audio/mp3;base64,${response.audioContent}`
       await audio.play()
+      return true
     } catch {
       handleFailure('無法產生語音，請稍後再試。')
+      return false
+    }
+  }
+
+  const playAudio = async (payload: PlayTtsAudioPayload) => {
+    sequenceVersion += 1
+    await requestAudio(payload, { toggleWhenActive: true })
+  }
+
+  const waitForAudioEnd = (audioId: string, currentSequenceVersion: number) =>
+    new Promise<void>((resolve) => {
+      if (
+        currentSequenceVersion !== sequenceVersion ||
+        (loadingAudioId.value !== audioId &&
+          playingAudioId.value !== audioId)
+      ) {
+        resolve()
+        return
+      }
+
+      const stopWatching = watch(
+        [loadingAudioId, playingAudioId],
+        () => {
+          if (
+            currentSequenceVersion !== sequenceVersion ||
+            (loadingAudioId.value !== audioId &&
+              playingAudioId.value !== audioId)
+          ) {
+            stopWatching()
+            resolve()
+          }
+        },
+      )
+    })
+
+  const playAudioSequence = async (items: PlayTtsAudioPayload[]) => {
+    stopAudio()
+    const currentSequenceVersion = sequenceVersion
+
+    for (const item of items) {
+      if (currentSequenceVersion !== sequenceVersion) return
+
+      const started = await requestAudio(item, { toggleWhenActive: false })
+      if (!started || currentSequenceVersion !== sequenceVersion) return
+
+      await waitForAudioEnd(item.audioId, currentSequenceVersion)
     }
   }
 
@@ -113,6 +175,7 @@ export const useTtsAudio = (
   return {
     audioState,
     playAudio,
+    playAudioSequence,
     stopAudio,
   }
 }

@@ -20,7 +20,7 @@ defineEmits<{
       :class="
         modelValue === level
           ? 'btn-error bg-error hover:bg-error text-white hover:text-white'
-          : 'btn-error text-error hover:bg-error bg-white hover:text-white'
+          : 'btn-error text-error hover:bg-error/10 bg-white hover:text-error'
       "
       :aria-pressed="modelValue === level"
       @click="$emit('update:modelValue', level)"

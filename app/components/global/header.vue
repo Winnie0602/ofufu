@@ -2,8 +2,8 @@
 const isMobileNavOpen = ref(false)
 
 const navItems = [
-  { label: '文章閱讀', href: '#' },
-  { label: '對話學習', href: '#' },
+  { label: '文章閱讀', href: '/reading' },
+  { label: '對話學習', href: '/conversation' },
   { label: '文法學習', href: '#' },
   { label: '單字學習', href: '/vocabulary' },
   { label: '歌曲學習', href: '#' },
