@@ -49,6 +49,37 @@
 - 不自行擴張 Feature 範圍；發現相鄰需求時記錄在 Todo 或 Notes。
 - 保留使用者工作區中與任務無關的未提交變更。
 
+## Git Commit 規範
+
+- 未經使用者明確同意，不自行建立 commit。
+- Commit message 統一使用 Conventional Commits 格式：`type(scope): 繁體中文摘要`。
+- `type` 與 `scope` 使用小寫英文，`scope` 必須填寫並清楚表示變更範圍。
+- 摘要與補充說明使用繁體中文，不使用英文句子，結尾不加句號。
+- Commit message 以 1 行為主；需要交代原因或重要細節時，可增加第 2 行繁體中文說明。
+- 一個 commit 只處理一組相關變更，避免混入無關檔案。
+- Commit 前必須檢查 staged files，不得包含 `.env`、credentials、系統檔或任務範圍外的變更。
+- 允許的 type：`feat`、`fix`、`refactor`、`style`、`docs`、`test`、`chore`、`perf`、`build`、`ci`。
+
+範例：
+
+```text
+feat(vocabulary): 完成單字與例句即時語音播放
+```
+
+```text
+fix(vocabulary): 修正展開單字後的畫面定位
+
+依固定 Header 高度保留捲動間距
+```
+
+```text
+refactor(tts): 抽離共用語音播放 composable
+```
+
+```text
+docs(task-004): 更新語音播放驗收結果
+```
+
 ## 完成條件
 
 - 實作符合對應 Feature Spec 與 Acceptance Criteria。
