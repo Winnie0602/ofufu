@@ -48,9 +48,9 @@ const memberBenefits = [
 
     <div class="mt-5 grid gap-3 md:grid-cols-3 md:gap-5">
       <article
-        v-for="(benefit, index) in memberBenefits"
+        v-for="benefit in memberBenefits"
         :key="benefit.title"
-        class="relative flex min-h-[112px] items-center gap-4 rounded-lg border border-neutral-200 bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-2 hover:shadow-md md:min-h-[240px] md:flex-col md:justify-center md:p-6 md:text-center"
+        class="border-error/5 shadow-error/5 relative flex min-h-[112px] items-center gap-4 rounded-lg border bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-2 hover:shadow-md md:min-h-[240px] md:flex-col md:justify-center md:p-6 md:text-center"
       >
         <div
           class="text-error/90 bg-error/5 flex size-16 shrink-0 items-center justify-center rounded-full md:size-20"

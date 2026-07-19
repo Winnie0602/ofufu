@@ -3,8 +3,9 @@ const isMobileNavOpen = ref(false)
 
 const navItems = [
   { label: '文章閱讀', href: '#' },
+  { label: '對話學習', href: '#' },
   { label: '文法學習', href: '#' },
-  { label: '單字學習', href: '#' },
+  { label: '單字學習', href: '/vocabulary' },
   { label: '歌曲學習', href: '#' },
   { label: '小測驗專區', href: '#' },
   { label: '關於本站', href: '#' },
@@ -42,9 +43,9 @@ const closeMobileNav = () => {
         class="menu ofufu-menu menu-horizontal hidden p-0 text-base font-semibold lg:flex"
       >
         <li v-for="item in navItems" :key="item.label">
-          <a :href="item.href" class="px-4 py-2">
+          <NuxtLink :to="item.href" class="px-4 py-2">
             {{ item.label }}
-          </a>
+          </NuxtLink>
         </li>
       </ul>
 
@@ -117,9 +118,9 @@ const closeMobileNav = () => {
             class="menu ofufu-mobile-menu w-full p-0 text-base font-semibold text-neutral-900"
           >
             <li v-for="item in navItems" :key="item.label">
-              <a :href="item.href" @click="closeMobileNav">
+              <NuxtLink :to="item.href" @click="closeMobileNav">
                 {{ item.label }}
-              </a>
+              </NuxtLink>
             </li>
           </ul>
 

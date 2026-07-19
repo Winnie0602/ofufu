@@ -51,7 +51,7 @@ const wordCards = [
 </script>
 
 <template>
-  <section class="test-hero-bg relative w-full overflow-hidden">
+  <section class="hero-bg relative w-full overflow-hidden">
     <div
       class="relative z-10 mx-auto grid min-h-[560px] w-full max-w-[1280px] items-center px-4 py-8 sm:px-6 md:gap-10 md:py-12 lg:min-h-[640px] lg:grid-cols-[0.95fr_1.05fr] lg:px-8"
     >
@@ -127,7 +127,7 @@ const wordCards = [
 </template>
 
 <style scoped>
-.test-hero-bg {
+.hero-bg {
   background-color: #fff;
   background-image: url('/hero-bg3.png');
   background-position: center top;
@@ -135,7 +135,7 @@ const wordCards = [
   background-size: auto 100%;
 }
 
-.test-hero-bg::after {
+.hero-bg::after {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -259,7 +259,7 @@ const wordCards = [
 }
 
 @media (min-width: 1024px) {
-  .test-hero-bg {
+  .hero-bg {
     background-size: cover;
   }
 
@@ -270,7 +270,7 @@ const wordCards = [
 }
 
 @media (max-width: 767px) {
-  .test-hero-bg {
+  .hero-bg {
     background-position: left top;
     background-size: cover;
   }

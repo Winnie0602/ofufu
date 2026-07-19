@@ -56,8 +56,12 @@ const openSections = reactive<Record<(typeof sections)[number]['id'], boolean>>(
       >
         {{ section.title }}
         <span
-          class="icon-[tabler--chevron-down] size-4 transition-transform"
-          :class="{ 'rotate-180': openSections[section.id] }"
+          class="size-4 shrink-0 text-neutral-500"
+          :class="
+            openSections[section.id]
+              ? 'icon-[tabler--minus]'
+              : 'icon-[tabler--plus]'
+          "
         />
       </button>
 

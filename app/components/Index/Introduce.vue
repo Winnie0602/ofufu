@@ -9,12 +9,20 @@ const studyModes = [
     motionDelay: 'intersect:motion-delay-[0ms]',
   },
   {
+    title: '對話學習',
+    text: '透過生活情境對話，熟悉自然說法、語氣與實用表達。',
+    action: '瀏覽對話',
+    icon: 'icon-[tabler--messages]',
+    iconColor: 'text-primary',
+    motionDelay: 'intersect:motion-delay-[112ms]',
+  },
+  {
     title: '文法學習',
     text: 'N5~N1 專題練習與模擬測驗，幫助你有效備考。',
     action: '前往練習',
     icon: 'icon-[tabler--clipboard-check]',
     iconColor: 'text-primary',
-    motionDelay: 'intersect:motion-delay-[140ms]',
+    motionDelay: 'intersect:motion-delay-[224ms]',
   },
   {
     title: '單字學習',
@@ -22,7 +30,7 @@ const studyModes = [
     action: '瀏覽單字',
     icon: 'icon-[tabler--letter-case]',
     iconColor: 'text-primary',
-    motionDelay: 'intersect:motion-delay-[280ms]',
+    motionDelay: 'intersect:motion-delay-[336ms]',
   },
   {
     title: '歌曲學習',
@@ -30,7 +38,7 @@ const studyModes = [
     action: '瀏覽歌曲',
     icon: 'icon-[tabler--music]',
     iconColor: 'text-primary',
-    motionDelay: 'intersect:motion-delay-[420ms]',
+    motionDelay: 'intersect:motion-delay-[448ms]',
   },
   {
     title: '小測驗',
@@ -97,7 +105,7 @@ const levelSteps = [
         <span
           class="icon-[tabler--arrow-badge-right] section-title-icon"
         ></span>
-        <h2>五大學習教材</h2>
+        <h2>六大學習教材</h2>
       </div>
       <div class="study-mode-grid">
         <article
@@ -184,8 +192,20 @@ const levelSteps = [
 <style scoped>
 .study-mode-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(188px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
+}
+
+@media (min-width: 640px) {
+  .study-mode-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .study-mode-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .study-mode-card {
@@ -269,7 +289,6 @@ const levelSteps = [
 
 @media (max-width: 767px) {
   .study-mode-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
 

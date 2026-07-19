@@ -1,6 +1,8 @@
-export type VocabularyLevel = 'all' | 'n5' | 'n4' | 'n3' | 'n2' | 'n1'
+import type { JlptLevel as MaterialJlptLevel, MaterialLevel } from './material'
 
-export type JlptLevel = Exclude<VocabularyLevel, 'all'>
+export type VocabularyLevel = MaterialLevel
+
+export type JlptLevel = MaterialJlptLevel
 
 export const verbGroupLabels = {
   1: '第一類動詞（五段動詞）',

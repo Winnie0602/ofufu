@@ -66,24 +66,21 @@ const newMaterials = [
       <article
         v-for="material in newMaterials"
         :key="material.title"
-        class="group border-primary/10 relative flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-md"
+        class="group border-error/5 shadow-error/5 relative flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-md"
       >
-        <button
-          type="button"
-          class="btn btn-circle btn-sm border-error/20 text-error hover:border-error hover:bg-error absolute top-3 right-3 z-20 border bg-white shadow-sm transition hover:text-white"
-          aria-label="收藏教材"
-        >
-          <span class="icon-[tabler--heart] size-4"></span>
-        </button>
+        <FavoriteButton
+          class="absolute top-3 right-3 z-20"
+          :label="`收藏 ${material.title}`"
+        />
         <div
           class="relative aspect-video w-full overflow-hidden bg-neutral-100"
         >
           <div
             v-if="material.type === '文法'"
-            class="flex h-full w-full items-center justify-center bg-white px-5 text-center"
+            class="flex h-full w-full items-center justify-center bg-neutral-950 px-5 text-center"
           >
             <span
-              class="text-xl leading-tight font-black break-words text-neutral-950 md:text-2xl"
+              class="text-xl leading-tight font-black break-words text-white md:text-2xl"
             >
               {{ material.title }}
             </span>
@@ -98,12 +95,12 @@ const newMaterials = [
         </div>
         <div class="flex flex-1 flex-col p-3">
           <h3
-            class="group-hover:text-primary line-clamp-1 text-sm font-black text-neutral-900 transition md:text-base"
+            class="group-hover:text-primary line-clamp-1 text-sm font-bold text-neutral-900 transition md:text-base"
           >
             {{ material.title }}
           </h3>
           <p
-            class="mt-2 line-clamp-2 min-h-[2.6rem] text-xs leading-relaxed font-semibold text-neutral-500"
+            class="mt-2 line-clamp-2 min-h-[2.6rem] text-xs leading-relaxed text-neutral-500"
           >
             {{ material.subtitle }}
           </p>
@@ -112,19 +109,19 @@ const newMaterials = [
           >
             <div class="flex min-w-0 flex-wrap items-center gap-2">
               <span
-                class="badge badge-outline badge-primary rounded-full px-3 text-[11px] font-black"
+                class="badge badge-outline badge-primary rounded-full px-3 text-[11px] font-medium"
               >
                 {{ material.type }}
               </span>
               <span
-                class="badge badge-outline badge-error rounded-full px-3 text-[11px] font-black"
+                class="badge badge-outline badge-error rounded-full px-3 text-[11px] font-medium"
               >
                 {{ material.level }}
               </span>
             </div>
             <button
               type="button"
-              class="text-primary hover:text-error flex shrink-0 items-center gap-1 text-[11px] font-black tracking-wide transition"
+              class="text-primary hover:text-error flex shrink-0 items-center gap-1 text-[11px] font-bold tracking-wide transition"
             >
               READ
               <span class="icon-[tabler--arrow-right] size-3.5"></span>
