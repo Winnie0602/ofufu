@@ -12,60 +12,30 @@ const { open, word, sentense, loading, lang } = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'close'): void
+  (event: 'close'): void
 }>()
 
-// 朗讀狀態控制
-const speakingIndex = ref<number | null>(null)
+const { audioState, playAudio, stopAudio } = useTtsAudio(
+  () => LANG_CONFIG_MAP[lang],
+)
 
-// 朗讀中？
-const isPlaying = ref(false)
+const handleSpeak = (text: string, index: number) =>
+  playAudio({
+    audioId: `bottom-panel-${index}`,
+    text,
+  })
 
-// 是否不能點
-const cooldown = ref(false)
-
-const handleSpeak = async (text: string, index: number) => {
-  if (isPlaying.value || cooldown.value) return
-
-  isPlaying.value = true
-  speakingIndex.value = index
-
-  try {
-    const res = await $fetch('/api/tts', {
-      method: 'POST',
-      body: {
-        text,
-        lang: LANG_CONFIG_MAP[lang],
-      },
-    })
-
-    const audio = new Audio(`data:audio/mp3;base64,${res.audioContent}`)
-
-    audio.onended = () => {
-      isPlaying.value = false
-      speakingIndex.value = null
-
-      cooldown.value = true
-
-      // 設定兩秒後才能繼續聽語音
-      setTimeout(() => {
-        cooldown.value = false
-      }, 2000)
-    }
-
-    audio.play()
-  } catch (e) {
-    isPlaying.value = false
-    speakingIndex.value = null
-  }
-}
-
-// 關閉前先復原所有狀態
 const handleClose = () => {
-  cooldown.value = false
-  isPlaying.value = false
+  stopAudio()
   emit('close')
 }
+
+watch(
+  () => open,
+  (isOpen) => {
+    if (!isOpen) stopAudio()
+  },
+)
 </script>
 
 <template>
@@ -132,22 +102,13 @@ const handleClose = () => {
                   :key="i"
                   class="mt-3 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3 transition-all hover:bg-white/10 md:gap-4 md:p-4"
                 >
-                  <button
-                    class="flex h-9 w-9 flex-none items-center justify-center rounded-full transition-all md:mt-1 md:h-10 md:w-10"
-                    :class="[
-                      speakingIndex === i
-                        ? 'scale-95 bg-white text-[#C63E42] opacity-100'
-                        : 'bg-white/10 text-white/80 hover:scale-110 hover:bg-white/20 active:scale-95',
-
-                      (isPlaying || cooldown) && speakingIndex !== i
-                        ? 'cursor-not-allowed opacity-30'
-                        : '',
-                    ]"
-                    :disabled="isPlaying || cooldown"
-                    @click="handleSpeak(s.text, i)"
-                  >
-                    <i class="fa-solid fa-volume-high text-xs md:text-base"></i>
-                  </button>
+                  <AudioButton
+                    class="flex-none md:mt-1"
+                    :label="`播放例句 ${i + 1}`"
+                    :state="audioState(`bottom-panel-${i}`)"
+                    size="md"
+                    @play="handleSpeak(s.text, i)"
+                  />
 
                   <div class="w-full flex-1 space-y-1">
                     <div

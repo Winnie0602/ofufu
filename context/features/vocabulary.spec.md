@@ -115,11 +115,16 @@ MongoDB Schema。未來可由規則程式或 AI 產生活用候選值，但必�
 
 ### Audio
 
-- 第一版可沿用既有 TTS API 或使用 mock 播放狀態驗證 UI。
+- Task 002 使用 mock 播放狀態完成 UI 驗證；Task 004 將沿用既有
+  `POST /api/tts` 串接真實即時播放。
+- 單字 TTS 使用 `VocabularyItem.word`；例句 TTS 使用不含 HTML 的完整
+  `VocabularyExample.japanese`，不從 highlight segments 或 DOM 組合朗讀文字。
+- 頁面使用單一 `HTMLAudioElement`，同一時間只播放一段；切換播放目標或離開
+  頁面時需停止舊音訊並清理狀態。
 - 需呈現可辨識的播放、載入與不可用狀態。
 - 視覺元件使用 FlyonUI Button、Swap 與 Loading。
 - 不得使用 YouTube 或全站播放器。
-- Google TTS、R2 快取與正式 Audio Asset 流程另開技術 Feature。
+- R2 快取、批次產生、正式 Audio Asset 與公開環境防濫用流程另開技術 Feature。
 
 ### Responsive Design
 
@@ -195,6 +200,7 @@ MongoDB Schema。未來可由規則程式或 AI 產生活用候選值，但必�
 
 - `context/project-overview.md`
 - `context/current-feature.md`
+- `docs/tasks/task-004-vocabulary-tts-playback.md`
 - `/test-index` Hero 單字卡的紅、藍 Badge。
 - [FlyonUI Accordion `With Avatar`](https://flyonui.com/docs/components/accordion/#with-avatar) 範例；只參考結構，不使用 Avatar。
 - 視覺參考圖待補至 `context/screenshots/references/`。

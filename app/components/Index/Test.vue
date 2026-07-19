@@ -103,6 +103,7 @@ const testTypes = [
 
 const activeTestId = ref(testTypes[0]?.id ?? '')
 const selectedReorderWords = ref<string[]>([])
+const isPreviewAudioPlaying = ref(false)
 
 const toggleTest = (id: string) => {
   activeTestId.value = activeTestId.value === id ? '' : id
@@ -151,7 +152,7 @@ const removeReorderWord = (word?: string) => {
         v-for="testType in testTypes"
         :id="`${testType.id}-test`"
         :key="testType.id"
-        class="accordion-item"
+        class="accordion-item border-error/5 !shadow-error/5 border"
         :class="{ active: activeTestId === testType.id }"
       >
         <button
@@ -203,18 +204,13 @@ const removeReorderWord = (word?: string) => {
                         >
                           問題
                         </span>
-                        <label
-                          class="text-error swap swap-rotate"
-                          aria-label="播放聽力題目"
-                        >
-                          <input type="checkbox" />
-                          <span
-                            class="icon-[tabler--player-play-filled] swap-off"
-                          ></span>
-                          <span
-                            class="icon-[tabler--player-pause-filled] swap-on"
-                          ></span>
-                        </label>
+                        <AudioButton
+                          label="播放聽力題目"
+                          :state="isPreviewAudioPlaying ? 'playing' : 'idle'"
+                          @play="
+                            isPreviewAudioPlaying = !isPreviewAudioPlaying
+                          "
+                        />
                       </div>
                       <p
                         class="text-error flex min-w-0 items-center leading-7 font-medium break-words md:flex-1"
@@ -275,7 +271,7 @@ const removeReorderWord = (word?: string) => {
                       <button
                         v-if="selectedReorderWords[slotIndex]"
                         :key="`selected-${selectedReorderWords[slotIndex]}`"
-                        class="border-primary/50 text-primary hover:bg-primary/20 flex h-10 min-w-20 items-center justify-center border-b-[3px] bg-none px-3 text-sm font-black transition"
+                        class="border-error/50 text-error hover:bg-error/20 flex h-10 min-w-20 items-center justify-center border-b-[3px] bg-none px-3 text-sm font-black transition"
                         type="button"
                         @click="
                           removeReorderWord(selectedReorderWords[slotIndex])
@@ -286,7 +282,7 @@ const removeReorderWord = (word?: string) => {
                       <span
                         v-else
                         :key="`slot-${slotIndex}`"
-                        class="flex h-10 min-w-20 items-center justify-center border-b-[3px] border-neutral-300 bg-neutral-50 px-3 text-sm font-black text-neutral-300"
+                        class="bg-error/5 flex h-10 min-w-20 items-center justify-center border-b-[3px] border-neutral-300 px-3 text-sm font-black text-neutral-300"
                       >
                         _
                       </span>

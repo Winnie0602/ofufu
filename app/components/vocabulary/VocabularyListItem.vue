@@ -16,8 +16,7 @@ const props = defineProps<{
 
 defineEmits<{
   (event: 'toggle', vocabularyId: string): void
-  // eslint-disable-next-line @typescript-eslint/unified-signatures
-  (event: 'play', audioId: string): void
+  (event: 'play', payload: { audioId: string; text: string }): void
 }>()
 
 const verbGroupLabel = computed(() =>
@@ -50,7 +49,7 @@ const verbGroupLabel = computed(() =>
       <button
         :id="`vocabulary-${item.id}-toggle`"
         type="button"
-        class="flex min-w-0 flex-wrap items-end gap-x-4 gap-y-1 text-left"
+        class="flex min-w-0 scroll-mt-[84px] flex-wrap items-end gap-x-4 gap-y-1 text-left"
         :aria-controls="`vocabulary-${item.id}-collapse`"
         :aria-expanded="isActive"
         @click="$emit('toggle', item.id)"
@@ -67,24 +66,13 @@ const verbGroupLabel = computed(() =>
         </span>
       </button>
 
-      <VocabularyAudioButton
+      <AudioButton
         :label="`播放 ${item.word} 讀音`"
         :state="audioState(item.id)"
-        @play="$emit('play', item.id)"
+        @play="$emit('play', { audioId: item.id, text: item.word })"
       />
 
-      <button
-        type="button"
-        class="btn btn-circle btn-sm border-error/20 text-error hover:border-error hover:bg-error bg-white shadow-none transition-none hover:text-white"
-        :aria-label="`收藏 ${item.word}`"
-      >
-        <span
-          class="size-5"
-          :class="
-            isActive ? 'icon-[tabler--heart-filled]' : 'icon-[tabler--heart]'
-          "
-        />
-      </button>
+      <FavoriteButton :label="`收藏 ${item.word}`" :active="isActive" />
 
       <button
         type="button"
@@ -95,10 +83,10 @@ const verbGroupLabel = computed(() =>
         @click="$emit('toggle', item.id)"
       >
         <span
-          class="icon-[tabler--plus] accordion-item-active:hidden size-5 shrink-0"
+          class="icon-[tabler--chevron-down] accordion-item-active:hidden size-5 shrink-0"
         />
         <span
-          class="icon-[tabler--minus] accordion-item-active:block hidden size-5 shrink-0"
+          class="icon-[tabler--chevron-up] accordion-item-active:block hidden size-5 shrink-0"
         />
       </button>
     </div>
@@ -174,18 +162,17 @@ const verbGroupLabel = computed(() =>
                         {{ example.translation }}
                       </p>
                     </div>
-                    <VocabularyAudioButton
+                    <AudioButton
                       :label="`播放 ${item.word} 例句`"
                       :state="audioState(example.id)"
-                      @play="$emit('play', example.id)"
+                      @play="
+                        $emit('play', {
+                          audioId: example.id,
+                          text: example.japanese,
+                        })
+                      "
                     />
-                    <button
-                      type="button"
-                      class="btn btn-circle btn-sm border-error/20 text-error hover:border-error hover:bg-error bg-white shadow-none transition-none hover:text-white"
-                      :aria-label="`收藏 ${item.word} 例句`"
-                    >
-                      <span class="icon-[tabler--heart] size-5" />
-                    </button>
+                    <FavoriteButton :label="`收藏 ${item.word} 例句`" />
                   </div>
                 </div>
               </div>

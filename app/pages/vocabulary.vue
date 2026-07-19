@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { vocabularyItems } from '~/data/materials/vocabulary'
-import type { VocabularyLevel } from '~/types/vocabulary'
+import { LANG_CONFIG_MAP } from '~/types/lang'
+import { materialLevels, type MaterialLevel } from '~/types/material'
 
 const route = useRoute()
 const router = useRouter()
-const levels: VocabularyLevel[] = ['all', 'n5', 'n4', 'n3', 'n2', 'n1']
 const pageSize = 20
 
-const selectedLevel = computed<VocabularyLevel>(() => {
+const selectedLevel = computed<MaterialLevel>(() => {
   const level = String(route.query.level ?? 'all').toLowerCase()
-  return levels.includes(level as VocabularyLevel)
-    ? (level as VocabularyLevel)
+  return materialLevels.includes(level as MaterialLevel)
+    ? (level as MaterialLevel)
     : 'all'
 })
 
@@ -36,37 +36,53 @@ const visibleItems = computed(() => {
 
 const showRuby = ref(true)
 const activeVocabularyId = ref<string | null>(null)
-const loadingAudioId = ref<string | null>(null)
-const playingAudioId = ref<string | null>(null)
-let audioTimer: ReturnType<typeof window.setTimeout> | undefined
+const { audioState, playAudio } = useTtsAudio(LANG_CONFIG_MAP.ja)
+let scrollRequestVersion = 0
 
-const changeLevel = (level: VocabularyLevel) =>
+const changeLevel = (level: MaterialLevel) =>
   router.push({ query: { ...route.query, level, page: 1 } })
 
-const changePage = (page: number) =>
-  router.push({ query: { ...route.query, level: selectedLevel.value, page } })
+const scrollToVocabulary = async (
+  vocabularyId: string,
+  waitForAccordion = false,
+) => {
+  const currentScrollRequest = ++scrollRequestVersion
+  await nextTick()
+
+  // 展開與上一個項目的收合動畫完成後，單字標題的位置才會固定。
+  if (waitForAccordion) {
+    await new Promise((resolve) => window.setTimeout(resolve, 320))
+  }
+
+  if (currentScrollRequest !== scrollRequestVersion) return
+
+  document
+    .getElementById(`vocabulary-${vocabularyId}-toggle`)
+    ?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+}
+
+const changePage = async (page: number) => {
+  await router.push({
+    query: { ...route.query, level: selectedLevel.value, page },
+  })
+
+  const firstVocabulary = visibleItems.value[0]
+  if (safePage.value === page && firstVocabulary) {
+    await scrollToVocabulary(firstVocabulary.id)
+  }
+}
 
 const toggleVocabulary = (id: string) => {
-  activeVocabularyId.value = activeVocabularyId.value === id ? null : id
-}
+  if (activeVocabularyId.value === id) {
+    activeVocabularyId.value = null
+    return
+  }
 
-const audioState = (id: string) => {
-  if (loadingAudioId.value === id) return 'loading'
-  if (playingAudioId.value === id) return 'playing'
-  return 'idle'
-}
-
-const playAudioPreview = (id: string) => {
-  window.clearTimeout(audioTimer)
-  playingAudioId.value = null
-  loadingAudioId.value = id
-  audioTimer = window.setTimeout(() => {
-    loadingAudioId.value = null
-    playingAudioId.value = id
-    audioTimer = window.setTimeout(() => {
-      playingAudioId.value = null
-    }, 1200)
-  }, 450)
+  activeVocabularyId.value = id
+  void scrollToVocabulary(id, true)
 }
 
 watch(
@@ -77,68 +93,33 @@ watch(
   { immediate: true },
 )
 
-onBeforeUnmount(() => window.clearTimeout(audioTimer))
-
 useSeoMeta({
-  title: '單字學習｜Ofufu',
+  title: '單字學習',
   description: '依照 JLPT 程度瀏覽日文單字、讀音、活用與例句。',
 })
 </script>
 
 <template>
-  <div class="w-full bg-white text-neutral-950">
-    <section class="vocabulary-hero-bg relative w-full overflow-hidden">
-      <div
-        class="relative z-10 mx-auto grid min-h-[280px] w-full max-w-[1280px] items-end px-4 pt-8 pb-4 sm:px-6 sm:pb-[10px] md:gap-10 md:pt-12 lg:min-h-[340px] lg:grid-cols-[0.95fr_1.05fr] lg:px-8"
-      >
-        <div class="max-w-full pt-4 text-center lg:text-left">
-          <h1
-            class="text-[2rem] leading-tight font-bold sm:text-5xl lg:text-[3.4rem]"
-          >
-            單字學習
-          </h1>
-          <p
-            class="mx-auto mt-7 max-w-lg text-base leading-8 font-semibold text-neutral-600 lg:mx-0 lg:text-lg"
-          >
-            依照適合自己的 JLPT 程度瀏覽單字，
-            <br />
-            搭配發音、活用與例句，
-            <br class="md:hidden" />
-            一步一步累積日文詞彙力。
-          </p>
-        </div>
+  <MaterialsPage>
+    <template #hero>
+      <MaterialsHero
+        title="單字學習"
+        :description="`依照適合自己的 JLPT 程度瀏覽單字，\n搭配發音、活用與例句，一步一步累積日文詞彙力。`"
+      />
+    </template>
 
-        <div class="hidden lg:block" aria-hidden="true" />
-      </div>
-    </section>
-
-    <main class="mx-auto w-full max-w-[1280px] px-4 pt-4">
+    <div class="pt-4">
       <section
         class="flex items-stretch gap-3 border-y border-neutral-200 py-4 sm:items-center sm:gap-6 sm:px-4"
       >
         <div class="min-w-0 flex-1 sm:contents">
           <div class="shrink-0 text-sm text-neutral-700">程度篩選</div>
 
-          <div
-            class="join mt-3 min-w-0 sm:mt-0 sm:flex-1"
-            aria-label="JLPT 程度篩選"
-          >
-            <button
-              v-for="level in levels"
-              :key="level"
-              type="button"
-              class="btn btn-soft btn-sm join-item !rounded-none transition-none"
-              :class="
-                selectedLevel === level
-                  ? 'btn-error bg-error hover:bg-error text-white hover:text-white'
-                  : 'btn-error text-error hover:bg-error bg-white hover:text-white'
-              "
-              :aria-pressed="selectedLevel === level"
-              @click="changeLevel(level)"
-            >
-              {{ level === 'all' ? 'All' : level.toUpperCase() }}
-            </button>
-          </div>
+          <MaterialsLevelFilter
+            class="mt-3 min-w-0 sm:mt-0 sm:flex-1"
+            :model-value="selectedLevel"
+            @update:model-value="changeLevel"
+          />
         </div>
 
         <label
@@ -167,7 +148,7 @@ useSeoMeta({
             :show-level="selectedLevel === 'all'"
             :audio-state="audioState"
             @toggle="toggleVocabulary"
-            @play="playAudioPreview"
+            @play="playAudio"
           />
         </div>
 
@@ -178,47 +159,14 @@ useSeoMeta({
           目前沒有這個程度的單字。
         </div>
 
-        <nav class="mt-6 flex justify-center" aria-label="單字列表分頁">
-          <div class="flex items-center gap-x-1">
-            <button
-              type="button"
-              class="btn btn-circle btn-sm text-error hover:bg-error/10 hover:text-error border-transparent bg-transparent shadow-none transition-none hover:border-transparent"
-              :disabled="safePage === 1"
-              aria-label="上一頁"
-              @click="changePage(safePage - 1)"
-            >
-              <span class="icon-[tabler--chevron-left] size-5" />
-            </button>
-            <div class="flex items-center gap-x-1">
-              <button
-                v-for="page in pageCount"
-                :key="page"
-                type="button"
-                class="btn btn-circle btn-sm shadow-none transition-none"
-                :class="
-                  safePage === page
-                    ? 'border-error bg-error hover:bg-error text-white hover:text-white'
-                    : 'text-error hover:bg-error/10 hover:text-error border-transparent bg-transparent hover:border-transparent'
-                "
-                :aria-current="safePage === page ? 'page' : undefined"
-                :aria-label="`第 ${page} 頁`"
-                @click="changePage(page)"
-              >
-                {{ page }}
-              </button>
-            </div>
-            <button
-              type="button"
-              class="btn btn-circle btn-sm text-error hover:bg-error/10 hover:text-error border-transparent bg-transparent shadow-none transition-none hover:border-transparent"
-              :disabled="safePage === pageCount"
-              aria-label="下一頁"
-              @click="changePage(safePage + 1)"
-            >
-              <span class="icon-[tabler--chevron-right] size-5" />
-            </button>
-          </div>
-        </nav>
+        <Pagination
+          class="mt-6"
+          :page="safePage"
+          :total-pages="pageCount"
+          aria-label="單字列表分頁"
+          @update-page="changePage"
+        />
       </section>
-    </main>
-  </div>
+    </div>
+  </MaterialsPage>
 </template>

@@ -2,7 +2,7 @@
 
 ## Feature Name
 
-Footer 手機版精簡
+單字教材即時 TTS 播放
 
 ## Branch
 
@@ -23,10 +23,11 @@ Footer 手機版精簡
 - 確認程度使用單選 Badge，並以 `level`、`page` route query 保存狀態。
 - 完成並驗收 Task 002：依確認的桌面／手機方向建立單字列表視覺原型、30 筆 mock data、每字 3 句可供 TTS 使用的結構化例句、型別與響應式互動。
 - 完成並驗收 Task 003：手機與平板隱藏 Footer「學習內容」、平板採三欄、桌面保留四欄，並將主要內容置中。
+- 完成 Task 004：串接既有 `/api/tts`，以 `useTtsAudio()` 統一單一音訊播放、loading、playing、停止、快速切換競態、錯誤復原及卸載清理；單字頁與既有 `BottomPanel` 共用相同邏輯。
 
 ## Todo
 
-- 建立單字教材即時 TTS 播放 Task。
+- 即時播放驗收後，另開 R2、TTS 快取與 Audio Asset 技術 Task。
 
 ## Notes
 
