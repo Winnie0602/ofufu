@@ -27,7 +27,16 @@ export const readingMaterials: ReadingMaterial[] = [
               { id: 'RdA7vJ2eK6qB', text: '景色', ruby: 'けしき' },
               { id: 'RdA8cN5uL1tF', text: 'や' },
               { id: 'RdA9hR7pD3xS', text: '食べ物', ruby: 'たべもの' },
-              { id: 'RdA0wM4kV8nQ', text: 'を楽しめる' },
+              { id: 'RdA0wM4kV8nQ', text: 'を' },
+              {
+                id: 'RdA0bT3nQ7mK',
+                text: '楽しめる',
+                parts: [
+                  { text: '楽', ruby: 'たの' },
+                  { text: 'しめる' },
+                ],
+                vocabularyNoteId: 'RdVw8Tn3Lm2K',
+              },
               {
                 id: 'RdG1bP6zT2cH',
                 text: 'ようになります',
@@ -38,7 +47,7 @@ export const readingMaterials: ReadingMaterial[] = [
           },
           {
             id: 'RdS2mQ9vB4xK',
-            japanese: '春になると桜が咲き、公園には多くの人が集まります。',
+            japanese: '春になると桜が咲き、公園には多くの人が集まりま   。',
             translation: '春天一到櫻花盛開，許多人會聚集在公園裡。',
             segments: [
               { id: 'RdB1tL5nC8qR', text: '春', ruby: 'はる' },
@@ -127,11 +136,14 @@ export const readingMaterials: ReadingMaterial[] = [
     ],
     vocabularyNotes: [
       {
+        // 名詞：辭書形＝表層形，(桜, さくら, noun) 命中單字表 → 已連結
         id: 'RdVw4Kp8Nx2M',
-        lexemeId: 'LxSk7Pq3Vm8N',
         surface: '桜',
+        surfaceReading: 'さくら',
+        dictionaryForm: '桜',
         reading: 'さくら',
-        contextualMeaning: '櫻花；本文指春季盛開、常被觀賞的日本櫻花。',
+        partOfSpeech: 'noun',
+        contextualMeaning: '櫻花',
         examples: [
           {
             id: 'RdVe1mT6qN9xP',
@@ -146,11 +158,36 @@ export const readingMaterials: ReadingMaterial[] = [
         ],
       },
       {
+        // 動詞活用形示範：表層形「楽しめる」，辭書形「楽しむ」(たのしむ, verb) → 命中單字表
+        id: 'RdVw8Tn3Lm2K',
+        surface: '楽しめる',
+        surfaceReading: 'たのしめる',
+        dictionaryForm: '楽しむ',
+        reading: 'たのしむ',
+        partOfSpeech: 'verb',
+        contextualMeaning: '享受；此處為可能形，意為「能夠享受」',
+        examples: [
+          {
+            id: 'RdVe5tK8mP2qL',
+            japanese: '春には桜を楽しめる。',
+            translation: '春天能享受櫻花。',
+          },
+          {
+            id: 'RdVe6nQ3vH9xC',
+            japanese: '四季それぞれの景色を楽しめる。',
+            translation: '能享受四季各自的景色。',
+          },
+        ],
+      },
+      {
+        // 刻意未收錄於單字表：(夏祭り, なつまつり, noun) → 未連結，改用本註解自帶例句
         id: 'RdVw6Ts3Qa7L',
-        lexemeId: 'LxNm5Rk9Bw2D',
         surface: '夏祭り',
+        surfaceReading: 'なつまつり',
+        dictionaryForm: '夏祭り',
         reading: 'なつまつり',
-        contextualMeaning: '夏季祭典；日本夏天常見、有攤販與煙火的節慶活動。',
+        partOfSpeech: 'noun',
+        contextualMeaning: '夏季祭典（有攤販與煙火的日本夏季節慶）',
         examples: [
           {
             id: 'RdVe3pF8mQ1tV',

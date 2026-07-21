@@ -122,11 +122,14 @@ export const conversationMaterials: ConversationMaterial[] = [
     ],
     vocabularyNotes: [
       {
+        // 刻意未收錄於單字表：(電話, でんわ, noun) → 未連結，改用本註解自帶例句
         id: 'CvVw2Rt7Km4P',
-        lexemeId: 'LxDn8Qp3Vm6T',
         surface: '電話',
+        surfaceReading: 'でんわ',
+        dictionaryForm: '電話',
         reading: 'でんわ',
-        contextualMeaning: '電話；本文指打電話向餐廳訂位。',
+        partOfSpeech: 'noun',
+        contextualMeaning: '電話',
         examples: [
           {
             id: 'CvVe1pM5xT8qN',
@@ -141,11 +144,14 @@ export const conversationMaterials: ConversationMaterial[] = [
         ],
       },
       {
+        // (予約, よやく, noun) 命中單字表 → 收藏時會與單字表同一條目去重
         id: 'CvVw5Lm9Qa2N',
-        lexemeId: 'LxYk4Nw7Ps1C',
         surface: '予約',
+        surfaceReading: 'よやく',
+        dictionaryForm: '予約',
         reading: 'よやく',
-        contextualMeaning: '預約、預訂；本文指事先預留餐廳座位。',
+        partOfSpeech: 'noun',
+        contextualMeaning: '預約、預訂',
         examples: [
           {
             id: 'CvVe3tH8mQ4pD',

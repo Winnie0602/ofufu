@@ -4,7 +4,7 @@
 
 | 項目 | 內容 |
 | --- | --- |
-| 狀態 | In Review |
+| 狀態 | Completed |
 | Feature | 對話教材前台視覺原型 |
 | Route | `/conversation`、`/conversation/[id]` |
 | 資料來源 | 前端 TypeScript mock data |
@@ -130,25 +130,25 @@
 
 ## Acceptance Criteria
 
-- [ ] `/conversation` 可依程度與頁碼顯示正確 mock data，並還原有效 query。
-- [ ] 列表共用閱讀頁的教材卡片；桌面一列 5 張，手機為同元件橫向 compact 排版。
-- [ ] 無封面資料時顯示黑底白字預設封面。
-- [ ] 換頁後捲動到第一張卡片，Header 電腦版及手機版均可前往 `/conversation`。
-- [ ] `/conversation/[id]` 使用固定模擬 nanoid 取得資料，無效 ID 顯示 404。
-- [ ] 每篇顯示 2～3 名角色，對話行以 `speakerId` 正確取得名字、角色與 `avatarKey`。
-- [ ] 使用 FlyonUI Chat Bubble 清楚呈現角色、逐句日文、翻譯、播放及收藏 UI。
-- [ ] 中日對照、僅顯示日文、對話隱藏模式及 Ruby 開關結果正確，隱藏模式仍保留對話框、播放及收藏操作。
-- [ ] 對話文字使用安全結構化 segments，不使用 `v-html`。
-- [ ] 點擊內文單字或下方重點單字 Badge，皆可在原地開啟共用 FlyonUI Popover。
-- [ ] 重點單字 Badge 可自動換行，且與常見用法與文法不使用 Tabs、依序顯示。
-- [ ] 文法 Collapse 顯示短解釋、本文例句、額外例句與完整文法入口狀態。
-- [ ] 顯示最多 5 篇同程度推薦對話並可正常導航。
-- [ ] 桌面與手機版無非預期水平溢出。
-- [ ] 不新增 npm 套件、不建立 API 或資料庫。
-- [ ] 相關檔案通過 ESLint；完成視覺原型後更新本文件狀態與驗收結果。
+- [x] `/conversation` 可依程度與頁碼顯示正確 mock data，並還原有效 query。
+- [x] 列表共用閱讀頁的教材卡片；桌面一列 5 張，手機為同元件橫向 compact 排版。
+- [x] 無封面資料時顯示黑底白字預設封面。
+- [x] 換頁後捲動到第一張卡片，Header 電腦版及手機版均可前往 `/conversation`。
+- [x] `/conversation/[id]` 使用固定模擬 nanoid 取得資料，無效 ID 顯示 404。
+- [x] 每篇顯示 2～3 名角色，對話行以 `speakerId` 正確取得名字、角色與 `avatarKey`。
+- [x] 使用 FlyonUI Chat Bubble 清楚呈現角色、逐句日文、翻譯、播放及收藏 UI。
+- [x] 中日對照、僅顯示日文、對話隱藏模式及 Ruby 開關結果正確，隱藏模式仍保留對話框、播放及收藏操作。
+- [x] 對話文字使用安全結構化 segments，不使用 `v-html`。
+- [x] 點擊內文單字或下方重點單字 Badge，皆可在原地開啟共用 FlyonUI Popover。
+- [x] 重點單字 Badge 可自動換行，且與常見用法與文法不使用 Tabs、依序顯示。
+- [x] 文法 Collapse 顯示短解釋、本文例句、額外例句與完整文法入口狀態。
+- [x] 顯示最多 5 篇同程度推薦對話並可正常導航。
+- [x] 桌面與手機版無非預期水平溢出。
+- [x] 不新增 npm 套件、不建立 API 或資料庫。
+- [x] 相關檔案通過 ESLint；完成視覺原型後更新本文件狀態與驗收結果。
 
 ## Notes
 
 - 對話分類可持續擴充；大類放在 categories，標題描述具體溝通任務，避免同類對話標題難以區分。
 - AI 候選對話仍必須經管理員確認角色、翻譯、單字與文法後才能發布。
-- 2026-07-19 已完成第一版前端視覺原型與自動檢查，Acceptance Criteria 保留待使用者設計確認後勾選。
+- 2026-07-19 完成第一版前端視覺原型與自動檢查；2026-07-21 使用者確認視覺，驗收通過並勾選 Acceptance Criteria。

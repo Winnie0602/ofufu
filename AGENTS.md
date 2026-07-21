@@ -7,8 +7,15 @@
 1. `context/project-overview.md`
 2. `context/current-feature.md`
 3. 對應的 `context/features/*.spec.md`（若存在）
+4. 涉及教材內文、單字／文法註解、收藏或 AI 產生內容時，另讀 `context/content-model.md`。
+5. 比較 current-feature.md、Feature Spec、Git diff / history 與目前實際 implementation，確認 Codex 停在哪裡。不要修改，先回報差異。
 
 `docs/schema.md` 是未來資料庫草案，不是目前前端實作的強制規格。
+
+## 溝通語言
+
+- 使用者是繁體中文使用者，與使用者的所有回覆、說明與提問一律使用繁體中文，不使用日文或簡體中文。
+- 教材內的日文內容、程式碼、識別字與必要術語可保留原文。
 
 ## 專案方向
 
@@ -55,7 +62,7 @@
 - Commit message 統一使用 Conventional Commits 格式：`type(scope): 繁體中文摘要`。
 - `type` 與 `scope` 使用小寫英文，`scope` 必須填寫並清楚表示變更範圍。
 - 摘要與補充說明使用繁體中文，不使用英文句子，結尾不加句號。
-- Commit message 以 1 行為主；需要交代原因或重要細節時，可增加第 2 行繁體中文說明。
+- Commit message 以 1 行中文敘述為主；需要交代原因或重要細節時，可增加第 2 行繁體中文說明。
 - 一個 commit 只處理一組相關變更，避免混入無關檔案。
 - Commit 前必須檢查 staged files，不得包含 `.env`、credentials、系統檔或任務範圍外的變更。
 - 允許的 type：`feat`、`fix`、`refactor`、`style`、`docs`、`test`、`chore`、`perf`、`build`、`ci`。

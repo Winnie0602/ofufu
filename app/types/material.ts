@@ -1,3 +1,5 @@
+import type { VocabularyPartOfSpeechCode } from './vocabulary'
+
 export const materialLevels = ['all', 'n5', 'n4', 'n3', 'n2', 'n1'] as const
 
 export type MaterialLevel = (typeof materialLevels)[number]
@@ -68,18 +70,43 @@ export type MaterialTextSegment = {
 }
 
 export type MaterialExample = {
+  /** 例句的固定模擬 nanoid（代理鍵）。 */
   id: string
+  /** 不含 HTML 的完整日文例句；供顯示與 TTS 使用。 */
   japanese: string
+  /** 對應的繁體中文翻譯。 */
   translation: string
 }
 
+/**
+ * 教材內文（文章／對話）中「可點單字」的註解。
+ *
+ * 採「參照優先」設計：本型別只保存「出現位置」與「本文專屬」資訊，
+ * 完整單字資料（活用、通用意思、豐富例句）一律由單字表 `VocabularyItem`
+ * 以辭書形自然鍵 `(dictionaryForm, reading, partOfSpeech)` 查得，不內嵌於此。
+ */
 export type MaterialVocabularyNote = {
+  /** 此單字「出現位置（occurrence）」的固定模擬 nanoid（代理鍵，非自然鍵）。 */
   id: string
-  lexemeId: string
+  /** 實際出現在文中的表層形／活用形（例：食べた、楽しめる）；僅供顯示，不用於配對。 */
   surface: string
+  /** 表層形本身的讀音（例：楽しめる → たのしめる）；畫面主要顯示此讀音，供初學者對照發音。 */
+  surfaceReading: string
+  /** 辭書形（原形，例：食べる、楽しむ）——自然鍵之一，用於配對單字表。 */
+  dictionaryForm: string
+  /** 辭書形的讀音（例：たべる、たのしむ）——自然鍵之一，用於配對，非畫面主要顯示讀音。 */
   reading: string
+  /** 詞性代碼——自然鍵之一，消除同形同音的歧義（沿用單字表既有代碼）。 */
+  partOfSpeech: VocabularyPartOfSpeechCode
+  /** 此字在「本段」的意思／用法；單字表沒有、屬本文專屬資訊，連結後仍會顯示。 */
   contextualMeaning: string
-  examples: MaterialExample[]
+  /** 未連結單字表時的備用例句；已連結時優先顯示單字表例句。 */
+  examples?: MaterialExample[]
+  /**
+   * resolver 依自然鍵解析後填入的單字表 id（代理鍵）；未命中為 null。
+   * 前端原型可於執行時即時解析，故 mock data 不手動填寫；未來後端於匯入時填入。
+   */
+  vocabularyItemId?: string | null
 }
 
 export type MaterialGrammarNote = {
