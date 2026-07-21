@@ -152,7 +152,7 @@ const removeReorderWord = (word?: string) => {
         v-for="testType in testTypes"
         :id="`${testType.id}-test`"
         :key="testType.id"
-        class="accordion-item border-error/5 !shadow-error/5 border"
+        class="accordion-item --prevent-on-load-init border-error/5 !shadow-error/5 border"
         :class="{ active: activeTestId === testType.id }"
       >
         <button
