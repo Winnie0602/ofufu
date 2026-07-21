@@ -75,9 +75,17 @@ task-005／006 目前文章／對話內文採「segment 陣列」模型：每句
 
 - 先前多個 Task 的部分驗收項目標為未完成（X），**主因是現階段 mock data 量不足以驗證列表
   呈現是否合乎標準**，非實作缺陷。
-- 待本 Task 的括號記法＋notes anchor 格式定案後，批次生成更多**閱讀／對話／單字** mock
-  data，再逐一回勾這些以「資料量」為前提的驗收項目、確認列表合乎標準。
+- 待本 Task 的括號記法＋notes anchor 格式定案後，批次生成更多**閱讀／對話／單字** mock data。
 - **不要在 007 定案前用舊格式生大量資料**，否則 007 後需全部重生。
+
+補完資料後的**必做步驟：回頭清算舊 X**（不是只生資料就結束）：
+
+1. 逐一翻查先前 Task／Feature Spec 的 Acceptance Criteria，找出**當初因「資料量不足」而
+   打 X** 的項目（例：`context/features/reading.spec.md`、`conversation.spec.md`、
+   `docs/tasks/task-002/005` 等的分頁、程度篩選、推薦數量、多分類等）。
+2. 用新的資料量實際驗證每一條，該勾的**回勾 `[x]`**，並補上驗收日期。
+3. 若某條 X 其實是**真實缺陷（非資料量）**，另立 bug/Task 處理，不要混進資料補齊裡默默勾掉。
+4. 全部清算完成後，更新 `context/current-feature.md` 任務總覽與相關 spec/task 狀態。
 
 ### 給 ChatGPT 的資料產生規範（做完 007 才產出）
 

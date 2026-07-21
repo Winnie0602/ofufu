@@ -65,6 +65,7 @@
 - Commit message 以 1 行中文敘述為主；需要交代原因或重要細節時，可增加第 2 行繁體中文說明。
 - 一個 commit 只處理一組相關變更，避免混入無關檔案。
 - Commit 前必須檢查 staged files，不得包含 `.env`、credentials、系統檔或任務範圍外的變更。
+- 不在 commit message 加入 `Co-Authored-By` 或任何 AI／工具署名 trailer。
 - 允許的 type：`feat`、`fix`、`refactor`、`style`、`docs`、`test`、`chore`、`perf`、`build`、`ci`。
 
 範例：
@@ -89,6 +90,7 @@ docs(task-004): 更新語音播放驗收結果
 
 ## 完成條件
 
+- 撰寫 Acceptance Criteria 時，功能項用「涵蓋代表性案例」描述（例：有封面與 null 封面各一、可解析與未連結註解各一），不用「30 筆」這類數量描述；資料量不算功能完成度，另行追蹤。
 - 實作符合對應 Feature Spec 與 Acceptance Criteria。
 - 執行專案現有且與變更相關的檢查；目前至少執行 `npx eslint <changed-files>`。
 - 涉及建置或 Nuxt 組態時執行 `npm run build`。
