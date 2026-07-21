@@ -3,6 +3,7 @@ import { conversationMaterials } from '~/data/materials/conversation'
 import { characterAvatarMap } from '~/types/conversation'
 import { LANG_CONFIG_MAP } from '~/types/lang'
 import { materialCategoryLabels, type StudyMode } from '~/types/material'
+import { toPlainJapanese } from '~/utils/parseRuby'
 
 const route = useRoute()
 const material = conversationMaterials.find(
@@ -13,10 +14,17 @@ if (!material) {
   throw createError({ statusCode: 404, statusMessage: '找不到這篇對話' })
 }
 
+// 註解掛在句子層，側欄「重點單字／常見用法與文法」由各句攤平彙整。
+// 「重點單字」只列主打字（featured）；featured:false 屬一般可收藏字，等 task-008 查字模式再揭露。
+const vocabularyNotes = material.lines
+  .flatMap((line) => line.vocabularyNotes ?? [])
+  .filter((note) => note.featured)
+const grammarNotes = material.lines.flatMap((line) => line.grammarNotes ?? [])
+
 const mode = ref<StudyMode>('full')
 const showRuby = ref(true)
 const playbackRate = ref(1)
-const activeGrammarId = ref<string | null>(material.grammarNotes[0]?.id ?? null)
+const activeGrammarId = ref<string | null>(grammarNotes[0]?.id ?? null)
 const isConversationPlaying = ref(false)
 const { audioState, playAudio, playAudioSequence, stopAudio } = useTtsAudio(
   LANG_CONFIG_MAP.ja,
@@ -33,7 +41,7 @@ const playConversation = async () => {
   await playAudioSequence(
     material.lines.map((line) => ({
       audioId: line.id,
-      text: line.japanese,
+      text: toPlainJapanese(line.text),
     })),
   )
   isConversationPlaying.value = false
@@ -216,8 +224,9 @@ useSeoMeta({ title: material.title, description: material.excerpt })
               :aria-hidden="mode === 'listening'"
             >
               <MaterialsAnnotatedText
-                :segments="line.segments"
-                :vocabulary-notes="material.vocabularyNotes"
+                :text="line.text"
+                :vocabulary-notes="line.vocabularyNotes"
+                :grammar-notes="line.grammarNotes"
                 :show-ruby="showRuby"
                 @select-grammar="selectGrammar"
               />
@@ -236,7 +245,9 @@ useSeoMeta({ title: material.title, description: material.excerpt })
             <AudioButton
               :label="`播放 ${participantMap.get(line.speakerId)?.name} 的對話`"
               :state="audioState(line.id)"
-              @play="playAudio({ audioId: line.id, text: line.japanese })"
+              @play="
+                playAudio({ audioId: line.id, text: toPlainJapanese(line.text) })
+              "
             />
             <FavoriteButton
               :label="`收藏 ${participantMap.get(line.speakerId)?.name} 的對話`"
@@ -249,7 +260,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
         <h2 class="text-2xl font-bold">重點單字</h2>
         <div class="mt-5 flex flex-wrap gap-2">
           <MaterialsVocabularyPopover
-            v-for="note in material.vocabularyNotes"
+            v-for="note in vocabularyNotes"
             :key="note.id"
             :note="note"
             variant="badge"
@@ -266,7 +277,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
         </p>
         <MaterialsGrammarNotes
           class="mt-5"
-          :notes="material.grammarNotes"
+          :notes="grammarNotes"
           :active-id="activeGrammarId"
           @toggle="toggleGrammar"
         />

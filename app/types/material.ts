@@ -55,18 +55,27 @@ export const studyModes = [
 
 export type StudyMode = (typeof studyModes)[number]
 
-export type MaterialRubyPart = {
+/**
+ * Ruby 括號記法解析後的顯示 token。
+ *
+ * 由 `parseRubyNotation()` 從純文字（含 furigana 括號）產生：
+ * - 純文字段：只有 `text`。
+ * - 漢字連續段：`text` 為漢字、`ruby` 為括號內讀音，供 `<ruby>` 顯示。
+ */
+export type RubyToken = {
   text: string
   ruby?: string
 }
 
-export type MaterialTextSegment = {
-  id: string
-  text: string
-  ruby?: string
-  parts?: MaterialRubyPart[]
-  vocabularyNoteId?: string
-  grammarNoteId?: string
+/**
+ * 內文標註（stand-off）的定位錨點：以「表層字串 ＋ 第幾次出現」在句中定位，
+ * renderer 自行找位置並包樣式，不預先把句子切成 segment。
+ */
+export type NoteAnchor = {
+  /** 要標記的表層子字串（純文字，不含 ruby 括號），例：眺めたり。 */
+  surface: string
+  /** 同一 surface 在本句出現多次時，指定第幾個（1-based）；預設 1。 */
+  occurrence?: number
 }
 
 export type MaterialExample = {
@@ -88,8 +97,18 @@ export type MaterialExample = {
 export type MaterialVocabularyNote = {
   /** 此單字「出現位置（occurrence）」的固定模擬 nanoid（代理鍵，非自然鍵）。 */
   id: string
-  /** 實際出現在文中的表層形／活用形（例：食べた、楽しめる）；僅供顯示，不用於配對。 */
+  /**
+   * 實際出現在文中的表層形／活用形（例：食べた、楽しめる）；僅供顯示，不用於配對。
+   * 同時作為 stand-off 定位的 anchor：renderer 以此字串在句中找位置並包樣式。
+   */
   surface: string
+  /** 同一 surface 在本句出現多次時，指定要標第幾個（1-based）；預設 1，唯一出現可省略。 */
+  occurrence?: number
+  /**
+   * 是否為本篇主打單字（一句約 1～2 個）。目前僅存欄位、不影響畫面；
+   * 「查字模式」等依 featured 的視覺差異屬下一版，本 Task 不實作。
+   */
+  featured?: boolean
   /** 表層形本身的讀音（例：楽しめる → たのしめる）；畫面主要顯示此讀音，供初學者對照發音。 */
   surfaceReading: string
   /** 辭書形（原形，例：食べる、楽しむ）——自然鍵之一，用於配對單字表。 */
@@ -114,7 +133,22 @@ export type MaterialGrammarNote = {
   grammarPointId: string | null
   pattern: string
   shortExplanation: string
-  sourceSentenceId: string
+  /**
+   * 本文法在句中要框起的錨點；可有多個，用於不連續文法
+   * （例：〜たり、〜たりする 跨逗號 → anchors: [{surface:'眺めたり'},{surface:'温めたり'}]）。
+   */
+  anchors: NoteAnchor[]
   sourceExample: MaterialExample
   extraExample: MaterialExample
+}
+
+/**
+ * `buildAnnotatedSegments()` 產生的渲染計畫：把一句拆成連續的 span，
+ * 每個 span 是「一串 ruby token ＋（可選）它所屬的單字／文法註解」。
+ * 元件只要依序渲染：有 vocabularyNote 就包 Popover、有 grammarNote 就包按鈕、都沒有就純文字。
+ */
+export type AnnotatedSpan = {
+  tokens: RubyToken[]
+  vocabularyNote?: MaterialVocabularyNote
+  grammarNote?: MaterialGrammarNote
 }

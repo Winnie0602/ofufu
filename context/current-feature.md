@@ -13,21 +13,20 @@
 | 004 | 單字 TTS 播放（`useTtsAudio`） | ✅ Completed |
 | 005 | 閱讀／對話前台原型 | ✅ Completed |
 | 006 | 單字身分與收藏去重重構 | ✅ Completed |
-| 007 | Ruby 括號記法 ＋ 內文標註 stand-off 模型 | 📋 Planned |
+| 007 | Ruby 括號記法 ＋ 內文標註 stand-off 模型 | ✅ Completed |
 
 > 批次補教材資料屬 007 之後的工作，計畫見 task-007 的「完成後續接」段；屆時再視需要開 task-008。
 
 ## 現在焦點
 
 - Branch：`dev`
-- 上一個完成：**Task 006**（2026-07-21 使用者確認 Popover 視覺定案，驗收通過）。
-- 下一步：**Task 007**（詳見 `docs/tasks/task-007-ruby-notation-and-annotation-model.md`）。
-- 零星進行中：首頁互動修正（`Index/Test.vue` collapse 競態、`Index/Introduce.vue` 卡片 NuxtLink）——見下方「已知債」。
+- 上一個完成：**Task 007**（2026-07-21 使用者確認畫面無誤，驗收通過）。
+- 下一步：**批次補教材資料 ＋ 回頭清算舊 X**（見 task-007「完成後續接」段）；「給 ChatGPT 的資料產生規範」由 Claude 於本輪撰寫、交付使用者。
+
 
 ## 下一步 Todo
 
-- **Task 007**：Ruby 括號記法 parser ＋ 內文標註改 stand-off「notes anchor」；順帶修 `AnnotatedText.vue` 文法標記斷行置中。細節見 task-007 doc。
-- **Task 007 完成後**：批次補教材資料並回頭驗收各列表（計畫見 task-007「完成後續接」段）；「給 ChatGPT 的資料產生規範」待 007 格式定案後由 Claude 撰寫、交付使用者貼給 ChatGPT。功能 AC 只驗代表性案例、資料量另計（見 `AGENTS.md` 完成條件）。
+- **批次補教材資料並回頭驗收各列表**（計畫見 task-007「完成後續接」段）：格式已於 007 定案；「給 ChatGPT 的資料產生規範」由 Claude 撰寫、交付使用者貼給 ChatGPT。功能 AC 只驗代表性案例、資料量另計（見 `AGENTS.md` 完成條件）。
 - **閱讀／對話頁互動改版（規劃中）**：
   - 閱讀：版面軸（整篇／單句）、查字模式、整篇聽力遮罩、單句逐句遮日文／遮中文。
   - 對話：顯示三段（對照／只看日文／只看中文）、查字模式、聽力遮罩、角色扮演（精簡版可一起做）。

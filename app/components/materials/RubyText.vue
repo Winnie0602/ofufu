@@ -1,25 +1,18 @@
 <script setup lang="ts">
-import type { MaterialTextSegment } from '~/types/material'
+import type { RubyToken } from '~/types/material'
 
 defineProps<{
-  segment: MaterialTextSegment
+  tokens: RubyToken[]
   showRuby: boolean
 }>()
 </script>
 
 <template>
-  <template v-if="segment.parts">
-    <template v-for="(part, index) in segment.parts" :key="`${segment.id}-${index}`">
-      <ruby v-if="part.ruby">
-        {{ part.text }}
-        <rt v-if="showRuby">{{ part.ruby }}</rt>
-      </ruby>
-      <template v-else>{{ part.text }}</template>
-    </template>
+  <template v-for="(token, index) in tokens" :key="index">
+    <ruby v-if="token.ruby">
+      {{ token.text }}
+      <rt v-if="showRuby">{{ token.ruby }}</rt>
+    </ruby>
+    <template v-else>{{ token.text }}</template>
   </template>
-  <ruby v-else-if="segment.ruby">
-    {{ segment.text }}
-    <rt v-if="showRuby">{{ segment.ruby }}</rt>
-  </ruby>
-  <template v-else>{{ segment.text }}</template>
 </template>

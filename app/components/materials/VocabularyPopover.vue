@@ -62,7 +62,7 @@ const isInflected = computed(
             <FavoriteButton :label="`收藏 ${note.dictionaryForm}`" />
           </span>
         </span>
-        <span class="mt-3 mb-5 block border-t border-neutral-100 pt-3">
+        <span class="mt-3 block border-t border-neutral-100 pt-3">
           <span
             class="badge badge-soft badge-neutral badge-sm rounded-full px-2"
           >
@@ -72,7 +72,7 @@ const isInflected = computed(
             {{ note.contextualMeaning }}
           </span>
         </span>
-        <span v-if="isInflected" class="mb-5 block">
+        <span v-if="isInflected" class="mt-5 block">
           <span
             class="badge badge-soft badge-neutral badge-sm rounded-full px-2"
           >
@@ -82,7 +82,7 @@ const isInflected = computed(
             {{ note.dictionaryForm }}
           </span>
         </span>
-        <span v-if="note.examples?.length" class="mb-2 block">
+        <span v-if="note.examples?.length" class="mt-5 block">
           <span
             class="badge badge-soft badge-neutral badge-sm rounded-full px-2"
           >

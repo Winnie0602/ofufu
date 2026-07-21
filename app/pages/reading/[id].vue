@@ -2,6 +2,7 @@
 import { readingMaterials } from '~/data/materials/reading'
 import { LANG_CONFIG_MAP } from '~/types/lang'
 import { materialCategoryLabels, type StudyMode } from '~/types/material'
+import { toPlainJapanese } from '~/utils/parseRuby'
 
 const route = useRoute()
 const material = readingMaterials.find((item) => item.id === route.params.id)
@@ -10,17 +11,26 @@ if (!material) {
   throw createError({ statusCode: 404, statusMessage: '找不到這篇文章' })
 }
 
+const articleSentences = material.paragraphs.flatMap(
+  (paragraph) => paragraph.sentences,
+)
+
+// 註解掛在句子層，側欄「重點單字／本文使用文法」由各句攤平彙整。
+// 「重點單字」只列主打字（featured）；featured:false 屬一般可收藏字，等 task-008 查字模式再揭露。
+const vocabularyNotes = articleSentences
+  .flatMap((sentence) => sentence.vocabularyNotes ?? [])
+  .filter((note) => note.featured)
+const grammarNotes = articleSentences.flatMap(
+  (sentence) => sentence.grammarNotes ?? [],
+)
+
 const mode = ref<StudyMode>('full')
 const showRuby = ref(true)
 const playbackRate = ref(1)
-const activeGrammarId = ref<string | null>(material.grammarNotes[0]?.id ?? null)
+const activeGrammarId = ref<string | null>(grammarNotes[0]?.id ?? null)
 const isArticlePlaying = ref(false)
 const { audioState, playAudio, playAudioSequence, stopAudio } = useTtsAudio(
   LANG_CONFIG_MAP.ja,
-)
-
-const articleSentences = material.paragraphs.flatMap(
-  (paragraph) => paragraph.sentences,
 )
 
 const playArticle = async () => {
@@ -34,7 +44,7 @@ const playArticle = async () => {
   await playAudioSequence(
     articleSentences.map((sentence) => ({
       audioId: sentence.id,
-      text: sentence.japanese,
+      text: toPlainJapanese(sentence.text),
     })),
   )
   isArticlePlaying.value = false
@@ -156,8 +166,9 @@ useSeoMeta({ title: material.title, description: material.excerpt })
                 :key="sentence.id"
               >
                 <MaterialsAnnotatedText
-                  :segments="sentence.segments"
-                  :vocabulary-notes="material.vocabularyNotes"
+                  :text="sentence.text"
+                  :vocabulary-notes="sentence.vocabularyNotes"
+                  :grammar-notes="sentence.grammarNotes"
                   :show-ruby="showRuby"
                   @select-grammar="selectGrammar"
                 />
@@ -196,8 +207,8 @@ useSeoMeta({ title: material.title, description: material.excerpt })
               <div class="min-w-0">
                 <p class="text-base leading-8 text-neutral-900 sm:text-lg">
                   <MaterialsAnnotatedText
-                    :segments="sentence.segments"
-                    :vocabulary-notes="[]"
+                    :text="sentence.text"
+                    :grammar-notes="sentence.grammarNotes"
                     :show-ruby="showRuby"
                     @select-grammar="selectGrammar"
                   />
@@ -210,13 +221,18 @@ useSeoMeta({ title: material.title, description: material.excerpt })
               </div>
               <div class="flex shrink-0 flex-col gap-2 sm:flex-row">
                 <AudioButton
-                  :label="`播放句子：${sentence.japanese}`"
+                  :label="`播放句子：${toPlainJapanese(sentence.text)}`"
                   :state="audioState(sentence.id)"
                   @play="
-                    playAudio({ audioId: sentence.id, text: sentence.japanese })
+                    playAudio({
+                      audioId: sentence.id,
+                      text: toPlainJapanese(sentence.text),
+                    })
                   "
                 />
-                <FavoriteButton :label="`收藏句子：${sentence.japanese}`" />
+                <FavoriteButton
+                  :label="`收藏句子：${toPlainJapanese(sentence.text)}`"
+                />
               </div>
             </article>
           </template>
@@ -227,7 +243,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
         <h2 class="text-2xl font-bold">重點單字</h2>
         <div class="mt-5 flex flex-wrap gap-2">
           <MaterialsVocabularyPopover
-            v-for="note in material.vocabularyNotes"
+            v-for="note in vocabularyNotes"
             :key="note.id"
             :note="note"
             variant="badge"
@@ -244,7 +260,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
         </p>
         <MaterialsGrammarNotes
           class="mt-5"
-          :notes="material.grammarNotes"
+          :notes="grammarNotes"
           :active-id="activeGrammarId"
           @toggle="toggleGrammar"
         />

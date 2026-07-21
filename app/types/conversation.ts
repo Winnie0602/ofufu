@@ -1,7 +1,6 @@
 import type {
   MaterialGrammarNote,
   MaterialSummary,
-  MaterialTextSegment,
   MaterialVocabularyNote,
 } from './material'
 
@@ -41,9 +40,13 @@ export type ConversationParticipant = {
 export type ConversationLine = {
   id: string
   speakerId: string
-  japanese: string
-  segments: MaterialTextSegment[]
+  /** 純文字含 ruby 括號記法；純日文由 `toPlainJapanese()` 剝括號得到。 */
+  text: string
   translation: string
+  /** 本句的可點單字註解（stand-off，以 surface 定位）。 */
+  vocabularyNotes?: MaterialVocabularyNote[]
+  /** 本句的文法註解（stand-off，以 anchors 定位）。 */
+  grammarNotes?: MaterialGrammarNote[]
 }
 
 export type ConversationMaterial = MaterialSummary & {
@@ -51,6 +54,4 @@ export type ConversationMaterial = MaterialSummary & {
   sceneDescription: string
   participants: ConversationParticipant[]
   lines: ConversationLine[]
-  vocabularyNotes: MaterialVocabularyNote[]
-  grammarNotes: MaterialGrammarNote[]
 }
