@@ -4,6 +4,7 @@ const studyModes = [
     title: '文章閱讀',
     text: '閱讀各式主題文章，提升理解力與閱讀速度。',
     action: '瀏覽文章',
+    to: '/reading',
     icon: 'icon-[tabler--file-text]',
     iconColor: 'text-primary',
     motionDelay: 'intersect:motion-delay-[0ms]',
@@ -12,6 +13,7 @@ const studyModes = [
     title: '對話學習',
     text: '透過生活情境對話，熟悉自然說法、語氣與實用表達。',
     action: '瀏覽對話',
+    to: '/conversation',
     icon: 'icon-[tabler--messages]',
     iconColor: 'text-primary',
     motionDelay: 'intersect:motion-delay-[112ms]',
@@ -28,6 +30,7 @@ const studyModes = [
     title: '單字學習',
     text: '系統化單字學習與測驗，擴充詞彙量更有效率。',
     action: '瀏覽單字',
+    to: '/vocabulary',
     icon: 'icon-[tabler--letter-case]',
     iconColor: 'text-primary',
     motionDelay: 'intersect:motion-delay-[336ms]',
@@ -124,7 +127,14 @@ const levelSteps = [
             <p class="study-mode-text">{{ mode.text }}</p>
           </div>
           <div class="study-mode-overlay">
-            <button class="btn btn-error study-mode-action">
+            <NuxtLink
+              v-if="mode.to"
+              :to="mode.to"
+              class="btn btn-error study-mode-action"
+            >
+              {{ mode.action }} >
+            </NuxtLink>
+            <button v-else class="btn btn-error study-mode-action">
               {{ mode.action }} >
             </button>
           </div>
