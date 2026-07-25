@@ -125,7 +125,7 @@ watch(locale, () => {
       {{ $t('no_words') }}
     </div>
 
-    <BottomPanel
+    <SongBottomPanel
       :open="isPanelOpen"
       :word="selectedWord"
       :sentense="tatoebaSentenses"
