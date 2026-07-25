@@ -501,1110 +501,369 @@ export const conversationMaterials: ConversationMaterial[] = [
     ],
   },
   {
-    id: 'X8mQa4L2vP',
+    id: 'Q7mK2xV9pL4a',
     type: 'conversation',
     title: '空港でチェックイン',
-    excerpt: '空港でチェックインをする会話です。',
+    excerpt: '空港のチェックインカウンターでのやり取りを読んでみましょう。',
     level: 'n4',
-    categories: ['airport', 'travel'],
+    categories: ['airport', 'service'],
     coverImage: null,
     sceneDescription:
-      '旅行に行く前に、空港のチェックインカウンターで手続きをする場面です。',
+      '空港のチェックインカウンターで、旅客が地勤職員に搭乗手続きをしてもらう場面です。',
     participants: [
       {
-        id: 'h2LpN8xQ5A',
-        name: 'シロ',
-        role: '地勤人員',
-        avatarKey: 'shiro',
-      },
-      {
-        id: 'v7KtM3bY9R',
+        id: 'a9Tq3Lm7Xv2P',
         name: 'ふふ',
         role: '旅客',
         avatarKey: 'fufu',
       },
+      {
+        id: 'R4nW8cK2pY6d',
+        name: 'シロ',
+        role: '地勤人員',
+        avatarKey: 'shiro',
+      },
     ],
     lines: [
       {
-        id: 'a6YpR4mT8J',
-        speakerId: 'h2LpN8xQ5A',
-        text: 'こんにちは。パスポートと航空券[こうくうけん]をお願[ねが]いします。',
-        translation: '您好，請出示護照和機票。',
-        vocabularyNotes: [
+        id: 'u3Jm9Qx5Lk8N',
+        speakerId: 'R4nW8cK2pY6d',
+        text: '本日[ほんじつ]はどちらまででしょうか。',
+        translation: '今天請問是要前往哪裡呢？',
+        grammarNotes: [
           {
-            id: 'e3QwL9nF7S',
-            surface: '航空券',
-            surfaceReading: 'こうくうけん',
-            dictionaryForm: '航空券',
-            reading: 'こうくうけん',
-            partOfSpeech: 'noun',
-            contextualMeaning: '機票',
-            examples: [
-              {
-                id: 'd5MxK2vP1C',
-                japanese: '航空券をインターネットで予約しました。',
-                translation: '我在網路上預訂了機票。',
-              },
-            ],
+            id: 'B7vP2sN9mQ4x',
+            grammarPointId: null,
+            pattern: '〜でしょうか',
+            shortMeaning: '禮貌地詢問',
+            explanation: '比「ですか」語氣更委婉，常用於服務業及正式場合。',
+            anchors: [{ surface: 'でしょうか' }],
+            sourceExample: {
+              id: 'k5Dq8Xn3Vt7M',
+              japanese: '本日はどちらまででしょうか。',
+              translation: '今天請問是要前往哪裡呢？',
+            },
+            extraExample: {
+              id: 'Z2pL6cR9wK4a',
+              japanese: 'お名前を伺ってもよろしいでしょうか。',
+              translation: '方便請教您的姓名嗎？',
+            },
           },
         ],
       },
       {
-        id: 'j4NzV7qL2D',
-        speakerId: 'v7KtM3bY9R',
-        text: 'はい、お願[ねが]いします。',
-        translation: '好的，麻煩您了。',
+        id: 'H8tM3qV6xP2n',
+        speakerId: 'a9Tq3Lm7Xv2P',
+        text: '台北[たいぺい]までです。チェックインをお願[ねが]いします。',
+        translation: '我要去台北，麻煩辦理報到。',
       },
       {
-        id: 'k8TaH6cR5M',
-        speakerId: 'h2LpN8xQ5A',
-        text: 'お荷物[にもつ]はお預[あず]けになりますか。',
-        translation: '請問有需要托運行李嗎？',
+        id: 'f2Qx7Nw4Kp9L',
+        speakerId: 'R4nW8cK2pY6d',
+        text: 'かしこまりました。パスポートをお預[あず]かりいたします。',
+        translation: '好的。我先替您收下護照。',
+        grammarNotes: [
+          {
+            id: 'M9rV3kT7qX2c',
+            grammarPointId: null,
+            pattern: 'お〜いたします',
+            shortMeaning: '謙讓地表示自己要做某事',
+            explanation:
+              '「お＋動詞ます形＋いたします」是謙讓語，用來表示自己恭敬地為對方做某件事，常見於服務業。',
+            anchors: [{ surface: 'お預かりいたします' }],
+            sourceExample: {
+              id: 'x6Lq2Pj8Nw4S',
+              japanese: 'パスポートをお預かりいたします。',
+              translation: '我先替您收下護照。',
+            },
+            extraExample: {
+              id: 'C3mY7vR2kT9a',
+              japanese: 'お荷物をお運びいたします。',
+              translation: '我來替您搬運行李。',
+            },
+          },
+        ],
+      },
+      {
+        id: 'n4Kp8Xq2Vt6M',
+        speakerId: 'a9Tq3Lm7Xv2P',
+        text: 'お願[ねが]いします。それから、荷物[にもつ]を一[ひと]つ預[あず]けたいです。',
+        translation: '麻煩您了。另外，我想托運一件行李。',
         vocabularyNotes: [
           {
-            id: 'm5QxW8uB2N',
-            surface: 'お預け',
-            surfaceReading: 'おあずけ',
+            id: 'T7wQ3mL9xP5d',
+            surface: '預けたい',
+            surfaceReading: 'あずけたい',
             dictionaryForm: '預ける',
             reading: 'あずける',
             partOfSpeech: 'verb',
-            contextualMeaning: '寄放、托運（此處指托運行李）',
+            contextualMeaning: '托運、寄放；此處表示「想要托運」',
             examples: [
               {
-                id: 'r9LpC3vE6K',
-                japanese: '荷物をホテルに預けました。',
-                translation: '我把行李寄放在飯店。',
+                id: 'p2Rk6Vn8Qx4M',
+                japanese: '大きい荷物を空港で預けます。',
+                translation: '我會在機場托運大型行李。',
               },
             ],
           },
         ],
         grammarNotes: [
           {
-            id: 't7GwM4kY1J',
+            id: 'W8cN4qL2vP7x',
             grammarPointId: null,
-            pattern: '〜になりますか',
-            shortMeaning: '是否要～',
-            explanation: '服務業常用的禮貌說法，用來確認顧客是否需要某項服務。',
-            anchors: [
-              {
-                surface: 'お預けになりますか',
-              },
-            ],
+            pattern: '〜たい',
+            shortMeaning: '想要……',
+            explanation:
+              '接在動詞ます形去掉「ます」後，表示說話者想做某件事的願望。',
+            anchors: [{ surface: '預けたいです' }],
             sourceExample: {
-              id: 'u2PeL8rQ4A',
-              japanese: 'お荷物はお預けになりますか。',
-              translation: '請問要托運行李嗎？',
+              id: 'g5Xv9Mq3Kp2T',
+              japanese: '荷物を一つ預けたいです。',
+              translation: '我想托運一件行李。',
             },
             extraExample: {
-              id: 'w6HtB5xN9F',
-              japanese: 'お支払いは現金になりますか。',
-              translation: '請問您要用現金付款嗎？',
+              id: 'L2nQ7rV4xM8c',
+              japanese: '窓側の席に座りたいです。',
+              translation: '我想坐靠窗的座位。',
             },
           },
         ],
       },
       {
-        id: 'p3FsK7mQ8X',
-        speakerId: 'v7KtM3bY9R',
-        text: 'はい、このスーツケースを一[ひと]つお願[ねが]いします。',
-        translation: '是的，這個行李箱要托運一件。',
+        id: 'Y6mP2kX9qT4v',
+        speakerId: 'R4nW8cK2pY6d',
+        text: '承知[しょうち]いたしました。スーツケースをこちらへお置[お]きください。',
+        translation: '好的。請把行李箱放到這裡。',
+        grammarNotes: [
+          {
+            id: 'q9Vt3M2xK7pL',
+            grammarPointId: null,
+            pattern: 'お〜ください',
+            shortMeaning: '請您……',
+            explanation:
+              '「お＋動詞ます形＋ください」是尊敬語，用來禮貌地請對方做某個動作，常見於服務場合。',
+            anchors: [{ surface: 'お置きください' }],
+            sourceExample: {
+              id: 'D4xN8pQ2mV6k',
+              japanese: 'スーツケースをこちらへお置きください。',
+              translation: '請把行李箱放到這裡。',
+            },
+            extraExample: {
+              id: 's7Kq3Tn9Lx5P',
+              japanese: 'こちらで少々お待ちください。',
+              translation: '請在這裡稍候。',
+            },
+          },
+        ],
       },
       {
-        id: 'g9WdL2tH5P',
-        speakerId: 'h2LpN8xQ5A',
-        text: 'ありがとうございます。重量[じゅうりょう]を確認[かくにん]しますので、こちらへお願[ねが]いします。',
-        translation: '好的，謝謝。我們要確認重量，請放到這邊。',
+        id: 'c8Rk4Vn2Qm7X',
+        speakerId: 'a9Tq3Lm7Xv2P',
+        text: 'この荷物[にもつ]で大丈夫[だいじょうぶ]でしょうか。',
+        translation: '這件行李可以嗎？',
+        grammarNotes: [
+          {
+            id: 'P3mX9qL5vT2k',
+            grammarPointId: null,
+            pattern: '〜でしょうか',
+            shortMeaning: '禮貌地詢問',
+            explanation: '比「ですか」語氣更委婉，常用於正式場合。',
+            anchors: [{ surface: 'でしょうか' }],
+            sourceExample: {
+              id: 'v6Nq2Kp8Xr4M',
+              japanese: 'この荷物で大丈夫でしょうか。',
+              translation: '這件行李可以嗎？',
+            },
+            extraExample: {
+              id: 'J9tL3cQ7mV2x',
+              japanese: 'こちらの席でよろしいでしょうか。',
+              translation: '這個座位可以嗎？',
+            },
+          },
+        ],
+      },
+      {
+        id: 'm5Qx8Tn3Kp7V',
+        speakerId: 'R4nW8cK2pY6d',
+        text: 'はい、重量[じゅうりょう]は二十[にじゅっ]キロですので、問題[もんだい]ございません。',
+        translation: '好的，重量是二十公斤，所以沒有問題。',
         vocabularyNotes: [
           {
-            id: 'b4RaY6mU8E',
+            id: 'X2pM7vQ4kN9r',
             surface: '重量',
             surfaceReading: 'じゅうりょう',
             dictionaryForm: '重量',
             reading: 'じゅうりょう',
             partOfSpeech: 'noun',
-            contextualMeaning: '重量',
+            contextualMeaning: '重量；此處指托運行李的重量',
             examples: [
               {
-                id: 'n1TvK7pL5R',
-                japanese: '荷物の重量を測ります。',
-                translation: '測量行李的重量。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'c8QmF5xZ2T',
-        speakerId: 'h2LpN8xQ5A',
-        text: '問題[もんだい]ありません。窓側[まどがわ]のお席[せき]をご希望[きぼう]でしたね。',
-        translation: '沒有問題。您希望坐靠窗的位置，對吧？',
-        vocabularyNotes: [
-          {
-            id: 'f7LnR3kM9B',
-            surface: '希望',
-            surfaceReading: 'きぼう',
-            dictionaryForm: '希望',
-            reading: 'きぼう',
-            partOfSpeech: 'noun',
-            contextualMeaning: '希望、需求',
-            examples: [
-              {
-                id: 'q2HaV8sD6W',
-                japanese: 'ご希望を教えてください。',
-                translation: '請告訴我您的需求。',
+                id: 'r8Kq3Lx6Vn2P',
+                japanese: '荷物の重量を確認します。',
+                translation: '確認行李的重量。',
               },
             ],
           },
         ],
         grammarNotes: [
           {
-            id: 's5KeJ1yP4G',
-            grammarPointId: null,
-            pattern: '〜でしたね',
-            shortMeaning: '我記得是～吧',
-            explanation:
-              '說話者確認自己記得的資訊是否正確，帶有再次確認的語氣。',
-            anchors: [
-              {
-                surface: 'ご希望でしたね',
-              },
-            ],
-            sourceExample: {
-              id: 'v8MuD4qC1L',
-              japanese: '窓側のお席をご希望でしたね。',
-              translation: '您是希望靠窗座位，對吧。',
-            },
-            extraExample: {
-              id: 'x4PnA7hR5Y',
-              japanese: '今日は休みでしたね。',
-              translation: '今天是休假，對吧。',
-            },
-          },
-        ],
-      },
-      {
-        id: 'z3LvQ6bM8N',
-        speakerId: 'v7KtM3bY9R',
-        text: 'はい、できれば窓側[まどがわ]がいいです。',
-        translation: '是的，如果可以的話，希望是靠窗。',
-        grammarNotes: [
-          {
-            id: 'y7TkF2nJ5P',
-            grammarPointId: null,
-            pattern: '〜できれば',
-            shortMeaning: '如果可以的話',
-            explanation: '用來委婉表達自己的希望或要求，比直接要求更客氣。',
-            anchors: [
-              {
-                surface: 'できれば',
-              },
-            ],
-            sourceExample: {
-              id: 'p5WvL9dQ2X',
-              japanese: 'できれば窓側がいいです。',
-              translation: '如果可以，希望是靠窗。',
-            },
-            extraExample: {
-              id: 'h6QnB3mR8C',
-              japanese: 'できれば早めに来てください。',
-              translation: '如果可以的話，請早一點來。',
-            },
-          },
-        ],
-      },
-      {
-        id: 'l4ErY8cT1K',
-        speakerId: 'h2LpN8xQ5A',
-        text: '承知[しょうち]しました。こちらがお客様[きゃくさま]の搭乗券[とうじょうけん]です。',
-        translation: '好的。這是您的登機證。',
-        vocabularyNotes: [
-          {
-            id: 'o9PdX5jL7M',
-            surface: '搭乗券',
-            surfaceReading: 'とうじょうけん',
-            dictionaryForm: '搭乗券',
-            reading: 'とうじょうけん',
-            partOfSpeech: 'noun',
-            contextualMeaning: '登機證',
-            examples: [
-              {
-                id: 'i3FaK2vN8Q',
-                japanese: '搭乗券をなくさないでください。',
-                translation: '請不要弄丟登機證。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'u8CbM6qR3H',
-        speakerId: 'h2LpN8xQ5A',
-        text: '搭乗[とうじょう]は出発[しゅっぱつ]の三十分前[さんじゅっぷんまえ]から始[はじ]まりますので、時間[じかん]までお待[ま]ちください。',
-        translation: '登機將於起飛前三十分鐘開始，請等候至登機時間。',
-        vocabularyNotes: [
-          {
-            id: 'k1XeP9wL4V',
-            surface: '搭乗',
-            surfaceReading: 'とうじょう',
-            dictionaryForm: '搭乗',
-            reading: 'とうじょう',
-            partOfSpeech: 'noun',
-            contextualMeaning: '登機',
-            examples: [
-              {
-                id: 'm6RyQ2dT8J',
-                japanese: 'まもなく搭乗が始まります。',
-                translation: '即將開始登機。',
-              },
-            ],
-          },
-        ],
-        grammarNotes: [
-          {
-            id: 'n4BwH7kP5S',
+            id: 'N4vT9mQ2xK7c',
             grammarPointId: null,
             pattern: '〜ので',
-            shortMeaning: '因為～所以',
+            shortMeaning: '因為……',
             explanation:
-              '用來說明原因，語氣比「から」更客觀，也常用於服務場合。',
-            anchors: [
-              {
-                surface: '始まりますので',
-              },
-            ],
+              '用來說明原因或理由，語氣通常比「から」柔和，適合用於禮貌或正式的對話。',
+            anchors: [{ surface: 'ですので' }],
             sourceExample: {
-              id: 'q7LvF3rM2E',
-              japanese:
-                '搭乗は三十分前から始まりますので、時間までお待ちください。',
-              translation: '因為登機會在三十分鐘前開始，所以請等候。',
+              id: 'h7Pq2Xn5M9vK',
+              japanese: '重量は二十キロですので、問題ございません。',
+              translation: '因為重量是二十公斤，所以沒有問題。',
             },
             extraExample: {
-              id: 'r2XaC8nV6P',
-              japanese: '雨ですので、気をつけてください。',
-              translation: '因為下雨，請小心。',
+              id: 'Q6mR3kV8xT2n',
+              japanese: '時間がありますので、ゆっくり確認してください。',
+              translation: '因為還有時間，請慢慢確認。',
             },
           },
         ],
       },
       {
-        id: 'w5NpJ1yK7D',
-        speakerId: 'v7KtM3bY9R',
-        text: 'ありがとうございます。行[い]ってきます。',
-        translation: '謝謝您，我要出發了。',
-      },
-    ],
-  },
-  {
-    id: 'K8xLm2Qa9P',
-    type: 'conversation',
-    title: '空港でチェックインする',
-    excerpt: '空港で搭乗手続きをする会話です。',
-    level: 'n4',
-    categories: ['airport', 'travel'],
-    coverImage: null,
-    sceneDescription:
-      '日本の空港でチェックインカウンターへ行き、搭乗手続きをする場面です。',
-    participants: [
-      {
-        id: 'A7mQk3Ls8R',
-        name: 'ふふ',
-        role: '旅客',
-        avatarKey: 'fufu',
-      },
-      {
-        id: 'Y2vNp8Dx5T',
-        name: 'シロ',
-        role: '地勤人員',
-        avatarKey: 'shiro',
-      },
-    ],
-    lines: [
-      {
-        id: 'r5Hn2Qa7Lp',
-        speakerId: 'Y2vNp8Dx5T',
-        text: 'お客様[きゃくさま]、こんにちは。本日[ほんじつ]はどちらまでご出発[しゅっぱつ]でしょうか。',
-        translation: '您好。請問今天要飛往哪裡呢？',
+        id: 'V7nK2qP9mX4t',
+        speakerId: 'R4nW8cK2pY6d',
+        text: '通路側[つうろがわ]と窓側[まどがわ]では、どちらのお席[せき]をご希望[きぼう]でしょうか。',
+        translation: '靠走道和靠窗的座位，請問您希望哪一個呢？',
         vocabularyNotes: [
           {
-            id: 'V6kTp9Wa2E',
-            surface: '出発',
-            surfaceReading: 'しゅっぱつ',
-            dictionaryForm: '出発',
-            reading: 'しゅっぱつ',
-            partOfSpeech: 'noun',
-            contextualMeaning: '出發；此處指搭乘班機出發。',
-            examples: [
-              {
-                id: 'e4Kx8Pm1Rt',
-                japanese: '飛行機は午後三時に出発します。',
-                translation: '飛機下午三點出發。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 't8Lm3Qv6Po',
-        speakerId: 'A7mQk3Ls8R',
-        text: '台北[たいぺい]までです。チェックインをお願[ねが]いします。',
-        translation: '我要去台北，麻煩幫我辦理報到。',
-      },
-      {
-        id: 'u3Px7Mn9Qa',
-        speakerId: 'Y2vNp8Dx5T',
-        text: 'かしこまりました。パスポートをお預[あず]かりいたします。',
-        translation: '好的，我為您辦理。請讓我為您收取護照。',
-        vocabularyNotes: [
-          {
-            id: 'W2nLa6Pf8D',
-            surface: 'お預かりいたします',
-            surfaceReading: 'おあずかりいたします',
-            dictionaryForm: '預かる',
-            reading: 'あずかる',
-            partOfSpeech: 'verb',
-            contextualMeaning: '服務業敬語，表示「先替您保管／收取」。',
-            examples: [
-              {
-                id: 'g5Rt1Xm8Nc',
-                japanese: 'お荷物をお預かりいたします。',
-                translation: '我先替您保管行李。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'p9Qs5Lv2Mz',
-        speakerId: 'A7mQk3Ls8R',
-        text: 'はい、どうぞ。',
-        translation: '好的，請。',
-      },
-      {
-        id: 'm7Qa1Tp8Xv',
-        speakerId: 'Y2vNp8Dx5T',
-        text: 'お荷物[にもつ]はお預[あず]けになりますか。',
-        translation: '請問您有需要托運行李嗎？',
-        vocabularyNotes: [
-          {
-            id: 'L8xQv3Mp6T',
-            surface: 'お預け',
-            surfaceReading: 'おあずけ',
-            dictionaryForm: '預け',
-            reading: 'あずけ',
-            partOfSpeech: 'noun',
-            contextualMeaning: '托運（行李）的意思。',
-            examples: [
-              {
-                id: 'q6Nz2Lp5Ra',
-                japanese: '荷物を預けます。',
-                translation: '我要托運行李。',
-              },
-            ],
-          },
-        ],
-        grammarNotes: [
-          {
-            id: 'G5pLm7Qa2X',
-            grammarPointId: null,
-            pattern: '〜になりますか',
-            shortMeaning: '是否要～',
-            explanation:
-              '服務業常用的禮貌說法，用來委婉詢問顧客的需求，比直接說「預けますか」更自然。',
-            anchors: [
-              {
-                surface: 'お預けになりますか',
-              },
-            ],
-            sourceExample: {
-              id: 'S2mPv8Qk4L',
-              japanese: 'お荷物はお預けになりますか。',
-              translation: '請問您需要托運行李嗎？',
-            },
-            extraExample: {
-              id: 'E9xLa3Rn7P',
-              japanese: 'お飲み物はいかがになさいますか。',
-              translation: '請問您想喝點什麼呢？',
-            },
-          },
-        ],
-      },
-      {
-        id: 'x4Mv8Qa2Lp',
-        speakerId: 'A7mQk3Ls8R',
-        text: 'スーツケースを一[ひと]つお願[ねが]いします。',
-        translation: '我要托運一個行李箱。',
-      },
-      {
-        id: 'd8Qa6Lm3Xt',
-        speakerId: 'Y2vNp8Dx5T',
-        text: 'ありがとうございます。重量[じゅうりょう]は問題[もんだい]ございません。',
-        translation: '謝謝您。重量沒有問題。',
-        vocabularyNotes: [
-          {
-            id: 'C4mQa7Lv9R',
-            surface: '重量',
-            surfaceReading: 'じゅうりょう',
-            dictionaryForm: '重量',
-            reading: 'じゅうりょう',
-            partOfSpeech: 'noun',
-            contextualMeaning: '重量。',
-            examples: [
-              {
-                id: 'N6pRt2Xa5Q',
-                japanese: '荷物の重量を量ります。',
-                translation: '測量行李重量。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'w6Tp1Qa8Lm',
-        speakerId: 'Y2vNp8Dx5T',
-        text: 'こちらが搭乗券[とうじょうけん]でございます。搭乗口[とうじょうぐち]は十五番[じゅうごばん]です。',
-        translation: '這是您的登機證。登機門是15號。',
-        vocabularyNotes: [
-          {
-            id: 'P7kLm3Qa9T',
-            surface: '搭乗券',
-            surfaceReading: 'とうじょうけん',
-            dictionaryForm: '搭乗券',
-            reading: 'とうじょうけん',
-            partOfSpeech: 'noun',
-            contextualMeaning: '登機證。',
-            examples: [
-              {
-                id: 'B8vQa5Lp2R',
-                japanese: '搭乗券を見せてください。',
-                translation: '請出示登機證。',
-              },
-            ],
-          },
-          {
-            id: 'F2xMp6Qa8L',
-            surface: '搭乗口',
-            surfaceReading: 'とうじょうぐち',
-            dictionaryForm: '搭乗口',
-            reading: 'とうじょうぐち',
-            partOfSpeech: 'noun',
-            contextualMeaning: '登機門。',
-            examples: [
-              {
-                id: 'R3nQa9Xt5P',
-                japanese: '搭乗口は三番です。',
-                translation: '登機門是3號。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'j2Lm8Qa5Pv',
-        speakerId: 'A7mQk3Ls8R',
-        text: '出発[しゅっぱつ]は何時[なんじ]ですか。',
-        translation: '請問幾點起飛呢？',
-      },
-      {
-        id: 'h7Qa4Mp1Ls',
-        speakerId: 'Y2vNp8Dx5T',
-        text: '午後[ごご]二時[にじ]の予定[よてい]でございます。ご搭乗[とうじょう]は三十分前[さんじゅっぷんまえ]までにお願[ねが]いいたします。',
-        translation: '預計下午兩點起飛，請於起飛前三十分鐘前完成登機。',
-        vocabularyNotes: [
-          {
-            id: 'T5mQa8Lp3V',
-            surface: '予定',
-            surfaceReading: 'よてい',
-            dictionaryForm: '予定',
-            reading: 'よてい',
-            partOfSpeech: 'noun',
-            contextualMeaning: '預定、預計。',
-            examples: [
-              {
-                id: 'X2pRt6Qa1L',
-                japanese: '予定より早く着きました。',
-                translation: '比預定更早抵達。',
-              },
-            ],
-          },
-        ],
-        grammarNotes: [
-          {
-            id: 'U9vQa3Lm8P',
-            grammarPointId: null,
-            pattern: '〜までに',
-            shortMeaning: '在～之前',
-            explanation:
-              '表示期限，在某個時間點以前完成某件事情，日常生活與通知都很常使用。',
-            anchors: [
-              {
-                surface: '三十分前までに',
-              },
-            ],
-            sourceExample: {
-              id: 'Z8mQa2Lp6R',
-              japanese: 'ご搭乗は三十分前までにお願いいたします。',
-              translation: '請於三十分鐘前完成登機。',
-            },
-            extraExample: {
-              id: 'Q4xLm9Pa2N',
-              japanese: '九時までに来てください。',
-              translation: '請在九點以前到。',
-            },
-          },
-        ],
-      },
-      {
-        id: 'n5Qa7Lm4Xt',
-        speakerId: 'A7mQk3Ls8R',
-        text: 'ありがとうございます。',
-        translation: '謝謝您。',
-      },
-    ],
-  },
-  {
-    id: 'K8vQ2mT7xLp',
-    type: 'conversation',
-    title: '空港でチェックインする',
-    excerpt: '空港のカウンターで荷物を預け、飛行機に乗る準備をする会話です。',
-    level: 'n4',
-    categories: ['airport', 'travel'],
-    coverImage: null,
-    sceneDescription:
-      '空港の航空会社カウンターで、地上係員にパスポートを見せてチェックインする場面です。',
-    participants: [
-      {
-        id: 'pR4nX8cL2Vz',
-        name: 'ふふ',
-        role: '客人',
-        avatarKey: 'fufu',
-      },
-      {
-        id: 'Y6tM3qW9bKs',
-        name: 'シロ',
-        role: '地勤人員',
-        avatarKey: 'shiro',
-      },
-    ],
-    lines: [
-      {
-        id: 'aT7kP2vN8Qm',
-        speakerId: 'Y6tM3qW9bKs',
-        text: 'お待[ま]たせいたしました。本日[ほんじつ]はどちらまででしょうか。',
-        translation: '讓您久等了。請問您今天要前往哪裡？',
-        vocabularyNotes: [
-          {
-            id: 'uC5xR9mL3Wp',
-            surface: '本日',
-            surfaceReading: 'ほんじつ',
-            dictionaryForm: '本日',
-            reading: 'ほんじつ',
-            partOfSpeech: 'noun',
-            contextualMeaning: '今日；較正式的說法，常用於服務業或商務場合',
-            examples: [
-              {
-                id: 'dN8qV2tK6Ms',
-                japanese: '本日は午後六時まで営業しております。',
-                translation: '今天營業至下午六點。',
-              },
-            ],
-          },
-        ],
-        grammarNotes: [
-          {
-            id: 'gL4pX7cQ9Vr',
-            grammarPointId: null,
-            pattern: '〜まででしょうか',
-            shortMeaning: '請問要到哪裡？',
-            explanation:
-              '用「でしょうか」柔和而有禮貌地詢問目的地。航空公司櫃檯常以「どちらまででしょうか」確認旅客要前往的城市。',
-            anchors: [{ surface: 'どちらまででしょうか' }],
-            sourceExample: {
-              id: 'eM3wT8nR5Kb',
-              japanese: '本日はどちらまででしょうか。',
-              translation: '請問您今天要前往哪裡？',
-            },
-            extraExample: {
-              id: 'fQ9vC2xP7Ls',
-              japanese: 'タクシーでどちらまででしょうか。',
-              translation: '請問搭計程車要到哪裡？',
-            },
-          },
-        ],
-      },
-      {
-        id: 'zW2mK8rT5Nc',
-        speakerId: 'pR4nX8cL2Vz',
-        text: '台北[たいぺい]までです。こちらがパスポートです。',
-        translation: '我要去台北。這是我的護照。',
-      },
-      {
-        id: 'hP6vQ3nM9Xt',
-        speakerId: 'Y6tM3qW9bKs',
-        text: 'パスポートをお預[あず]かりいたします。お荷物[にもつ]はお預[あず]けになりますか。',
-        translation: '我先保管您的護照。請問您有行李要託運嗎？',
-        vocabularyNotes: [
-          {
-            id: 'sK8tL4xV2Qn',
-            surface: '預かり',
-            surfaceReading: 'あずかり',
-            dictionaryForm: '預かる',
-            reading: 'あずかる',
-            partOfSpeech: 'verb',
-            contextualMeaning:
-              '代為保管；此處用於「お預かりいたします」的謙讓表達',
-            examples: [
-              {
-                id: 'jR5mW9pC3Vk',
-                japanese: 'フロントで荷物を預かります。',
-                translation: '櫃檯會代為保管行李。',
-              },
-            ],
-          },
-          {
-            id: 'bX7qN2tM6Lp',
-            surface: '荷物',
-            surfaceReading: 'にもつ',
-            dictionaryForm: '荷物',
-            reading: 'にもつ',
-            partOfSpeech: 'noun',
-            contextualMeaning: '行李；旅行時攜帶或託運的物品',
-            examples: [
-              {
-                id: 'nV4cP8xQ2Ts',
-                japanese: '荷物をホテルに置いてきました。',
-                translation: '我把行李放在飯店了。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'cM9rT5kX2Vq',
-        speakerId: 'pR4nX8cL2Vz',
-        text: 'はい、このスーツケースを一[ひと]つお願[ねが]いします。機内[きない]には小[ちい]さいバッグを持[も]っていきます。',
-        translation: '好的，麻煩託運這一個行李箱。我會把小包包帶進機艙。',
-        vocabularyNotes: [
-          {
-            id: 'qT3xL7mP9Wc',
-            surface: '機内',
-            surfaceReading: 'きない',
-            dictionaryForm: '機内',
-            reading: 'きない',
-            partOfSpeech: 'noun',
-            contextualMeaning: '飛機內部、機艙內',
-            examples: [
-              {
-                id: 'vN8kR2qM5Xs',
-                japanese: '機内では携帯電話を機内モードにしてください。',
-                translation: '在機艙內請將手機設為飛航模式。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'rQ5nV8cT3Km',
-        speakerId: 'Y6tM3qW9bKs',
-        text: 'かしこまりました。スーツケースをこちらに載[の]せていただけますか。',
-        translation: '好的。可以請您把行李箱放到這裡嗎？',
-        vocabularyNotes: [
-          {
-            id: 'mC2pX9tL6Vr',
-            surface: '載せて',
-            surfaceReading: 'のせて',
-            dictionaryForm: '載せる',
-            reading: 'のせる',
-            partOfSpeech: 'verb',
-            contextualMeaning:
-              '放到某個平面或設備上；此處指把行李放上磅秤或輸送帶',
-            examples: [
-              {
-                id: 'wK7vN3qR8Pt',
-                japanese: '箱を台の上に載せてください。',
-                translation: '請把箱子放在台子上。',
-              },
-            ],
-          },
-        ],
-        grammarNotes: [
-          {
-            id: 'xV8mQ4pT2Ln',
-            grammarPointId: null,
-            pattern: '〜ていただけますか',
-            shortMeaning: '可以請您～嗎？',
-            explanation:
-              '用來禮貌地請對方做某件事，比「〜てください」更加客氣，常見於服務業與正式場合。',
-            anchors: [{ surface: '載せていただけますか' }],
-            sourceExample: {
-              id: 'kP3tW7cM9Xq',
-              japanese: 'スーツケースをこちらに載せていただけますか。',
-              translation: '可以請您把行李箱放到這裡嗎？',
-            },
-            extraExample: {
-              id: 'tL6qR2vN8Cs',
-              japanese: 'こちらにお名前を書いていただけますか。',
-              translation: '可以請您在這裡寫下姓名嗎？',
-            },
-          },
-        ],
-      },
-      {
-        id: 'nX4kP7mV9Qt',
-        speakerId: 'pR4nX8cL2Vz',
-        text: 'はい。重[おも]さは大丈夫[だいじょうぶ]でしょうか。',
-        translation: '好的。重量沒有超過限制嗎？',
-        vocabularyNotes: [
-          {
-            id: 'pM8vT3xC5Lq',
-            surface: '重さ',
-            surfaceReading: 'おもさ',
-            dictionaryForm: '重さ',
-            reading: 'おもさ',
-            partOfSpeech: 'noun',
-            contextualMeaning: '重量；由形容詞「重い」形成的名詞',
-            examples: [
-              {
-                id: 'cR2nK9wQ6Vt',
-                japanese: '荷物の重さを量ります。',
-                translation: '測量行李的重量。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'vT9qL3xM6Pr',
-        speakerId: 'Y6tM3qW9bKs',
-        text: '十八[じゅうはち]キロですので、問題[もんだい]ございません。壊[こわ]れやすい物[もの]や貴重品[きちょうひん]は入[はい]っていませんか。',
-        translation: '是十八公斤，因此沒有問題。裡面沒有易碎物品或貴重物品嗎？',
-        vocabularyNotes: [
-          {
-            id: 'fK5mX8qT2Nc',
-            surface: '壊れやすい',
-            surfaceReading: 'こわれやすい',
-            dictionaryForm: '壊れる',
-            reading: 'こわれる',
-            partOfSpeech: 'verb',
-            contextualMeaning: '容易損壞；「〜やすい」表示容易發生某動作或狀態',
-            examples: [
-              {
-                id: 'yQ7pL3vR9Mt',
-                japanese: 'このコップは薄くて壊れやすいです。',
-                translation: '這個杯子很薄，容易破掉。',
-              },
-            ],
-          },
-          {
-            id: 'rC8tN4mX2Vp',
-            surface: '貴重品',
-            surfaceReading: 'きちょうひん',
-            dictionaryForm: '貴重品',
-            reading: 'きちょうひん',
-            partOfSpeech: 'noun',
-            contextualMeaning: '貴重物品，例如現金、護照、珠寶或電子產品',
-            examples: [
-              {
-                id: 'aV6xP9kM3Qs',
-                japanese: '貴重品は自分で持ってください。',
-                translation: '貴重物品請自行攜帶。',
-              },
-            ],
-          },
-        ],
-        grammarNotes: [
-          {
-            id: 'dP4qT8vL2Xn',
-            grammarPointId: null,
-            pattern: '〜やすい',
-            shortMeaning: '容易～',
-            explanation:
-              '接在動詞ます形去掉「ます」之後，表示某個動作容易發生，或某件事做起來較容易。',
-            anchors: [{ surface: '壊れやすい' }],
-            sourceExample: {
-              id: 'mW9cR3tK7Vq',
-              japanese: '壊れやすい物は入っていませんか。',
-              translation: '裡面沒有容易損壞的物品嗎？',
-            },
-            extraExample: {
-              id: 'qN2xL8pT5Cs',
-              japanese: 'この説明は分かりやすいです。',
-              translation: '這個說明很容易理解。',
-            },
-          },
-        ],
-      },
-      {
-        id: 'kL3mV7qX9Tc',
-        speakerId: 'pR4nX8cL2Vz',
-        text: 'いいえ、入[はい]っていません。ノートパソコンは機内[きない]に持[も]ち込[こ]んでもいいですか。',
-        translation: '沒有。筆記型電腦可以帶進機艙嗎？',
-        vocabularyNotes: [
-          {
-            id: 'tQ8nC2vM6Xp',
-            surface: '持ち込んで',
-            surfaceReading: 'もちこんで',
-            dictionaryForm: '持ち込む',
-            reading: 'もちこむ',
-            partOfSpeech: 'verb',
-            contextualMeaning: '帶入某個場所；此處指把物品帶進機艙',
-            examples: [
-              {
-                id: 'pX5rK9mL3Vt',
-                japanese: '飲み物を教室に持ち込まないでください。',
-                translation: '請不要把飲料帶進教室。',
-              },
-            ],
-          },
-        ],
-        grammarNotes: [
-          {
-            id: 'nM7vQ3tC8Lx',
-            grammarPointId: null,
-            pattern: '〜てもいいですか',
-            shortMeaning: '可以～嗎？',
-            explanation:
-              '用來詢問是否允許做某件事。日常對話中很常見，正式場合也可以使用。',
-            anchors: [{ surface: '持ち込んでもいいですか' }],
-            sourceExample: {
-              id: 'cT4qP8xN2Vr',
-              japanese: 'ノートパソコンは機内に持ち込んでもいいですか。',
-              translation: '筆記型電腦可以帶進機艙嗎？',
-            },
-            extraExample: {
-              id: 'vL9mK3rQ6Xs',
-              japanese: 'ここで写真を撮ってもいいですか。',
-              translation: '可以在這裡拍照嗎？',
-            },
-          },
-        ],
-      },
-      {
-        id: 'wP6xR2nT8Mq',
-        speakerId: 'Y6tM3qW9bKs',
-        text: 'はい、機内[きない]にお持[も]ちください。お座席[ざせき]は通路側[つうろがわ]と窓側[まどがわ]のどちらがよろしいでしょうか。',
-        translation: '可以，請您帶進機艙。座位想要靠走道還是靠窗呢？',
-        vocabularyNotes: [
-          {
-            id: 'xR3mV7kQ9Lt',
+            id: 'k3Tq8M2vP7xN',
             surface: '通路側',
             surfaceReading: 'つうろがわ',
             dictionaryForm: '通路側',
             reading: 'つうろがわ',
             partOfSpeech: 'noun',
-            contextualMeaning: '靠走道的一側；在飛機或列車上指走道座位',
+            contextualMeaning: '靠走道的一側；此處指靠走道的座位',
             examples: [
               {
-                id: 'lN8qT2pC5Vx',
+                id: 'Y9pL4nQ2xV6c',
                 japanese: '通路側の席を予約しました。',
                 translation: '我預約了靠走道的座位。',
               },
             ],
           },
           {
-            id: 'bV5tM9xK3Qr',
+            id: 'b6Xq2Kp8Tn4M',
             surface: '窓側',
             surfaceReading: 'まどがわ',
             dictionaryForm: '窓側',
             reading: 'まどがわ',
             partOfSpeech: 'noun',
-            contextualMeaning: '靠窗的一側；指飛機或列車上的靠窗座位',
+            contextualMeaning: '靠窗的一側；此處指靠窗的座位',
             examples: [
               {
-                id: 'sQ2xP7nR8Lc',
-                japanese: '窓側から海が見えました。',
-                translation: '從靠窗的位置看到了海。',
+                id: 'F2vM7qR9kX3p',
+                japanese: '窓側から外の景色が見えます。',
+                translation: '從靠窗的位置可以看見外面的景色。',
               },
             ],
           },
         ],
       },
       {
-        id: 'mV8tQ4pX2Kn',
-        speakerId: 'pR4nX8cL2Vz',
-        text: '窓側[まどがわ]をお願[ねが]いします。できれば前[まえ]のほうがいいです。',
-        translation: '麻煩給我靠窗的位置。可以的話，希望是前面一點。',
-        grammarNotes: [
-          {
-            id: 'qC6nT9vL3Xp',
-            grammarPointId: null,
-            pattern: 'できれば〜',
-            shortMeaning: '可以的話，希望～',
-            explanation:
-              '用來客氣地提出希望或條件，語氣比直接要求柔和，表示無法做到也可以接受。',
-            anchors: [{ surface: 'できれば' }],
-            sourceExample: {
-              id: 'rP4mX8qK2Vt',
-              japanese: 'できれば前のほうがいいです。',
-              translation: '可以的話，希望是前面一點。',
-            },
-            extraExample: {
-              id: 'kT7vN3cQ9Ls',
-              japanese: 'できれば午前中に来てください。',
-              translation: '可以的話，請在上午過來。',
-            },
-          },
-        ],
+        id: 't9M3xQ7kV2pL',
+        speakerId: 'a9Tq3Lm7Xv2P',
+        text: '通路側[つうろがわ]をお願[ねが]いします。',
+        translation: '我想要靠走道的座位。',
       },
       {
-        id: 'tN2qL9mV5Xc',
-        speakerId: 'Y6tM3qW9bKs',
-        text: '承知[しょうち]いたしました。前方[ぜんぽう]の窓側[まどがわ]をご用意[ようい]いたします。',
-        translation: '了解。我會為您安排前方的靠窗座位。',
+        id: 'K2qV8mP4xN7t',
+        speakerId: 'R4nW8cK2pY6d',
+        text: 'かしこまりました。こちらが搭乗券[とうじょうけん]でございます。搭乗開始時刻[とうじょうかいしじこく]までに搭乗口[とうじょうぐち]までお越[こ]しください。',
+        translation: '好的。這是您的登機證。請於開始登機前抵達登機門。',
         vocabularyNotes: [
           {
-            id: 'vQ7mC3xT8Lp',
-            surface: '前方',
-            surfaceReading: 'ぜんぽう',
-            dictionaryForm: '前方',
-            reading: 'ぜんぽう',
-            partOfSpeech: 'noun',
-            contextualMeaning: '前方、前面的方向；此處指機艙較前面的區域',
-            examples: [
-              {
-                id: 'nK5tR9qM2Vx',
-                japanese: '駅はこの道の前方にあります。',
-                translation: '車站在這條路的前方。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'xC7pR3vM9Qt',
-        speakerId: 'Y6tM3qW9bKs',
-        text: 'こちらが搭乗券[とうじょうけん]とお荷物[にもつ]の控[ひか]えでございます。搭乗口[とうじょうぐち]は二十五番[にじゅうごばん]で、出発時刻[しゅっぱつじこく]は午後[ごご]三時[さんじ]二十分[にじゅっぷん]です。',
-        translation:
-          '這是您的登機證與行李收據。登機門是二十五號，起飛時間是下午三點二十分。',
-        vocabularyNotes: [
-          {
-            id: 'pL4xT8nQ2Vc',
+            id: 'w4Nq9Xk2Vt7M',
             surface: '搭乗券',
             surfaceReading: 'とうじょうけん',
             dictionaryForm: '搭乗券',
             reading: 'とうじょうけん',
             partOfSpeech: 'noun',
-            contextualMeaning: '登機證；搭乘飛機時用來確認航班與座位的票券',
+            contextualMeaning: '登機證；辦理報到後取得的搭機憑證',
             examples: [
               {
-                id: 'cV9mR3tK7Xq',
+                id: 'A7mP3qL8xV2k',
                 japanese: '搭乗券を係員に見せてください。',
                 translation: '請向工作人員出示登機證。',
               },
             ],
           },
           {
-            id: 'mT6qP2xN8Lr',
+            id: 'R8xK2nQ5vM9p',
             surface: '搭乗口',
             surfaceReading: 'とうじょうぐち',
             dictionaryForm: '搭乗口',
             reading: 'とうじょうぐち',
             partOfSpeech: 'noun',
-            contextualMeaning: '登機門；旅客搭乘飛機前集合並登機的入口',
+            contextualMeaning: '登機門；乘客搭乘飛機前集合並登機的入口',
             examples: [
               {
-                id: 'qX3vK7mC9Pt',
-                japanese: '搭乗口が変更になりました。',
-                translation: '登機門已經變更。',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'qK5mT8vX3Nc',
-        speakerId: 'pR4nX8cL2Vz',
-        text: '搭乗口[とうじょうぐち]には何時[なんじ]までに行[い]けばいいですか。',
-        translation: '我最晚幾點前到登機門就可以呢？',
-        grammarNotes: [
-          {
-            id: 'wN8xQ4pL2Vr',
-            grammarPointId: null,
-            pattern: '〜ばいいですか',
-            shortMeaning: '怎麼做才好？',
-            explanation:
-              '向對方詢問適合的方法、時間或做法，相當於「要怎麼做才好呢」。',
-            anchors: [{ surface: '行けばいいですか' }],
-            sourceExample: {
-              id: 'dC3tM9qX6Lp',
-              japanese: '搭乗口には何時までに行けばいいですか。',
-              translation: '我最晚幾點前到登機門就可以呢？',
-            },
-            extraExample: {
-              id: 'rV7nK2xT5Qs',
-              japanese: 'この書類はどこに出せばいいですか。',
-              translation: '這份文件要交到哪裡才好呢？',
-            },
-          },
-        ],
-      },
-      {
-        id: 'lR9vC3mT7Xq',
-        speakerId: 'Y6tM3qW9bKs',
-        text: '午後[ごご]二時[にじ]五十分[ごじゅっぷん]までにお越[こ]しください。保安検査場[ほあんけんさじょう]が混[こ]むこともございますので、お早[はや]めにお進[すす]みください。',
-        translation:
-          '請在下午兩點五十分前抵達。安檢區有時會很擁擠，請提早前往。',
-        vocabularyNotes: [
-          {
-            id: 'yM4qX8tP2Vc',
-            surface: '保安検査場',
-            surfaceReading: 'ほあんけんさじょう',
-            dictionaryForm: '保安検査場',
-            reading: 'ほあんけんさじょう',
-            partOfSpeech: 'noun',
-            contextualMeaning:
-              '機場的安全檢查區，旅客需在此接受隨身行李與身體檢查',
-            examples: [
-              {
-                id: 'kC7pN3vR9Lt',
-                japanese: '保安検査場では搭乗券が必要です。',
-                translation: '在安檢區需要出示登機證。',
-              },
-            ],
-          },
-          {
-            id: 'tV6mQ2xK8Pr',
-            surface: '混む',
-            surfaceReading: 'こむ',
-            dictionaryForm: '混む',
-            reading: 'こむ',
-            partOfSpeech: 'verb',
-            contextualMeaning: '擁擠、人多；常用於交通工具、道路、店家或機場',
-            examples: [
-              {
-                id: 'pQ9xL4nC2Vs',
-                japanese: '朝の電車はとても混みます。',
-                translation: '早上的電車非常擁擠。',
+                id: 'n3Vq7Tk9P2xM',
+                japanese: '搭乗口は二十番です。',
+                translation: '登機門是二十號。',
               },
             ],
           },
         ],
         grammarNotes: [
           {
-            id: 'cX3rT8mV5Qn',
+            id: 'M6pQ2xV8kT4n',
             grammarPointId: null,
-            pattern: '〜こともある',
-            shortMeaning: '有時也會～',
+            pattern: '〜までに',
+            shortMeaning: '在……之前',
             explanation:
-              '表示某種情況偶爾可能發生。此處使用正式服務敬語「〜こともございます」。',
-            anchors: [{ surface: '混むこともございます' }],
+              '表示截止時間，說明某個動作必須在指定時間點到來之前完成。',
+            anchors: [{ surface: '搭乗開始時刻までに' }],
             sourceExample: {
-              id: 'vP7mK2qN9Xt',
-              japanese: '保安検査場が混むこともございます。',
-              translation: '安檢區有時也會很擁擠。',
+              id: 'x9Kq3N7mV2pL',
+              japanese: '搭乗開始時刻までに搭乗口までお越しください。',
+              translation: '請於開始登機前抵達登機門。',
             },
             extraExample: {
-              id: 'nL5tQ8xR3Cs',
-              japanese: '電車が遅れることもあります。',
-              translation: '電車有時也會誤點。',
+              id: 'T5vM8qP2xR6k',
+              japanese: '九時までに空港に来てください。',
+              translation: '請在九點以前抵達機場。',
+            },
+          },
+          {
+            id: 'p7Qn2Xk9V4mT',
+            grammarPointId: null,
+            pattern: 'お〜ください',
+            shortMeaning: '請您……',
+            explanation:
+              '「お＋動詞ます形＋ください」是尊敬語，用來禮貌地請對方做某個動作。',
+            anchors: [{ surface: 'お越しください' }],
+            sourceExample: {
+              id: 'G4xV8mQ2kN7p',
+              japanese: '搭乗口までお越しください。',
+              translation: '請前往登機門。',
+            },
+            extraExample: {
+              id: 'c2Tq9P5vX7mK',
+              japanese: '時間になりましたら、受付までお越しください。',
+              translation: '時間到了之後，請前往櫃檯。',
             },
           },
         ],
       },
       {
-        id: 'bT8qM2vX6Pk',
-        speakerId: 'pR4nX8cL2Vz',
-        text: '分[わ]かりました。どうもありがとうございました。',
-        translation: '我知道了。非常感謝。',
+        id: 'q3Lx7Vn2M9pK',
+        speakerId: 'a9Tq3Lm7Xv2P',
+        text: 'ありがとうございます。',
+        translation: '謝謝您。',
+      },
+      {
+        id: 'X8mQ4kT2vP7n',
+        speakerId: 'R4nW8cK2pY6d',
+        text: 'どうぞお気[き]をつけて、いってらっしゃいませ。',
+        translation: '祝您旅途愉快，一路平安。',
       },
     ],
   },
