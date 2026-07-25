@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { readingMaterials } from '~/data/materials/reading'
-import { LANG_CONFIG_MAP } from '~/types/lang'
-import { materialCategoryLabels, type StudyMode } from '~/types/material'
+import { materialCategoryLabels } from '~/types/material'
 import { toPlainJapanese } from '~/utils/parseRuby'
 
 const route = useRoute()
@@ -24,76 +23,46 @@ const grammarNotes = articleSentences.flatMap(
   (sentence) => sentence.grammarNotes ?? [],
 )
 
-const mode = ref<StudyMode>('full')
-const showRuby = ref(true)
-const lookupMode = ref(false)
-const playbackRate = ref(1)
+// 顯示設定、遮罩掀開、文法展開與日文語音與對話頁共用，見 useStudyState；
+// 整篇遮罩（articleVisible）只有閱讀有，留在本頁。
+const {
+  mode,
+  showRuby,
+  lookupMode,
+  playbackRate,
+  japaneseVisible: sentenceJapaneseVisible,
+  translationVisible: sentenceTranslationVisible,
+  activeGrammarId,
+  toggleGrammar,
+  isJapaneseVisible: isSentenceJapaneseVisible,
+  isTranslationVisible: isSentenceTranslationVisible,
+  revealJapanese: revealJapaneseSentence,
+  revealTranslation: revealTranslationSentence,
+  clearReveals,
+  audioState,
+  playAudio,
+  isSequencePlaying: isArticlePlaying,
+  toggleSequence,
+  stopSequence,
+} = useStudyState({ initialGrammarId: grammarNotes[0]?.id ?? null })
+
 const articleVisible = ref(true)
-const sentenceJapaneseVisible = ref(true)
-const sentenceTranslationVisible = ref(true)
-const revealedJapaneseSentenceIds = ref(new Set<string>())
-const revealedTranslationSentenceIds = ref(new Set<string>())
-const activeGrammarId = ref<string | null>(grammarNotes[0]?.id ?? null)
-const isArticlePlaying = ref(false)
-const { audioState, playAudio, playAudioSequence, stopAudio } = useTtsAudio(
-  LANG_CONFIG_MAP.ja,
-  { playbackRate },
-)
 
-const playArticle = async () => {
-  if (isArticlePlaying.value) {
-    stopAudio()
-    isArticlePlaying.value = false
-    return
-  }
-
-  isArticlePlaying.value = true
-  await playAudioSequence(
+const playArticle = () =>
+  toggleSequence(
     articleSentences.map((sentence) => ({
       audioId: sentence.id,
       text: toPlainJapanese(sentence.text),
     })),
   )
-  isArticlePlaying.value = false
-}
-
-const toggleGrammar = (grammarId: string) => {
-  activeGrammarId.value = activeGrammarId.value === grammarId ? null : grammarId
-}
-
-const isSentenceJapaneseVisible = (sentenceId: string) =>
-  sentenceJapaneseVisible.value ||
-  revealedJapaneseSentenceIds.value.has(sentenceId)
-const isSentenceTranslationVisible = (sentenceId: string) =>
-  sentenceTranslationVisible.value ||
-  revealedTranslationSentenceIds.value.has(sentenceId)
-const revealJapaneseSentence = (sentenceId: string) => {
-  revealedJapaneseSentenceIds.value.add(sentenceId)
-}
-const revealTranslationSentence = (sentenceId: string) => {
-  revealedTranslationSentenceIds.value.add(sentenceId)
-}
 
 const recommendations = readingMaterials
   .filter((item) => item.id !== material.id && item.level === material.level)
   .slice(0, 5)
 
-// 查字模式或版面切換後，內文單字 Popover 是新長出的 DOM，需重新綁定 FlyonUI click trigger。
-const reinitFlyonui = useFlyonuiReinit()
-watch([lookupMode, mode], () => reinitFlyonui())
 watch(mode, () => {
-  if (isArticlePlaying.value) {
-    stopAudio()
-    isArticlePlaying.value = false
-  }
-  revealedJapaneseSentenceIds.value.clear()
-  revealedTranslationSentenceIds.value.clear()
-})
-watch(sentenceJapaneseVisible, () => {
-  revealedJapaneseSentenceIds.value.clear()
-})
-watch(sentenceTranslationVisible, () => {
-  revealedTranslationSentenceIds.value.clear()
+  if (isArticlePlaying.value) stopSequence()
+  clearReveals()
 })
 
 useSeoMeta({ title: material.title, description: material.excerpt })

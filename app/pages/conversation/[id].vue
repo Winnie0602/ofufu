@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { conversationMaterials } from '~/data/materials/conversation'
 import { characterAvatarMap } from '~/types/conversation'
-import { LANG_CONFIG_MAP } from '~/types/lang'
-import { materialCategoryLabels, type StudyMode } from '~/types/material'
+import { materialCategoryLabels } from '~/types/material'
 import { toPlainJapanese } from '~/utils/parseRuby'
 
 const route = useRoute()
@@ -21,44 +20,51 @@ const vocabularyNotes = material.lines.flatMap(
 )
 const grammarNotes = material.lines.flatMap((line) => line.grammarNotes ?? [])
 
-const mode = ref<StudyMode>('full')
-const showRuby = ref(true)
-const lookupMode = ref(false)
-const playbackRate = ref(1)
+// 顯示設定、遮罩掀開、文法展開與日文語音與閱讀頁共用，見 useStudyState；
+// 角色扮演與逐句引導練習只有對話有，留在本頁。
 // 對照模式：日文／中文各自一個獨立的顯示開關（眼睛），彼此正交。
-const japaneseVisible = ref(true)
-const translationVisible = ref(true)
+const {
+  mode,
+  showRuby,
+  lookupMode,
+  playbackRate,
+  japaneseVisible,
+  translationVisible,
+  activeGrammarId,
+  toggleGrammar,
+  isJapaneseRevealed,
+  isTranslationRevealed,
+  revealJapanese: revealJapaneseLine,
+  revealTranslation: revealTranslationLine,
+  clearJapaneseReveals,
+  clearReveals,
+  audioState,
+  playAudio,
+  playLine,
+  stopAudio,
+  isSequencePlaying: isConversationPlaying,
+  toggleSequence,
+  stopSequence,
+} = useStudyState({ initialGrammarId: grammarNotes[0]?.id ?? null })
+
 const selectedRoleParticipantId = ref(material.participants[0]?.id ?? '')
-const revealedJapaneseLineIds = ref(new Set<string>())
-const revealedTranslationLineIds = ref(new Set<string>())
-const activeGrammarId = ref<string | null>(grammarNotes[0]?.id ?? null)
-const isConversationPlaying = ref(false)
 // 角色扮演逐句練習游標：null＝自由瀏覽；數字＝目前停在第幾句（0-based）。
 const practiceIndex = ref<number | null>(null)
-const { audioState, playAudio, playAudioSequence, playLine, stopAudio } =
-  useTtsAudio(LANG_CONFIG_MAP.ja, { playbackRate })
 
-const playConversation = async () => {
-  if (isConversationPlaying.value) {
-    stopAudio()
-    isConversationPlaying.value = false
-    return
-  }
-
-  isConversationPlaying.value = true
+const playConversation = () => {
+  // 角色扮演自動播放時跳過你扮演的角色，只播對方台詞。
   const playableLines =
     mode.value === 'roleplay'
       ? material.lines.filter(
           (line) => line.speakerId !== selectedRoleParticipantId.value,
         )
       : material.lines
-  await playAudioSequence(
+  return toggleSequence(
     playableLines.map((line) => ({
       audioId: line.id,
       text: toPlainJapanese(line.text),
     })),
   )
-  isConversationPlaying.value = false
 }
 
 const participantMap = new Map(
@@ -93,7 +99,7 @@ const isPracticeUserStep = (lineId: string) => {
   return !!line && line.id === lineId && isUserLine(line)
 }
 const practiceHintFor = (lineId: string) =>
-  isPracticeUserStep(lineId) && !revealedJapaneseLineIds.value.has(lineId)
+  isPracticeUserStep(lineId) && !isJapaneseRevealed(lineId)
     ? '看中文說日文'
     : undefined
 
@@ -125,7 +131,7 @@ const runPracticeStep = async () => {
   await runPracticeStep()
 }
 const startPractice = () => {
-  revealedJapaneseLineIds.value.clear()
+  clearJapaneseReveals()
   practiceIndex.value = 0
   void runPracticeStep()
 }
@@ -135,7 +141,7 @@ const togglePractice = () => {
 }
 // 你的回合按鈕：未掀開＝看答案（掀開日文）；已掀開＝繼續對話（前進），最後一句改為結束練習。
 const handlePracticeAction = (lineId: string) => {
-  if (!revealedJapaneseLineIds.value.has(lineId)) {
+  if (!isJapaneseRevealed(lineId)) {
     revealJapaneseLine(lineId)
     return
   }
@@ -147,11 +153,11 @@ const handlePracticeAction = (lineId: string) => {
   void runPracticeStep()
 }
 const practiceActionText = (lineId: string) => {
-  if (!revealedJapaneseLineIds.value.has(lineId)) return '看答案'
+  if (!isJapaneseRevealed(lineId)) return '看答案'
   return isLastPracticeStep.value ? '結束練習' : '繼續對話'
 }
 const practiceActionIcon = (lineId: string) => {
-  if (!revealedJapaneseLineIds.value.has(lineId)) return 'icon-[tabler--eye]'
+  if (!isJapaneseRevealed(lineId)) return 'icon-[tabler--eye]'
   return isLastPracticeStep.value
     ? 'icon-[tabler--player-stop-filled]'
     : 'icon-[tabler--arrow-right]'
@@ -174,50 +180,30 @@ const handlePlaybackAction = () => {
 // 這句日文是否看得見（未被遮罩）：已掀開的一律看得見；
 // 角色扮演＝只遮你扮演角色的日文，對照＝由日文眼睛統一控制。
 const isJapaneseVisible = (lineId: string, speakerId: string) =>
-  revealedJapaneseLineIds.value.has(lineId) ||
+  isJapaneseRevealed(lineId) ||
   (mode.value === 'roleplay'
     ? speakerId !== selectedRoleParticipantId.value
     : japaneseVisible.value)
 // 這句中文是否看得見：角色扮演一律保留中文；對照由中文眼睛控制。
 const isTranslationVisible = (lineId: string) =>
   mode.value === 'roleplay' ||
-  revealedTranslationLineIds.value.has(lineId) ||
+  isTranslationRevealed(lineId) ||
   translationVisible.value
-const revealJapaneseLine = (lineId: string) => {
-  revealedJapaneseLineIds.value.add(lineId)
-}
-const revealTranslationLine = (lineId: string) => {
-  revealedTranslationLineIds.value.add(lineId)
-}
-const toggleGrammar = (grammarId: string) => {
-  activeGrammarId.value = activeGrammarId.value === grammarId ? null : grammarId
-}
+
 const recommendations = conversationMaterials
   .filter((item) => item.id !== material.id && item.level === material.level)
   .slice(0, 5)
 
-// 查字模式切換後，內文單字 Popover 是新長出的 DOM，需重新綁定 FlyonUI click trigger。
-const reinitFlyonui = useFlyonuiReinit()
-watch([lookupMode, mode], () => reinitFlyonui())
 watch(mode, () => {
   // 切模式：停止序列播放與逐句練習，避免控制狀態與語音、遮罩錯位。
-  stopAudio()
-  isConversationPlaying.value = false
+  stopSequence()
   practiceIndex.value = null
-  revealedJapaneseLineIds.value.clear()
-  revealedTranslationLineIds.value.clear()
-})
-// 重新遮起日文／中文時，清掉先前掀開的紀錄，讓眼睛再次關閉能重新遮全部。
-watch(japaneseVisible, () => {
-  revealedJapaneseLineIds.value.clear()
-})
-watch(translationVisible, () => {
-  revealedTranslationLineIds.value.clear()
+  clearReveals()
 })
 watch(selectedRoleParticipantId, () => {
   // 切角色：練習作廢並清掉掀開紀錄，讓新角色的台詞重新遮起。
   stopPractice()
-  revealedJapaneseLineIds.value.clear()
+  clearJapaneseReveals()
 })
 // 捲動焦點：練習中由目前 step 句驅動（你的台詞停下時 activeLineId 為 null，不能只靠它）；
 // 一般自動播放沿用 activeLineId；手動逐句播放不強制捲動。

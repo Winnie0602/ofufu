@@ -3,7 +3,7 @@ import type { AudioPlaybackState } from '~/types/audio'
 
 type TtsLanguageConfig = (typeof LANG_CONFIG_MAP)[keyof typeof LANG_CONFIG_MAP]
 
-interface PlayTtsAudioPayload {
+export interface PlayTtsAudioPayload {
   audioId: string
   text: string
 }
