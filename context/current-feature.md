@@ -23,7 +23,7 @@
 - Branch：`dev`（**Task 008 尚未 commit**，工作區另含既有變更）。
 - 上一個完成：**Task 008**（閱讀／對話內文互動改版）。現行畫面功能、AC、驗證與實作注意事項見 `docs/tasks/task-008-reading-conversation-interaction.md`。
 - 後續已記錄：**Task 009**（TTS 與教材音檔正式流程）目前為 Backlog，需求與 Task 008 播放現況見 `docs/tasks/task-009-tts-audio-assets.md`；尚未進入技術規劃或實作。
-- 並行雜項：**批次補教材資料 ＋ 回頭清算舊 X**（見 task-007「完成後續接」段）；`docs/tasks/seed-data.md` 已交付使用者陸續貼資料。
+- 並行雜項：**批次補教材資料 ＋ 回頭清算舊 X**（見 task-007「完成後續接」段）；資料產生改為三階段：`seed-content-draft.md` 產內容、`seed-annotation-draft.md` 審重點、`seed-data.md` 轉 TypeScript。
 - **Task 008 完成摘要（2026-07-25）**：閱讀使用整篇／單句 Tabs；對話使用閱讀／角色扮演 Tabs與逐句引導練習。重點單字／文法、Ruby、模糊掀開、逐句／序列播放及播放中即時改速皆已接回正式狀態。舊三模式、`featured` 兩層與文法底線／捲頁尾規格已移除。
 
 
@@ -41,4 +41,25 @@
 ## Notes（跨 Task、不在別處記錄的決策）
 
 - 現階段不要先依 `docs/schema.md` 建資料庫或 API。
+- **元件資料夾依「職責層」而非「教材類型」分類（2026-07-25 重整）**：教材元件不按閱讀／對話拆，因為它們會被六種教材共用；閱讀／對話專屬區塊之後從各自頁面抽出時才建 `reading/`、`conversation/`。對照表（task-006／007／008 內的舊路徑不回頭改寫，以本表為準）：
+
+  | 舊 | 新 | 元件名變化 |
+  | --- | --- | --- |
+  | `components/materials/MaterialCard.vue` | `components/material/Card.vue` | `MaterialsMaterialCard` → `MaterialCard` |
+  | `components/materials/MaterialListing.vue` | `components/material/Listing.vue` | `MaterialsMaterialListing` → `MaterialListing` |
+  | `components/materials/Page.vue` | `components/material/PageShell.vue` | `MaterialsPage` → `MaterialPageShell` |
+  | `components/materials/{Hero,LevelFilter,TypeBadges}.vue` | `components/material/` 同名 | `Materials*` → `Material*` |
+  | `components/materials/StudyControls.vue` | `components/content/Controls.vue` | `MaterialsStudyControls` → `ContentControls` |
+  | `components/materials/StudyDisplayToggles.vue` | `components/content/DisplayToggles.vue` | → `ContentDisplayToggles` |
+  | `components/materials/StudyMobileControls.vue` | `components/content/MobileControls.vue` | → `ContentMobileControls` |
+  | `components/materials/RevealableContent.vue` | `components/content/Maskable.vue` | → `ContentMaskable`（prop 仍為 `visible`、事件仍為 `reveal`） |
+  | `components/materials/{AnnotatedText,RubyText,VocabularyPopover,GrammarPopover,GrammarNotes,VisibilityToggle}.vue` | `components/content/` 同名 | `Materials*` → `Content*` |
+  | `components/Index/` | `components/home/` | `Index*` → `Home*` |
+  | `components/test/` | `components/quiz/` | `Test*` → `Quiz*`（`test` 易誤讀為單元測試） |
+  | `components/{SongLyrics,SongWords}.vue`、`global/{SongPlayer,BottomPanel}.vue` | `components/song/{Lyrics,Words,Player,BottomPanel}.vue` | 僅 `BottomPanel` → `SongBottomPanel`，其餘不變 |
+  | `global/VideoCard.vue` | `components/video/Card.vue` | 不變（`VideoCard`） |
+  | `global/{header,footer}.vue` | `global/{Header,Footer}.vue` | 不變（檔名改 PascalCase） |
+  | `composables/useYoutubePlayer.local.ts` | `composables/useYoutubePlayerLocal.ts` | 不變（檔名對齊 export） |
+
+- `components/global/` 在 Nuxt 是「全域註冊、無前綴」的保留語意，只放全站到處用的 UI（`Toast`、`ConfirmModal`、`Pagination`、`AudioButton`、`FavoriteButton`、`Header`、`Footer`、`MobileNavbar`），教材／歌曲專屬元件不得放入。
 - 專案既有 hydration mismatch：Header／Toast／ConfirmModal，以及 FlyonUI accordion 自動初始化與 Vue 狀態競態（解法：在 Vue 自控的 accordion 上加 `--prevent-on-load-init`，見 `Index/Test.vue`、`VocabularyListItem.vue`）。
