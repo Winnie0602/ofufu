@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { MaterialVocabularyNote } from '~/types/material'
+import { LANG_CONFIG_MAP } from '~/types/lang'
 import { vocabularyPartOfSpeechLabels } from '~/types/vocabulary'
+import { toPlainJapanese } from '~/utils/parseRuby'
 
 const props = withDefaults(
   defineProps<{
@@ -10,11 +12,24 @@ const props = withDefaults(
   { variant: 'highlight' },
 )
 
+// Popover 內單字語音：沿用 useTtsAudio，播放單字表層形（與側欄清單一致，audioId 用 note.id）。
+const { audioState, playAudio } = useTtsAudio(LANG_CONFIG_MAP.ja)
+
 // 表層形是否為活用形（與辭書形不同）；活用時另外標示辭書形，方便查字典，
 // 收藏時也會依辭書形自然鍵去重（在收藏動作處理，Popover 不攤開單字表資料）。
 const isInflected = computed(
   () => props.note.surface !== props.note.dictionaryForm,
 )
+
+// 觸發樣式：badge 為側欄「重點單字」水平標籤；highlight 為內文可點字（查字模式開啟時才出現）。
+// 內文的底色標記改由 RubyText 只套在「底排文字」上（見 AnnotatedText highlightClass），
+// 此處的內文按鈕本身不再上底色，僅維持文字色與可點性，避免背景蓋到 furigana。
+const triggerClass = computed(() => {
+  if (props.variant === 'badge') {
+    return 'badge badge-outline badge-error hover:bg-error/10 tooltip-shown:bg-error/10 h-auto rounded-full bg-white px-3 py-1.5 text-error font-medium'
+  }
+  return 'text-neutral-900'
+})
 </script>
 
 <template>
@@ -24,12 +39,8 @@ const isInflected = computed(
     <span class="tooltip-toggle inline-flex align-baseline">
       <button
         type="button"
-        class="text-error align-baseline font-medium transition-none"
-        :class="
-          variant === 'badge'
-            ? 'badge badge-outline badge-error hover:bg-error/10 tooltip-shown:bg-error/10 h-auto rounded-full bg-white px-3 py-1.5'
-            : 'bg-error/10 hover:bg-error/20 tooltip-shown:bg-error/20 rounded-sm px-1 py-0.5'
-        "
+        class="align-baseline transition-none"
+        :class="triggerClass"
         :data-vocabulary-note-id="note.id"
         :aria-label="`查看單字 ${note.surface}`"
       >
@@ -58,7 +69,16 @@ const isInflected = computed(
             </span>
           </span>
           <span class="flex gap-2">
-            <AudioButton :label="`播放 ${note.surface}`" />
+            <AudioButton
+              :label="`播放 ${note.surface}`"
+              :state="audioState(note.id)"
+              @play="
+                playAudio({
+                  audioId: note.id,
+                  text: toPlainJapanese(note.surface),
+                })
+              "
+            />
             <FavoriteButton :label="`收藏 ${note.dictionaryForm}`" />
           </span>
         </span>

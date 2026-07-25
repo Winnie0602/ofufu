@@ -24,11 +24,16 @@ const isActive = (id: string) => props.activeId === id
     >
       <button
         type="button"
-        class="collapse-toggle flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-bold text-neutral-900"
+        class="collapse-toggle flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-neutral-900"
         :aria-expanded="isActive(note.id)"
         @click="$emit('toggle', note.id)"
       >
-        {{ note.pattern }}
+        <span class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+          <span class="font-bold">{{ note.pattern }}</span>
+          <span class="text-sm font-medium text-neutral-500">
+            {{ note.shortMeaning }}
+          </span>
+        </span>
         <span
           class="size-5 shrink-0"
           :class="isActive(note.id) ? 'icon-[tabler--minus]' : 'icon-[tabler--plus]'"
@@ -41,10 +46,10 @@ const isActive = (id: string) => props.activeId === id
         <div class="min-h-0 overflow-hidden">
           <div class="border-t border-neutral-100 px-5 py-5">
             <p class="text-sm leading-7 text-neutral-700">
-              {{ note.shortExplanation }}
+              {{ note.explanation }}
             </p>
             <div class="mt-5 grid gap-4 md:grid-cols-2">
-              <div class="rounded-lg bg-error/5 p-4">
+              <div class="rounded-lg bg-primary/5 p-4">
                 <h4 class="text-xs font-bold text-neutral-500">本文例句</h4>
                 <p class="mt-2 text-sm font-medium text-neutral-900">
                   {{ note.sourceExample.japanese }}
@@ -53,7 +58,7 @@ const isActive = (id: string) => props.activeId === id
                   {{ note.sourceExample.translation }}
                 </p>
               </div>
-              <div class="rounded-lg bg-error/5 p-4">
+              <div class="rounded-lg bg-primary/5 p-4">
                 <h4 class="text-xs font-bold text-neutral-500">其他例句</h4>
                 <p class="mt-2 text-sm font-medium text-neutral-900">
                   {{ note.extraExample.japanese }}

@@ -15,22 +15,29 @@ const articleSentences = material.paragraphs.flatMap(
   (paragraph) => paragraph.sentences,
 )
 
-// 註解掛在句子層，側欄「重點單字／本文使用文法」由各句攤平彙整。
-// 「重點單字」只列主打字（featured）；featured:false 屬一般可收藏字，等 task-008 查字模式再揭露。
-const vocabularyNotes = articleSentences
-  .flatMap((sentence) => sentence.vocabularyNotes ?? [])
-  .filter((note) => note.featured)
+// 註解掛在句子層，頁尾「重點單字／本文使用文法」由各句攤平彙整。
+// 內文只標符合該程度的重點單字，故頁尾即列出所有單字註解。
+const vocabularyNotes = articleSentences.flatMap(
+  (sentence) => sentence.vocabularyNotes ?? [],
+)
 const grammarNotes = articleSentences.flatMap(
   (sentence) => sentence.grammarNotes ?? [],
 )
 
 const mode = ref<StudyMode>('full')
 const showRuby = ref(true)
+const lookupMode = ref(false)
 const playbackRate = ref(1)
+const articleVisible = ref(true)
+const sentenceJapaneseVisible = ref(true)
+const sentenceTranslationVisible = ref(true)
+const revealedJapaneseSentenceIds = ref(new Set<string>())
+const revealedTranslationSentenceIds = ref(new Set<string>())
 const activeGrammarId = ref<string | null>(grammarNotes[0]?.id ?? null)
 const isArticlePlaying = ref(false)
 const { audioState, playAudio, playAudioSequence, stopAudio } = useTtsAudio(
   LANG_CONFIG_MAP.ja,
+  { playbackRate },
 )
 
 const playArticle = async () => {
@@ -54,19 +61,40 @@ const toggleGrammar = (grammarId: string) => {
   activeGrammarId.value = activeGrammarId.value === grammarId ? null : grammarId
 }
 
-const selectGrammar = async (grammarId: string) => {
-  activeGrammarId.value = grammarId
-  await nextTick()
-  await new Promise((resolve) => window.setTimeout(resolve, 350))
-  document.getElementById(`grammar-note-${grammarId}`)?.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start',
-  })
+const isSentenceJapaneseVisible = (sentenceId: string) =>
+  sentenceJapaneseVisible.value ||
+  revealedJapaneseSentenceIds.value.has(sentenceId)
+const isSentenceTranslationVisible = (sentenceId: string) =>
+  sentenceTranslationVisible.value ||
+  revealedTranslationSentenceIds.value.has(sentenceId)
+const revealJapaneseSentence = (sentenceId: string) => {
+  revealedJapaneseSentenceIds.value.add(sentenceId)
+}
+const revealTranslationSentence = (sentenceId: string) => {
+  revealedTranslationSentenceIds.value.add(sentenceId)
 }
 
 const recommendations = readingMaterials
   .filter((item) => item.id !== material.id && item.level === material.level)
   .slice(0, 5)
+
+// 查字模式或版面切換後，內文單字 Popover 是新長出的 DOM，需重新綁定 FlyonUI click trigger。
+const reinitFlyonui = useFlyonuiReinit()
+watch([lookupMode, mode], () => reinitFlyonui())
+watch(mode, () => {
+  if (isArticlePlaying.value) {
+    stopAudio()
+    isArticlePlaying.value = false
+  }
+  revealedJapaneseSentenceIds.value.clear()
+  revealedTranslationSentenceIds.value.clear()
+})
+watch(sentenceJapaneseVisible, () => {
+  revealedJapaneseSentenceIds.value.clear()
+})
+watch(sentenceTranslationVisible, () => {
+  revealedTranslationSentenceIds.value.clear()
+})
 
 useSeoMeta({ title: material.title, description: material.excerpt })
 </script>
@@ -128,60 +156,106 @@ useSeoMeta({ title: material.title, description: material.excerpt })
       <MaterialsStudyControls
         class="mt-8"
         :mode="mode"
-        :show-ruby="showRuby"
         :playback-rate="playbackRate"
         content-label="文章"
         @update:mode="mode = $event"
-        @update:show-ruby="showRuby = $event"
         @update:playback-rate="playbackRate = $event"
-      />
-
-      <section class="mt-8 w-full rounded-xl px-3 py-4 sm:px-4 sm:py-9">
-        <template v-if="mode !== 'sentence'">
-          <div>
-            <button
-              type="button"
-              class="btn btn-outline btn-error btn-sm text-error hover:bg-error/10 hover:text-error bg-white"
-              :aria-label="isArticlePlaying ? '停止播放文章' : '自動播放文章'"
-              @click="void playArticle()"
-            >
-              <span
-                :class="
-                  isArticlePlaying
-                    ? 'icon-[tabler--player-stop-filled]'
-                    : 'icon-[tabler--player-play-filled]'
-                "
-                class="size-4"
-              />
-              {{ isArticlePlaying ? '停止播放文章' : '自動播放文章' }}
-            </button>
-          </div>
-
-          <div
-            class="mt-6 space-y-7 px-2 text-lg leading-[2.35] text-neutral-900 sm:px-4 sm:text-xl"
+      >
+        <template #playback-actions>
+          <button
+            v-if="mode === 'full'"
+            type="button"
+            class="btn btn-outline btn-error btn-sm min-h-11 bg-white text-error hover:bg-error/10 hover:text-error sm:min-h-8"
+            :aria-label="isArticlePlaying ? '停止播放文章' : '播放文章'"
+            @click="void playArticle()"
           >
-            <p v-for="paragraph in material.paragraphs" :key="paragraph.id">
-              <template
-                v-for="sentence in paragraph.sentences"
-                :key="sentence.id"
-              >
-                <MaterialsAnnotatedText
-                  :text="sentence.text"
-                  :vocabulary-notes="sentence.vocabularyNotes"
-                  :grammar-notes="sentence.grammarNotes"
-                  :show-ruby="showRuby"
-                  @select-grammar="selectGrammar"
-                />
-              </template>
-            </p>
-          </div>
+            <span
+              :class="
+                isArticlePlaying
+                  ? 'icon-[tabler--player-stop-filled]'
+                  : 'icon-[tabler--player-play-filled]'
+              "
+              class="size-4"
+            />
+            {{ isArticlePlaying ? '停止播放文章' : '播放文章' }}
+          </button>
+        </template>
+        <template #mode-actions>
+          <MaterialsVisibilityToggle
+            v-if="mode === 'full'"
+            :visible="articleVisible"
+            label="隱藏整篇"
+            @update:visible="articleVisible = $event"
+          />
+          <MaterialsVisibilityToggle
+            v-if="mode === 'sentence'"
+            :visible="sentenceJapaneseVisible"
+            label="隱藏日文"
+            @update:visible="sentenceJapaneseVisible = $event"
+          />
+          <MaterialsVisibilityToggle
+            v-if="mode === 'sentence'"
+            :visible="sentenceTranslationVisible"
+            label="隱藏中文"
+            @update:visible="sentenceTranslationVisible = $event"
+          />
+        </template>
+        <template #display-settings>
+          <MaterialsStudyDisplayToggles
+            :lookup-mode="lookupMode"
+            :show-ruby="showRuby"
+            @update:lookup-mode="lookupMode = $event"
+            @update:show-ruby="showRuby = $event"
+          />
+        </template>
+      </MaterialsStudyControls>
+
+      <section class="w-full rounded-xl py-4 sm:px-4 sm:py-5">
+        <div
+          class="mb-6 rounded-lg bg-neutral-50 p-3 sm:hidden"
+        >
+          <MaterialsStudyMobileControls
+            content-label="文章"
+            :playback-rate="playbackRate"
+            :is-playing="isArticlePlaying"
+            :lookup-mode="lookupMode"
+            :show-ruby="showRuby"
+            @toggle-playback="void playArticle()"
+            @update:playback-rate="playbackRate = $event"
+            @update:lookup-mode="lookupMode = $event"
+            @update:show-ruby="showRuby = $event"
+          />
+        </div>
+
+        <template v-if="mode === 'full'">
+          <MaterialsRevealableContent
+            class="mt-6"
+            :visible="articleVisible"
+            reveal-label="顯示文章日文"
+            @reveal="articleVisible = true"
+          >
+            <div
+              class="space-y-7 px-2 text-lg leading-[2.5] text-neutral-900 sm:px-4 sm:text-xl"
+            >
+              <p v-for="paragraph in material.paragraphs" :key="paragraph.id">
+                <template
+                  v-for="sentence in paragraph.sentences"
+                  :key="sentence.id"
+                >
+                  <MaterialsAnnotatedText
+                    :text="sentence.text"
+                    :vocabulary-notes="sentence.vocabularyNotes"
+                    :grammar-notes="sentence.grammarNotes"
+                    :show-ruby="showRuby"
+                    :lookup-mode="lookupMode"
+                  />
+                </template>
+              </p>
+            </div>
+          </MaterialsRevealableContent>
 
           <section
             class="border-error/10 bg-error/5 mt-10 rounded-xl border px-4 py-5"
-            :class="{
-              'pointer-events-none invisible select-none': mode !== 'full',
-            }"
-            :aria-hidden="mode !== 'full'"
           >
             <h2 class="text-error text-sm font-medium">文章翻譯</h2>
             <div
@@ -194,7 +268,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
           </section>
         </template>
 
-        <div v-else class="space-y-4">
+        <div v-else class="mt-6 space-y-4">
           <template
             v-for="paragraph in material.paragraphs"
             :key="paragraph.id"
@@ -204,20 +278,35 @@ useSeoMeta({ title: material.title, description: material.excerpt })
               :key="sentence.id"
               class="border-error/10 bg-error/5 grid grid-cols-[minmax(0,1fr)_auto] gap-3 rounded-xl border p-4 sm:gap-5 sm:p-5"
             >
-              <div class="min-w-0">
-                <p class="text-base leading-8 text-neutral-900 sm:text-lg">
-                  <MaterialsAnnotatedText
-                    :text="sentence.text"
-                    :grammar-notes="sentence.grammarNotes"
-                    :show-ruby="showRuby"
-                    @select-grammar="selectGrammar"
-                  />
-                </p>
-                <p
-                  class="mt-2 border-t border-error/10 pt-2 text-sm leading-6 text-neutral-500"
+              <div class="min-w-0 space-y-2">
+                <MaterialsRevealableContent
+                  :visible="isSentenceJapaneseVisible(sentence.id)"
+                  :reveal-label="`顯示句子：${toPlainJapanese(sentence.text)}`"
+                  @reveal="revealJapaneseSentence(sentence.id)"
                 >
-                  {{ sentence.translation }}
-                </p>
+                  <p class="text-base leading-10 text-neutral-900 sm:text-lg">
+                    <MaterialsAnnotatedText
+                      :text="sentence.text"
+                      :vocabulary-notes="sentence.vocabularyNotes"
+                      :grammar-notes="sentence.grammarNotes"
+                      :show-ruby="showRuby"
+                      :lookup-mode="lookupMode"
+                    />
+                  </p>
+                </MaterialsRevealableContent>
+                <div
+                  class="border-error/10 min-w-0 border-t pt-2"
+                >
+                  <MaterialsRevealableContent
+                    :visible="isSentenceTranslationVisible(sentence.id)"
+                    :reveal-label="`顯示中文翻譯：${sentence.translation}`"
+                    @reveal="revealTranslationSentence(sentence.id)"
+                  >
+                    <p class="text-sm leading-6 text-neutral-500">
+                      {{ sentence.translation }}
+                    </p>
+                  </MaterialsRevealableContent>
+                </div>
               </div>
               <div class="flex shrink-0 flex-col gap-2 sm:flex-row">
                 <AudioButton

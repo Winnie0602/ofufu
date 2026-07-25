@@ -2,306 +2,85 @@ import type { ReadingMaterial } from '~/types/reading'
 
 export const readingMaterials: ReadingMaterial[] = [
   {
-    id: 'V1StGXR8Z5jd',
+    id: 'Rk9mZ2pQ7wA',
     type: 'reading',
-    title: '日本の四季を楽しもう',
-    excerpt:
-      '桜、夏祭り、紅葉、雪景色から、日本の季節ごとの楽しみ方を読みます。',
+    title: '私の週末',
+    excerpt: '土曜日の散歩と、のんびりした週末の過ごし方を読みます。',
     level: 'n5',
-    categories: ['culture', 'travel'],
-    coverImage: '/reading-japanese-seasons.png',
-    paragraphs: [
-      {
-        id: 'RdP8kM2xQ5aN',
-        sentences: [
-          {
-            id: 'RdS1wF7cL3pT',
-            text: '日本[にほん]には四[よっ]つの季節[きせつ]があり、それぞれの景色[けしき]や食[た]べ物[もの]を楽[たの]しめるようになります。',
-            translation: '日本有四個季節，每個季節都能欣賞不同的景色與食物。',
-            vocabularyNotes: [
-              {
-                // 動詞活用形示範：表層形「楽しめる」，辭書形「楽しむ」(たのしむ, verb) → 命中單字表
-                id: 'RdVw8Tn3Lm2K',
-                surface: '楽しめる',
-                surfaceReading: 'たのしめる',
-                dictionaryForm: '楽しむ',
-                reading: 'たのしむ',
-                partOfSpeech: 'verb',
-                contextualMeaning: '享受；此處為可能形，意為「能夠享受」',
-                featured: true,
-                examples: [
-                  {
-                    id: 'RdVe5tK8mP2qL',
-                    japanese: '春には桜を楽しめる。',
-                    translation: '春天能享受櫻花。',
-                  },
-                  {
-                    id: 'RdVe6nQ3vH9xC',
-                    japanese: '四季それぞれの景色を楽しめる。',
-                    translation: '能享受四季各自的景色。',
-                  },
-                ],
-              },
-            ],
-            grammarNotes: [
-              {
-                id: 'RdGr7Yp2Lm9Q',
-                grammarPointId: 'GpN5cT8vK3mR',
-                pattern: '〜ようになる',
-                shortExplanation:
-                  '表示能力、狀態或習慣產生變化，相當於中文的「變得會……／開始變成……」。',
-                anchors: [{ surface: 'ようになります' }],
-                sourceExample: {
-                  id: 'RdGe1qM6xP4nH',
-                  japanese: 'それぞれの景色や食べ物を楽しめるようになります。',
-                  translation: '變得能享受各個季節的景色與食物。',
-                },
-                extraExample: {
-                  id: 'RdGe2kV9tC5sL',
-                  japanese: '日本語が話せるようになりました。',
-                  translation: '變得會說日文了。',
-                },
-              },
-            ],
-          },
-          {
-            id: 'RdS2mQ9vB4xK',
-            text: '春[はる]になると桜[さくら]が咲き、公園[こうえん]には多くの人が集まります。',
-            translation: '春天一到櫻花盛開，許多人會聚集在公園裡。',
-            vocabularyNotes: [
-              {
-                // 名詞：辭書形＝表層形，(桜, さくら, noun) 命中單字表 → 已連結
-                id: 'RdVw4Kp8Nx2M',
-                surface: '桜',
-                surfaceReading: 'さくら',
-                dictionaryForm: '桜',
-                reading: 'さくら',
-                partOfSpeech: 'noun',
-                contextualMeaning: '櫻花',
-                featured: true,
-                examples: [
-                  {
-                    id: 'RdVe1mT6qN9xP',
-                    japanese: '公園の桜が満開です。',
-                    translation: '公園裡的櫻花盛開了。',
-                  },
-                  {
-                    id: 'RdVe2cK4vH7sR',
-                    japanese: '家族と桜を見に行きます。',
-                    translation: '要和家人一起去賞櫻。',
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            id: 'RdS3pT6nH8cQ',
-            text: '夏[なつ]には各地で夏祭[なつまつ]りが開かれ、浴衣[ゆかた]を着た人々が屋台の食べ物や夜空の花火[はなび]を楽しみます。',
-            translation:
-              '夏天日本各地會舉辦夏季祭典，穿著浴衣的人們會享受攤販美食與夜空中的煙火。',
-            vocabularyNotes: [
-              {
-                // 刻意未收錄於單字表：(夏祭り, なつまつり, noun) → 未連結，改用本註解自帶例句
-                id: 'RdVw6Ts3Qa7L',
-                surface: '夏祭り',
-                surfaceReading: 'なつまつり',
-                dictionaryForm: '夏祭り',
-                reading: 'なつまつり',
-                partOfSpeech: 'noun',
-                contextualMeaning: '夏季祭典（有攤販與煙火的日本夏季節慶）',
-                featured: true,
-                examples: [
-                  {
-                    id: 'RdVe3pF8mQ1tV',
-                    japanese: '夏祭りで花火を見ました。',
-                    translation: '在夏季祭典看了煙火。',
-                  },
-                  {
-                    id: 'RdVe4wL2nC6kA',
-                    japanese: '浴衣で夏祭りへ行きます。',
-                    translation: '穿浴衣去參加夏季祭典。',
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'RdP3cT9mK6xV',
-        sentences: [
-          {
-            id: 'RdS4qN1wL7pF',
-            text: '秋[あき]になると山や寺の木々が赤や黄色に変わり、美しい紅葉[こうよう]を見に出かける人が増えます。',
-            translation:
-              '秋天山林與寺院周圍的樹木轉為紅色和黃色，出門欣賞美麗紅葉的人也會增加。',
-          },
-          {
-            id: 'RdS5rD8kM2vA',
-            text: '冬[ふゆ]の雪が多い地域では、静かな雪景色[ゆきげしき]を眺めたり、温泉で冷えた体を温めたりできます。',
-            translation:
-              '冬季積雪較多的地區能欣賞寧靜的雪景，也能泡溫泉暖和冰冷的身體。',
-            grammarNotes: [
-              {
-                id: 'RdGr5Cv8Rt1X',
-                grammarPointId: 'GpN4mW2qF7pA',
-                pattern: '〜たり、〜たりする',
-                shortExplanation:
-                  '列舉數個代表性的動作或狀態，表示「做做……、做做……之類的事情」。',
-                // 不連續文法：只框關鍵字，中間的「、温泉で冷えた体を」不畫線
-                anchors: [{ surface: '眺めたり' }, { surface: '温めたり' }],
-                sourceExample: {
-                  id: 'RdGe3nD7xQ1mB',
-                  japanese: '雪景色を眺めたり、温泉で体を温めたりできます。',
-                  translation: '可以欣賞雪景、泡溫泉暖身等。',
-                },
-                extraExample: {
-                  id: 'RdGe4pL3vK8tS',
-                  japanese: '休みの日は本を読んだり、音楽を聞いたりします。',
-                  translation: '休假時會看看書、聽聽音樂。',
-                },
-              },
-            ],
-          },
-          {
-            id: 'RdS6xJ4pT9nC',
-            text: '季節[きせつ]の変化を知ることは、日本[にほん]の文化を理解するきっかけにもなります。',
-            translation: '了解季節的變化，也會成為理解日本文化的契機。',
-          },
-        ],
-      },
-    ],
-    translation: [
-      '日本有春、夏、秋、冬四個季節，每個季節都能欣賞不同的景色與食物。春天一到櫻花盛開，許多人會聚集在公園裡賞花。',
-      '夏天日本各地會舉辦夏季祭典。穿著浴衣的人們可以品嚐攤販美食，並欣賞點亮夜空的煙火。',
-      '秋天可以欣賞紅葉，冬天則能看見寧靜的雪景並享受溫泉。了解季節的變化，也是認識日本文化的好機會。',
-    ],
-  },
-  {
-    id: 'T7mQ3xK9Vp',
-    type: 'reading',
-    title: 'タイ旅行で知っておきたいこと',
-    excerpt: 'タイの観光地、食事、交通、旅行中の注意点について読みます。',
-    level: 'n3',
-    categories: ['travel', 'culture', 'food'],
+    categories: ['life', 'daily'],
     coverImage: null,
     paragraphs: [
       {
-        id: 'P4kN8pT2Lx',
+        id: 'pA4nK8xT2mL',
         sentences: [
           {
-            id: 'S9mQ3vR6Ka',
-            text: 'タイは東南[とうなん]アジアにある国[くに]で、美[うつく]しい寺院[じいん]や南国[なんごく]らしい自然[しぜん]を楽[たの]しめる人気[にんき]の旅行先[りょこうさき]です。',
-            translation:
-              '泰國是位於東南亞的國家，是一個能欣賞美麗寺廟與熱帶自然風光的熱門旅遊目的地。',
+            id: 'sV7cL3pT1wF',
+            text: '私[わたし]は毎週[まいしゅう]、土曜日[どようび]の朝[あさ]に近[ちか]くの公園[こうえん]を散歩[さんぽ]します。',
+            translation: '我每個星期六早上都會在附近的公園散步。',
             vocabularyNotes: [
               {
-                id: 'V5xP8nM2Wt',
-                surface: '東南アジア',
-                surfaceReading: 'とうなんあじあ',
-                dictionaryForm: '東南アジア',
-                reading: 'とうなんあじあ',
+                id: 'vW8Tn3Lm2Ka',
+                surface: '散歩',
+                surfaceReading: 'さんぽ',
+                dictionaryForm: '散歩',
+                reading: 'さんぽ',
                 partOfSpeech: 'noun',
-                contextualMeaning: '東南亞',
-                featured: false,
-              },
-              {
-                id: 'V3qK7mL9Vc',
-                surface: '寺院',
-                surfaceReading: 'じいん',
-                dictionaryForm: '寺院',
-                reading: 'じいん',
-                partOfSpeech: 'noun',
-                contextualMeaning: '寺院、寺廟',
-                featured: true,
-              },
-              {
-                id: 'V8pR2xN5Md',
-                surface: '旅行先',
-                surfaceReading: 'りょこうさき',
-                dictionaryForm: '旅行先',
-                reading: 'りょこうさき',
-                partOfSpeech: 'noun',
-                contextualMeaning: '旅遊目的地、旅行前往的地方',
-                featured: true,
-              },
-            ],
-            grammarNotes: [
-              {
-                id: 'G2nX7pK5Ls',
-                grammarPointId: null,
-                pattern: '〜らしい',
-                shortExplanation:
-                  '表示具有某種典型特徵，中文可譯為「很有～特色、很像～」。',
-                anchors: [{ surface: '南国らしい' }],
-                sourceExample: {
-                  id: 'E6mQ3tR9Vb',
-                  japanese: '南国らしい自然を楽しめます。',
-                  translation: '可以享受充滿熱帶風情的自然景色。',
-                },
-                extraExample: {
-                  id: 'E7xM2qT8Pc',
-                  japanese: '京都らしい町並みを見ることができます。',
-                  translation: '可以看到很有京都特色的街景。',
-                },
+                contextualMeaning: '散步',
+                examples: [
+                  {
+                    id: 'eV5tK8mP2qc',
+                    japanese: '毎朝、公園を散歩します。',
+                    translation: '每天早上都在公園散步。',
+                  },
+                ],
               },
             ],
           },
           {
-            id: 'S4kV9nL3Ra',
-            text: '首都[しゅと]のバンコクには、有名[ゆうめい]な寺院[じいん]や大[おお]きなショッピングモールが多[おお]く、観光[かんこう]と買[か]い物[もの]の両方[りょうほう]を楽[たの]しむことができます。',
-            translation:
-              '首都曼谷有許多知名寺廟和大型購物中心，可以同時享受觀光與購物。',
+            id: 'sB2mK9xQ4nR',
+            text: '朝[あさ]の空気[くうき]はきれいで、とても気持[きも]ちがいいです。',
+            translation: '早晨的空氣很清新，讓人非常舒服。',
             vocabularyNotes: [
               {
-                id: 'V9nP4xM2Lc',
-                surface: '首都',
-                surfaceReading: 'しゅと',
-                dictionaryForm: '首都',
-                reading: 'しゅと',
+                id: 'vB3xK7mQ2La',
+                surface: '空気',
+                surfaceReading: 'くうき',
+                dictionaryForm: '空気',
+                reading: 'くうき',
                 partOfSpeech: 'noun',
-                contextualMeaning: '首都',
-                featured: false,
-              },
-              {
-                id: 'V5rK8qT3Vd',
-                surface: '観光',
-                surfaceReading: 'かんこう',
-                dictionaryForm: '観光',
-                reading: 'かんこう',
-                partOfSpeech: 'noun',
-                contextualMeaning: '觀光',
-                featured: true,
-              },
-              {
-                id: 'V2qT6xN8Kb',
-                surface: '両方',
-                surfaceReading: 'りょうほう',
-                dictionaryForm: '両方',
-                reading: 'りょうほう',
-                partOfSpeech: 'noun',
-                contextualMeaning: '兩者、雙方',
-                featured: true,
+                contextualMeaning: '空氣',
+                examples: [
+                  {
+                    id: 'eB6nT2qK9xd',
+                    japanese: '窓を開けて空気を入れかえます。',
+                    translation: '打開窗戶讓空氣流通。',
+                  },
+                ],
               },
             ],
+          },
+          {
+            id: 'sQ9vB4xK6nR',
+            text: '公園[こうえん]には色[いろ]とりどりの花[はな]が咲[さ]いていて、写真[しゃしん]を撮[と]る人[ひと]もいます。',
+            translation: '公園裡開滿了色彩繽紛的花，也有人在拍照。',
             grammarNotes: [
               {
-                id: 'G7mL3pV9Rc',
+                id: 'gR7Yp2Lm9Qb',
                 grammarPointId: null,
-                pattern: '〜ことができる',
-                shortExplanation:
-                  '表示能力、可能性或條件上可以做某件事，意思是「能夠～」。',
-                anchors: [{ surface: '楽しむことができます' }],
+                pattern: '〜ている',
+                shortMeaning: '（開）著的狀態',
+                explanation:
+                  '動作結束後留下的狀態一直持續著。這裡的「咲いている」不是正在開花的動作，而是花已經開了、現在正處於盛開的樣子。',
+                anchors: [{ surface: '咲いていて' }],
                 sourceExample: {
-                  id: 'E4pN7rK9Mc',
-                  japanese: '観光と買い物の両方を楽しむことができます。',
-                  translation: '可以同時享受觀光與購物。',
+                  id: 'eG1qM6xP4nb',
+                  japanese: '公園にはたくさんの花が咲いています。',
+                  translation: '公園裡開著許多花。',
                 },
                 extraExample: {
-                  id: 'E8xT3mL5Qd',
-                  japanese:
-                    'この町では温泉と自然の両方を楽しむことができます。',
-                  translation: '在這座城鎮可以同時享受溫泉與自然景色。',
+                  id: 'eG2kV9tC5sc',
+                  japanese: '窓が開いていて、風が入ってきます。',
+                  translation: '窗戶開著，風吹了進來。',
                 },
               },
             ],
@@ -309,647 +88,257 @@ export const readingMaterials: ReadingMaterial[] = [
         ],
       },
       {
-        id: 'P7qP4nV2Ks',
+        id: 'pP3cT9mK6xV',
         sentences: [
           {
-            id: 'S3mR9xK6Tb',
-            text: 'タイを旅行[りょこう]するなら、ぜひ食[た]べてみたいのが本場[ほんば]のタイ料理[りょうり]です。',
-            translation: '如果去泰國旅行，很值得品嚐的就是道地的泰國料理。',
+            id: 'sK1wF7cL3pd',
+            text: '散歩[さんぽ]の後[あと]で、私[わたし]はよく喫茶店[きっさてん]でコーヒーを飲[の]みます。',
+            translation: '散步之後，我常在咖啡廳喝咖啡。',
             vocabularyNotes: [
               {
-                id: 'V6qK2tN9Ra',
-                surface: '本場',
-                surfaceReading: 'ほんば',
-                dictionaryForm: '本場',
-                reading: 'ほんば',
+                id: 'vK4Kp8Nx2Mc',
+                surface: '喫茶店',
+                surfaceReading: 'きっさてん',
+                dictionaryForm: '喫茶店',
+                reading: 'きっさてん',
                 partOfSpeech: 'noun',
-                contextualMeaning: '發源地、正宗所在地；此處指道地的',
-                featured: true,
-              },
-              {
-                id: 'V9vM4xP7Lc',
-                surface: 'タイ料理',
-                surfaceReading: 'たいりょうり',
-                dictionaryForm: 'タイ料理',
-                reading: 'たいりょうり',
-                partOfSpeech: 'noun',
-                contextualMeaning: '泰國料理',
-                featured: false,
+                contextualMeaning: '咖啡廳、茶館',
+                examples: [
+                  {
+                    id: 'eV1mT6qN9xd',
+                    japanese: '駅の前の喫茶店で友だちを待ちます。',
+                    translation: '在車站前的咖啡廳等朋友。',
+                  },
+                ],
               },
             ],
             grammarNotes: [
               {
-                id: 'G5xN2pL8Vd',
+                id: 'gY3Kp8Nx1We',
                 grammarPointId: null,
-                pattern: '〜なら',
-                shortExplanation:
-                  '表示以某種情況為前提提出建議、判斷或話題，意思是「如果要～的話」。',
-                anchors: [{ surface: '旅行するなら' }],
+                pattern: '〜の後で',
+                shortMeaning: '在～之後',
+                explanation:
+                  '一件事做完之後，接著做下一件事。前面接名詞加「の」，用來交代兩件事的先後順序。',
+                anchors: [{ surface: '後で' }],
                 sourceExample: {
-                  id: 'E7tM9qK3Rb',
-                  japanese:
-                    'タイを旅行するなら、ぜひ本場のタイ料理を食べてみたいです。',
-                  translation: '如果去泰國旅行，很想品嚐看看道地的泰國料理。',
+                  id: 'eG3nD7xQ1mf',
+                  japanese: '仕事の後で、買い物に行きます。',
+                  translation: '下班之後去購物。',
                 },
                 extraExample: {
-                  id: 'E8mQ4xR2Lc',
-                  japanese: '京都へ行くなら、秋がおすすめです。',
-                  translation: '如果要去京都的話，推薦秋天。',
-                },
-              },
-              {
-                id: 'G2pK6nV9Td',
-                grammarPointId: null,
-                pattern: '〜てみる',
-                shortExplanation:
-                  '表示嘗試做某件事，中文常譯為「試著～看看」。',
-                anchors: [{ surface: '食べてみたい' }],
-                sourceExample: {
-                  id: 'E4qV7mK3Ta',
-                  japanese: '本場のタイ料理を食べてみたいです。',
-                  translation: '想試著吃看看道地的泰國料理。',
-                },
-                extraExample: {
-                  id: 'E9kP2xN6Rb',
-                  japanese: 'タイの果物を食べてみたいです。',
-                  translation: '想試著吃看看泰國的水果。',
+                  id: 'eG4pL3vK8sg',
+                  japanese: '食事の後で、少し休みましょう。',
+                  translation: '吃完飯之後，稍微休息一下吧。',
                 },
               },
             ],
           },
           {
-            id: 'S5mR8xK2Vc',
-            text: 'パッタイやトムヤムクンなどは有名[ゆうめい]ですが、料理[りょうり]によっては辛[から]さが強[つよ]いものもあります。',
-            translation:
-              '打拋？不是，是像泰式炒河粉和冬蔭功等料理很有名，不過依料理不同，有些辣度也相當高。',
+            id: 'sT6nH8cQ2vh',
+            text: '静[しず]かな店[みせ]で本[ほん]を読[よ]むのが好[す]きです。',
+            translation: '我喜歡在安靜的店裡看書。',
             vocabularyNotes: [
               {
-                id: 'V3pT7nQ9La',
-                surface: '有名',
-                surfaceReading: 'ゆうめい',
-                dictionaryForm: '有名',
-                reading: 'ゆうめい',
+                id: 'vT3Qa7Lm4Xi',
+                surface: '静か',
+                surfaceReading: 'しずか',
+                dictionaryForm: '静か',
+                reading: 'しずか',
                 partOfSpeech: 'na_adjective',
-                contextualMeaning: '有名的、知名的',
-                featured: false,
-              },
-              {
-                id: 'V8qK4mV2Rd',
-                surface: '辛さ',
-                surfaceReading: 'からさ',
-                dictionaryForm: '辛い',
-                reading: 'からい',
-                partOfSpeech: 'i_adjective',
-                contextualMeaning: '辣度、辣的程度',
-                featured: true,
+                contextualMeaning: '安靜的',
+                examples: [
+                  {
+                    id: 'eV3pF8mQ1tj',
+                    japanese: 'この図書館はとても静かです。',
+                    translation: '這間圖書館非常安靜。',
+                  },
+                ],
               },
             ],
             grammarNotes: [
               {
-                id: 'G9nL3pT6Xb',
+                id: 'gN2pL8Vd6Rk',
                 grammarPointId: null,
-                pattern: '〜によって',
-                shortExplanation:
-                  '表示因對象、條件或情況不同而有差異，中文為「根據～、因～而異」。',
-                anchors: [{ surface: '料理によって' }],
+                pattern: '〜のが好き',
+                shortMeaning: '喜歡做～',
+                explanation:
+                  '「動詞辭書形＋のが好き」用來說自己喜歡做某件事。「の」把前面的動作變成一個名詞，好接在「好き」前面。',
+                anchors: [{ surface: '読むのが好き' }],
                 sourceExample: {
-                  id: 'E4mP8xR2Kc',
-                  japanese: '料理によっては辛さが強いものもあります。',
-                  translation: '依料理不同，有些辣度也比較高。',
+                  id: 'eG5tM9qK3vl',
+                  japanese: '私は音楽を聞くのが好きです。',
+                  translation: '我喜歡聽音樂。',
                 },
                 extraExample: {
-                  id: 'E7vN5qL9Ta',
-                  japanese: '店によって値段が違います。',
-                  translation: '價格會依店家不同而有所差異。',
+                  id: 'eG6mQ4xR2Lm',
+                  japanese: '弟は絵を描くのが好きです。',
+                  translation: '弟弟喜歡畫畫。',
                 },
               },
             ],
           },
           {
-            id: 'S6xT3pN9Kb',
-            text: '辛[から]い物[もの]が苦手[にがて]な人[ひと]は、注文[ちゅうもん]するときに「辛[から]くしないでください」と伝[つた]えると安心[あんしん]です。',
-            translation:
-              '不擅長吃辣的人，在點餐時告訴店員「請不要做辣」會比較安心。',
+            id: 'sC7mT2xQ8vk',
+            text: '時々[ときどき]、友[とも]だちとここで会[あ]って、ゆっくり話[はな]します。',
+            translation: '有時候，我會和朋友在這裡碰面，悠閒地聊天。',
             vocabularyNotes: [
               {
-                id: 'V3rM7qK5Va',
-                surface: '苦手',
-                surfaceReading: 'にがて',
-                dictionaryForm: '苦手',
-                reading: 'にがて',
-                partOfSpeech: 'na_adjective',
-                contextualMeaning: '不擅長、對某事不拿手；此處指不太能吃辣',
-                featured: true,
-              },
-              {
-                id: 'V8nQ2xL6Pc',
-                surface: '注文',
-                surfaceReading: 'ちゅうもん',
-                dictionaryForm: '注文',
-                reading: 'ちゅうもん',
-                partOfSpeech: 'noun',
-                contextualMeaning: '點餐、訂購',
-                featured: false,
-              },
-              {
-                id: 'V6pK3xT8Md',
-                surface: '伝える',
-                surfaceReading: 'つたえる',
-                dictionaryForm: '伝える',
-                reading: 'つたえる',
-                partOfSpeech: 'verb',
-                contextualMeaning: '傳達、告知',
-                featured: true,
-              },
-            ],
-            grammarNotes: [
-              {
-                id: 'G2mR9qV4La',
-                grammarPointId: null,
-                pattern: '〜とき',
-                shortExplanation:
-                  '表示某件事情發生的時間或情境，意思是「在～的時候」。',
-                anchors: [{ surface: '注文するとき' }],
-                sourceExample: {
-                  id: 'E8mQ4xR2Ld',
-                  japanese: '注文するときに辛くしないでくださいと伝えます。',
-                  translation: '點餐時告訴對方請不要做辣。',
-                },
-                extraExample: {
-                  id: 'E2pK6nV9Te',
-                  japanese: 'ホテルを予約するときに場所を確認してください。',
-                  translation: '預約飯店時請確認地點。',
-                },
-              },
-              {
-                id: 'G4qV7mK3Tb',
-                grammarPointId: null,
-                pattern: '〜と',
-                shortExplanation:
-                  '表示一做前項就自然產生後項結果，此處可理解為「這樣做的話就會～」。',
-                anchors: [{ surface: '伝えると安心です' }],
-                sourceExample: {
-                  id: 'E9kP2xN6Rc',
-                  japanese: '辛くしないでくださいと伝えると安心です。',
-                  translation: '告知對方不要做辣會比較安心。',
-                },
-                extraExample: {
-                  id: 'E5mR8xK2Vd',
-                  japanese: '地図を見ると場所がすぐ分かります。',
-                  translation: '看地圖的話馬上就知道地點。',
-                },
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'P3pT7nQ9Lc',
-        sentences: [
-          {
-            id: 'S8qK4mV2Re',
-            text: 'バンコク市内[しない]の移動[いどう]には、電車[でんしゃ]や地下鉄[ちかてつ]が便利[べんり]です。',
-            translation: '在曼谷市區移動時，電車和地鐵很方便。',
-            vocabularyNotes: [
-              {
-                id: 'V6rT3pK9Vb',
-                surface: '市内',
-                surfaceReading: 'しない',
-                dictionaryForm: '市内',
-                reading: 'しない',
-                partOfSpeech: 'noun',
-                contextualMeaning: '市區、市內',
-                featured: false,
-              },
-              {
-                id: 'V9xM5nQ2Lc',
-                surface: '移動',
-                surfaceReading: 'いどう',
-                dictionaryForm: '移動',
-                reading: 'いどう',
-                partOfSpeech: 'noun',
-                contextualMeaning: '移動、交通往來',
-                featured: true,
-              },
-              {
-                id: 'V4nL8qM2Xa',
-                surface: '便利',
-                surfaceReading: 'べんり',
-                dictionaryForm: '便利',
-                reading: 'べんり',
-                partOfSpeech: 'na_adjective',
-                contextualMeaning: '方便的',
-                featured: false,
-              },
-            ],
-          },
-          {
-            id: 'S6rT3pK9Vc',
-            text: 'タクシーも多[おお]いですが、時間帯[じかんたい]によっては道路[どうろ]がとても混[こ]むため、予定[よてい]より時間[じかん]がかかることがあります。',
-            translation:
-              '計程車也很多，但依時段不同道路可能非常壅塞，有時會比預定花更多時間。',
-            vocabularyNotes: [
-              {
-                id: 'V9xM5nQ2Ld',
-                surface: '時間帯',
-                surfaceReading: 'じかんたい',
-                dictionaryForm: '時間帯',
-                reading: 'じかんたい',
-                partOfSpeech: 'noun',
-                contextualMeaning: '時段、時間帶',
-                featured: true,
-              },
-              {
-                id: 'V4nL8qM2Xb',
-                surface: '道路',
-                surfaceReading: 'どうろ',
-                dictionaryForm: '道路',
-                reading: 'どうろ',
-                partOfSpeech: 'noun',
-                contextualMeaning: '道路',
-                featured: false,
-              },
-              {
-                id: 'V6rT3pK9Vd',
-                surface: '混む',
-                surfaceReading: 'こむ',
-                dictionaryForm: '混む',
-                reading: 'こむ',
-                partOfSpeech: 'verb',
-                contextualMeaning: '擁擠、壅塞',
-                featured: true,
-              },
-            ],
-            grammarNotes: [
-              {
-                id: 'G9xM5nQ2Le',
-                grammarPointId: null,
-                pattern: '〜ため',
-                shortExplanation:
-                  '表示原因或理由，語氣比「から」較正式，意思是「因為～」。',
-                anchors: [{ surface: '混むため' }],
-                sourceExample: {
-                  id: 'E4nL8qM2Xc',
-                  japanese:
-                    '道路がとても混むため、時間がかかることがあります。',
-                  translation: '因為道路很壅塞，有時會花較多時間。',
-                },
-                extraExample: {
-                  id: 'E6rT3pK9Ve',
-                  japanese: '雨が強いため、電車が遅れています。',
-                  translation: '因為雨勢很大，電車誤點了。',
-                },
-              },
-              {
-                id: 'G9xM5nQ2Lf',
-                grammarPointId: null,
-                pattern: '〜ことがある',
-                shortExplanation:
-                  '表示有時會發生某種情況，意思是「有時會～」。',
-                anchors: [{ surface: '時間がかかることがあります' }],
-                sourceExample: {
-                  id: 'E4nL8qM2Xd',
-                  japanese: '予定より時間がかかることがあります。',
-                  translation: '有時會比預定花更多時間。',
-                },
-                extraExample: {
-                  id: 'E6rT3pK9Vf',
-                  japanese: '週末は店が混んでいることがあります。',
-                  translation: '週末店裡有時會很擁擠。',
-                },
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'P9xM5nQ2Lg',
-        sentences: [
-          {
-            id: 'S4nL8qM2Xe',
-            text: 'また、寺院[じいん]を見学[けんがく]するときは、服装[ふくそう]にも注意[ちゅうい]が必要[ひつよう]です。',
-            translation: '另外，參觀寺廟時，也需要注意服裝。',
-            vocabularyNotes: [
-              {
-                id: 'V6rT3pK9Vg',
-                surface: '見学',
-                surfaceReading: 'けんがく',
-                dictionaryForm: '見学',
-                reading: 'けんがく',
-                partOfSpeech: 'noun',
-                contextualMeaning: '參觀、見習',
-                featured: false,
-              },
-              {
-                id: 'V9xM5nQ2Lh',
-                surface: '服装',
-                surfaceReading: 'ふくそう',
-                dictionaryForm: '服装',
-                reading: 'ふくそう',
-                partOfSpeech: 'noun',
-                contextualMeaning: '服裝、穿著',
-                featured: true,
-              },
-              {
-                id: 'V4nL8qM2Xf',
-                surface: '注意',
-                surfaceReading: 'ちゅうい',
-                dictionaryForm: '注意',
-                reading: 'ちゅうい',
-                partOfSpeech: 'noun',
-                contextualMeaning: '注意、留意',
-                featured: true,
-              },
-            ],
-            grammarNotes: [
-              {
-                id: 'G6rT3pK9Vh',
-                grammarPointId: null,
-                pattern: '〜にも',
-                shortExplanation:
-                  '「も」加在助詞「に」後，表示除了其他事項之外，「也」要注意某一點。',
-                anchors: [{ surface: '服装にも注意' }],
-                sourceExample: {
-                  id: 'E9xM5nQ2Li',
-                  japanese: '服装にも注意が必要です。',
-                  translation: '也需要注意服裝。',
-                },
-                extraExample: {
-                  id: 'E4nL8qM2Xg',
-                  japanese:
-                    '旅行では天気だけでなく、服装にも注意してください。',
-                  translation: '旅行時不只天氣，也請注意服裝。',
-                },
-              },
-            ],
-          },
-          {
-            id: 'S6rT3pK9Vi',
-            text: '肩[かた]や膝[ひざ]が大[おお]きく出[で]る服[ふく]では入[はい]れない場合[ばあい]もあるので、寺院[じいん]へ行[い]く前[まえ]に確認[かくにん]しておくといいでしょう。',
-            translation:
-              '如果穿著大幅露出肩膀或膝蓋的衣服，有些寺廟可能無法進入，因此最好在前往寺廟前先確認。',
-            vocabularyNotes: [
-              {
-                id: 'V9xM5nQ2Lj',
-                surface: '場合',
-                surfaceReading: 'ばあい',
-                dictionaryForm: '場合',
-                reading: 'ばあい',
-                partOfSpeech: 'noun',
-                contextualMeaning: '情況、場合',
-                featured: true,
-              },
-              {
-                id: 'V4nL8qM2Xh',
-                surface: '確認',
-                surfaceReading: 'かくにん',
-                dictionaryForm: '確認',
-                reading: 'かくにん',
-                partOfSpeech: 'noun',
-                contextualMeaning: '確認、事先查清楚',
-                featured: true,
-              },
-            ],
-            grammarNotes: [
-              {
-                id: 'G6rT3pK9Vj',
-                grammarPointId: null,
-                pattern: '〜場合もある',
-                shortExplanation:
-                  '表示某種情況有時可能發生，意思是「也有～的情況」。',
-                anchors: [{ surface: '入れない場合もある' }],
-                sourceExample: {
-                  id: 'E9xM5nQ2Lk',
-                  japanese: '服装によっては入れない場合もあります。',
-                  translation: '依服裝不同，也可能有無法進入的情況。',
-                },
-                extraExample: {
-                  id: 'E4nL8qM2Xi',
-                  japanese: '天気によってはツアーが中止になる場合もあります。',
-                  translation: '依天氣情況，旅遊行程也可能會取消。',
-                },
-              },
-              {
-                id: 'G6rT3pK9Vk',
-                grammarPointId: null,
-                pattern: '〜ておく',
-                shortExplanation:
-                  '表示為了之後而事先做好某件事，意思是「先～好」。',
-                anchors: [{ surface: '確認しておく' }],
-                sourceExample: {
-                  id: 'E9xM5nQ2Ll',
-                  japanese: '寺院へ行く前に確認しておくといいでしょう。',
-                  translation: '最好在去寺廟之前先確認好。',
-                },
-                extraExample: {
-                  id: 'E4nL8qM2Xj',
-                  japanese: '旅行の前にホテルの場所を調べておきます。',
-                  translation: '旅行前先查好飯店的位置。',
-                },
-              },
-              {
-                id: 'G6rT3pK9Vl',
-                grammarPointId: null,
-                pattern: '〜といいでしょう',
-                shortExplanation:
-                  '用來委婉提出建議，意思是「最好～、～會比較好」。',
-                anchors: [{ surface: '確認しておくといいでしょう' }],
-                sourceExample: {
-                  id: 'E9xM5nQ2Lm',
-                  japanese: '寺院へ行く前に確認しておくといいでしょう。',
-                  translation: '最好在去寺廟之前先確認。',
-                },
-                extraExample: {
-                  id: 'E4nL8qM2Xk',
-                  japanese: '暑いので、水を持って行くといいでしょう。',
-                  translation: '因為天氣炎熱，最好帶水去。',
-                },
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'P6rT3pK9Vm',
-        sentences: [
-          {
-            id: 'S9xM5nQ2Ln',
-            text: 'タイは一年[いちねん]を通[とお]して暑[あつ]い日[ひ]が多[おお]いため、暑[あつ]さ対策[たいさく]も大切[たいせつ]です。',
-            translation: '泰國全年炎熱的日子很多，因此防暑措施也很重要。',
-            vocabularyNotes: [
-              {
-                id: 'V4nL8qM2Xl',
-                surface: '一年を通して',
-                surfaceReading: 'いちねんをとおして',
-                dictionaryForm: '一年を通して',
-                reading: 'いちねんをとおして',
+                id: 'vC8mQ2xT7La',
+                surface: '時々',
+                surfaceReading: 'ときどき',
+                dictionaryForm: '時々',
+                reading: 'ときどき',
                 partOfSpeech: 'adverb',
-                contextualMeaning: '全年、一整年期間',
-                featured: true,
-              },
-              {
-                id: 'V6rT3pK9Vn',
-                surface: '暑さ対策',
-                surfaceReading: 'あつさたいさく',
-                dictionaryForm: '暑さ対策',
-                reading: 'あつさたいさく',
-                partOfSpeech: 'noun',
-                contextualMeaning: '防暑措施、應對高溫的方法',
-                featured: true,
+                contextualMeaning: '有時候、偶爾',
+                examples: [
+                  {
+                    id: 'eC2nK9qT4xm',
+                    japanese: '時々、母に電話をかけます。',
+                    translation: '偶爾會打電話給媽媽。',
+                  },
+                ],
               },
             ],
+          },
+        ],
+      },
+      {
+        id: 'pL8qM2Xa4nT',
+        sentences: [
+          {
+            id: 'sR9xK6TbFvn',
+            text: '家[いえ]に帰[かえ]ってから、家族[かぞく]と一緒[いっしょ]に昼[ひる]ご飯[はん]を作[つく]ります。',
+            translation: '回到家後，我會和家人一起做午餐。',
             grammarNotes: [
               {
-                id: 'G9xM5nQ2Lo',
+                id: 'gV4La9qM2Xo',
                 grammarPointId: null,
-                pattern: '〜を通して',
-                shortExplanation:
-                  '表示某段期間從頭到尾持續如此，此處「一年を通して」表示「全年」。',
-                anchors: [{ surface: '一年を通して' }],
+                pattern: '〜てから',
+                shortMeaning: '做完～之後',
+                explanation:
+                  '「動詞て形＋から」強調前一個動作先完成，再進行後面的動作，比「〜の後で」更著重動作的先後順序。',
+                anchors: [{ surface: '帰ってから' }],
                 sourceExample: {
-                  id: 'E4nL8qM2Xm',
-                  japanese: 'タイは一年を通して暑い日が多いです。',
-                  translation: '泰國全年炎熱的日子很多。',
+                  id: 'eG7tM9qK3vp',
+                  japanese: '手を洗ってから、ご飯を食べます。',
+                  translation: '洗完手之後再吃飯。',
                 },
                 extraExample: {
-                  id: 'E6rT3pK9Vo',
-                  japanese: 'この町は一年を通して観光客が多いです。',
-                  translation: '這座城市全年都有很多觀光客。',
+                  id: 'eG8mQ4xR2Lq',
+                  japanese: '宿題をしてから、テレビを見ます。',
+                  translation: '寫完作業之後看電視。',
                 },
               },
             ],
           },
           {
-            id: 'S9xM5nQ2Lp',
-            text: '水分[すいぶん]を十分[じゅうぶん]に取[と]り、無理[むり]をせずに休[やす]みながら観光[かんこう]することをおすすめします。',
-            translation: '建議充分補充水分，不要勉強自己，一邊休息一邊觀光。',
+            id: 'sD3mK8xQ2vp',
+            text: '自分[じぶん]で作[つく]った料理[りょうり]は、とてもおいしく感[かん]じます。',
+            translation: '自己做的料理，吃起來覺得特別美味。',
+          },
+          {
+            id: 'sX3pN9KbVcr',
+            text: 'こんなのんびりした週末[しゅうまつ]が、私[わたし]は大好[だいす]きです。',
+            translation: '我最喜歡這樣悠閒的週末。',
+          },
+        ],
+      },
+      {
+        id: 'pH5vR2nK9qC',
+        sentences: [
+          {
+            id: 'sM8tQ3xL6vB',
+            text: '日曜日[にちようび]は少[すこ]し遅[おそ]く起[お]きて、部屋[へや]を掃除[そうじ]したり、洗濯[せんたく]をしたりします。',
+            translation: '星期天我會晚一點起床，打掃房間、洗衣服等等。',
             vocabularyNotes: [
               {
-                id: 'V4nL8qM2Xn',
-                surface: '水分',
-                surfaceReading: 'すいぶん',
-                dictionaryForm: '水分',
-                reading: 'すいぶん',
+                id: 'vN4pK7mT2xQ',
+                surface: '洗濯',
+                surfaceReading: 'せんたく',
+                dictionaryForm: '洗濯',
+                reading: 'せんたく',
                 partOfSpeech: 'noun',
-                contextualMeaning: '水分',
-                featured: false,
-              },
-              {
-                id: 'V6rT3pK9Vp',
-                surface: '十分',
-                surfaceReading: 'じゅうぶん',
-                dictionaryForm: '十分',
-                reading: 'じゅうぶん',
-                partOfSpeech: 'na_adjective',
-                contextualMeaning: '充分、足夠',
-                featured: true,
-              },
-              {
-                id: 'V9xM5nQ2Lq',
-                surface: '無理',
-                surfaceReading: 'むり',
-                dictionaryForm: '無理',
-                reading: 'むり',
-                partOfSpeech: 'na_adjective',
-                contextualMeaning:
-                  '勉強、超出能力範圍；「無理をしない」指不要勉強自己',
-                featured: true,
+                contextualMeaning: '洗衣服',
+                examples: [
+                  {
+                    id: 'eP6nR3vK8mT',
+                    japanese: '天気がいいので、朝から洗濯をします。',
+                    translation: '因為天氣很好，從早上就開始洗衣服。',
+                  },
+                ],
               },
             ],
             grammarNotes: [
               {
-                id: 'G4nL8qM2Xo',
+                id: 'gQ9mL4xT2vN',
                 grammarPointId: null,
-                pattern: '〜ながら',
-                shortExplanation:
-                  '表示同一主體同時進行兩個動作，意思是「一邊～一邊～」。',
-                anchors: [{ surface: '休みながら' }],
+                pattern: '〜たり、〜たりする',
+                shortMeaning: '做做～、做做～',
+                explanation:
+                  '從多個動作中舉出幾個代表，表示會做這些事情以及其他類似的事，不是列出全部。',
+                anchors: [
+                  { surface: '掃除したり' },
+                  { surface: '洗濯をしたり' },
+                ],
                 sourceExample: {
-                  id: 'E6rT3pK9Vq',
-                  japanese: '休みながら観光することをおすすめします。',
-                  translation: '建議一邊休息一邊觀光。',
+                  id: 'eR5tK8qM3vL',
+                  japanese: '日曜日は部屋を掃除したり、洗濯をしたりします。',
+                  translation: '星期天會打掃房間、洗衣服等等。',
                 },
                 extraExample: {
-                  id: 'E9xM5nQ2Lr',
-                  japanese: '景色を見ながらゆっくり歩きました。',
-                  translation: '一邊看風景一邊慢慢走。',
+                  id: 'eC7mP2xN9qT',
+                  japanese: '夜は本を読んだり、音楽を聞いたりします。',
+                  translation: '晚上會看看書、聽聽音樂。',
                 },
               },
             ],
           },
           {
-            id: 'S4nL8qM2Xp',
-            text: '事前[じぜん]に気候[きこう]や交通[こうつう]、現地[げんち]のマナーを調[しら]べておけば、より安心[あんしん]してタイ旅行[りょこう]を楽[たの]しめるでしょう。',
-            translation:
-              '如果事先查好氣候、交通以及當地禮儀，就能更安心地享受泰國旅行。',
+            id: 'sD2nV7qK5mR',
+            text: '午後[ごご]は次[つぎ]の週[しゅう]に必要[ひつよう]な物[もの]を買[か]いに行[い]き、冷蔵庫[れいぞうこ]の中[なか]をいっぱいにします。',
+            translation: '下午我會去買下週需要的東西，把冰箱裝得滿滿的。',
             vocabularyNotes: [
               {
-                id: 'V6rT3pK9Vr',
-                surface: '事前',
-                surfaceReading: 'じぜん',
-                dictionaryForm: '事前',
-                reading: 'じぜん',
-                partOfSpeech: 'noun',
-                contextualMeaning: '事前、事先',
-                featured: true,
-              },
-              {
-                id: 'V9xM5nQ2Ls',
-                surface: '気候',
-                surfaceReading: 'きこう',
-                dictionaryForm: '気候',
-                reading: 'きこう',
-                partOfSpeech: 'noun',
-                contextualMeaning: '氣候',
-                featured: false,
-              },
-              {
-                id: 'V4nL8qM2Xq',
-                surface: '現地',
-                surfaceReading: 'げんち',
-                dictionaryForm: '現地',
-                reading: 'げんち',
-                partOfSpeech: 'noun',
-                contextualMeaning: '當地、現場所在地',
-                featured: true,
+                id: 'vB6xT3mQ8pL',
+                surface: '必要',
+                surfaceReading: 'ひつよう',
+                dictionaryForm: '必要',
+                reading: 'ひつよう',
+                partOfSpeech: 'na_adjective',
+                contextualMeaning: '需要的、不可缺少的',
+                examples: [
+                  {
+                    id: 'eV4qN9kM2xP',
+                    japanese: '旅行に必要な物をかばんに入れます。',
+                    translation: '把旅行需要的東西放進包包。',
+                  },
+                ],
               },
             ],
+          },
+          {
+            id: 'sK7pC4mR9vX',
+            text: '夜[よる]は早[はや]めに休[やす]むので、月曜日[げつようび]も元気[げんき]に学校[がっこう]へ行[い]けます。',
+            translation: '晚上會早點休息，所以星期一也能精神飽滿地去學校。',
             grammarNotes: [
               {
-                id: 'G6rT3pK9Vs',
+                id: 'gT3vM8qL5nK',
                 grammarPointId: null,
-                pattern: '〜ておけば',
-                shortExplanation:
-                  '「〜ておく」的假定形，表示如果事先做好某事，就會對之後有幫助。',
-                anchors: [{ surface: '調べておけば' }],
+                pattern: '〜ので',
+                shortMeaning: '因為～',
+                explanation:
+                  '用來自然地說明原因或理由，語氣通常比「〜から」柔和。這裡說明星期一有精神的原因。',
+                anchors: [{ surface: '休むので' }],
                 sourceExample: {
-                  id: 'E9xM5nQ2Lt',
-                  japanese:
-                    '事前に気候や交通を調べておけば、安心して旅行できます。',
-                  translation: '如果事先查好氣候和交通，就能安心旅行。',
+                  id: 'eN2xR6mP9qV',
+                  japanese: '明日は早いので、もう寝ます。',
+                  translation: '因為明天要早起，我要睡了。',
                 },
                 extraExample: {
-                  id: 'E4nL8qM2Xr',
-                  japanese: 'ホテルを予約しておけば安心です。',
-                  translation: '如果事先訂好飯店就比較安心。',
-                },
-              },
-              {
-                id: 'G6rT3pK9Vt',
-                grammarPointId: null,
-                pattern: '〜でしょう',
-                shortExplanation:
-                  '表示說話者較有把握的推測，此處可譯為「應該能～吧」。',
-                anchors: [{ surface: '楽しめるでしょう' }],
-                sourceExample: {
-                  id: 'E9xM5nQ2Lu',
-                  japanese: 'より安心してタイ旅行を楽しめるでしょう。',
-                  translation: '應該就能更安心地享受泰國旅行。',
-                },
-                extraExample: {
-                  id: 'E4nL8qM2Xs',
-                  japanese: '春に行けば、美しい桜を楽しめるでしょう。',
-                  translation: '如果春天去，應該能欣賞到美麗的櫻花。',
+                  id: 'eL8pT4vK3mQ',
+                  japanese: '雨が降っているので、家にいます。',
+                  translation: '因為正在下雨，我待在家。',
                 },
               },
             ],
@@ -958,11 +347,722 @@ export const readingMaterials: ReadingMaterial[] = [
       },
     ],
     translation: [
-      '泰國是位於東南亞的國家，也是能欣賞美麗寺廟與熱帶自然風光的熱門旅遊目的地。首都曼谷有許多知名寺廟和大型購物中心，可以同時享受觀光與購物。',
-      '如果去泰國旅行，很值得品嚐的就是道地的泰國料理。泰式炒河粉、冬蔭功等料理都很有名，不過依料理不同，有些辣度也相當高。不擅長吃辣的人，可以在點餐時告訴店員「請不要做辣」，會比較安心。',
-      '在曼谷市區移動時，電車和地鐵很方便。計程車也很多，但依時段不同，道路可能非常壅塞，因此有時會比原本預定花更多時間。',
-      '另外，參觀寺廟時也需要注意服裝。如果穿著大幅露出肩膀或膝蓋的衣服，有些寺廟可能無法進入，因此最好在前往寺廟前先確認相關規定。',
-      '泰國全年炎熱的日子很多，因此防暑措施也很重要。建議充分補充水分，不要勉強自己，一邊休息一邊觀光。如果事先查好氣候、交通與當地禮儀，就能更安心地享受泰國旅行。',
+      '我每個星期六早上都會在附近的公園散步。早晨的空氣很清新，讓人非常舒服。公園裡開滿了色彩繽紛的花，也有人在拍照。',
+      '散步之後，我常在安靜的咖啡廳喝咖啡、看書。有時候也會和朋友在這裡碰面，悠閒地聊天。',
+      '回到家後，我會和家人一起做午餐。自己做的料理吃起來特別美味。我最喜歡這樣悠閒的週末。',
+      '星期天我會晚一點起床，打掃房間、洗衣服等等。下午會去買下週需要的東西，把冰箱裝得滿滿的。晚上會早點休息，所以星期一也能精神飽滿地去學校。',
+    ],
+  },
+  {
+    id: 'Nc6vP2mK8tB',
+    type: 'reading',
+    title: '初めての一人暮らし',
+    excerpt:
+      '大学をきっかけに始めた一人暮らしと、そこで気づいたことを読みます。',
+    level: 'n3',
+    categories: ['life', 'daily'],
+    coverImage: null,
+    paragraphs: [
+      {
+        id: 'qN8pT2Lx4mK',
+        sentences: [
+          {
+            id: 'tV7cR6KaWpF',
+            text: '大学[だいがく]に入[はい]ったのをきっかけに、私[わたし]は一人[ひとり]暮[ぐ]らしを始[はじ]めました。',
+            translation: '以進入大學為契機，我開始了一個人生活。',
+            vocabularyNotes: [
+              {
+                id: 'uP8nM2WtKca',
+                surface: '一人暮らし',
+                surfaceReading: 'ひとりぐらし',
+                dictionaryForm: '一人暮らし',
+                reading: 'ひとりぐらし',
+                partOfSpeech: 'noun',
+                contextualMeaning: '一個人生活、獨自居住',
+                examples: [
+                  {
+                    id: 'uE5rK8qT3vb',
+                    japanese: '一人暮らしを始めて、料理が上手になりました。',
+                    translation: '開始一個人生活後，變得會做菜了。',
+                  },
+                ],
+              },
+            ],
+            grammarNotes: [
+              {
+                id: 'wP4xM2LcTgc',
+                grammarPointId: null,
+                pattern: '〜をきっかけに',
+                shortMeaning: '以～為契機',
+                explanation:
+                  '把某件事當成轉變的起點，之後展開新的行動或發生變化。多用在較正式、書面的敘述，有「這件事推了我一把」的意味。',
+                anchors: [{ surface: 'きっかけに' }],
+                sourceExample: {
+                  id: 'wE7tM9qK3Rd',
+                  japanese: '入院をきっかけに、生活を見直しました。',
+                  translation: '以住院為契機，重新檢視了生活。',
+                },
+                extraExample: {
+                  id: 'wE8mQ4xR2Le',
+                  japanese: '旅行をきっかけに、日本語の勉強を始めました。',
+                  translation: '因為一次旅行，開始學起了日文。',
+                },
+              },
+            ],
+          },
+          {
+            id: 'tX7pK5LsQvf',
+            text: '最初[さいしょ]は自由[じゆう]で楽[たの]しかったものの、だんだん家事[かじ]の大変[たいへん]さが分[わ]かりました。',
+            translation: '一開始既自由又開心，但漸漸體會到家事的辛苦。',
+            vocabularyNotes: [
+              {
+                id: 'uQ3tR9VbKmg',
+                surface: '家事',
+                surfaceReading: 'かじ',
+                dictionaryForm: '家事',
+                reading: 'かじ',
+                partOfSpeech: 'noun',
+                contextualMeaning: '家務事（打掃、煮飯、洗衣等）',
+                examples: [
+                  {
+                    id: 'uE2qT6xN8Kh',
+                    japanese: '仕事をしながら家事もするのは大変です。',
+                    translation: '一邊工作一邊做家事很辛苦。',
+                  },
+                ],
+              },
+            ],
+            grammarNotes: [
+              {
+                id: 'wL3pV9RcNhi',
+                grammarPointId: null,
+                pattern: '〜ものの',
+                shortMeaning: '雖然～，但是',
+                explanation:
+                  '先承認前面是事實，後面卻出現和預期有落差的結果。語氣偏書面，常帶著「雖然如此，現實卻沒那麼簡單」的感受。',
+                anchors: [{ surface: '楽しかったものの' }],
+                sourceExample: {
+                  id: 'wE4pN7rK9Mj',
+                  japanese: '約束はしたものの、時間が取れませんでした。',
+                  translation: '雖然約好了，卻抽不出時間。',
+                },
+                extraExample: {
+                  id: 'wE8xT3mL5Qk',
+                  japanese: '返事はもらえたものの、内容はよく分かりません。',
+                  translation: '雖然收到了回覆，內容卻不太清楚。',
+                },
+              },
+            ],
+          },
+          {
+            id: 'tD4mK8xQ2vh',
+            text: '特[とく]に、仕事[しごと]や勉強[べんきょう]で疲[つか]れて帰[かえ]った日[ひ]は、何[なに]もする気[き]になれませんでした。',
+            translation:
+              '尤其是因工作或讀書而疲憊回家的日子，什麼都提不起勁去做。',
+            grammarNotes: [
+              {
+                id: 'wD5nK2xQ8Lj',
+                grammarPointId: null,
+                pattern: '〜気になれない',
+                shortMeaning: '提不起勁做～',
+                explanation:
+                  '心情上不想、也沒有力氣去做某件事。不是「不會做」，而是「就是打不起精神」，多用在疲累或情緒低落的情境。',
+                anchors: [{ surface: 'する気になれません' }],
+                sourceExample: {
+                  id: 'wE2nK8qT4xm',
+                  japanese: '疲れていて、何もする気になれませんでした。',
+                  translation: '太累了，什麼都提不起勁去做。',
+                },
+                extraExample: {
+                  id: 'wE6rT3pK9vn',
+                  japanese: '今日は外に出る気になれない。',
+                  translation: '今天實在不想出門。',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'qT4nV2Ks8pL',
+        sentences: [
+          {
+            id: 'tR9xK6TbVcl',
+            text: '料理[りょうり]をしたことがなかった私[わたし]にとって、毎日[まいにち]の食事[しょくじ]作[づく]りは大[おお]きな課題[かだい]でした。',
+            translation: '對從沒下過廚的我來說，每天做飯是個很大的課題。',
+            vocabularyNotes: [
+              {
+                id: 'uK2xN6RbLmm',
+                surface: '課題',
+                surfaceReading: 'かだい',
+                dictionaryForm: '課題',
+                reading: 'かだい',
+                partOfSpeech: 'noun',
+                contextualMeaning: '課題、必須設法解決的問題',
+                examples: [
+                  {
+                    id: 'uE8mQ4xR2Ln',
+                    japanese: '費用をどう抑えるかが大きな課題です。',
+                    translation: '如何壓低費用是個大課題。',
+                  },
+                ],
+              },
+            ],
+            grammarNotes: [
+              {
+                id: 'wR9qV4LaXoo',
+                grammarPointId: null,
+                pattern: '〜にとって',
+                shortMeaning: '對～來說',
+                explanation:
+                  '站在某個人或某個立場的角度，去評價或判斷一件事的重要性、難易。前面通常接人或團體。',
+                anchors: [{ surface: '私にとって' }],
+                sourceExample: {
+                  id: 'wE2pK6nV9Tp',
+                  japanese: '子どもにとって、遊びは大切な勉強です。',
+                  translation: '對孩子來說，玩耍是重要的學習。',
+                },
+                extraExample: {
+                  id: 'wE5mR8xK2Vq',
+                  japanese: '私たちにとって、水は欠かせないものです。',
+                  translation: '對我們來說，水是不可或缺的東西。',
+                },
+              },
+            ],
+          },
+          {
+            id: 'tK4mV2ReXpr',
+            text: 'それでも、少[すこ]しずつレシピを覚[おぼ]え、自分[じぶん]で作[つく]れる料理[りょうり]が増[ふ]えました。',
+            translation:
+              '即便如此，我還是一點一點記住食譜，能自己做的菜也變多了。',
+            vocabularyNotes: [
+              {
+                id: 'uM7qK5VaLps',
+                surface: '覚え',
+                surfaceReading: 'おぼえ',
+                dictionaryForm: '覚える',
+                reading: 'おぼえる',
+                partOfSpeech: 'verb',
+                contextualMeaning: '記住、背下來；此處指把食譜記起來',
+                examples: [
+                  {
+                    id: 'uE6rT3pK9Vt',
+                    japanese: '新しい単語を少しずつ覚えています。',
+                    translation: '正在一點一點地記新單字。',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'tF6mK2xQ9vs',
+            text: '慣[な]れるにしたがって、買[か]い物[もの]や掃除[そうじ]も上手[じょうず]にこなせるようになりました。',
+            translation: '隨著逐漸習慣，我也開始能把買菜和打掃處理得很好。',
+            grammarNotes: [
+              {
+                id: 'wF7nK2xQ8Lt',
+                grammarPointId: null,
+                pattern: '〜にしたがって',
+                shortMeaning: '隨著～（越來越）',
+                explanation:
+                  '隨著一方逐漸變化，另一方也跟著一起改變。常用在描述隨時間或程度推移的連動變化，語氣偏書面。',
+                anchors: [{ surface: '慣れるにしたがって' }],
+                sourceExample: {
+                  id: 'wE9xM5nQ2Lu',
+                  japanese: '年をとるにしたがって、体力が落ちてきた。',
+                  translation: '隨著年紀增長，體力逐漸下降。',
+                },
+                extraExample: {
+                  id: 'wE4nL8qM2Xv',
+                  japanese: '練習を重ねるにしたがって、上手になっていった。',
+                  translation: '隨著不斷練習，變得越來越熟練。',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'qL8qM2Xa4nV',
+        sentences: [
+          {
+            id: 'tR3pK9VbFvu',
+            text: '一人[ひとり]で生活[せいかつ]してみて、家族[かぞく]のありがたさを改[あらた]めて感[かん]じました。',
+            translation: '自己一個人生活後，重新感受到家人的可貴。',
+            vocabularyNotes: [
+              {
+                id: 'uT3pK9VaLmw',
+                surface: '改めて',
+                surfaceReading: 'あらためて',
+                dictionaryForm: '改めて',
+                reading: 'あらためて',
+                partOfSpeech: 'adverb',
+                contextualMeaning: '重新、再一次（帶著新的體會）',
+                examples: [
+                  {
+                    id: 'uE9xM5nQ2Lx',
+                    japanese: '改めて健康の大切さを感じました。',
+                    translation: '重新感受到健康的重要。',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'tG7mK2xQ4vw',
+            text: '今[いま]まで当[あ]たり前[まえ]だと思[おも]っていたことが、実[じつ]はとても幸[しあわ]せなことだったのだと気[き]づきました。',
+            translation:
+              '過去一直以為理所當然的事，其實原來是很幸福的事，我這才察覺到。',
+            vocabularyNotes: [
+              {
+                id: 'uG8mK2xQ7La',
+                surface: '当たり前',
+                surfaceReading: 'あたりまえ',
+                dictionaryForm: '当たり前',
+                reading: 'あたりまえ',
+                partOfSpeech: 'na_adjective',
+                contextualMeaning: '理所當然、天經地義',
+                examples: [
+                  {
+                    id: 'uE3nK9qT2xy',
+                    japanese:
+                      '毎日ご飯が食べられるのは当たり前ではありません。',
+                    translation: '每天都有飯吃並不是理所當然的事。',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'tX9nQ2LpKvY',
+            text: '今[いま]では、無理[むり]をしすぎない範囲[はんい]で、家族[かぞく]にも自分[じぶん]から連絡[れんらく]するようにしています。',
+            translation: '現在，我也會在不勉強自己的範圍內，主動和家人聯絡。',
+            vocabularyNotes: [
+              {
+                id: 'uN8qL2XaKpz',
+                surface: '範囲',
+                surfaceReading: 'はんい',
+                dictionaryForm: '範囲',
+                reading: 'はんい',
+                partOfSpeech: 'noun',
+                contextualMeaning: '範圍、界線',
+                examples: [
+                  {
+                    id: 'uE4nL8qM2Xy',
+                    japanese: '自分にできる範囲で手伝います。',
+                    translation: '在自己能力範圍內幫忙。',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'qC5mR8vK2nT',
+        sentences: [
+          {
+            id: 'tP7xN3qL9mB',
+            text: '一方[いっぽう]で、困[こま]ったときに相談[そうだん]できる人[ひと]が近[ちか]くにいないことには、なかなか慣[な]れませんでした。',
+            translation:
+              '另一方面，我一直不太能習慣遇到困難時身邊沒有可以商量的人。',
+            vocabularyNotes: [
+              {
+                id: 'uH4vT8mQ2xK',
+                surface: '一方',
+                surfaceReading: 'いっぽう',
+                dictionaryForm: '一方',
+                reading: 'いっぽう',
+                partOfSpeech: 'noun',
+                contextualMeaning: '另一方面；用來補充與前文不同或相反的情況',
+                examples: [
+                  {
+                    id: 'uE7nP3vL9qM',
+                    japanese: '都会は便利な一方、生活費が高いです。',
+                    translation: '都市雖然方便，另一方面生活費很高。',
+                  },
+                ],
+              },
+            ],
+            grammarNotes: [
+              {
+                id: 'wC6qM2xR8vN',
+                grammarPointId: null,
+                pattern: '〜一方で',
+                shortMeaning: '另一方面～',
+                explanation:
+                  '把同一件事的兩個不同面向放在一起比較，也可以補充和前文相反的情況。',
+                anchors: [{ surface: '一方で' }],
+                sourceExample: {
+                  id: 'wE3mK8qT5vP',
+                  japanese: 'この仕事は大変な一方で、やりがいもあります。',
+                  translation: '這份工作雖然辛苦，另一方面也很有成就感。',
+                },
+                extraExample: {
+                  id: 'wE9xL4nR2mQ',
+                  japanese: '一人暮らしは自由な一方で、寂しいこともあります。',
+                  translation: '一個人生活雖然自由，另一方面也有寂寞的時候。',
+                },
+              },
+            ],
+          },
+          {
+            id: 'tB2mV7qK5xR',
+            text: 'そこで、同[おな]じ建物[たてもの]に住[す]む人[ひと]や大学[だいがく]の友人[ゆうじん]に自分[じぶん]から声[こえ]をかけ、少[すこ]しずつ助[たす]け合[あ]える関係[かんけい]を作[つく]りました。',
+            translation:
+              '於是，我主動和住在同一棟建築的人以及大學朋友搭話，逐漸建立能互相幫助的關係。',
+            vocabularyNotes: [
+              {
+                id: 'uQ9nL3vM6pT',
+                surface: '声をかけ',
+                surfaceReading: 'こえをかけ',
+                dictionaryForm: '声をかける',
+                reading: 'こえをかける',
+                partOfSpeech: 'verb',
+                contextualMeaning: '主動向某人搭話、打招呼或邀請',
+                examples: [
+                  {
+                    id: 'uE5tR8mK2xV',
+                    japanese: '困っている人を見かけたので、声をかけました。',
+                    translation: '看到有人遇到困難，所以主動上前搭話。',
+                  },
+                ],
+              },
+              {
+                id: 'uN7pC4mQ9vL',
+                surface: '助け合える',
+                surfaceReading: 'たすけあえる',
+                dictionaryForm: '助け合う',
+                reading: 'たすけあう',
+                partOfSpeech: 'verb',
+                contextualMeaning: '能夠彼此幫助；此處是「助け合う」的可能形',
+                examples: [
+                  {
+                    id: 'uE2xV6qT8mR',
+                    japanese: '近所の人と助け合って暮らしています。',
+                    translation: '和鄰居互相幫助地生活。',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'tR8kM4xP2vQ',
+            text: '病気[びょうき]のときに食[た]べ物[もの]を届[とど]けてもらった経験[けいけん]から、自立[じりつ]とは何[なん]でも一人[ひとり]ですることではないと学[まな]び、周[まわ]りの人[ひと]とのつながりも大切[たいせつ]にしたいと思[おも]うようになりました。',
+            translation:
+              '從生病時有人送食物來的經驗中，我學到自立並不是什麼事都要自己做，也開始想要珍惜與身邊人們的連結。',
+            vocabularyNotes: [
+              {
+                id: 'uX3mT7qL5nK',
+                surface: '自立',
+                surfaceReading: 'じりつ',
+                dictionaryForm: '自立',
+                reading: 'じりつ',
+                partOfSpeech: 'noun',
+                contextualMeaning:
+                  '不過度依賴他人、能為自己的生活負責；不等於拒絕所有幫助',
+                examples: [
+                  {
+                    id: 'uE8pN4vK3mQ',
+                    japanese: '経済的に自立するために、仕事を探しています。',
+                    translation: '為了在經濟上獨立，正在找工作。',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    translation: [
+      '以進入大學為契機，我開始了一個人生活。一開始既自由又開心，但漸漸體會到家事的辛苦；尤其是因工作或讀書而疲憊回家的日子，什麼都提不起勁去做。',
+      '對從沒下過廚的我來說，每天做飯是個很大的課題。即便如此，我還是一點一點記住食譜，能自己做的菜也變多了；隨著逐漸習慣，買菜和打掃也漸漸能處理得很好。',
+      '自己一個人生活後，我重新感受到家人的可貴。過去一直以為理所當然的事，其實原來是很幸福的事。現在，我也會在不勉強自己的範圍內，主動和家人聯絡。',
+      '另一方面，我一直不太能習慣遇到困難時身邊沒有可以商量的人。於是，我主動和鄰居及大學朋友搭話，逐漸建立能互相幫助的關係。從生病時有人送食物來的經驗中，我學到自立並不是什麼事都要自己做，也開始想要珍惜與身邊人們的連結。',
+    ],
+  },
+  {
+    id: 'K8mQ2vLp7Xa',
+    type: 'reading',
+    title: '台湾の山',
+    excerpt: '台湾の山と自然について読みます。',
+    level: 'n5',
+    categories: ['travel', 'culture'],
+    coverImage: null,
+    paragraphs: [
+      {
+        id: 'pT6xN3kW9bR',
+        sentences: [
+          {
+            id: 'Y4qL8mC2sVn',
+            text: '台湾[たいわん]にはたくさんの山[やま]があります。',
+            translation: '台灣有很多山。',
+            vocabularyNotes: [
+              {
+                id: 'hR7vK2pM5xQ',
+                surface: 'たくさん',
+                surfaceReading: 'たくさん',
+                dictionaryForm: 'たくさん',
+                reading: 'たくさん',
+                partOfSpeech: 'adverb',
+                contextualMeaning: '很多；表示數量很多',
+                examples: [
+                  {
+                    id: 'N3wF8qT6mKa',
+                    japanese: '公園に人がたくさんいます。',
+                    translation: '公園裡有很多人。',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'cM9sV4xP7qL',
+            text: '町[まち]から近[ちか]い山[やま]もあり、休[やす]みの日[ひ]に山[やま]へ行[い]く人[ひと]も多[おお]いです。',
+            translation: '也有離市區很近的山，很多人會在休假日去爬山。',
+            vocabularyNotes: [
+              {
+                id: 'W6kR2nH8tPs',
+                surface: '近い',
+                surfaceReading: 'ちかい',
+                dictionaryForm: '近い',
+                reading: 'ちかい',
+                partOfSpeech: 'i_adjective',
+                contextualMeaning: '近的；此處指距離市區不遠',
+                examples: [
+                  {
+                    id: 'aQ5mX9vC3kT',
+                    japanese: '駅は家から近いです。',
+                    translation: '車站離家很近。',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'gV3pL7wN2xF',
+            text: '山[やま]では木[き]や花[はな]を見[み]たり、きれいな景色[けしき]を楽[たの]しんだりできます。',
+            translation: '在山上可以看看樹木和花，也可以欣賞美麗的風景。',
+            vocabularyNotes: [
+              {
+                id: 'J8tK4qS6mRy',
+                surface: '景色',
+                surfaceReading: 'けしき',
+                dictionaryForm: '景色',
+                reading: 'けしき',
+                partOfSpeech: 'noun',
+                contextualMeaning: '風景；眼前看到的自然或周圍景象',
+                examples: [
+                  {
+                    id: 'uP2xM7cV9nL',
+                    japanese: 'ここからの景色はきれいです。',
+                    translation: '從這裡看到的風景很漂亮。',
+                  },
+                ],
+              },
+            ],
+            grammarNotes: [
+              {
+                id: 'dN5qW8kT3mX',
+                grammarPointId: null,
+                pattern: '〜たり、〜たりする',
+                shortMeaning: '做做～、做做～',
+                explanation:
+                  '從幾個動作中舉出代表性的例子，表示會做這些事情以及其他類似的事情。',
+                anchors: [{ surface: '見たり' }, { surface: '楽しんだり' }],
+                sourceExample: {
+                  id: 'R7mC2vL5pQx',
+                  japanese:
+                    '木や花を見たり、きれいな景色を楽しんだりできます。',
+                  translation: '可以看看樹木和花，也可以欣賞美麗的風景。',
+                },
+                extraExample: {
+                  id: 'kF9xT4nM6sW',
+                  japanese: '休みの日は本を読んだり、音楽を聞いたりします。',
+                  translation: '休假日會看看書、聽聽音樂。',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'B2vH7qP4mNs',
+        sentences: [
+          {
+            id: 'xL6mR3tK8qV',
+            text: '台湾[たいわん]で一番[いちばん]高[たか]い山[やま]は玉山[ぎょくざん]です。',
+            translation: '台灣最高的山是玉山。',
+            grammarNotes: [
+              {
+                id: 'T5nQ9xC2vKm',
+                grammarPointId: null,
+                pattern: '〜で一番',
+                shortMeaning: '在～之中最～',
+                explanation:
+                  '用來比較某個範圍內的人或事物，指出其中程度最高的一個。',
+                anchors: [{ surface: '台湾で一番高い' }],
+                sourceExample: {
+                  id: 'mV8pL4wR6qH',
+                  japanese: '台湾で一番高い山は玉山です。',
+                  translation: '台灣最高的山是玉山。',
+                },
+                extraExample: {
+                  id: 'Q3kN7tX5cPs',
+                  japanese: 'この店で一番安い料理はこれです。',
+                  translation: '這是這家店最便宜的料理。',
+                },
+              },
+            ],
+          },
+          {
+            id: 'fC7qM2vW9kR',
+            text: '玉山[ぎょくざん]はとても高[たか]くて、冬[ふゆ]には雪[ゆき]が降[ふ]ることもあります。',
+            translation: '玉山非常高，冬天有時也會下雪。',
+            vocabularyNotes: [
+              {
+                id: 'P4xS8mL2tVq',
+                surface: '降る',
+                surfaceReading: 'ふる',
+                dictionaryForm: '降る',
+                reading: 'ふる',
+                partOfSpeech: 'verb',
+                contextualMeaning: '下（雨、雪等）；此處指下雪',
+                examples: [
+                  {
+                    id: 'nK6vQ3pT9xM',
+                    japanese: '明日は雨が降ります。',
+                    translation: '明天會下雨。',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'sW9mH5qL3vN',
+            text: '山[やま]の上[うえ]は寒[さむ]いので、暖[あたた]かい服[ふく]を持[も]って行[い]くことが大切[たいせつ]です。',
+            translation: '因為山上很冷，所以帶保暖的衣服去很重要。',
+            vocabularyNotes: [
+              {
+                id: 'E2qV7kM4xRt',
+                surface: '大切',
+                surfaceReading: 'たいせつ',
+                dictionaryForm: '大切',
+                reading: 'たいせつ',
+                partOfSpeech: 'na_adjective',
+                contextualMeaning: '重要的；需要特別注意或重視的',
+                examples: [
+                  {
+                    id: 'vM5tP8cQ2nL',
+                    japanese: '家族はとても大切です。',
+                    translation: '家人非常重要。',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'qX4nK8vC6mP',
+        sentences: [
+          {
+            id: 'L7pT2wR9sVx',
+            text: '台北[たいぺい]にも気軽[きがる]に行[い]ける山[やま]があります。',
+            translation: '台北也有可以輕鬆前往的山。',
+            vocabularyNotes: [
+              {
+                id: 'rH3mQ7xN5kW',
+                surface: '気軽',
+                surfaceReading: 'きがる',
+                dictionaryForm: '気軽',
+                reading: 'きがる',
+                partOfSpeech: 'na_adjective',
+                contextualMeaning: '輕鬆、不需要太多顧慮；此處指容易前往',
+                examples: [
+                  {
+                    id: 'C8vL4qT6mPs',
+                    japanese: 'この店には気軽に入れます。',
+                    translation: '這家店可以很輕鬆地走進去。',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'M2xV6kQ8nRt',
+            text: '天気[てんき]がいい日[ひ]には、家族[かぞく]や友達[ともだち]と山[やま]を歩[ある]くのも楽[たの]しいです。',
+            translation: '天氣好的日子，和家人或朋友一起到山裡走走也很開心。',
+            vocabularyNotes: [
+              {
+                id: 'wQ9tN3mK7xF',
+                surface: '歩く',
+                surfaceReading: 'あるく',
+                dictionaryForm: '歩く',
+                reading: 'あるく',
+                partOfSpeech: 'verb',
+                contextualMeaning: '走路、步行；此處指在山中健行',
+                examples: [
+                  {
+                    id: 'G5mR2vP8qLs',
+                    japanese: '毎朝、駅まで歩きます。',
+                    translation: '每天早上走路到車站。',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 'tP6cX4mV9qH',
+            text: '台湾[たいわん]へ来[き]たら、町[まち]だけではなく、山[やま]の自然[しぜん]も楽[たの]しんでみてください。',
+            translation:
+              '如果來到台灣，不要只逛城市，也請試著享受山林的大自然。',
+            vocabularyNotes: [
+              {
+                id: 'Z3nL7wK5mQr',
+                surface: '自然',
+                surfaceReading: 'しぜん',
+                dictionaryForm: '自然',
+                reading: 'しぜん',
+                partOfSpeech: 'noun',
+                contextualMeaning: '大自然；此處指山林中的自然環境與景觀',
+                examples: [
+                  {
+                    id: 'bV8qT2xM6pN',
+                    japanese: '北海道には美しい自然があります。',
+                    translation: '北海道有美麗的大自然。',
+                  },
+                ],
+              },
+            ],
+            grammarNotes: [
+              {
+                id: 'H4mX9qC2vTk',
+                grammarPointId: null,
+                pattern: '〜てみる',
+                shortMeaning: '試著～看看',
+                explanation: '表示實際嘗試做某件事情，看看結果或體驗如何。',
+                anchors: [{ surface: '楽しんでみて' }],
+                sourceExample: {
+                  id: 'jN7vP3mR5xQ',
+                  japanese: '山の自然も楽しんでみてください。',
+                  translation: '也請試著享受山林的大自然。',
+                },
+                extraExample: {
+                  id: 'S6qK2tV8mLc',
+                  japanese: 'この料理を食べてみます。',
+                  translation: '我試著吃吃看這道料理。',
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    translation: [
+      '台灣有很多山。也有離市區很近的山，很多人會在休假日去爬山。在山上可以看看樹木和花，也可以欣賞美麗的風景。',
+      '台灣最高的山是玉山。玉山非常高，冬天有時也會下雪。因為山上很冷，所以帶保暖的衣服去很重要。',
+      '台北也有可以輕鬆前往的山。天氣好的日子，和家人或朋友一起到山裡走走也很開心。如果來到台灣，不要只逛城市，也請試著享受山林的大自然。',
     ],
   },
 ]

@@ -48,9 +48,8 @@ export type MaterialSummary = {
 
 export const studyModes = [
   'full',
-  'japanese',
-  'listening',
   'sentence',
+  'roleplay',
 ] as const
 
 export type StudyMode = (typeof studyModes)[number]
@@ -104,11 +103,6 @@ export type MaterialVocabularyNote = {
   surface: string
   /** 同一 surface 在本句出現多次時，指定要標第幾個（1-based）；預設 1，唯一出現可省略。 */
   occurrence?: number
-  /**
-   * 是否為本篇主打單字（一句約 1～2 個）。目前僅存欄位、不影響畫面；
-   * 「查字模式」等依 featured 的視覺差異屬下一版，本 Task 不實作。
-   */
-  featured?: boolean
   /** 表層形本身的讀音（例：楽しめる → たのしめる）；畫面主要顯示此讀音，供初學者對照發音。 */
   surfaceReading: string
   /** 辭書形（原形，例：食べる、楽しむ）——自然鍵之一，用於配對單字表。 */
@@ -131,8 +125,15 @@ export type MaterialVocabularyNote = {
 export type MaterialGrammarNote = {
   id: string
   grammarPointId: string | null
+  /** 文法句型本身（例：〜てくる）；作為 popover／列表的主標題。 */
   pattern: string
-  shortExplanation: string
+  /** 簡短意思，寫在標題旁當顯眼 gloss（例：漸漸變得～）；不寫「表示…」這種前綴。 */
+  shortMeaning: string
+  /**
+   * 補充說明：較長、給人看的有意義說明（例：某種變化從過去逐漸累積、發展到現在）。
+   * 避免公式化的「表示ＸＸＸ，意思是「ＸＸＸ」。」寫法。
+   */
+  explanation: string
   /**
    * 本文法在句中要框起的錨點；可有多個，用於不連續文法
    * （例：〜たり、〜たりする 跨逗號 → anchors: [{surface:'眺めたり'},{surface:'温めたり'}]）。

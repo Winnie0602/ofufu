@@ -14,6 +14,7 @@ type PlayAudioOptions = {
 
 export const useTtsAudio = (
   lang: TtsLanguageConfig | (() => TtsLanguageConfig),
+  options: { playbackRate?: MaybeRefOrGetter<number> } = {},
 ) => {
   const loadingAudioId = ref<string | null>(null)
   const playingAudioId = ref<string | null>(null)
@@ -23,6 +24,19 @@ export const useTtsAudio = (
   let requestVersion = 0
   let sequenceVersion = 0
   let removeAudioListeners: (() => void) | null = null
+
+  // 收斂成合法的正數倍速；未提供或異常值一律回 1，避免把 audio.playbackRate 設成 0／NaN。
+  const resolvePlaybackRate = () => {
+    const rate = toValue(options.playbackRate) ?? 1
+    return Number.isFinite(rate) && rate > 0 ? rate : 1
+  }
+
+  // 播放中即時套用速度變更：使用者切換 select 時，正在播放的音訊立刻改速。
+  if (options.playbackRate !== undefined) {
+    watch(resolvePlaybackRate, (rate) => {
+      if (audio) audio.playbackRate = rate
+    })
+  }
 
   const audioState = (audioId: string): AudioPlaybackState => {
     if (loadingAudioId.value === audioId) return 'loading'
@@ -116,6 +130,9 @@ export const useTtsAudio = (
       }
 
       audio.src = `data:audio/mp3;base64,${response.audioContent}`
+      // defaultPlaybackRate 供載入後套用、playbackRate 立即生效，避免部分瀏覽器載入時重設速度。
+      audio.defaultPlaybackRate = resolvePlaybackRate()
+      audio.playbackRate = audio.defaultPlaybackRate
       await audio.play()
       return true
     } catch {
@@ -169,6 +186,19 @@ export const useTtsAudio = (
     }
   }
 
+  // 播放單句並 await 到自然播畢才 resolve true；被停止、切換或手動點播中斷則 resolve false。
+  // 供角色扮演逐句練習「別人台詞自動播畢再前進」使用；逐句 AudioButton 仍走 playAudio 不阻塞、不亂序。
+  const playLine = async (payload: PlayTtsAudioPayload) => {
+    stopAudio()
+    const currentSequenceVersion = sequenceVersion
+
+    const started = await requestAudio(payload, { toggleWhenActive: false })
+    if (!started || currentSequenceVersion !== sequenceVersion) return false
+
+    await waitForAudioEnd(payload.audioId, currentSequenceVersion)
+    return currentSequenceVersion === sequenceVersion
+  }
+
   // 頁面或使用此 composable 的元件卸載時停止背景音訊並清除事件。
   onScopeDispose(stopAudio)
 
@@ -176,6 +206,7 @@ export const useTtsAudio = (
     audioState,
     playAudio,
     playAudioSequence,
+    playLine,
     stopAudio,
   }
 }
