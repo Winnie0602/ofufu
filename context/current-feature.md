@@ -13,7 +13,7 @@
 | 004 | 單字 TTS 播放（`useTtsAudio`） | ✅ Completed |
 | 005 | 閱讀／對話前台原型 | ✅ Completed |
 | 006 | 單字身分與收藏去重重構 | ✅ Completed |
-| 007 | Ruby 括號記法 ＋ 內文標註 stand-off 模型 | ✅ Completed |
+| 007 | Ruby 括號記法 ＋ 註解與內文分離模型 | ✅ Completed |
 | 008 | 閱讀／對話內文互動改版（顯示層） | ✅ Completed |
 | 009 | TTS 與教材音檔正式流程 | 📋 Backlog |
 | 010 | 元件資料夾重整 ＋ `useStudyState` | ✅ Completed |

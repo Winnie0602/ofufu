@@ -41,6 +41,7 @@
 | `global/{header,footer}.vue` | `global/{Header,Footer}.vue` | 不變（檔名改 PascalCase） |
 | `vocabulary/Vocabulary{ListItem,Conjugations}.vue` | `vocabulary/{ListItem,Conjugations}.vue` | 不變（Nuxt 會去重前綴） |
 | `composables/useYoutubePlayer.local.ts` | `composables/useYoutubePlayerLocal.ts` | 不變（檔名對齊 export） |
+| `utils/vocabularyIdentity.ts` | `utils/vocabularyMatching.ts` | 不變（utils 依 export 名稱自動匯入；`identity` 過於抽象，改為直述用途「配對」） |
 
 ### 移除的未使用檔案
 
