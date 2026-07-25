@@ -1,23 +1,33 @@
 import type { RubyToken } from '~/types/material'
 
 /**
- * Ruby 括號記法 parser。
+ * 教材內文的假名標記解析。
  *
- * 記法（authoring 格式）：純文字，furigana 以「半形中括號」標在緊接在前的漢字連續段之後。
- *   例：`日本[にほん]には四[よっ]つの季節[きせつ]があり、楽[たの]しめます。`
- *   混合：`食[た]べ物[もの]` → 食(た)・べ・物(もの)。
+ * 作者寫教材時，假名是用半形中括號標在漢字後面的：
  *
- * 規則：
- * - 只有「半形 `[` `]`」是記法；全形「［］」及其他括號一律當普通文字，原樣保留。
- * - 讀音掛在「緊接在前的漢字連續段」（trailing 漢字 run）；其餘為純文字段。
- * - 反斜線跳脫下一個字元：`\[`、`\]` 得到字面括號，`\\` 得到字面反斜線。
- * - 容錯：`[` 找不到對應 `]`，或 `[...]` 前沒有漢字可掛，皆原樣保留字面括號，讓作者一眼看出寫錯。
+ *   輸入：'日本[にほん]の四[よっ]つの季節[きせつ]'
+ *   輸出：日本(にほん) ／ の ／ 四(よっ) ／ つの ／ 季節(きせつ)
+ *
+ * 讀音掛在「緊接在前面的那串漢字」上，所以一個詞裡只有部分漢字要標也沒問題：
+ *
+ *   輸入：'食[た]べ物[もの]'
+ *   輸出：食(た) ／ べ ／ 物(もの)
+ *
+ * 幾個講好的規則：
+ * - 只有半形 [ ] 是記法。全形［］和其他括號都當普通文字，原樣顯示。
+ * - 想寫字面的中括號就加反斜線：'\[重要\]' 會顯示成 [重要]。
+ * - 作者寫錯時不吞掉也不猜，原樣把括號印出來，讓人在畫面上一眼看到哪裡壞了。
  */
 
-// 漢字連續段判定：CJK 統一漢字（含擴充 A）、相容漢字，及疊字／記號 々〆〇ヶヵ。
+// 哪些字算漢字：CJK 統一漢字與擴充 A、相容漢字，再加上 々〆〇ヶヵ 這幾個常跟漢字黏在一起的符號。
 const KANJI = /[㐀-䶿一-鿿豈-﫿々〆〇ヶヵ]/
 
-/** 從 `openIndex`（指向 `[`）起，找到第一個未被跳脫的 `]`；找不到回傳 -1。 */
+/**
+ * 從 `[` 往後找它配對的 `]`，被反斜線跳脫的不算。
+ *
+ *   findClosingBracket('四[よっ]つ', 1)  →  5
+ *   findClosingBracket('四[よっつ', 1)   →  -1（沒收尾）
+ */
 function findClosingBracket(text: string, openIndex: number): number {
   for (let i = openIndex + 1; i < text.length; i++) {
     if (text[i] === '\\') {
@@ -29,22 +39,36 @@ function findClosingBracket(text: string, openIndex: number): number {
   return -1
 }
 
-/** 取字串尾端「連續漢字」的最長後綴；無漢字回傳空字串。 */
+/**
+ * 取字串尾巴那串連續漢字，也就是括號裡的讀音該掛在誰身上。
+ *
+ *   trailingKanjiRun('日本')      →  '日本'
+ *   trailingKanjiRun('のち季節')  →  '季節'
+ *   trailingKanjiRun('べ')        →  ''      （沒漢字可掛）
+ */
 function trailingKanjiRun(text: string): string {
   let start = text.length
   while (start > 0 && KANJI.test(text[start - 1]!)) start--
   return text.slice(start)
 }
 
-/** 把括號記法解析成顯示用的 ruby token 陣列。 */
+/**
+ * 把括號記法拆成 token 陣列，給 RubyText.vue 渲染成 <ruby>。
+ *
+ *   parseRuby('朝[あさ]の空気[くうき]')
+ *   → [{ text: '朝', ruby: 'あさ' }, { text: 'の' }, { text: '空気', ruby: 'くうき' }]
+ *
+ * 作法是從頭掃一遍，還沒遇到括號的字先累積在 buffer；一碰到 `[` 就把 buffer 尾巴的
+ * 漢字切下來配讀音，前面剩下的部分先送出去成為一個純文字 token。
+ */
 export function parseRuby(text: string): RubyToken[] {
   const tokens: RubyToken[] = []
-  let plain = ''
+  let buffer = ''
 
-  const flushPlain = () => {
-    if (plain) {
-      tokens.push({ text: plain })
-      plain = ''
+  const flushBuffer = () => {
+    if (buffer) {
+      tokens.push({ text: buffer })
+      buffer = ''
     }
   }
 
@@ -53,7 +77,7 @@ export function parseRuby(text: string): RubyToken[] {
     const char = text[i]!
 
     if (char === '\\' && i + 1 < text.length) {
-      plain += text[i + 1] // 跳脫：下一個字元原樣輸出
+      buffer += text[i + 1] // 跳脫：下一個字元原樣輸出
       i += 2
       continue
     }
@@ -61,35 +85,37 @@ export function parseRuby(text: string): RubyToken[] {
     if (char === '[') {
       const close = findClosingBracket(text, i)
       if (close === -1) {
-        plain += char // 無對應 ]，當字面括號
+        buffer += char // 沒有對應的 ]，當成字面括號
         i++
         continue
       }
 
       const reading = text.slice(i + 1, close)
-      const base = trailingKanjiRun(plain)
+      const base = trailingKanjiRun(buffer)
       if (base) {
-        plain = plain.slice(0, plain.length - base.length)
-        flushPlain()
+        buffer = buffer.slice(0, buffer.length - base.length)
+        flushBuffer()
         tokens.push({ text: base, ruby: reading })
       } else {
-        // 前面沒有漢字可掛：原樣保留字面括號，提示作者記法有誤
-        plain += text.slice(i, close + 1)
+        // 前面沒漢字可掛（例：'べ[もの]'）：原樣印出括號，讓作者看到自己寫錯了
+        buffer += text.slice(i, close + 1)
       }
       i = close + 1
       continue
     }
 
-    plain += char
+    buffer += char
     i++
   }
 
-  flushPlain()
+  flushBuffer()
   return tokens
 }
 
 /**
- * 剝除括號記法，得到純日文（無 furigana、無括號），供 TTS 與「純日文顯示」使用。
+ * 只留看得見的日文，讀音和括號全部丟掉。TTS 與「關掉假名」時用這個。
+ *
+ *   toPlainJapanese('朝[あさ]の空気[くうき]')  →  '朝の空気'
  */
 export function toPlainJapanese(text: string): string {
   return parseRuby(text)
