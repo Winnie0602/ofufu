@@ -39,12 +39,12 @@ const {
   clearJapaneseReveals,
   clearReveals,
   audioState,
-  playAudio,
-  playLine,
+  togglePlay,
+  playAndWait,
   stopAudio,
-  isSequencePlaying: isConversationPlaying,
-  toggleSequence,
-  stopSequence,
+  isAutoPlaying: isConversationPlaying,
+  toggleAutoPlay,
+  stopAutoPlay,
 } = useStudyState({ initialGrammarId: grammarNotes[0]?.id ?? null })
 
 const selectedRoleParticipantId = ref(material.participants[0]?.id ?? '')
@@ -59,7 +59,7 @@ const playConversation = () => {
           (line) => line.speakerId !== selectedRoleParticipantId.value,
         )
       : material.lines
-  return toggleSequence(
+  return toggleAutoPlay(
     playableLines.map((line) => ({
       audioId: line.id,
       text: toPlainJapanese(line.text),
@@ -121,7 +121,7 @@ const runPracticeStep = async () => {
     stopAudio()
     return
   }
-  const completed = await playLine({
+  const completed = await playAndWait({
     audioId: line.id,
     text: toPlainJapanese(line.text),
   })
@@ -196,7 +196,7 @@ const recommendations = conversationMaterials
 
 watch(mode, () => {
   // 切模式：停止序列播放與逐句練習，避免控制狀態與語音、遮罩錯位。
-  stopSequence()
+  stopAutoPlay()
   practiceIndex.value = null
   clearReveals()
 })
@@ -481,7 +481,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
               :label="`播放 ${line.speaker.name} 的對話`"
               :state="audioState(line.id)"
               @play="
-                playAudio({
+                togglePlay({
                   audioId: line.id,
                   text: toPlainJapanese(line.text),
                 })

@@ -13,7 +13,7 @@ const props = withDefaults(
 )
 
 // Popover 內單字語音：沿用 useTtsAudio，播放單字表層形（與側欄清單一致，audioId 用 note.id）。
-const { audioState, playAudio } = useTtsAudio(LANG_CONFIG_MAP.ja)
+const { audioState, togglePlay } = useTtsAudio(LANG_CONFIG_MAP.ja)
 
 // 表層形是否為活用形（與辭書形不同）；活用時另外標示辭書形，方便查字典，
 // 收藏時也會依辭書形自然鍵去重（在收藏動作處理，Popover 不攤開單字表資料）。
@@ -73,7 +73,7 @@ const triggerClass = computed(() => {
               :label="`播放 ${note.surface}`"
               :state="audioState(note.id)"
               @play="
-                playAudio({
+                togglePlay({
                   audioId: note.id,
                   text: toPlainJapanese(note.surface),
                 })

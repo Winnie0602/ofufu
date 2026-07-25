@@ -40,16 +40,16 @@ const {
   revealTranslation: revealTranslationSentence,
   clearReveals,
   audioState,
-  playAudio,
-  isSequencePlaying: isArticlePlaying,
-  toggleSequence,
-  stopSequence,
+  togglePlay,
+  isAutoPlaying: isArticlePlaying,
+  toggleAutoPlay,
+  stopAutoPlay,
 } = useStudyState({ initialGrammarId: grammarNotes[0]?.id ?? null })
 
 const articleVisible = ref(true)
 
 const playArticle = () =>
-  toggleSequence(
+  toggleAutoPlay(
     articleSentences.map((sentence) => ({
       audioId: sentence.id,
       text: toPlainJapanese(sentence.text),
@@ -61,7 +61,7 @@ const recommendations = readingMaterials
   .slice(0, 5)
 
 watch(mode, () => {
-  if (isArticlePlaying.value) stopSequence()
+  if (isArticlePlaying.value) stopAutoPlay()
   clearReveals()
 })
 
@@ -282,7 +282,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
                   :label="`播放句子：${toPlainJapanese(sentence.text)}`"
                   :state="audioState(sentence.id)"
                   @play="
-                    playAudio({
+                    togglePlay({
                       audioId: sentence.id,
                       text: toPlainJapanese(sentence.text),
                     })

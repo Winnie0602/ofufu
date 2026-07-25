@@ -15,12 +15,12 @@ const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
-const { audioState, playAudio, stopAudio } = useTtsAudio(
+const { audioState, togglePlay, stopAudio } = useTtsAudio(
   () => LANG_CONFIG_MAP[lang],
 )
 
 const handleSpeak = (text: string, index: number) =>
-  playAudio({
+  togglePlay({
     audioId: `bottom-panel-${index}`,
     text,
   })

@@ -36,7 +36,7 @@ const visibleItems = computed(() => {
 
 const showRuby = ref(true)
 const activeVocabularyId = ref<string | null>(null)
-const { audioState, playAudio } = useTtsAudio(LANG_CONFIG_MAP.ja)
+const { audioState, togglePlay } = useTtsAudio(LANG_CONFIG_MAP.ja)
 let scrollRequestVersion = 0
 
 const changeLevel = (level: MaterialLevel) =>
@@ -148,7 +148,7 @@ useSeoMeta({
             :show-level="selectedLevel === 'all'"
             :audio-state="audioState"
             @toggle="toggleVocabulary"
-            @play="playAudio"
+            @play="togglePlay"
           />
         </div>
 
