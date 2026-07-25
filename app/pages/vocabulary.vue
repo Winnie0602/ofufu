@@ -100,9 +100,9 @@ useSeoMeta({
 </script>
 
 <template>
-  <MaterialsPage>
+  <MaterialPageShell>
     <template #hero>
-      <MaterialsHero
+      <MaterialHero
         title="單字學習"
         :description="`依照適合自己的 JLPT 程度瀏覽單字，\n搭配發音、活用與例句，一步一步累積日文詞彙力。`"
       />
@@ -115,7 +115,7 @@ useSeoMeta({
         <div class="min-w-0 flex-1 sm:contents">
           <div class="shrink-0 text-sm text-neutral-700">程度篩選</div>
 
-          <MaterialsLevelFilter
+          <MaterialLevelFilter
             class="mt-3 min-w-0 sm:mt-0 sm:flex-1"
             :model-value="selectedLevel"
             @update:model-value="changeLevel"
@@ -168,5 +168,5 @@ useSeoMeta({
         />
       </section>
     </div>
-  </MaterialsPage>
+  </MaterialPageShell>
 </template>

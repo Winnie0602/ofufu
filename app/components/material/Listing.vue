@@ -20,9 +20,9 @@ const {
 </script>
 
 <template>
-  <MaterialsPage>
+  <MaterialPageShell>
     <template #hero>
-      <MaterialsHero :title="title" :description="description" />
+      <MaterialHero :title="title" :description="description" />
     </template>
 
     <div class="pt-4 pb-12">
@@ -30,7 +30,7 @@ const {
         class="flex items-center gap-6 border-y border-neutral-200 py-4 sm:px-4"
       >
         <span class="shrink-0 text-sm text-neutral-700">程度篩選</span>
-        <MaterialsLevelFilter
+        <MaterialLevelFilter
           class="min-w-0 overflow-x-auto"
           :model-value="selectedLevel"
           @update:model-value="changeLevel"
@@ -39,7 +39,7 @@ const {
 
       <section class="mt-6">
         <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          <MaterialsMaterialCard
+          <MaterialCard
             v-for="item in visibleItems"
             :id="`${itemIdPrefix}-${item.id}`"
             :key="item.id"
@@ -66,5 +66,5 @@ const {
         />
       </section>
     </div>
-  </MaterialsPage>
+  </MaterialPageShell>
 </template>

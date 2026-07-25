@@ -153,7 +153,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
         </div>
       </div>
 
-      <MaterialsStudyControls
+      <ContentControls
         class="mt-8"
         :mode="mode"
         :playback-rate="playbackRate"
@@ -181,19 +181,19 @@ useSeoMeta({ title: material.title, description: material.excerpt })
           </button>
         </template>
         <template #mode-actions>
-          <MaterialsVisibilityToggle
+          <ContentVisibilityToggle
             v-if="mode === 'full'"
             :visible="articleVisible"
             label="隱藏整篇"
             @update:visible="articleVisible = $event"
           />
-          <MaterialsVisibilityToggle
+          <ContentVisibilityToggle
             v-if="mode === 'sentence'"
             :visible="sentenceJapaneseVisible"
             label="隱藏日文"
             @update:visible="sentenceJapaneseVisible = $event"
           />
-          <MaterialsVisibilityToggle
+          <ContentVisibilityToggle
             v-if="mode === 'sentence'"
             :visible="sentenceTranslationVisible"
             label="隱藏中文"
@@ -201,20 +201,20 @@ useSeoMeta({ title: material.title, description: material.excerpt })
           />
         </template>
         <template #display-settings>
-          <MaterialsStudyDisplayToggles
+          <ContentDisplayToggles
             :lookup-mode="lookupMode"
             :show-ruby="showRuby"
             @update:lookup-mode="lookupMode = $event"
             @update:show-ruby="showRuby = $event"
           />
         </template>
-      </MaterialsStudyControls>
+      </ContentControls>
 
       <section class="w-full rounded-xl py-4 sm:px-4 sm:py-5">
         <div
           class="mb-6 rounded-lg bg-neutral-50 p-3 sm:hidden"
         >
-          <MaterialsStudyMobileControls
+          <ContentMobileControls
             content-label="文章"
             :playback-rate="playbackRate"
             :is-playing="isArticlePlaying"
@@ -228,7 +228,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
         </div>
 
         <template v-if="mode === 'full'">
-          <MaterialsRevealableContent
+          <ContentMaskable
             class="mt-6"
             :visible="articleVisible"
             reveal-label="顯示文章日文"
@@ -242,7 +242,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
                   v-for="sentence in paragraph.sentences"
                   :key="sentence.id"
                 >
-                  <MaterialsAnnotatedText
+                  <ContentAnnotatedText
                     :text="sentence.text"
                     :vocabulary-notes="sentence.vocabularyNotes"
                     :grammar-notes="sentence.grammarNotes"
@@ -252,7 +252,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
                 </template>
               </p>
             </div>
-          </MaterialsRevealableContent>
+          </ContentMaskable>
 
           <section
             class="border-error/10 bg-error/5 mt-10 rounded-xl border px-4 py-5"
@@ -279,13 +279,13 @@ useSeoMeta({ title: material.title, description: material.excerpt })
               class="border-error/10 bg-error/5 grid grid-cols-[minmax(0,1fr)_auto] gap-3 rounded-xl border p-4 sm:gap-5 sm:p-5"
             >
               <div class="min-w-0 space-y-2">
-                <MaterialsRevealableContent
+                <ContentMaskable
                   :visible="isSentenceJapaneseVisible(sentence.id)"
                   :reveal-label="`顯示句子：${toPlainJapanese(sentence.text)}`"
                   @reveal="revealJapaneseSentence(sentence.id)"
                 >
                   <p class="text-base leading-10 text-neutral-900 sm:text-lg">
-                    <MaterialsAnnotatedText
+                    <ContentAnnotatedText
                       :text="sentence.text"
                       :vocabulary-notes="sentence.vocabularyNotes"
                       :grammar-notes="sentence.grammarNotes"
@@ -293,11 +293,11 @@ useSeoMeta({ title: material.title, description: material.excerpt })
                       :lookup-mode="lookupMode"
                     />
                   </p>
-                </MaterialsRevealableContent>
+                </ContentMaskable>
                 <div
                   class="border-error/10 min-w-0 border-t pt-2"
                 >
-                  <MaterialsRevealableContent
+                  <ContentMaskable
                     :visible="isSentenceTranslationVisible(sentence.id)"
                     :reveal-label="`顯示中文翻譯：${sentence.translation}`"
                     @reveal="revealTranslationSentence(sentence.id)"
@@ -305,7 +305,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
                     <p class="text-sm leading-6 text-neutral-500">
                       {{ sentence.translation }}
                     </p>
-                  </MaterialsRevealableContent>
+                  </ContentMaskable>
                 </div>
               </div>
               <div class="flex shrink-0 flex-col gap-2 sm:flex-row">
@@ -331,14 +331,14 @@ useSeoMeta({ title: material.title, description: material.excerpt })
       <section class="mt-14">
         <h2 class="text-2xl font-bold">重點單字</h2>
         <div class="mt-5 flex flex-wrap gap-2">
-          <MaterialsVocabularyPopover
+          <ContentVocabularyPopover
             v-for="note in vocabularyNotes"
             :key="note.id"
             :note="note"
             variant="badge"
           >
             {{ note.surface }}
-          </MaterialsVocabularyPopover>
+          </ContentVocabularyPopover>
         </div>
       </section>
 
@@ -347,7 +347,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
         <p class="mt-2 text-sm leading-6 text-neutral-500">
           展開查看本文中的用法與另一個例句。
         </p>
-        <MaterialsGrammarNotes
+        <ContentGrammarNotes
           class="mt-5"
           :notes="grammarNotes"
           :active-id="activeGrammarId"
@@ -358,7 +358,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
       <section class="mt-14">
         <h2 class="text-2xl font-bold">其他推薦文章</h2>
         <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          <MaterialsMaterialCard
+          <MaterialCard
             v-for="item in recommendations"
             :key="item.id"
             :material="item"

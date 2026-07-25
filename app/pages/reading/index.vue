@@ -8,7 +8,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <MaterialsMaterialListing
+  <MaterialListing
     title="文章閱讀"
     :description="`依照適合自己的 JLPT 程度閱讀各類文章，\n從文化、生活到科學，用日文探索更多主題。`"
     :items="readingMaterials"

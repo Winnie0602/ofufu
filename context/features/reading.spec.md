@@ -29,7 +29,7 @@
 
 ### Shared Material Foundation
 
-- 閱讀與對話列表共用 `MaterialsPage`、`MaterialsHero`、`MaterialsLevelFilter`、`Pagination` 及新的網站共用教材卡片。
+- 閱讀與對話列表共用 `MaterialPageShell`、`MaterialHero`、`MaterialLevelFilter`、`Pagination` 及新的網站共用教材卡片。
 - 六大教材使用穩定英文 type code：`vocabulary`、`reading`、`conversation`、`song`、`grammar`、`quiz`，畫面由 mapping 顯示繁中名稱。
 - 共用教材摘要型別 `MaterialSummary` 至少包含 `id`、`type`、`title`、`excerpt`、`level`、`categories` 與 `coverImage`。
 - `id` 使用固定的模擬 nanoid，不以日文、羅馬拼音、分類或標題作為 ID。
@@ -40,7 +40,7 @@
 ### Reading List
 
 - `/reading` 使用與單字頁相同的共用教材 Hero，標題為「文章閱讀」。
-- 提供 `All`、`N5`～`N1` 單選程度篩選，使用既有 `MaterialsLevelFilter`。
+- 提供 `All`、`N5`～`N1` 單選程度篩選，使用既有 `MaterialLevelFilter`。
 - 程度與頁碼同步至 route query，例如 `/reading?level=n3&page=1`。
 - 切換程度時將 `page` 重設為 `1`；無效 query 使用安全預設值。
 - 每頁顯示 20 篇，桌面版一列 5 張卡片，共 4 列。

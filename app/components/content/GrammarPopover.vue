@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <!-- 版型比照 MaterialsVocabularyPopover，accent 改用 primary（單字用 error）。 -->
+  <!-- 版型比照 ContentVocabularyPopover，accent 改用 primary（單字用 error）。 -->
   <span
     class="tooltip [--interaction:true] [--placement:top] [--strategy:fixed] [--trigger:click]"
   >

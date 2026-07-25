@@ -34,26 +34,26 @@ const GRAMMAR_HIGHLIGHT = 'rounded-[2px] bg-primary/20'
 
 <template>
   <template v-for="(span, index) in spans" :key="index">
-    <MaterialsVocabularyPopover
+    <ContentVocabularyPopover
       v-if="span.vocabularyNote"
       :note="span.vocabularyNote"
     >
-      <MaterialsRubyText
+      <ContentRubyText
         :tokens="span.tokens"
         :show-ruby="showRuby"
         :highlight-class="VOCABULARY_HIGHLIGHT"
       />
-    </MaterialsVocabularyPopover>
-    <MaterialsGrammarPopover
+    </ContentVocabularyPopover>
+    <ContentGrammarPopover
       v-else-if="span.grammarNote"
       :note="span.grammarNote"
     >
-      <MaterialsRubyText
+      <ContentRubyText
         :tokens="span.tokens"
         :show-ruby="showRuby"
         :highlight-class="GRAMMAR_HIGHLIGHT"
       />
-    </MaterialsGrammarPopover>
-    <MaterialsRubyText v-else :tokens="span.tokens" :show-ruby="showRuby" />
+    </ContentGrammarPopover>
+    <ContentRubyText v-else :tokens="span.tokens" :show-ruby="showRuby" />
   </template>
 </template>

@@ -314,7 +314,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
         </div>
       </div>
 
-      <MaterialsStudyControls
+      <ContentControls
         class="mt-8"
         :mode="mode"
         :playback-rate="playbackRate"
@@ -369,12 +369,12 @@ useSeoMeta({ title: material.title, description: material.excerpt })
             </button>
           </template>
           <template v-else>
-            <MaterialsVisibilityToggle
+            <ContentVisibilityToggle
               :visible="japaneseVisible"
               label="隱藏日文"
               @update:visible="japaneseVisible = $event"
             />
-            <MaterialsVisibilityToggle
+            <ContentVisibilityToggle
               :visible="translationVisible"
               label="隱藏中文"
               @update:visible="translationVisible = $event"
@@ -382,20 +382,20 @@ useSeoMeta({ title: material.title, description: material.excerpt })
           </template>
         </template>
         <template #display-settings>
-          <MaterialsStudyDisplayToggles
+          <ContentDisplayToggles
             :lookup-mode="lookupMode"
             :show-ruby="showRuby"
             @update:lookup-mode="lookupMode = $event"
             @update:show-ruby="showRuby = $event"
           />
         </template>
-      </MaterialsStudyControls>
+      </ContentControls>
 
       <section
         class="border-error/10 bg-error/5 mt-3 w-full space-y-5 rounded-xl border px-3 py-7 shadow-2xs sm:px-4 sm:py-5"
       >
         <div class="pb-6 sm:hidden">
-          <MaterialsStudyMobileControls
+          <ContentMobileControls
             content-label="對話"
             :playback-rate="playbackRate"
             :is-playing="playbackActive"
@@ -463,14 +463,14 @@ useSeoMeta({ title: material.title, description: material.excerpt })
             class="chat-bubble border-error/30 !max-w-full !rounded-xl border !text-left !text-neutral-900 shadow transition-colors duration-300 before:!hidden sm:!max-w-[min(38rem,85vw)]"
             :class="line.id === activeLineId ? '!bg-error/5' : '!bg-white'"
           >
-            <MaterialsRevealableContent
+            <ContentMaskable
               :visible="isJapaneseVisible(line.id, line.speakerId)"
               :overlay-hint="practiceHintFor(line.id)"
               :reveal-label="`顯示 ${line.speaker.name} 的日文對話`"
               @reveal="revealJapaneseLine(line.id)"
             >
               <p class="text-[15px] leading-7 sm:text-base">
-                <MaterialsAnnotatedText
+                <ContentAnnotatedText
                   :text="line.text"
                   :vocabulary-notes="line.vocabularyNotes"
                   :grammar-notes="line.grammarNotes"
@@ -478,8 +478,8 @@ useSeoMeta({ title: material.title, description: material.excerpt })
                   :lookup-mode="lookupMode"
                 />
               </p>
-            </MaterialsRevealableContent>
-            <MaterialsRevealableContent
+            </ContentMaskable>
+            <ContentMaskable
               class="mt-2 border-t border-neutral-200 pt-2"
               :visible="isTranslationVisible(line.id)"
               :reveal-label="`顯示 ${line.speaker.name} 的中文翻譯`"
@@ -488,7 +488,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
               <p class="text-xs leading-5 text-neutral-500">
                 {{ line.translation }}
               </p>
-            </MaterialsRevealableContent>
+            </ContentMaskable>
           </div>
           <div class="chat-footer mt-3 flex gap-2">
             <AudioButton
@@ -518,14 +518,14 @@ useSeoMeta({ title: material.title, description: material.excerpt })
       <section class="mt-14">
         <h2 class="text-2xl font-bold">重點單字</h2>
         <div class="mt-5 flex flex-wrap gap-2">
-          <MaterialsVocabularyPopover
+          <ContentVocabularyPopover
             v-for="note in vocabularyNotes"
             :key="note.id"
             :note="note"
             variant="badge"
           >
             {{ note.surface }}
-          </MaterialsVocabularyPopover>
+          </ContentVocabularyPopover>
         </div>
       </section>
 
@@ -534,7 +534,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
         <p class="mt-2 text-sm leading-6 text-neutral-500">
           展開查看對話中的用法與另一個例句。
         </p>
-        <MaterialsGrammarNotes
+        <ContentGrammarNotes
           class="mt-5"
           :notes="grammarNotes"
           :active-id="activeGrammarId"
@@ -547,7 +547,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
           更多 {{ material.level.toUpperCase() }} 對話
         </h2>
         <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          <MaterialsMaterialCard
+          <MaterialCard
             v-for="item in recommendations"
             :key="item.id"
             :material="item"

@@ -8,7 +8,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <MaterialsMaterialListing
+  <MaterialListing
     title="對話學習"
     :description="`從餐廳、旅行到職場，跟著角色練習自然對話，\n搭配逐句翻譯與發音，累積實際溝通能力。`"
     :items="conversationMaterials"

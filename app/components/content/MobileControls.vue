@@ -65,7 +65,7 @@ const playbackLabel = computed(
     </div>
 
     <div class="flex items-center justify-end">
-      <MaterialsStudyDisplayToggles
+      <ContentDisplayToggles
         compact
         :lookup-mode="lookupMode"
         :show-ruby="showRuby"
