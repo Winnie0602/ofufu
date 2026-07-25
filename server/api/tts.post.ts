@@ -5,10 +5,10 @@ const client = new textToSpeech.TextToSpeechClient({
 })
 
 export default defineEventHandler(async (event) => {
-  // throw createError({
-  //   statusCode: 503,
-  //   statusMessage: 'TTS 暫時停用',
-  // })
+  throw createError({
+    statusCode: 503,
+    statusMessage: 'TTS 暫時停用',
+  })
 
   const { text, lang } = await readBody(event)
 
