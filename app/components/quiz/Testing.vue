@@ -142,7 +142,7 @@ watchEffect((onCleanup) => {
           class="embla__slide"
         >
           <!-- 聽力翻譯題型 -->
-          <TestCardListeningTranslation
+          <QuizCardListeningTranslation
             v-if="translationGameLang && selectedQuizType === 'translation'"
             :each-lyric="eachLyric"
             :is-now-card="i === nowIndex"

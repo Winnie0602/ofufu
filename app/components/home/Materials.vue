@@ -54,7 +54,7 @@ const newMaterials: MaterialSummary[] = [
       </NuxtLink>
     </div>
     <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-      <MaterialsMaterialCard
+      <MaterialCard
         v-for="material in newMaterials"
         :key="material.id"
         :material="material"

@@ -1,15 +1,15 @@
 <template>
   <div class="w-full bg-white text-neutral-950">
-    <IndexTopHero />
+    <HomeTopHero />
 
     <main class="w-full">
-      <IndexIntroduce />
+      <HomeIntroduce />
 
-      <IndexMaterials />
+      <HomeMaterials />
 
-      <IndexTest />
+      <HomeTest />
 
-      <IndexMemberBenefits />
+      <HomeMemberBenefits />
     </main>
   </div>
 </template>

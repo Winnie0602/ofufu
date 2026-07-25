@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import SelectLyrics from '~/components/test/SelectLyrics.vue'
-import SelectTestType from '~/components/test/SelectTestType.vue'
+import SelectLyrics from '~/components/quiz/SelectLyrics.vue'
+import SelectTestType from '~/components/quiz/SelectTestType.vue'
 import type { LangCode } from '~/types/lang'
 import type { SongData, LyricData } from '~/types/song'
 
@@ -180,7 +180,7 @@ watch(step, async (newStep) => {
     class="flex h-full min-h-[80vh] w-full flex-col p-4 md:max-w-[1280px] md:p-6"
   >
     <div class="flex-none pb-4">
-      <TestStepProgress :step="step" />
+      <QuizStepProgress :step="step" />
     </div>
 
     <div v-if="pending" class="flex w-full justify-center text-2xl">
@@ -229,7 +229,7 @@ watch(step, async (newStep) => {
       />
 
       <!-- 第三步驟 開始考試 -->
-      <TestTesting
+      <QuizTesting
         v-if="currentSong && step === 3"
         :current-song="currentSong"
         :test-lyrics="selectedLyrics"
@@ -240,7 +240,7 @@ watch(step, async (newStep) => {
       />
 
       <!-- 第四步驟 複習 -->
-      <TestReview
+      <QuizReview
         v-if="currentSong && step === 4"
         :user-answers="userAnswers"
         :test-lyrics="selectedLyrics"
@@ -253,7 +253,7 @@ watch(step, async (newStep) => {
     </div>
 
     <!-- 上／下一步 -->
-    <TestControlProgressButton
+    <QuizControlProgressButton
       :can-prev="step > 1"
       :can-next="canNext"
       :prev-label="prevLabel"
