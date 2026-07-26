@@ -93,7 +93,7 @@ export const vocabularyItemIdentityKey = (item: VocabularyItem): string =>
  * 找不到是正常情況，代表這個字還沒被收進單字表；之後接後端時，這種字會變成待審核草稿。
  * `items` 參數平常不用傳，預設就是整份單字表，開放它是為了方便測試時塞假資料。
  */
-export const resolveVocabularyItem = (
+export const findVocabularyItem = (
   identity: VocabularyIdentity,
   items: VocabularyItem[] = vocabularyItems,
 ): VocabularyItem | null => {
@@ -116,7 +116,7 @@ export const favoriteVocabularyKey = (
   identity: VocabularyIdentity,
   items: VocabularyItem[] = vocabularyItems,
 ): string => {
-  const item = resolveVocabularyItem(identity, items)
+  const item = findVocabularyItem(identity, items)
   return item ? item.id : `draft:${vocabularyIdentityKey(identity)}`
 }
 

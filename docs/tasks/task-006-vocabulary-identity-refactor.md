@@ -58,6 +58,7 @@
 - `app/utils/vocabularyIdentity.ts`（新）
   - `vocabularyIdentityKey({ lemma, reading, partOfSpeech })`：回傳正規化後的穩定字串鍵。
   - `resolveVocabularyItem(note, items)`：以自然鍵在 `vocabularyItems` 找對應條目，找到回傳該 `VocabularyItem`、找不到回傳 `null`。
+    （**本函式已於 Task 011 更名為 `findVocabularyItem`**，行為不變；本檔保留當時名稱作為歷史紀錄。）
   - `favoriteVocabularyKey(source)`：回傳收藏用身分（已連結 → 單字表 `id`；未連結 → 由自然鍵組出的草稿鍵）。此函式即「去重」的單一依據。
 
 ### 3. Mock data：建立可驗證的配對案例
