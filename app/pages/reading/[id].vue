@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { readingMaterials } from '~/data/materials/reading'
-import { materialCategoryLabels } from '~/types/material'
+import type { CurrentMaterial } from '~/types/material'
+import { materialCategoryLabels, currentMaterialKey } from '~/types/material'
 import { toPlainJapanese } from '~/utils/parseRuby'
 
 const route = useRoute()
@@ -9,6 +10,13 @@ const material = readingMaterials.find((item) => item.id === route.params.id)
 if (!material) {
   throw createError({ statusCode: 404, statusMessage: '找不到這篇文章' })
 }
+
+// 語音要知道這是哪一篇教材；內文的單字 Popover 靠 inject 拿同一份。
+const currentMaterial: CurrentMaterial = {
+  materialType: 'reading',
+  materialId: material.id,
+}
+provide(currentMaterialKey, currentMaterial)
 
 const articleSentences = material.paragraphs.flatMap(
   (paragraph) => paragraph.sentences,
@@ -44,16 +52,16 @@ const {
   isAutoPlaying: isArticlePlaying,
   toggleAutoPlay,
   stopAutoPlay,
-} = useStudyState({ initialGrammarId: grammarNotes[0]?.id ?? null })
+} = useStudyState({
+  material: currentMaterial,
+  initialGrammarId: grammarNotes[0]?.id ?? null,
+})
 
 const articleVisible = ref(true)
 
 const playArticle = () =>
   toggleAutoPlay(
-    articleSentences.map((sentence) => ({
-      audioId: sentence.id,
-      text: toPlainJapanese(sentence.text),
-    })),
+    articleSentences.map((sentence) => ({ audioId: sentence.id })),
   )
 
 const recommendations = readingMaterials
@@ -281,12 +289,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
                 <AudioButton
                   :label="`播放句子：${toPlainJapanese(sentence.text)}`"
                   :state="audioState(sentence.id)"
-                  @play="
-                    togglePlay({
-                      audioId: sentence.id,
-                      text: toPlainJapanese(sentence.text),
-                    })
-                  "
+                  @play="togglePlay({ audioId: sentence.id })"
                 />
                 <FavoriteButton
                   :label="`收藏句子：${toPlainJapanese(sentence.text)}`"

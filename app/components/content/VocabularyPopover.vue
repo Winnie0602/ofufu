@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { MaterialVocabularyNote } from '~/types/material'
-import { LANG_CONFIG_MAP } from '~/types/lang'
+import { currentMaterialKey } from '~/types/material'
 import { vocabularyPartOfSpeechLabels } from '~/types/vocabulary'
-import { toPlainJapanese } from '~/utils/parseRuby'
 
 const props = withDefaults(
   defineProps<{
@@ -12,8 +11,16 @@ const props = withDefaults(
   { variant: 'highlight' },
 )
 
-// Popover 內單字語音：沿用 useTtsAudio，播放單字表層形（與側欄清單一致，audioId 用 note.id）。
-const { audioState, togglePlay } = useTtsAudio(LANG_CONFIG_MAP.ja)
+// 這個 Popover 自己不知道屬於哪一篇教材，由詳情頁 provide；拿不到就是漏了 provide。
+const currentMaterial = inject(currentMaterialKey)
+if (!currentMaterial) {
+  throw new Error(
+    'ContentVocabularyPopover 需要 currentMaterial，請在教材詳情頁 provide(currentMaterialKey, …)',
+  )
+}
+
+// Popover 內單字語音：播放的是單字表層形，unitId 用 note.id（伺服器依此查回文字與聲音）。
+const { audioState, togglePlay } = useTtsAudio(currentMaterial)
 
 // 表層形是否為活用形（與辭書形不同）；活用時另外標示辭書形，方便查字典，
 // 收藏時也會依辭書形自然鍵去重（在收藏動作處理，Popover 不攤開單字表資料）。
@@ -72,12 +79,7 @@ const triggerClass = computed(() => {
             <AudioButton
               :label="`播放 ${note.surface}`"
               :state="audioState(note.id)"
-              @play="
-                togglePlay({
-                  audioId: note.id,
-                  text: toPlainJapanese(note.surface),
-                })
-              "
+              @play="togglePlay({ audioId: note.id })"
             />
             <FavoriteButton :label="`收藏 ${note.dictionaryForm}`" />
           </span>

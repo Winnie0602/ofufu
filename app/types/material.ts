@@ -1,3 +1,4 @@
+import type { InjectionKey } from 'vue'
 import type { VocabularyPartOfSpeechCode } from './vocabulary'
 
 /** 程度篩選用的完整清單。`all` 只是篩選器的「全部」選項，不是真的教材程度。 */
@@ -22,6 +23,37 @@ export const materialTypeLabels = {
 } as const
 
 export type MaterialType = keyof typeof materialTypeLabels
+
+/**
+ * 目前有語音的教材類型。
+ *
+ * `/api/tts` 只接受「內容座標」——教材類型 ＋ 教材 id ＋ 單位 id——不接受任意文字，
+ * 所以前端能送的類型必須是伺服器查得到的這三種。歌曲、文法、測驗還沒有語音。
+ */
+export const speechMaterialTypes = [
+  'vocabulary',
+  'reading',
+  'conversation',
+] as const
+
+export type SpeechMaterialType = (typeof speechMaterialTypes)[number]
+
+/**
+ * 「現在這一頁是哪一篇教材」，由兩個詳情頁 `provide`，內文元件自己 `inject`。
+ *
+ *   provide(currentMaterialKey, { materialType: 'reading', materialId: material.id })
+ *   const currentMaterial = inject(currentMaterialKey)
+ *
+ * 單字列表頁不用這個：那裡每一筆單字自成一篇教材，隨按鈕而變。
+ */
+export type CurrentMaterial = {
+  materialType: Extract<SpeechMaterialType, 'reading' | 'conversation'>
+  materialId: string
+}
+
+export const currentMaterialKey = Symbol(
+  'currentMaterial',
+) as InjectionKey<CurrentMaterial>
 
 /**
  * 教材分類標籤的中文對照，例：`categories: ['airport', 'travel']` → 「機場」「旅遊」。

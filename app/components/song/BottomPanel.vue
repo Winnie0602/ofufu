@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { DisplayAPIResult } from '~/types/tatoeba'
 import type { LangCode } from '~/types/lang'
-import { LANG_CONFIG_MAP } from '~/types/lang'
 
 const { open, word, sentense, loading, lang } = defineProps<{
   open: boolean
@@ -15,27 +14,12 @@ const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
-const { audioState, togglePlay, stopAudio } = useTtsAudio(
-  () => LANG_CONFIG_MAP[lang],
-)
-
-const handleSpeak = (text: string, index: number) =>
-  togglePlay({
-    audioId: `bottom-panel-${index}`,
-    text,
-  })
-
-const handleClose = () => {
-  stopAudio()
-  emit('close')
-}
-
-watch(
-  () => open,
-  (isOpen) => {
-    if (!isOpen) stopAudio()
-  },
-)
+// 語音在 v1 停用（見 task-011 定案七）。這裡的例句來自 Tatoeba，是**任意外部句子**，
+// 沒有 materialId 可指，無法套用「只能唸既有教材」的保護；而 /api/tts 現在只接受
+// 內容座標，所以不是「一併遷移就好」，是設計上的衝突。
+// 這個功能今天本來就是壞的（原本整站 TTS 都回 503），停用不是退步。
+// 日後恢復的方向：改成已登入使用者才能對任意文字合成，或把常用例句先收成教材。
+const handleClose = () => emit('close')
 </script>
 
 <template>
@@ -104,10 +88,9 @@ watch(
                 >
                   <AudioButton
                     class="flex-none md:mt-1"
-                    :label="`播放例句 ${i + 1}`"
-                    :state="audioState(`bottom-panel-${i}`)"
+                    label="這裡的例句目前沒有語音"
                     size="md"
-                    @play="handleSpeak(s.text, i)"
+                    disabled
                   />
 
                   <div class="w-full flex-1 space-y-1">

@@ -8,10 +8,13 @@ const props = withDefaults(
     label: string
     state?: AudioPlaybackState
     size?: AudioButtonSize
+    /** 這段內容目前沒有語音可播（例如來源無法座標化，見 task-011 定案七）。 */
+    disabled?: boolean
   }>(),
   {
     state: 'idle',
     size: 'sm',
+    disabled: false,
   },
 )
 
@@ -33,6 +36,7 @@ const iconSizeClass = computed(() =>
     class="btn btn-circle border-error/20 bg-white text-error shadow-none transition-none hover:border-error hover:bg-error hover:text-white"
     :class="buttonSizeClass"
     :aria-label="label"
+    :disabled="disabled"
     @click.stop="$emit('play')"
   >
     <span class="grid size-5 place-items-center">

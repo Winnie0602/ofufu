@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { conversationMaterials } from '~/data/materials/conversation'
 import { characterAvatarMap } from '~/types/conversation'
-import { materialCategoryLabels } from '~/types/material'
-import { toPlainJapanese } from '~/utils/parseRuby'
+import type { CurrentMaterial } from '~/types/material'
+import { materialCategoryLabels, currentMaterialKey } from '~/types/material'
 
 const route = useRoute()
 const material = conversationMaterials.find(
@@ -12,6 +12,13 @@ const material = conversationMaterials.find(
 if (!material) {
   throw createError({ statusCode: 404, statusMessage: '找不到這篇對話' })
 }
+
+// 語音要知道這是哪一篇教材；內文的單字 Popover 靠 inject 拿同一份。
+const currentMaterial: CurrentMaterial = {
+  materialType: 'conversation',
+  materialId: material.id,
+}
+provide(currentMaterialKey, currentMaterial)
 
 // 註解掛在句子層，頁尾「重點單字／常見用法與文法」由各句攤平彙整。
 // 內文只標符合該程度的重點單字，故頁尾即列出所有單字註解。
@@ -45,7 +52,10 @@ const {
   isAutoPlaying: isConversationPlaying,
   toggleAutoPlay,
   stopAutoPlay,
-} = useStudyState({ initialGrammarId: grammarNotes[0]?.id ?? null })
+} = useStudyState({
+  material: currentMaterial,
+  initialGrammarId: grammarNotes[0]?.id ?? null,
+})
 
 const selectedRoleParticipantId = ref(material.participants[0]?.id ?? '')
 // 角色扮演逐句練習游標：null＝自由瀏覽；數字＝目前停在第幾句（0-based）。
@@ -59,12 +69,7 @@ const playConversation = () => {
           (line) => line.speakerId !== selectedRoleParticipantId.value,
         )
       : material.lines
-  return toggleAutoPlay(
-    playableLines.map((line) => ({
-      audioId: line.id,
-      text: toPlainJapanese(line.text),
-    })),
-  )
+  return toggleAutoPlay(playableLines.map((line) => ({ audioId: line.id })))
 }
 
 const participantMap = new Map(
@@ -121,10 +126,7 @@ const runPracticeStep = async () => {
     stopAudio()
     return
   }
-  const completed = await playAndWait({
-    audioId: line.id,
-    text: toPlainJapanese(line.text),
-  })
+  const completed = await playAndWait({ audioId: line.id })
   // 單一 <audio> 可能被手動點播或切換中斷；僅在自然播畢且仍停在同句時前進。
   if (!completed || practiceIndex.value !== index) return
   practiceIndex.value = index + 1
@@ -480,12 +482,7 @@ useSeoMeta({ title: material.title, description: material.excerpt })
             <AudioButton
               :label="`播放 ${line.speaker.name} 的對話`"
               :state="audioState(line.id)"
-              @play="
-                togglePlay({
-                  audioId: line.id,
-                  text: toPlainJapanese(line.text),
-                })
-              "
+              @play="togglePlay({ audioId: line.id })"
             />
             <FavoriteButton :label="`收藏 ${line.speaker.name} 的對話`" />
             <button

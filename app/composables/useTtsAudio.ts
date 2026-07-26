@@ -1,17 +1,32 @@
-import type { LANG_CONFIG_MAP } from '~/types/lang'
 import type { AudioPlaybackState } from '~/types/audio'
-
-type TtsLanguageConfig = (typeof LANG_CONFIG_MAP)[keyof typeof LANG_CONFIG_MAP]
+import type { SpeechMaterialType } from '~/types/material'
 
 /**
- * 要唸的一段文字。
+ * 這個 composable 負責唸「哪一篇教材」。
  *
- * `audioId` 是呼叫端自己決定的識別字（通常直接用句子 id），
- * 用途是讓畫面知道「現在正在唸的是哪一句」，好把那顆按鈕變成播放中的樣子。
+ * `materialId` 之所以可以不填，是因為單字列表頁的一顆顆播放鍵屬於不同的單字，
+ * 而單字表裡**一筆單字就是一篇教材**（見 task-011 定案一）。那一頁只建立一個
+ * composable（才能維持「同時只播一段」），所以改由每次 payload 指定是哪一筆。
+ * 閱讀與對話詳情頁整頁就是一篇教材，在這裡填好，呼叫端只要給 `audioId`。
+ */
+export type TtsMaterialSource = {
+  materialType: SpeechMaterialType
+  materialId?: string
+}
+
+/**
+ * 要唸的一個單位。
+ *
+ * `audioId` 就是教材裡那個單位的 id（句子、台詞、單字、例句、單字註解），
+ * 送到 `/api/tts` 當 `unitId`，同時讓畫面知道「現在正在唸的是哪一句」，
+ * 好把那顆按鈕變成播放中的樣子。
+ *
+ * **要唸的文字不由前端決定**——伺服器依座標自己去教材裡查，所以這裡沒有 `text`。
  */
 export interface PlayTtsAudioPayload {
   audioId: string
-  text: string
+  /** 只有單字頁需要：指定這顆按鈕屬於哪一筆單字。其餘教材在建立 composable 時就填好了。 */
+  materialId?: string
 }
 
 type PlayAudioOptions = {
@@ -21,11 +36,16 @@ type PlayAudioOptions = {
 /**
  * 教材語音播放。
  *
- * 文字沒有預先錄好的音檔，是即時送到 `/api/tts` 換一段 base64 音訊回來播。
+ * 教材沒有預先錄好的音檔，是即時送到 `/api/tts` 換一段 base64 音訊回來播。
+ * 送過去的只有「要唸教材裡的哪個位置」，文字與聲音都由伺服器決定，
+ * 前端沒有辦法讓它唸任意文字。
  *
- *   const { audioState, togglePlay } = useTtsAudio(LANG_CONFIG_MAP.ja)
+ *   const { audioState, togglePlay } = useTtsAudio({
+ *     materialType: 'reading',
+ *     materialId: material.id,
+ *   })
  *
- *   togglePlay({ audioId: sentence.id, text: '公園を散歩します。' })
+ *   togglePlay({ audioId: sentence.id })
  *   audioState(sentence.id)   →  'loading' → 'playing' → 'idle'
  *
  * ## 一次只播一段
@@ -58,11 +78,11 @@ type PlayAudioOptions = {
  * 非同步工作開始前先記下「我拿的是 3 號」，回來時看看現在叫到幾號——
  * 已經 5 號了就代表使用者早就換去別的，這輪安靜退場，不要去動畫面。
  *
- * @param lang         語言設定，決定送給 TTS API 的聲音。可以傳函式，之後想切語言比較好接。
+ * @param source       這個 composable 唸的是哪一篇教材。
  * @param options.playbackRate 播放速度。傳 ref 進來的話，播放中調整會即時生效。
  */
 export const useTtsAudio = (
-  lang: TtsLanguageConfig | (() => TtsLanguageConfig),
+  source: TtsMaterialSource,
   options: { playbackRate?: MaybeRefOrGetter<number> } = {},
 ) => {
   const loadingAudioId = ref<string | null>(null)
@@ -131,9 +151,17 @@ export const useTtsAudio = (
    * - false（連播中）：照播，因為那是流程推進不是使用者在按
    */
   const requestAudio = async (
-    { audioId, text }: PlayTtsAudioPayload,
+    { audioId, materialId }: PlayTtsAudioPayload,
     { toggleWhenActive }: PlayAudioOptions,
   ) => {
+    // 兩邊都沒填是呼叫端寫錯，直接吵出來；靜默失敗只會變成「按了沒反應」很難查。
+    const targetMaterialId = materialId ?? source.materialId
+    if (!targetMaterialId) {
+      throw new Error(
+        `useTtsAudio：${source.materialType} 的 ${audioId} 缺少 materialId，請在建立 composable 時或 payload 裡指定`,
+      )
+    }
+
     if (
       loadingAudioId.value === audioId ||
       playingAudioId.value === audioId
@@ -158,8 +186,9 @@ export const useTtsAudio = (
       const response = await $fetch<{ audioContent: string }>('/api/tts', {
         method: 'POST',
         body: {
-          text,
-          lang: toValue(lang),
+          materialType: source.materialType,
+          materialId: targetMaterialId,
+          unitId: audioId,
         },
       })
 
@@ -250,7 +279,7 @@ export const useTtsAudio = (
   /**
    * 一句接一句連播，給「播放整篇文章」「自動播放對話」用。
    *
-   *   playAll(sentences.map((s) => ({ audioId: s.id, text: toPlainJapanese(s.text) })))
+   *   playAll(sentences.map((sentence) => ({ audioId: sentence.id })))
    *
    * 中途被停掉（使用者按停、切換模式、離開頁面）就直接結束，不會硬把剩下的唸完。
    */

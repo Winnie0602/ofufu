@@ -16,7 +16,8 @@ const props = defineProps<{
 
 defineEmits<{
   (event: 'toggle', vocabularyId: string): void
-  (event: 'play', payload: { audioId: string; text: string }): void
+  // materialId 是這一筆單字，audioId 是單字本體或它的某個例句。
+  (event: 'play', payload: { audioId: string; materialId: string }): void
 }>()
 
 const verbGroupLabel = computed(() =>
@@ -69,7 +70,7 @@ const verbGroupLabel = computed(() =>
       <AudioButton
         :label="`播放 ${item.word} 讀音`"
         :state="audioState(item.id)"
-        @play="$emit('play', { audioId: item.id, text: item.word })"
+        @play="$emit('play', { audioId: item.id, materialId: item.id })"
       />
 
       <FavoriteButton :label="`收藏 ${item.word}`" :active="isActive" />
@@ -168,7 +169,7 @@ const verbGroupLabel = computed(() =>
                       @play="
                         $emit('play', {
                           audioId: example.id,
-                          text: example.japanese,
+                          materialId: item.id,
                         })
                       "
                     />

@@ -14,6 +14,10 @@ export default defineNuxtConfig({
     // 教材資料庫名稱。舊的 karaoke 資料在同一個 instance 的 `karaoke_app`，
     // 由 `connectToDatabase(legacyDbName)` 指定。
     mongoDbName: process.env.MONGODB_DB || 'ofufu',
+    // 語音合成的總開關，**預設關閉**：部署站台不設這個變數就打不到 Google TTS，
+    // 公開端點不會被陌生人刷成本。本機要用就在 .env 設 `TTS_ENABLED=true`。
+    // 關閉時教材頁照常可讀，只有播放鍵會拿到 503。
+    ttsEnabled: process.env.TTS_ENABLED === 'true',
     authSecret: process.env.AUTH_SECRET,
     googleClientId: process.env.GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,

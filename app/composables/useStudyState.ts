@@ -1,6 +1,5 @@
 import type { PlayTtsAudioPayload } from '~/composables/useTtsAudio'
-import { LANG_CONFIG_MAP } from '~/types/lang'
-import type { StudyMode } from '~/types/material'
+import type { CurrentMaterial, StudyMode } from '~/types/material'
 
 /**
  * 閱讀頁與對話頁共用的學習狀態。
@@ -10,6 +9,7 @@ import type { StudyMode } from '~/types/material'
  * 差別只在內文單位不同（閱讀是句子、對話是台詞），所以這裡一律用中性的 `id` 當鍵。
  *
  *   const { mode, showRuby, isJapaneseVisible, toggleAutoPlay } = useStudyState({
+ *     material: { materialType: 'reading', materialId: material.id },
  *     initialGrammarId: grammarNotes[0]?.id ?? null,
  *   })
  *
@@ -30,9 +30,11 @@ import type { StudyMode } from '~/types/material'
  * 掀開紀錄只增不減；眼睛重新關上時整批清空，這樣才能再遮一次。
  * 所以 `japaneseVisible` 被 watch 著，一變動就清掀開紀錄。
  */
-export function useStudyState(
-  options: { initialGrammarId?: string | null } = {},
-) {
+export function useStudyState(options: {
+  /** 這一頁是哪一篇教材。語音要靠它組出 `/api/tts` 的座標。 */
+  material: CurrentMaterial
+  initialGrammarId?: string | null
+}) {
   /** 目前的學習模式，對應頁面上方的 Tabs。 */
   const mode = ref<StudyMode>('full')
   /** 漢字上方要不要顯示假名。 */
@@ -55,7 +57,7 @@ export function useStudyState(
   const activeGrammarId = ref<string | null>(options.initialGrammarId ?? null)
 
   const { audioState, togglePlay, playAll, playAndWait, stopAudio } =
-    useTtsAudio(LANG_CONFIG_MAP.ja, { playbackRate })
+    useTtsAudio(options.material, { playbackRate })
 
   /** 是不是正在連續播放整篇／整段（不含單句播放）。 */
   const isAutoPlaying = ref(false)
@@ -104,7 +106,7 @@ export function useStudyState(
   /**
    * 連續播放整篇／整段；播放中再呼叫一次就是停止。
    *
-   *   toggleAutoPlay(sentences.map((s) => ({ audioId: s.id, text: toPlainJapanese(s.text) })))
+   *   toggleAutoPlay(sentences.map((sentence) => ({ audioId: sentence.id })))
    *
    * 要播哪些句子由呼叫端決定——對話的角色扮演會先濾掉你自己的台詞才傳進來。
    */

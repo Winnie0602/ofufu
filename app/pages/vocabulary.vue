@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { vocabularyItems } from '~/data/materials/vocabulary'
-import { LANG_CONFIG_MAP } from '~/types/lang'
 import { materialLevels, type MaterialLevel } from '~/types/material'
 
 const route = useRoute()
@@ -36,7 +35,9 @@ const visibleItems = computed(() => {
 
 const showRuby = ref(true)
 const activeVocabularyId = ref<string | null>(null)
-const { audioState, togglePlay } = useTtsAudio(LANG_CONFIG_MAP.ja)
+// 單字表裡一筆單字就是一篇「教材」，所以 materialId 不在這裡固定，
+// 改由 ListItem 隨每顆播放鍵送上（單字本體與例句都屬於同一筆單字）。
+const { audioState, togglePlay } = useTtsAudio({ materialType: 'vocabulary' })
 let scrollRequestVersion = 0
 
 const changeLevel = (level: MaterialLevel) =>
