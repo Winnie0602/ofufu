@@ -2,7 +2,7 @@
 
 ## 狀態
 
-`In Progress`（**步驟** 0-1 已完成——刪除死檔。階段 0 其餘步驟與階段 1 之後皆待實作。）
+`In Progress`（**階段 0 完成**，已通過瀏覽器與人耳驗收。階段 1 之後待實作。）
 
 ## 目標
 
@@ -52,7 +52,7 @@ MVP 必須同時滿足這三件事，缺一不可：
 
 - [x] **0-1** 刪除死檔 `app/components/song/Player.vue`（Task 001 的殘留，零引用，
       帶 3 個 eslint 與 1 個 typecheck error）。
-- [ ] **0-2** 建立 `server/utils/materials.ts`，提供依座標取得教材文字與 voice 的
+- [x] **0-2** 建立 `server/utils/materials.ts`，提供依座標取得教材文字與 voice 的
       查詢函式 `findSpeechSource()`（命名與支援範圍見「定案一」）。
       **第一版實作直接 import `~/data/materials/*`**：
 
@@ -65,12 +65,12 @@ MVP 必須同時滿足這三件事，缺一不可：
       這個檔案是階段 1 唯一要改實作的地方，因此函式簽章要先想清楚。
       （若 value import 的 alias 在 Nitro 建置時解析失敗，改用相對路徑
       `../../app/data/materials/reading`，行為相同。）
-- [ ] **0-3** 改寫 `server/api/tts.post.ts`：移除最上方的 `throw`，改為只接受
+- [x] **0-3** 改寫 `server/api/tts.post.ts`：移除最上方的 `throw`，改為只接受
       內容座標（見「定案一」），加上 voice allowlist、文字長度上限、
       找不到座標回 404、環境變數可一鍵停用。
-- [ ] **0-4** 對話雙人聲：依 `unitId → line.speakerId → participant.avatarKey`
+- [x] **0-4** 對話雙人聲：依 `unitId → line.speakerId → participant.avatarKey`
       查 voice allowlist（見「定案一」）。**不需要新增任何資料欄位。**
-- [ ] **0-5** `app/composables/useTtsAudio.ts` 的 payload 由 `{ audioId, text }`
+- [x] **0-5** `app/composables/useTtsAudio.ts` 的 payload 由 `{ audioId, text }`
       改為 `{ audioId }`，`materialType` 與 `materialId` 在建立 composable 時傳入。
       更新所有呼叫端：
 
@@ -111,21 +111,29 @@ MVP 必須同時滿足這三件事，缺一不可：
       而且頁面裡直接使用 popover 的地方（頁尾「重點單字」清單）也能一併拿到。
       改 3 處 vs 傳 prop 要改 8 處。
       `inject` 拿不到值時要丟出明確錯誤，不要靜默失敗。
-- [ ] **0-6** `app/components/song/BottomPanel.vue` 的語音停用：移除它的
+- [x] **0-6** `app/components/song/BottomPanel.vue` 的語音停用：移除它的
       `useTtsAudio`，播放鍵改為 disabled 並加註解說明原因（見「定案七」）。
       **這一步不能略過**，否則改完 payload 型別會讓建置失敗。
-- [ ] **0-7** 加一層行程內記憶體快取（`Map`），避免同一句反覆呼叫 Google TTS。
+- [x] **0-7** 加一層行程內記憶體快取（`Map`），避免同一句反覆呼叫 Google TTS。
       階段 2 再換成 MongoDB。
 
 **階段 0 檢查點（做完立刻執行，不要留到階段 3）**
 
-- [ ] `npx eslint <changed-files>` 通過。
-- [ ] `npm run build` 通過（`useTtsAudio` 改了型別，這裡最容易漏掉呼叫端）。
-- [ ] 閱讀、對話、單字三頁的所有播放按鈕都能發出聲音，含單字例句。
-- [ ] 對話中不同角色的聲音明顯不同。
-- [ ] 用工具直接對 `/api/tts` 送任意文字會被拒絕。
-- [ ] 送不存在的 `materialId` / `unitId` 回 404。
-- [ ] 同一句連按兩次，第二次不再呼叫 Google TTS。
+- [x] `npx eslint <changed-files>` 通過。
+- [x] `npm run build` 通過（`useTtsAudio` 改了型別，這裡最容易漏掉呼叫端）。
+- [x] 五種內容座標（閱讀句子、閱讀內文單字註解、單字本體、單字例句、對話台詞）
+      都能經 API 產生音檔。
+- [x] 瀏覽器逐顆點播、整篇／整段序列播放與角色扮演練習都正常。
+- [x] 對話中不同角色的聲音經人耳確認可辨識。
+      （伺服器端已驗證 `speakerId → avatarKey → voice` 真的生效：暫時把 `shiro` 的
+      voice 改成 `kuro` 的，**同一句台詞**的音檔從 41728B 變成 44544B，改回即還原。
+      但「聽起來夠不夠不一樣」只有人耳能判斷。）
+- [x] 用工具直接對 `/api/tts` 送任意文字會被拒絕。
+      （舊式 `{ text, lang }` 回 400；在合法座標上多塞一個 `text` 欄位會被完全忽略，
+      音檔與不塞時逐 byte 相同。）
+- [x] 送不存在的 `materialId` / `unitId` 回 404。
+- [x] 同一句連按兩次，第二次不再呼叫 Google TTS。
+      （244ms → 3ms，音檔 hash 相同。）
 
 ---
 
@@ -223,6 +231,14 @@ export async function findSpeechSource(
 即 `unitId`；`materialType` 與 `materialId` 在建立 composable 時傳入。
 呼叫端因此更簡單，播放狀態機不動。
 
+> **階段 0 實作註記（單字頁的例外）**：`materialId` 在單字頁沒辦法「在建立時傳入」。
+> 因為本定案下一段就規定「`materialType: 'vocabulary'` 時 `materialId` 一律是
+> `VocabularyItem.id`」，而單字列表頁一次列 20 筆單字、每筆都有播放鍵，卻只能建
+> **一個** composable（多建會讓「同時只播一段」失效）。
+> 因此實作為：`materialType` 一定在建立時傳入，`materialId` 建立時可填、
+> payload 亦可覆寫，兩邊都沒有就丟明確錯誤。閱讀與對話維持 `{ audioId }` 不變，
+> 只有 `vocabulary/ListItem.vue` 會送 `{ audioId, materialId }`。
+
 #### findSpeechSource 必須支援的 unit 種類
 
 `unitId` 在不同 `materialType` 下指的東西不同，實作時四種都要能查到：
@@ -280,7 +296,9 @@ const defaultJapaneseVoice = 'ja-JP-Neural2-B'
 }
 ```
 
-- 同一句文字＋同一 voice 只會合成一次。
+- 同一句文字＋同一 voice 只會合成一次。**合成中的請求也要共用**（階段 0 用
+  `pendingAudio` Map 存 in-flight Promise），否則同一句被同時點很多次時，
+  全部會在寫入快取前就查完，第一次點播反而最貴。換成 MongoDB 時別把這層弄丟。
 - 教材文字修改 → 雜湊改變 → 自動產生新音檔，天然滿足 Task 009 的「文字修改後
   不可誤用舊音檔」。
 - 舊的孤兒音檔 v1 不清理。
@@ -290,7 +308,8 @@ const defaultJapaneseVoice = 'ja-JP-Neural2-B'
 #### 其他保護
 
 - 文字長度上限（例如 200 字元），超過直接拒絕。
-- 環境變數可一鍵停用語音合成（保留現有 503 的能力，改成由設定控制）。
+- 環境變數控制語音合成，**v1 預設關閉**：本機設 `TTS_ENABLED=true` 才啟用，
+  部署站台不設，避免公開端點被陌生人刷成本。關閉時教材頁照常可讀，播放鍵拿到 503。
 - 找不到 `materialId` / `unitId` 一律 404，不進入合成。
 
 ---

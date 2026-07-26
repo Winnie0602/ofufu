@@ -17,22 +17,25 @@
 | 008 | 閱讀／對話內文互動改版（顯示層） | ✅ Completed |
 | 009 | TTS 與教材音檔正式流程 | 📋 Backlog |
 | 010 | 元件資料夾重整 ＋ `useStudyState` | ✅ Completed |
-| 011 | 受控語音、教材資料庫與教材 API（v1 主線） | 🚧 In Progress（僅步驟 0-1 完成） |
+| 011 | 受控語音、教材資料庫與教材 API（v1 主線） | 🚧 In Progress（階段 0 完成） |
 
 ## 現在焦點
 
 - Branch：`dev`。
-- 上一個完成：**Task 010**（元件依職責層重整為 `material/`、`content/`，並抽出 `useStudyState`）。
-- 進行中：**Task 011**——v1 的主線，把三種教材推進到資料庫 ＋ API，並讓語音在公開環境可用。
-  規格與**執行順序**見 `docs/tasks/task-011-material-api-and-seed.md`，依階段 0 → 1 → 2 → 3 由上而下做。
+- 上一個完成：**Task 011 階段 0**（受控語音 ＋ 對話雙人聲）。`/api/tts` 不再接受任意文字，
+  只吃「教材類型＋教材 id＋單位 id」的座標，文字與 voice 都由伺服器決定。
+- 進行中：**Task 011 階段 1**——把三種教材推進到 MongoDB ＋ API。
+  規格與**執行順序**見 `docs/tasks/task-011-material-api-and-seed.md`，依階段 1 → 2 → 3 由上而下做。
+- **語音預設關閉**：`TTS_ENABLED=true` 才啟用，本機設在 `.env`，部署站台不設，
+  避免公開端點被陌生人刷 Google TTS 的成本。要在網站上開之前先想好防濫用。
 - 產品範圍與版本規劃一律看 `docs/prd.md`（唯一一份 PRD，不再有 `prd-v1.md` 這類分版檔案）。
 - 目前資料量：對話 3 篇（`app/data/materials/conversation.ts`）。
 
 ## 下一步 Todo
 
-- **Task 011 階段 0**：受控語音 ＋ 對話雙人聲。不需要資料庫，做完網站全功能可展示。
-  含一項必做的連帶處理：`song/BottomPanel.vue` 播的是 Tatoeba 任意外部句子，無法座標化，v1 停用它的語音（見 task-011 定案七）。
 - **Task 011 階段 1**：collection、seed、五支 API、頁面接上。做完即 v1 的 MVP。
+  最後一步 1-7 把 `server/utils/materials.ts` 從讀資料檔換成讀 MongoDB，
+  `findSpeechSource()` 簽章不變，`/api/tts` 一行都不用改。
 - 補教材資料排在 Task 011 階段 2，三階段規範已寫好可直接貼給 AI：
   1. `docs/tasks/seed-content-draft.md` — 產內容
   2. `docs/tasks/seed-annotation-draft.md` — 審重點單字／文法
@@ -44,6 +47,9 @@
 
 - **首頁 `app/components/home/*`（Introduce、Test、各 List、Carousel…）為 showcase 頁**：寫死資料、用來展示其他頁面的使用方式，尚未完成，且**暫無 feature spec**。策略：等各教材頁穩定後再回頭補首頁內容與（如需要的）spec；目前只做必要的 bug 修復與連結，不為它建完整規格。
 - ~~`components/song/Player.vue` 死檔~~：已於 Task 011 階段 0 刪除。
+- **`song/BottomPanel.vue` 的語音已停用**：它播的是 Tatoeba 回來的任意外部句子，
+  沒有 `materialId` 可指，套不上「只能唸既有教材」的保護，播放鍵改為 disabled。
+  日後恢復的方向是「已登入才能對任意文字合成」或把常用例句收成教材（見 task-011 定案七）。
 
 ## Notes（跨 Task、不在別處記錄的決策）
 
