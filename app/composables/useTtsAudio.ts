@@ -76,14 +76,14 @@ export const useTtsAudio = (
   let removeAudioListeners: (() => void) | null = null
 
   // 速度收斂成合法正數。沒給或給了怪東西一律當 1，免得把 playbackRate 設成 0 或 NaN 讓音訊卡住。
-  const resolvePlaybackRate = () => {
+  const getPlaybackRate = () => {
     const rate = toValue(options.playbackRate) ?? 1
     return Number.isFinite(rate) && rate > 0 ? rate : 1
   }
 
   // 播到一半改速度：使用者拉了速度選單，正在唸的這句立刻變速，不用等下一句。
   if (options.playbackRate !== undefined) {
-    watch(resolvePlaybackRate, (rate) => {
+    watch(getPlaybackRate, (rate) => {
       if (audio) audio.playbackRate = rate
     })
   }
@@ -196,7 +196,7 @@ export const useTtsAudio = (
       audio.src = `data:audio/mp3;base64,${response.audioContent}`
       // 兩個都設：defaultPlaybackRate 讓載入完成後仍套用，playbackRate 讓它立刻生效。
       // 只設一個的話，部分瀏覽器會在載入音訊時把速度重設回 1。
-      audio.defaultPlaybackRate = resolvePlaybackRate()
+      audio.defaultPlaybackRate = getPlaybackRate()
       audio.playbackRate = audio.defaultPlaybackRate
       await audio.play()
       return true
