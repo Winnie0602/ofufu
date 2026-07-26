@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const { db } = await connectToDatabase()
+  const { db } = await connectToDatabase(legacyDbName)
 
   const song = await db.collection<SongData>('songs').findOne({ id: videoId })
 

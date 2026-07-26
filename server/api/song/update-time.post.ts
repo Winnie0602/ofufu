@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 
   const { videoId, lyrics } = body
 
-  const { db } = await connectToDatabase()
+  const { db } = await connectToDatabase(legacyDbName)
 
   const operations = lyrics.map(
     (line: { nanoid: string; start?: number; end?: number }) => {

@@ -1,5 +1,5 @@
 import { createError } from 'h3'
-import { connectToDatabase } from '~~/server/utils/mongodb'
+import { connectToDatabase, legacyDbName } from '~~/server/utils/mongodb'
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const { db } = await connectToDatabase()
+  const { db } = await connectToDatabase(legacyDbName)
 
   const collection = db.collection('songs')
 

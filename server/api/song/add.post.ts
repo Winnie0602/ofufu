@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
     }
   })
 
-  const { db } = await connectToDatabase()
+  const { db } = await connectToDatabase(legacyDbName)
 
   // 新增一筆該歌曲資料
   await db.collection('songs').insertOne({

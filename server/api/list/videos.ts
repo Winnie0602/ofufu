@@ -1,10 +1,10 @@
 import { getQuery } from 'h3'
-import { connectToDatabase } from '~~/server/utils/mongodb'
+import { connectToDatabase, legacyDbName } from '~~/server/utils/mongodb'
 import type { VideosList } from '~/types/video'
 import type { LangCode } from '~/types/lang'
 
 export default defineEventHandler(async (event) => {
-  const { db } = await connectToDatabase()
+  const { db } = await connectToDatabase(legacyDbName)
   const query = getQuery(event)
 
   const language = query.language as string

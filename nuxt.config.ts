@@ -11,6 +11,9 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     mongoURI: process.env.MONGODB_URI || '',
+    // 教材資料庫名稱。舊的 karaoke 資料在同一個 instance 的 `karaoke_app`，
+    // 由 `connectToDatabase(legacyDbName)` 指定。
+    mongoDbName: process.env.MONGODB_DB || 'ofufu',
     authSecret: process.env.AUTH_SECRET,
     googleClientId: process.env.GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,

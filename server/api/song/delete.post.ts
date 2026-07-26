@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const { db } = await connectToDatabase()
+  const { db } = await connectToDatabase(legacyDbName)
 
   await Promise.all([
     db.collection('songs').deleteOne({ id: videoId }),
