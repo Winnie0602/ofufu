@@ -17,30 +17,43 @@
 | 008 | 閱讀／對話內文互動改版（顯示層） | ✅ Completed |
 | 009 | TTS 與教材音檔正式流程 | 📋 Backlog |
 | 010 | 元件資料夾重整 ＋ `useStudyState` | ✅ Completed |
-| 011 | 受控語音、教材資料庫與教材 API（v1 主線） | 🚧 In Progress（階段 0 完成） |
+| 011 | 受控語音、教材資料庫與教材 API（v1 主線） | 🚧 In Progress（階段 0＋1 完成，MVP 成立） |
 
 ## 現在焦點
 
 - Branch：`dev`。
-- 上一個完成：**Task 011 階段 0**（受控語音 ＋ 對話雙人聲）。`/api/tts` 不再接受任意文字，
-  只吃「教材類型＋教材 id＋單位 id」的座標，文字與 voice 都由伺服器決定。
-- 進行中：**Task 011 階段 1**——把三種教材推進到 MongoDB ＋ API。
-  規格與**執行順序**見 `docs/tasks/task-011-material-api-and-seed.md`，依階段 1 → 2 → 3 由上而下做。
+- 上一個完成：**Task 011 階段 1（1-1 ～ 1-7 全部）**。三種教材已進 MongoDB，
+  三個列表頁與兩個詳情頁的資料都來自 API，程度篩選與分頁在伺服器端完成，
+  `findSpeechSource()` 也改讀資料庫（簽章不變，`/api/tts` 沒動）。
+- **階段 0** 的受控語音維持不變：`/api/tts` 只吃「教材類型＋教材 id＋單位 id」的座標，
+  文字與 voice 都由伺服器決定。
+- **尚缺一輪瀏覽器人工走查**，清單與建議看哪兩篇教材見 task-011 的
+  「人工走查清單」。這些都不需要改程式。
+- **語音公開開啟前必須先加 rate limit**：現在擋得住任意文字與任意 voice，
+  擋不住拿合法座標反覆請求。行程內快取重啟就沒了。
+- 教材封面放 `public/images/covers/`，資料寫相對路徑。**不能放 `app/assets/`**——
+  `coverImage` 是資料庫來的字串，Vite 只處理原始碼裡看得見的靜態路徑。
 - **語音預設關閉**：`TTS_ENABLED=true` 才啟用，本機設在 `.env`，部署站台不設，
   避免公開端點被陌生人刷 Google TTS 的成本。要在網站上開之前先想好防濫用。
 - 產品範圍與版本規劃一律看 `docs/prd.md`（唯一一份 PRD，不再有 `prd-v1.md` 這類分版檔案）。
-- 目前資料量：對話 3 篇（`app/data/materials/conversation.ts`）。
+- 目前資料量：單字 86 筆、閱讀 9 篇、對話 9 篇，程度涵蓋 n5～n1。教材內容仍在增加中。
 
 ## 下一步 Todo
 
-- **Task 011 階段 1**：collection、seed、五支 API、頁面接上。做完即 v1 的 MVP。
-  最後一步 1-7 把 `server/utils/materials.ts` 從讀資料檔換成讀 MongoDB，
-  `findSpeechSource()` 簽章不變，`/api/tts` 一行都不用改。
+- **瀏覽器人工走查**（見上方「現在焦點」與 task-011 階段 1 檢查點）。
+- **依未配對報告補齊單字表**：目前 47 個字還沒收錄，seed 回應的 `unmatchedNotes`
+  可直接拿去反向產生（`二名様` 判定為固定表達、刻意不收）。
 - 補教材資料排在 Task 011 階段 2，三階段規範已寫好可直接貼給 AI：
   1. `docs/tasks/seed-content-draft.md` — 產內容
   2. `docs/tasks/seed-annotation-draft.md` — 審重點單字／文法
   3. `docs/tasks/seed-data.md` — 轉 TypeScript
 - **從兩個教材頁 template 抽出各自專屬區塊**，屆時才建立 `components/reading/`、`components/conversation/`（見 task-010「後續接」）。
+- **單字表沒有欄位規格**：`docs/tasks/seed-data.md` 只規範閱讀與對話教材，不含
+  `VocabularyItem`（`rubyHtml`、`verbGroup`、`conjugations` 都沒提），但定案四要求
+  「依 seed-data.md 產 VocabularyItem」。下次要大量產單字前先補這份規格。
+  已定下的慣例先記在這裡：`rubyHtml` **能逐字拆就逐字拆，拆不開的整組標一個 `rt`**
+  （`一人暮らし` 的 `一人` 是熟字訓、`時々` 的 `々` 沒有讀音、`景色` 的 `景` 不讀 `け`，
+  三者都整組標）；する 名詞的 `meaning` 只寫短 gloss，不註明可接 `する`。
 - **Task 009** 的正式音檔流程（R2、批次預產、資產狀態機）由 Task 011 承接其中的受控與快取部分，其餘維持 Backlog。
 
 ## 已知債（有意識延後，非遺漏）
