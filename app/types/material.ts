@@ -95,6 +95,18 @@ export type MaterialSummary = {
 }
 
 /**
+ * 列表 API 的回應形狀，三個列表頁共用。
+ * 篩選與分頁都在伺服器完成，`items` 就是這一頁要顯示的東西。
+ */
+export type MaterialListingResponse<T> = {
+  items: T[]
+  total: number
+  page: number
+  pageSize: number
+  totalPages: number
+}
+
+/**
  * 教材頁上方 Tabs 的三種學習方式：
  * - `full`     整篇／整段閱讀，可自動播放全文
  * - `sentence` 一句一句學，可個別遮住日文或中文

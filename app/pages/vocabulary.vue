@@ -1,37 +1,5 @@
 <script setup lang="ts">
-import { vocabularyItems } from '~/data/materials/vocabulary'
-import { materialLevels, type MaterialLevel } from '~/types/material'
-
-const route = useRoute()
-const router = useRouter()
-const pageSize = 20
-
-const selectedLevel = computed<MaterialLevel>(() => {
-  const level = String(route.query.level ?? 'all').toLowerCase()
-  return materialLevels.includes(level as MaterialLevel)
-    ? (level as MaterialLevel)
-    : 'all'
-})
-
-const currentPage = computed(() => {
-  const page = Number(route.query.page ?? 1)
-  return Number.isInteger(page) && page > 0 ? page : 1
-})
-
-const filteredItems = computed(() =>
-  selectedLevel.value === 'all'
-    ? vocabularyItems
-    : vocabularyItems.filter((item) => item.level === selectedLevel.value),
-)
-
-const pageCount = computed(() =>
-  Math.max(1, Math.ceil(filteredItems.value.length / pageSize)),
-)
-const safePage = computed(() => Math.min(currentPage.value, pageCount.value))
-const visibleItems = computed(() => {
-  const start = (safePage.value - 1) * pageSize
-  return filteredItems.value.slice(start, start + pageSize)
-})
+import type { VocabularyItem } from '~/types/vocabulary'
 
 const showRuby = ref(true)
 const activeVocabularyId = ref<string | null>(null)
@@ -39,9 +7,6 @@ const activeVocabularyId = ref<string | null>(null)
 // 改由 ListItem 隨每顆播放鍵送上（單字本體與例句都屬於同一筆單字）。
 const { audioState, togglePlay } = useTtsAudio({ materialType: 'vocabulary' })
 let scrollRequestVersion = 0
-
-const changeLevel = (level: MaterialLevel) =>
-  router.push({ query: { ...route.query, level, page: 1 } })
 
 const scrollToVocabulary = async (
   vocabularyId: string,
@@ -65,16 +30,21 @@ const scrollToVocabulary = async (
     })
 }
 
-const changePage = async (page: number) => {
-  await router.push({
-    query: { ...route.query, level: selectedLevel.value, page },
-  })
-
-  const firstVocabulary = visibleItems.value[0]
-  if (safePage.value === page && firstVocabulary) {
-    await scrollToVocabulary(firstVocabulary.id)
-  }
-}
+const {
+  changeLevel,
+  changePage,
+  hasError,
+  isLoading,
+  pageCount,
+  pageSize,
+  retry,
+  safePage,
+  selectedLevel,
+  visibleItems,
+} = await useMaterialListing<VocabularyItem>(
+  '/api/materials/vocabulary',
+  scrollToVocabulary,
+)
 
 const toggleVocabulary = (id: string) => {
   if (activeVocabularyId.value === id) {
@@ -153,14 +123,27 @@ useSeoMeta({
           />
         </div>
 
+        <!-- 載入失敗要跟「這個程度沒有單字」分開講，不然看起來像資料真的不存在。 -->
+        <div v-if="hasError" class="py-16 text-center">
+          <p class="text-neutral-700">單字載入失敗，請稍後再試。</p>
+          <button
+            type="button"
+            class="btn btn-soft btn-sm mt-4"
+            @click="retry()"
+          >
+            重新載入
+          </button>
+        </div>
+
         <div
-          v-if="visibleItems.length === 0"
+          v-else-if="visibleItems.length === 0"
           class="py-16 text-center text-neutral-500"
         >
-          目前沒有這個程度的單字。
+          {{ isLoading ? '載入中⋯' : '目前沒有這個程度的單字。' }}
         </div>
 
         <Pagination
+          v-if="!hasError"
           class="mt-6"
           :page="safePage"
           :total-pages="pageCount"

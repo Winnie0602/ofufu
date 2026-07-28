@@ -1,16 +1,25 @@
 <script setup lang="ts">
-import { conversationMaterials } from '~/data/materials/conversation'
+import type { ConversationMaterial } from '~/types/conversation'
 import { characterAvatarMap } from '~/types/conversation'
-import type { CurrentMaterial } from '~/types/material'
+import type {
+  CurrentMaterial,
+  MaterialListingResponse,
+  MaterialSummary,
+} from '~/types/material'
 import { materialCategoryLabels, currentMaterialKey } from '~/types/material'
 
 const route = useRoute()
-const material = conversationMaterials.find(
-  (item) => item.id === route.params.id,
+// 單字註解的例句已由 API 併好，這裡拿到的就是要顯示的最終內容。
+const { data, error } = await useFetch<ConversationMaterial>(
+  `/api/materials/conversation/${route.params.id}`,
 )
+const material = data.value
 
 if (!material) {
-  throw createError({ statusCode: 404, statusMessage: '找不到這篇對話' })
+  throw createError({
+    statusCode: error.value?.statusCode ?? 404,
+    statusMessage: '找不到這篇對話',
+  })
 }
 
 // 語音要知道這是哪一篇教材；內文的單字 Popover 靠 inject 拿同一份。
@@ -192,8 +201,16 @@ const isTranslationVisible = (lineId: string) =>
   isTranslationRevealed(lineId) ||
   translationVisible.value
 
-const recommendations = conversationMaterials
-  .filter((item) => item.id !== material.id && item.level === material.level)
+// 推薦同程度的其他對話。列表 API 已經只回卡片需要的欄位，不會多載整篇內文。
+const { data: sameLevelListing } = await useFetch<
+  MaterialListingResponse<MaterialSummary>
+>('/api/materials/conversation', {
+  key: `conversation-recommendations-${material.id}`,
+  query: { level: material.level },
+})
+
+const recommendations = (sameLevelListing.value?.items ?? [])
+  .filter((item) => item.id !== material.id)
   .slice(0, 5)
 
 watch(mode, () => {

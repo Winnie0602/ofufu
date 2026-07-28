@@ -4,7 +4,8 @@ import type { MaterialSummary } from '~/types/material'
 const props = defineProps<{
   title: string
   description: string
-  items: MaterialSummary[]
+  /** 列表 API 路徑，例：`/api/materials/reading`。 */
+  endpoint: string
   itemIdPrefix: string
   emptyLabel: string
 }>()
@@ -12,11 +13,19 @@ const props = defineProps<{
 const {
   changeLevel,
   changePage,
+  hasError,
+  isLoading,
   pageCount,
+  retry,
   safePage,
   selectedLevel,
   visibleItems,
-} = useMaterialListing(props.items, props.itemIdPrefix)
+} = await useMaterialListing<MaterialSummary>(props.endpoint, (itemId) => {
+  document.getElementById(`${props.itemIdPrefix}-${itemId}`)?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+})
 </script>
 
 <template>
@@ -50,14 +59,27 @@ const {
           />
         </div>
 
+        <!-- 載入失敗要跟「這個程度沒有教材」分開講，不然看起來像資料真的不存在。 -->
+        <div v-if="hasError" class="py-16 text-center">
+          <p class="text-neutral-700">教材載入失敗，請稍後再試。</p>
+          <button
+            type="button"
+            class="btn btn-soft btn-sm mt-4"
+            @click="retry()"
+          >
+            重新載入
+          </button>
+        </div>
+
         <div
-          v-if="visibleItems.length === 0"
+          v-else-if="visibleItems.length === 0"
           class="py-16 text-center text-neutral-500"
         >
-          {{ emptyLabel }}
+          {{ isLoading ? '載入中⋯' : emptyLabel }}
         </div>
 
         <Pagination
+          v-if="!hasError"
           class="mt-8"
           :page="safePage"
           :total-pages="pageCount"
