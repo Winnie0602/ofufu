@@ -18,6 +18,8 @@ export default defineNuxtConfig({
     // 公開端點不會被陌生人刷成本。本機要用就在 .env 設 `TTS_ENABLED=true`。
     // 關閉時教材頁照常可讀，只有播放鍵會拿到 503。
     ttsEnabled: process.env.TTS_ENABLED === 'true',
+    // `/api/admin/seed` 的通行碼。沒設就打不通，正式環境本來也擋在 dev-only 之外。
+    seedToken: process.env.SEED_TOKEN || '',
     authSecret: process.env.AUTH_SECRET,
     googleClientId: process.env.GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
