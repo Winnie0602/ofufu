@@ -33,7 +33,7 @@ defineProps<{
 <style scoped>
 .material-hero-bg {
   background-color: #fff;
-  background-image: url('/hero-bg3.png');
+  background-image: url('/hero-bg3.jpg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: auto 100%;

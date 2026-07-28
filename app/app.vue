@@ -25,9 +25,9 @@ useHead(() => ({
 
 useSeoMeta({
   ogSiteName: siteName,
-  ogImage: `${siteUrl}/og-img.png`,
+  ogImage: `${siteUrl}/og-img.jpg`,
   twitterCard: 'summary_large_image',
-  twitterImage: `${siteUrl}/og-img.png`,
+  twitterImage: `${siteUrl}/og-img.jpg`,
 })
 </script>
 
