@@ -1,13 +1,8 @@
-import { conversationMaterials } from '~/data/materials/conversation'
-import { readingMaterials } from '~/data/materials/reading'
-import { vocabularyItems } from '~/data/materials/vocabulary'
 import type { CharacterAvatarKey } from '~/types/conversation'
-import type {
-  MaterialVocabularyNote,
-  SpeechMaterialType,
-} from '~/types/material'
+import type { SpeechMaterialType } from '~/types/material'
 import { speechMaterialTypes } from '~/types/material'
 import { toPlainJapanese } from '~/utils/parseRuby'
+import { getMaterialCollections } from '~~/server/utils/materialCollections'
 
 /**
  * 「要唸哪一句」的座標。
@@ -40,117 +35,92 @@ const characterVoiceMap: Record<CharacterAvatarKey, string> = {
 /** 閱讀與單字一律用這個聲音；對話查不到說話者時也退回這個。 */
 const defaultJapaneseVoice = 'ja-JP-Neural2-B'
 
-/** 內文的單字 Popover 播的是單字表層形，聲音一律用預設的旁白聲。 */
-const noteUnits = (
-  notes: MaterialVocabularyNote[] | undefined,
-): [string, SpeechSource][] =>
-  (notes ?? []).map((note) => [
-    note.id,
-    { text: toPlainJapanese(note.surface), voiceName: defaultJapaneseVoice },
-  ])
+const withDefaultVoice = (text: string): SpeechSource => ({
+  text: toPlainJapanese(text),
+  voiceName: defaultJapaneseVoice,
+})
 
 /**
  * 單字：一筆單字自成一篇「教材」，`materialId` 就是 `VocabularyItem.id`。
  * 單位有兩種——單字本體（唸 `word`）與它的例句（唸 `example.japanese`），
  * 單字列表頁兩種都會播。
  */
-const buildVocabularyUnits = (): Map<string, Map<string, SpeechSource>> =>
-  new Map(
-    vocabularyItems.map((item) => [
-      item.id,
-      new Map<string, SpeechSource>([
-        [item.id, { text: item.word, voiceName: defaultJapaneseVoice }],
-        ...item.examples.map(
-          (example): [string, SpeechSource] => [
-            example.id,
-            { text: example.japanese, voiceName: defaultJapaneseVoice },
-          ],
-        ),
-      ]),
-    ]),
-  )
+const findVocabularySource = async (
+  target: SpeechTarget,
+): Promise<SpeechSource | null> => {
+  const { vocabularyItems } = await getMaterialCollections()
+  const item = await vocabularyItems.findOne({ _id: target.materialId })
+  if (!item) return null
+
+  if (target.unitId === target.materialId) return withDefaultVoice(item.word)
+
+  const example = item.examples.find(({ id }) => id === target.unitId)
+  return example ? withDefaultVoice(example.japanese) : null
+}
 
 /** 閱讀：單位是句子（`ReadingSentence.id`）與句中的單字註解。 */
-const buildReadingUnits = (): Map<string, Map<string, SpeechSource>> =>
-  new Map(
-    readingMaterials.map((material) => {
-      const sentences = material.paragraphs.flatMap(
-        (paragraph) => paragraph.sentences,
-      )
-      return [
-        material.id,
-        new Map<string, SpeechSource>([
-          ...sentences.map(
-            (sentence): [string, SpeechSource] => [
-              sentence.id,
-              {
-                text: toPlainJapanese(sentence.text),
-                voiceName: defaultJapaneseVoice,
-              },
-            ],
-          ),
-          ...sentences.flatMap((sentence) =>
-            noteUnits(sentence.vocabularyNotes),
-          ),
-        ]),
-      ]
-    }),
+const findReadingSource = async (
+  target: SpeechTarget,
+): Promise<SpeechSource | null> => {
+  const { readingMaterials } = await getMaterialCollections()
+  const material = await readingMaterials.findOne({ _id: target.materialId })
+  if (!material) return null
+
+  const sentences = material.paragraphs.flatMap(
+    (paragraph) => paragraph.sentences,
   )
+
+  const sentence = sentences.find(({ id }) => id === target.unitId)
+  if (sentence) return withDefaultVoice(sentence.text)
+
+  const note = sentences
+    .flatMap((item) => item.vocabularyNotes ?? [])
+    .find(({ id }) => id === target.unitId)
+
+  return note ? withDefaultVoice(note.surface) : null
+}
 
 /**
  * 對話：單位是台詞（`ConversationLine.id`）與台詞裡的單字註解。
  *
  * 台詞的聲音靠 `line.speakerId → participant.avatarKey` 查出來，
  * 所以**不需要在教材資料裡新增任何欄位**，現有的三個固定角色就夠用。
+ * 單字註解播的是單字表層形，一律用預設的旁白聲。
  */
-const buildConversationUnits = (): Map<string, Map<string, SpeechSource>> =>
-  new Map(
-    conversationMaterials.map((material) => {
-      const voiceOf = new Map(
-        material.participants.map((participant) => [
-          participant.id,
-          characterVoiceMap[participant.avatarKey],
-        ]),
-      )
-      return [
-        material.id,
-        new Map<string, SpeechSource>([
-          ...material.lines.map(
-            (line): [string, SpeechSource] => [
-              line.id,
-              {
-                text: toPlainJapanese(line.text),
-                voiceName: voiceOf.get(line.speakerId) ?? defaultJapaneseVoice,
-              },
-            ],
-          ),
-          ...material.lines.flatMap((line) => noteUnits(line.vocabularyNotes)),
-        ]),
-      ]
-    }),
-  )
+const findConversationSource = async (
+  target: SpeechTarget,
+): Promise<SpeechSource | null> => {
+  const { conversationMaterials } = await getMaterialCollections()
+  const material = await conversationMaterials.findOne({
+    _id: target.materialId,
+  })
+  if (!material) return null
 
-// 第一次查詢時才建，之後整個行程共用。教材是編譯進來的常數，建好就不會變。
-const unitBuilders: Record<
-  SpeechMaterialType,
-  () => Map<string, Map<string, SpeechSource>>
-> = {
-  vocabulary: buildVocabularyUnits,
-  reading: buildReadingUnits,
-  conversation: buildConversationUnits,
-}
-const unitsByType = new Map<
-  SpeechMaterialType,
-  Map<string, Map<string, SpeechSource>>
->()
-
-const getUnits = (materialType: SpeechMaterialType) => {
-  let units = unitsByType.get(materialType)
-  if (!units) {
-    units = unitBuilders[materialType]()
-    unitsByType.set(materialType, units)
+  const line = material.lines.find(({ id }) => id === target.unitId)
+  if (line) {
+    const speaker = material.participants.find(({ id }) => id === line.speakerId)
+    return {
+      text: toPlainJapanese(line.text),
+      voiceName: speaker
+        ? characterVoiceMap[speaker.avatarKey]
+        : defaultJapaneseVoice,
+    }
   }
-  return units
+
+  const note = material.lines
+    .flatMap((item) => item.vocabularyNotes ?? [])
+    .find(({ id }) => id === target.unitId)
+
+  return note ? withDefaultVoice(note.surface) : null
+}
+
+const sourceFinders: Record<
+  SpeechMaterialType,
+  (target: SpeechTarget) => Promise<SpeechSource | null>
+> = {
+  vocabulary: findVocabularySource,
+  reading: findReadingSource,
+  conversation: findConversationSource,
 }
 
 /** 擋掉 request body 裡亂寫的 `materialType`，不讓它變成查表的 key。 */
@@ -165,15 +135,10 @@ export const isSpeechMaterialType = (
  *   findSpeechSource({ materialType: 'conversation', materialId: 'C7Km…', unitId: 'CvLn…' })
  *   →  { text: 'お電話ありがとうございます。', voiceName: 'ja-JP-Neural2-C' }
  *
- * 目前直接讀 `app/data/materials/*`（server 的 `~/*` 指向 `app/*`）。
- * 階段 1 換成讀 MongoDB 時只改這個檔案的內部實作，簽章不變，`/api/tts` 一行都不用動——
- * 所以這裡是非同步的，即使現在還不需要等任何東西。
+ * 資料來自 MongoDB。合成結果本來就有快取，所以同一句不會反覆查資料庫又反覆合成。
  */
 export async function findSpeechSource(
   target: SpeechTarget,
 ): Promise<SpeechSource | null> {
-  return (
-    getUnits(target.materialType).get(target.materialId)?.get(target.unitId) ??
-    null
-  )
+  return sourceFinders[target.materialType](target)
 }
