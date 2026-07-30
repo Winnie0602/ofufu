@@ -35,11 +35,6 @@ type PlayAudioOptions = {
 
 /**
  * 教材語音播放。
- *
- * 教材沒有預先錄好的音檔，是即時送到 `/api/tts` 換一段 base64 音訊回來播。
- * 送過去的只有「要唸教材裡的哪個位置」，文字與聲音都由伺服器決定，
- * 前端沒有辦法讓它唸任意文字。
- *
  *   const { audioState, togglePlay } = useTtsAudio({
  *     materialType: 'reading',
  *     materialId: material.id,

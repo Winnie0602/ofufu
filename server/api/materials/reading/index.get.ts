@@ -1,13 +1,13 @@
 import { defineEventHandler } from 'h3'
 import {
   getMaterialCollections,
-  toDomainDocument,
+  replaceMongoIdWithId,
 } from '~~/server/utils/materialCollections'
 import {
   limitToLastPage,
   listingResponse,
   materialPageSize,
-  materialSummaryProjection,
+  materialListFields,
   parseListingQuery,
 } from '~~/server/utils/materialQuery'
 
@@ -22,11 +22,11 @@ export default defineEventHandler(async (event) => {
   const page = limitToLastPage(query.page, total)
 
   const documents = await readingMaterials
-    .find(filter, { projection: materialSummaryProjection })
+    .find(filter, { projection: materialListFields })
     .sort({ level: -1, _id: 1 })
     .skip((page - 1) * materialPageSize)
     .limit(materialPageSize)
     .toArray()
 
-  return listingResponse(documents.map(toDomainDocument), total, page)
+  return listingResponse(documents.map(replaceMongoIdWithId), total, page)
 })

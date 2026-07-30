@@ -1,7 +1,7 @@
 import { defineEventHandler } from 'h3'
 import {
   getMaterialCollections,
-  toDomainDocument,
+  replaceMongoIdWithId,
 } from '~~/server/utils/materialCollections'
 import {
   limitToLastPage,
@@ -28,5 +28,5 @@ export default defineEventHandler(async (event) => {
     .limit(materialPageSize)
     .toArray()
 
-  return listingResponse(documents.map(toDomainDocument), total, page)
+  return listingResponse(documents.map(replaceMongoIdWithId), total, page)
 })

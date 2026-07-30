@@ -11,7 +11,6 @@ export type JlptLevel = Exclude<MaterialLevel, 'all'>
 
 /**
  * 六大教材類型。key 是不會變的英文代碼（存進資料、寫進網址），value 是畫面上顯示的中文。
- * 之所以分開，是為了讓資料不受中文用詞調整影響。
  */
 export const materialTypeLabels = {
   vocabulary: '單字',
@@ -51,6 +50,7 @@ export type CurrentMaterial = {
   materialId: string
 }
 
+// 目前正在看的教材
 export const currentMaterialKey = Symbol(
   'currentMaterial',
 ) as InjectionKey<CurrentMaterial>
@@ -121,12 +121,21 @@ export const studyModes = [
 export type StudyMode = (typeof studyModes)[number]
 
 /**
- * 解析完括號記法之後的一小段文字。
+ * 日文句子解析後的其中一小段。
  *
- *   '朝[あさ]の空気[くうき]'
- *   →  [{ text: '朝', ruby: 'あさ' }, { text: 'の' }, { text: '空気', ruby: 'くうき' }]
+ * 有漢字讀音：
+ * `{ text: '朝', ruby: 'あさ' }`
  *
- * 有 `ruby` 的會渲染成假名在上的 <ruby>，沒有的就是普通文字。由 `parseRuby()` 產生。
+ * 普通文字：
+ * `{ text: 'の' }`
+ *
+ * 一整句會由多個 RubyToken 組成：
+ * `朝[あさ]の空気[くうき]`
+ * → [
+ *   { text: '朝', ruby: 'あさ' },
+ *   { text: 'の' },
+ *   { text: '空気', ruby: 'くうき' },
+ * ]
  */
 export type RubyToken = {
   text: string
@@ -159,7 +168,7 @@ export type MaterialExample = {
 }
 
 /**
- * 內文裡一個可點單字的註解。
+ * 某個單字出現在某篇教材的某個句子時，該次出現所需要的註解資料。
  *
  * 這裡**只記「這個字在這篇文章的哪裡、在這句話是什麼意思」**，不放完整單字資料。
  * 活用變化、通用意思、豐富例句都在單字表裡，靠辭書形去查：
@@ -172,8 +181,7 @@ export type MaterialVocabularyNote = {
   /** 這個「出現位置」的固定模擬 nanoid。同一個單字在不同篇文章有不同的 id。 */
   id: string
   /**
-   * 實際出現在文中的樣子，可能是活用形（食べた、楽しめる）。
-   * 兩個用途：畫面上顯示，以及當作定位錨點——renderer 拿這個字串去句子裡找位置。
+   * 實際出現在文中的樣子，可能是活用形（食べた、楽しめる）
    */
   surface: string
   /** 同一個字在這句出現多次時，指定要標第幾個（從 1 數起）；只出現一次可省略。 */
@@ -208,7 +216,6 @@ export type MaterialGrammarNote = {
   shortMeaning: string
   /**
    * 較長的說明，寫給人看的白話，例：「某種變化從過去逐漸累積、發展到現在」。
-   * 避免「表示ＸＸＸ，意思是「ＸＸＸ」。」這種公式化寫法。
    */
   explanation: string
   /**
@@ -226,7 +233,7 @@ export type MaterialGrammarNote = {
 }
 
 /**
- * `buildAnnotatedSegments()` 算好的「渲染計畫」——一句話被切成好幾段，每段標明歸誰管。
+ * `createAnnotatedSpans()` 算好的「渲染計畫」——一句話被切成好幾段，每段標明歸誰管。
  *
  *   [ { tokens: 公園(こうえん)/の/花(はな)/が },            ← 普通文字
  *     { tokens: 咲(さ)/いていて, grammarNote },              ← 藍底、點了開文法說明

@@ -3,7 +3,7 @@ import type {
   MaterialGrammarNote,
   MaterialVocabularyNote,
 } from '~/types/material'
-import { buildAnnotatedSegments } from '~/utils/annotatedText'
+import { createAnnotatedSpans } from '~/utils/annotatedText'
 
 const props = defineProps<{
   /** 純文字含 ruby 括號記法（例：日本[にほん]には…）。 */
@@ -18,7 +18,7 @@ const props = defineProps<{
 }>()
 
 const spans = computed(() =>
-  buildAnnotatedSegments(props.text, {
+  createAnnotatedSpans(props.text, {
     // 關閉時內文完全不標記（單字與文法皆不標），只顯示乾淨文章；
     // 開啟時同時揭露重點單字（淡粉底）與文法（primary 淡底）。
     vocabularyNotes: props.lookupMode ? props.vocabularyNotes : undefined,

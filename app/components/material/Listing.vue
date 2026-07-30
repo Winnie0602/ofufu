@@ -29,7 +29,7 @@ const {
 </script>
 
 <template>
-  <MaterialPageShell>
+  <MaterialListPageLayout>
     <template #hero>
       <MaterialHero :title="title" :description="description" />
     </template>
@@ -88,5 +88,5 @@ const {
         />
       </section>
     </div>
-  </MaterialPageShell>
+  </MaterialListPageLayout>
 </template>

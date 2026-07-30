@@ -147,7 +147,7 @@ function isCovered(unit: Unit, range: CharRange): boolean {
  * 單字和文法搶同一段字時，文法先佔位，單字只填剩下沒被佔走的地方（v1 不做重疊）。
  * 像「〜たり、〜たり」這種被逗號隔開的文法，一則註解可以帶多個 anchor，各自定位、共用同一則說明。
  */
-export function buildAnnotatedSegments(
+export function createAnnotatedSpans(
   text: string,
   notes: {
     vocabularyNotes?: MaterialVocabularyNote[]

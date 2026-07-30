@@ -5,7 +5,7 @@ import {
   isSpeechMaterialType,
   type SpeechSource,
   type SpeechTarget,
-} from '~~/server/utils/materials'
+} from '~~/server/utils/speechSource'
 
 /**
  * 教材語音合成。

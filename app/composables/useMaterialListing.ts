@@ -1,8 +1,12 @@
-import type { JlptLevel, MaterialLevel, MaterialListingResponse } from '~/types/material'
+import type {
+  JlptLevel,
+  MaterialLevel,
+  MaterialListingResponse,
+} from '~/types/material'
 import { materialLevels } from '~/types/material'
 
 /**
- * 教材列表頁的程度篩選與分頁。
+ * 共用的「教材列表管理工具」，教材列表頁的程度篩選與分頁。
  *
  * 單字、閱讀、對話（之後還有歌曲、文法⋯）的列表頁行為完全一樣：選程度、翻頁、
  * 翻完捲到最上面。這支把那套邏輯抽出來，各列表頁只要傳自己的 API 路徑。
@@ -10,23 +14,15 @@ import { materialLevels } from '~/types/material'
  *   const { visibleItems, selectedLevel, changeLevel, changePage } =
  *     await useMaterialListing('/api/materials/reading', scrollToCard)
  *
- * ## 狀態存在網址，不存在元件裡
- *
- * 程度和頁碼都讀寫 route query，所以網址長這樣：
- *
- *   /reading?level=n3&page=2
- *
- * 這樣使用者可以把某一頁分享給別人、按上一頁會回到剛才的篩選、重新整理也不會跑掉。
- * 代價是切換條件要走 `router.push()`，不能直接改變數。
- *
- * 這兩個值同時是 `useFetch` 的 query，所以改網址就會自動重新請求，
- * **篩選與切片都在伺服器做**，前端不再持有完整教材陣列。
+ * ## 使用者目前選擇的「程度」和「頁數」，記錄在網址參數中，而不是另外用元件的 ref 保存。
  *
  * @param endpoint           列表 API 路徑，例：`/api/materials/reading`
- * @param scrollToFirstItem  翻頁後要捲到哪裡。各頁的捲動目標不同（卡片、單字標題），
- *                           所以交給呼叫端決定，這裡只負責決定「什麼時候該捲」。
+ * @param scrollToFirstItem  換頁完成後，捲動到第一筆教材的方法。
+ *                           不同頁面的目標元素不同，因此由各頁提供捲動方法；
  */
-export const useMaterialListing = async <T extends { id: string; level: JlptLevel }>(
+export const useMaterialListing = async <
+  T extends { id: string; level: JlptLevel },
+>(
   endpoint: string,
   scrollToFirstItem: (itemId: string) => void | Promise<void>,
 ) => {
@@ -71,6 +67,7 @@ export const useMaterialListing = async <T extends { id: string; level: JlptLeve
     router.push({ query: { ...route.query, level, page: 1 } })
 
   /** 等這一次請求結束。翻頁後要拿到新資料才知道要捲到哪張卡片。 */
+  /** 如果 API 還在載入，就等到它不再是 pending 才繼續。 */
   const waitForRequest = () =>
     new Promise<void>((resolve) => {
       if (status.value !== 'pending') {
@@ -100,8 +97,10 @@ export const useMaterialListing = async <T extends { id: string; level: JlptLeve
     await nextTick()
     await waitForRequest()
 
-    if (currentRequest !== scrollRequestVersion || safePage.value !== page) return
+    if (currentRequest !== scrollRequestVersion || safePage.value !== page)
+      return
     const firstItem = visibleItems.value[0]
+    //如果這一頁沒有資料，就不用捲動。
     if (!firstItem) return
 
     await scrollToFirstItem(firstItem.id)

@@ -9,7 +9,7 @@ import type { ReadingMaterial } from '~/types/reading'
 import { toPlainJapanese } from '~/utils/parseRuby'
 
 const route = useRoute()
-// 單字註解的例句已由 API 併好，這裡拿到的就是要顯示的最終內容。
+
 const { data, error } = await useFetch<ReadingMaterial>(
   `/api/materials/reading/${route.params.id}`,
 )

@@ -12,7 +12,7 @@ import { getMaterialCollections } from '~~/server/utils/materialCollections'
 /** 列表頁一頁幾筆。前端不傳這個值，由伺服器決定並回報。 */
 export const materialPageSize = 20
 
-/** 教材本身的程度，不含篩選器的 `all`。 */
+/** 教材本身的程度，不含`all`。 */
 const jlptLevels = materialLevels.filter(
   (level): level is JlptLevel => level !== 'all',
 )
@@ -55,7 +55,7 @@ export const listingResponse = <T>(items: T[], total: number, page: number) => (
 })
 
 /** 列表只需要 `MaterialSummary` 的欄位，不把整篇內文送到列表頁。 */
-export const materialSummaryProjection = {
+export const materialListFields = {
   type: 1,
   title: 1,
   excerpt: 1,
@@ -86,7 +86,7 @@ export const collectConversationNotes = (
  * 沒配對到的註解維持自己的備用例句，兩者皆無就不顯示例句區塊。
  * 在伺服器做完，前端不必為了幾個字載入整份單字表，`VocabularyPopover` 也一行都不用改。
  */
-export const attachVocabularyExamples = async (
+export const addExamplesToVocabularyNotes = async (
   notes: MaterialVocabularyNote[],
 ) => {
   const itemIds = [

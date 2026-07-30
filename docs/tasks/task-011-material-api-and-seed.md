@@ -53,7 +53,7 @@ MVP 必須同時滿足這三件事，缺一不可：
 
 - [x] **0-1** 刪除死檔 `app/components/song/Player.vue`（Task 001 的殘留，零引用，
       帶 3 個 eslint 與 1 個 typecheck error）。
-- [x] **0-2** 建立 `server/utils/materials.ts`，提供依座標取得教材文字與 voice 的
+- [x] **0-2** 建立 `server/utils/speechSource.ts`，提供依座標取得教材文字與 voice 的
       查詢函式 `findSpeechSource()`（命名與支援範圍見「定案一」）。
       **第一版實作直接 import `~/data/materials/*`**：
 
@@ -174,7 +174,7 @@ MVP 必須同時滿足這三件事，缺一不可：
       `coverImage` 是資料庫來的字串，Vite 只處理原始碼裡看得見的靜態路徑。
       日後要換 CDN 只需把字串換成完整 URL，程式不用改。
       已指定：`日本の四季`（閱讀 n5）與 `電話で席を予約する`（對話 n4）。
-- [x] **1-7** 把 `server/utils/materials.ts` 的實作從「讀資料檔」換成「讀 MongoDB」。
+- [x] **1-7** 把 `server/utils/speechSource.ts` 的實作從「讀資料檔」換成「讀 MongoDB」。
       函式簽章不變，因此 `/api/tts` 一行都不用改。
 
 **階段 1 檢查點（做完立刻執行）**
@@ -228,7 +228,7 @@ MVP 必須同時滿足這三件事，缺一不可：
 `/api/tts` 的 request body 就是 `SpeechTarget`：
 
 ```ts
-// server/utils/materials.ts
+// server/utils/speechSource.ts
 
 /** 「要唸哪一句」的座標。materialType 沿用 types/material.ts 既有的 MaterialType，不另創 scope 字彙。 */
 export type SpeechTarget = {

@@ -3,11 +3,14 @@ import type { VocabularyItem } from '~/types/vocabulary'
 
 const showRuby = ref(true)
 const activeVocabularyId = ref<string | null>(null)
-// 單字表裡一筆單字就是一篇「教材」，所以 materialId 不在這裡固定，
-// 改由 ListItem 隨每顆播放鍵送上（單字本體與例句都屬於同一筆單字）。
+
+// 每個播放按鈕會自行提供要播放的文字；單字和例句共用同一筆單字資料。
 const { audioState, togglePlay } = useTtsAudio({ materialType: 'vocabulary' })
+
+// 捲動編號
 let scrollRequestVersion = 0
 
+// 找到指定的單字，等畫面與展開動畫穩定後，平滑捲動到那個單字的位置。若使用者途中又點了別的單字，就取消前一次捲動。
 const scrollToVocabulary = async (
   vocabularyId: string,
   waitForAccordion = false,
@@ -15,19 +18,17 @@ const scrollToVocabulary = async (
   const currentScrollRequest = ++scrollRequestVersion
   await nextTick()
 
-  // 展開與上一個項目的收合動畫完成後，單字標題的位置才會固定。
+  // 如果單字正在展開，就等待 320 毫秒，讓展開與收合動畫完成，避免捲動位置不準。
   if (waitForAccordion) {
     await new Promise((resolve) => window.setTimeout(resolve, 320))
   }
 
   if (currentScrollRequest !== scrollRequestVersion) return
 
-  document
-    .getElementById(`vocabulary-${vocabularyId}-toggle`)
-    ?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    })
+  document.getElementById(`vocabulary-${vocabularyId}-toggle`)?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
 }
 
 const {
@@ -71,7 +72,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <MaterialPageShell>
+  <MaterialListPageLayout>
     <template #hero>
       <MaterialHero
         title="單字學習"
@@ -123,7 +124,7 @@ useSeoMeta({
           />
         </div>
 
-        <!-- 載入失敗要跟「這個程度沒有單字」分開講，不然看起來像資料真的不存在。 -->
+        <!-- 載入失敗要跟「這個程度沒有單字」分開，不然看起來像資料真的不存在。 -->
         <div v-if="hasError" class="py-16 text-center">
           <p class="text-neutral-700">單字載入失敗，請稍後再試。</p>
           <button
@@ -152,5 +153,5 @@ useSeoMeta({
         />
       </section>
     </div>
-  </MaterialPageShell>
+  </MaterialListPageLayout>
 </template>

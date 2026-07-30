@@ -86,7 +86,7 @@ task-005／006 目前文章／對話內文採「segment 陣列」模型：每句
 
 **定案：v1 不支援重疊，文法優先。** 先讓文法佔位，單字只填尚未被佔走的部分；因此重疊處的單字不會被標出來。
 
-見 `buildAnnotatedSegments()` 中 grammar 先於 vocabulary 的 `claim()` 順序。
+見 `createAnnotatedSpans()` 中 grammar 先於 vocabulary 的 `claim()` 順序。
 
 ### 4. 作者要在教材裡寫字面中括號怎麼辦？
 

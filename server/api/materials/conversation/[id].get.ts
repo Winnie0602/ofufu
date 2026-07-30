@@ -1,10 +1,10 @@
 import { createError, defineEventHandler, getRouterParam } from 'h3'
 import {
   getMaterialCollections,
-  toDomainDocument,
+  replaceMongoIdWithId,
 } from '~~/server/utils/materialCollections'
 import {
-  attachVocabularyExamples,
+  addExamplesToVocabularyNotes,
   collectConversationNotes,
 } from '~~/server/utils/materialQuery'
 
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, statusMessage: '找不到這則對話' })
   }
 
-  await attachVocabularyExamples(collectConversationNotes(material))
+  await addExamplesToVocabularyNotes(collectConversationNotes(material))
 
-  return toDomainDocument(material)
+  return replaceMongoIdWithId(material)
 })
