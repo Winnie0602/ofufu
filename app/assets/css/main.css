@@ -27,6 +27,12 @@
   --color-base-content: var(--ofufu-black);
 }
 
+html,
+body {
+  /* 擋掉進場動畫造成的橫向溢出 */
+  overflow-x: clip;
+}
+
 body {
   font-family: var(--font-sans);
 }

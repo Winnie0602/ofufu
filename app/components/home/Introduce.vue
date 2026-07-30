@@ -116,7 +116,7 @@ const levelSteps = [
           :key="mode.title"
           :class="[
             mode.motionDelay,
-            'intersect:motion-preset-slide-left intersect:motion-ease-spring-bouncier intersect-once card study-mode-card',
+            'intersect:motion-preset-slide-up intersect:motion-ease-spring-bouncier intersect-once card study-mode-card',
           ]"
         >
           <div class="card-body">
@@ -160,7 +160,7 @@ const levelSteps = [
               :key="step.level"
               :class="[
                 step.motionDelay,
-                'intersect:motion-preset-slide-left intersect:motion-ease-spring-bouncier intersect-once relative flex snap-center flex-col items-center px-2 text-center',
+                'intersect:motion-preset-slide-up intersect:motion-ease-spring-bouncier intersect-once relative flex snap-center flex-col items-center px-2 text-center',
               ]"
             >
               <div
