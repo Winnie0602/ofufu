@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     googleClientId: process.env.GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     public: {
-      siteUrl: process.env.APP_URL || 'https://karaoke.zeabur.app',
+      siteUrl: process.env.APP_URL || 'https://ofufu.zeabur.app',
     },
   },
   css: ['~/assets/css/main.css'],
