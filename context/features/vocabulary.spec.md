@@ -161,8 +161,12 @@ MongoDB Schema。未來可由規則程式或 AI 產生活用候選值，但必�
 
 ## Out of Scope
 
+> 本節記錄的是**本 spec 撰寫時（UI 原型階段）**的範圍，不是目前架構的描述。
+> 其中的 MongoDB 與教材 API 已在 Task 011 完成，現況見
+> `docs/tasks/task-011-material-api-and-seed.md`。
+
 - 單字獨立詳情頁。
-- MongoDB Schema、正式 API 與資料 migration。
+- ~~MongoDB Schema、正式 API 與資料 migration~~（已於 Task 011 完成，migration 除外）。
 - 會員登入及正式收藏。
 - 收藏持久化與跨裝置同步。
 - 單字測驗與複習排程。

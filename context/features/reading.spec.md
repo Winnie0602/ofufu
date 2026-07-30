@@ -136,7 +136,11 @@
 
 ## Out of Scope
 
-- MongoDB Schema、正式 API、資料 migration。
+> 本節記錄的是**本 spec 撰寫時（UI 原型階段）**的範圍，不是目前架構的描述。
+> 其中的 MongoDB、教材 API 與 TTS 受控流程已在 Task 011 完成，現況見
+> `docs/tasks/task-011-material-api-and-seed.md`。
+
+- ~~MongoDB Schema、正式 API、資料 migration~~（已於 Task 011 完成，migration 除外）。
 - 正式 Lexeme／Grammar Point registry 與後台對應流程。
 - AI 產生、管理員審核與發布後台。
 - 正式 TTS provider、音檔快取與 R2。
