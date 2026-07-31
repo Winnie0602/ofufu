@@ -1,5 +1,7 @@
 import { createHash } from 'node:crypto'
-import textToSpeech from '@google-cloud/text-to-speech'
+import textToSpeech, {
+  type TextToSpeechClient,
+} from '@google-cloud/text-to-speech'
 import {
   findSpeechSource,
   isSpeechMaterialType,
@@ -48,7 +50,7 @@ const pendingAudio = new Map<string, Promise<string>>()
 const cacheKeyOf = (voiceName: string, text: string) =>
   createHash('sha256').update(`${voiceName}|${text}`).digest('hex').slice(0, 32)
 
-let client: textToSpeech.TextToSpeechClient | null = null
+let client: TextToSpeechClient | null = null
 
 // 憑證在第一次真的要合成時才讀。放在模組頂層的話，沒設 GOOGLE_CREDENTIALS 的環境
 // 會在載入這支 route 時就整個炸掉，連「語音停用」的路徑都走不到。

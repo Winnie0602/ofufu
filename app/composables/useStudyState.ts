@@ -2,64 +2,53 @@ import type { PlayTtsAudioPayload } from '~/composables/useTtsAudio'
 import type { CurrentMaterial, StudyMode } from '~/types/material'
 
 /**
- * 閱讀頁與對話頁共用的學習狀態。
+ * 閱讀與對話詳情頁共用的「學習操作狀態」。
  *
- * 兩個頁面的學習操作幾乎一模一樣——開關假名、開關查字模式、調播放速度、
- * 把日文或中文遮起來再逐句掀開、展開文法說明、整篇連續播放。
- * 差別只在內文單位不同（閱讀是句子、對話是台詞），所以這裡一律用中性的 `id` 當鍵。
+ * 頁面負責決定這是哪篇教材、畫出內容，以及哪些句子／台詞要播放；
+ * 這裡集中管理兩頁重複的操作：
  *
- *   const { mode, showRuby, isJapaneseVisible, toggleAutoPlay } = useStudyState({
- *     material: { materialType: 'reading', materialId: material.id },
- *     initialGrammarId: grammarNotes[0]?.id ?? null,
- *   })
+ * - 學習模式、Ruby 與重點標記
+ * - 日文／中文遮罩與個別掀開紀錄
+ * - 目前展開的文法
+ * - 播放速度、單句播放與整篇／整段連播
  *
- * ## 各頁自己留著的東西
+ * 語音實際交給 `useTtsAudio`。閱讀的句子 ID 或對話的台詞 ID 在前端稱為
+ * `audioId`，送到 `/api/tts` 時會成為 `unitId`；後端再配合教材種類與教材 ID，
+ * 找出真正要朗讀的文字與聲音。
  *
- * 只有一邊才有的狀態不放進來：
- * - 閱讀：`articleVisible`（整篇模式的遮罩，對話沒有這個概念）
- * - 對話：選角色、角色扮演逐句練習那一整套
- *
- * ## 遮罩的兩層設計
- *
- * 「看不看得見」由兩件事決定：整體開關（眼睛圖示）＋ 個別掀開紀錄。
- *
- *   眼睛開著            → 全部看得見
- *   眼睛關著            → 全部遮起來
- *   眼睛關著＋點了某句  → 只有那句看得見
- *
- * 掀開紀錄只增不減；眼睛重新關上時整批清空，這樣才能再遮一次。
- * 所以 `japaneseVisible` 被 watch 著，一變動就清掀開紀錄。
+ * 只屬於單一頁面的流程仍留在頁面：閱讀的整篇遮罩，以及對話的選角與角色扮演。
  */
 export function useStudyState(options: {
-  /** 這一頁是哪一篇教材。語音要靠它組出 `/api/tts` 的座標。 */
+  /** 教材種類與教材 ID，供語音組成後端可查找的內容座標。 */
   material: CurrentMaterial
+  /** 頁面第一次顯示時預先展開的文法；沒有就傳 null 或省略。 */
   initialGrammarId?: string | null
 }) {
-  /** 目前的學習模式，對應頁面上方的 Tabs。 */
+  /** 頁面 Tabs 選中的學習模式。 */
   const mode = ref<StudyMode>('full')
-  /** 漢字上方要不要顯示假名。 */
+  /** 是否顯示漢字上方的 Ruby 假名。 */
   const showRuby = ref(true)
-  /** 查字模式：開啟後重點單字／文法才會有底色且可點開說明。 */
+  /** 是否顯示重點標記並允許點開單字／文法說明。 */
   const lookupMode = ref(false)
-  /** 語音播放速度，會即時傳給 useTtsAudio。 */
+  /** 語音速度；播放途中變更也會立即傳給 useTtsAudio。 */
   const playbackRate = ref(1)
 
-  /** 日文的整體顯示開關（畫面上的眼睛圖示）。 */
+  /** 日文與中文各自的整體顯示開關。 */
   const japaneseVisible = ref(true)
-  /** 中文翻譯的整體顯示開關，跟日文各自獨立。 */
   const translationVisible = ref(true)
 
-  // 眼睛關著時，被個別點開的那幾句。只增不減，重新遮起來是整批清空。
+  // 整體遮住後，使用者仍可單獨掀開某一句；Set 記錄已掀開的內容 ID。
   const revealedJapaneseIds = ref(new Set<string>())
   const revealedTranslationIds = ref(new Set<string>())
 
-  /** 目前展開說明的文法，一次只開一則；null 表示都收起來。 */
+  /** 目前展開的文法；一次只開一則，null 表示全部收合。 */
   const activeGrammarId = ref<string | null>(options.initialGrammarId ?? null)
 
+  // useStudyState 管操作狀態；真正的請求、播放、停止與音訊生命週期由 useTtsAudio 處理。
   const { audioState, togglePlay, playAll, playAndWait, stopAudio } =
     useTtsAudio(options.material, { playbackRate })
 
-  /** 是不是正在連續播放整篇／整段（不含單句播放）。 */
+  /** 是否正在連播整篇文章或整段對話；不包含手動播放單句。 */
   const isAutoPlaying = ref(false)
 
   const isJapaneseRevealed = (id: string) => revealedJapaneseIds.value.has(id)
@@ -83,17 +72,17 @@ export function useStudyState(options: {
   }
 
   /**
-   * 這一句的日文看不看得見：眼睛開著就看得見，關著時只有已掀開的那句看得見。
+   * 判斷某句是否可見：
+   * 整體開關打開時全部可見；關閉時只有使用者個別掀開的內容可見。
    *
-   * 對話的角色扮演另有規則（只遮你扮演角色的台詞），那邊不用這個，
-   * 改用 `isJapaneseRevealed` 自己組合。
+   * 對話角色扮演有自己的遮罩規則，由頁面搭配 `isJapaneseRevealed` 判斷。
    */
   const isJapaneseVisible = (id: string) =>
     japaneseVisible.value || isJapaneseRevealed(id)
   const isTranslationVisible = (id: string) =>
     translationVisible.value || isTranslationRevealed(id)
 
-  /** 點同一則文法是收合，點別則是換過去。 */
+  /** 點目前的文法就收合；點另一則就切換過去。 */
   const toggleGrammar = (grammarId: string) => {
     activeGrammarId.value = activeGrammarId.value === grammarId ? null : grammarId
   }
@@ -104,11 +93,9 @@ export function useStudyState(options: {
   }
 
   /**
-   * 連續播放整篇／整段；播放中再呼叫一次就是停止。
-   *
-   *   toggleAutoPlay(sentences.map((sentence) => ({ audioId: sentence.id })))
-   *
-   * 要播哪些句子由呼叫端決定——對話的角色扮演會先濾掉你自己的台詞才傳進來。
+   * 開始或停止連播。
+   * 頁面先決定要播哪些內容，再傳入句子／台詞的 audioId；
+   * 對話角色扮演會先排除使用者所扮演角色的台詞。
    */
   const toggleAutoPlay = async (items: PlayTtsAudioPayload[]) => {
     if (isAutoPlaying.value) {
@@ -120,11 +107,10 @@ export function useStudyState(options: {
     isAutoPlaying.value = false
   }
 
-  // 查字模式或模式切換後，單字 Popover 是新長出來的 DOM，
-  // FlyonUI 只在換頁時自動初始化一次，所以得手動再綁一次 click，否則點了沒反應。
+  // 切換模式會重新產生 Popover DOM，需請 FlyonUI 重新綁定互動。
   const reinitFlyonui = useFlyonuiReinit()
   watch([lookupMode, mode], () => reinitFlyonui())
-  // 眼睛重新關上時清掉掀開紀錄，讓它能重新遮全部。
+  // 整體顯示狀態改變時清除個別掀開紀錄，避免下次遮罩沿用舊狀態。
   watch(japaneseVisible, clearJapaneseReveals)
   watch(translationVisible, clearTranslationReveals)
 

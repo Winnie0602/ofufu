@@ -2,12 +2,11 @@ import type { AudioPlaybackState } from '~/types/audio'
 import type { SpeechMaterialType } from '~/types/material'
 
 /**
- * 這個 composable 負責唸「哪一篇教材」。
+ * 這次播放屬於哪種教材、哪一份教材。
  *
- * `materialId` 之所以可以不填，是因為單字列表頁的一顆顆播放鍵屬於不同的單字，
- * 而單字表裡**一筆單字就是一篇教材**（見 task-011 定案一）。那一頁只建立一個
- * composable（才能維持「同時只播一段」），所以改由每次 payload 指定是哪一筆。
- * 閱讀與對話詳情頁整頁就是一篇教材，在這裡填好，呼叫端只要給 `audioId`。
+ * 閱讀／對話詳情頁整頁只對應一份教材，因此建立 useTtsAudio 時就能傳入 materialId。
+ * 單字列表一頁有很多筆單字，materialId 會隨播放按鈕改變，所以建立時可以不傳，
+ * 改由每次播放的 PlayTtsAudioPayload 提供。
  */
 export type TtsMaterialSource = {
   materialType: SpeechMaterialType
@@ -15,17 +14,16 @@ export type TtsMaterialSource = {
 }
 
 /**
- * 要唸的一個單位。
+ * 一次要播放的教材內容。
  *
- * `audioId` 就是教材裡那個單位的 id（句子、台詞、單字、例句、單字註解），
- * 送到 `/api/tts` 當 `unitId`，同時讓畫面知道「現在正在唸的是哪一句」，
- * 好把那顆按鈕變成播放中的樣子。
+ * audioId 可以是單字、例句、閱讀句子、對話台詞或單字註解的 ID。
+ * 送到 `/api/tts` 時會放進 unitId；前端也用它判斷哪顆按鈕正在載入或播放。
  *
- * **要唸的文字不由前端決定**——伺服器依座標自己去教材裡查，所以這裡沒有 `text`。
+ * 前端不傳朗讀文字。伺服器會用 materialType、materialId、unitId 從教材資料找文字。
  */
 export interface PlayTtsAudioPayload {
   audioId: string
-  /** 只有單字頁需要：指定這顆按鈕屬於哪一筆單字。其餘教材在建立 composable 時就填好了。 */
+  /** 單字頁用來指出這次播放屬於哪筆單字；閱讀／對話已在建立 useTtsAudio 時傳入。 */
   materialId?: string
 }
 
@@ -34,7 +32,13 @@ type PlayAudioOptions = {
 }
 
 /**
- * 教材語音播放。
+ * 教材語音的前端播放工具。
+ *
+ * 它會把教材座標送到 `/api/tts`，收到 Base64 MP3 後交給瀏覽器 Audio 播放。
+ * 它不決定朗讀文字或 voice，那些由伺服器處理。
+ *
+ * 閱讀頁的使用方式：
+ *
  *   const { audioState, togglePlay } = useTtsAudio({
  *     materialType: 'reading',
  *     materialId: material.id,
@@ -43,38 +47,28 @@ type PlayAudioOptions = {
  *   togglePlay({ audioId: sentence.id })
  *   audioState(sentence.id)   →  'loading' → 'playing' → 'idle'
  *
- * ## 一次只播一段
+ * ## 播放限制
  *
- * 整個 composable 只有一個 `Audio` 物件。點了 B 句，A 句就會被停掉，
- * 不會兩句疊在一起唸。所以頁面上再多顆播放鈕，同時最多只有一顆在動。
+ * 每個 useTtsAudio 實例只使用一個瀏覽器 Audio 物件。
+ * 播放新內容前會停止舊內容，因此同一個實例不會同時播放兩段聲音。
  *
- * ## 三個播放入口，差在「要不要等它唸完」
+ * ## 三種播放方式
  *
  * | 函式 | 用在哪 | 行為 |
  * | --- | --- | --- |
- * | `togglePlay` | 每句旁邊的小喇叭 | 播下去就回來，不等；同一句再按一次是停止 |
- * | `playAll` | 整篇／整段自動播放 | 一句唸完才接下一句 |
- * | `playAndWait` | 對話角色扮演逐句練習 | 播一句並等到唸完，回傳「是不是自然唸完的」 |
+ * | `togglePlay` | 單字／句子／台詞旁的播放鍵 | 開始播放；同一顆再按一次就停止 |
+ * | `playAll` | 整篇文章／整段對話 | 等上一句結束後自動播放下一句 |
+ * | `playAndWait` | 對話角色扮演 | 等一段結束並回報是否自然播完 |
  *
- * `playAndWait` 之所以要回傳結果，是因為練習流程要靠它決定「可以前進到下一句了嗎」——
- * 如果是被使用者中途按停的，就不該自動往下跑。
+ * 角色扮演只有在對方台詞自然播完時才能前進；若中途被停止，playAndWait 會回傳 false。
  *
- * ## 為什麼有一堆版本號
+ * ## 防止舊請求回來播放
  *
- * 語音是非同步拿回來的，使用者卻可以隨時亂點。想像這個順序：
+ * 使用者可能在 A 的 API 尚未回來前改播 B。requestVersion 和 pendingPlayVersion
+ * 用來辨認已過期的 A 請求及連播流程，避免它回來後蓋掉 B 或繼續播放下一句。
  *
- *   1. 點 A 句 → 送出請求，等 API
- *   2. 不耐煩，改點 B 句 → 送出另一個請求
- *   3. A 的回應才姍姍來遲
- *
- * 沒有防護的話，A 的回應會覆蓋掉 B 的播放狀態，畫面就錯亂了。
- *
- * `requestVersion`／`pendingPlayVersion` 是流水號，像餐廳叫號：每次停止或切換就換一批新號碼。
- * 非同步工作開始前先記下「我拿的是 3 號」，回來時看看現在叫到幾號——
- * 已經 5 號了就代表使用者早就換去別的，這輪安靜退場，不要去動畫面。
- *
- * @param source       這個 composable 唸的是哪一篇教材。
- * @param options.playbackRate 播放速度。傳 ref 進來的話，播放中調整會即時生效。
+ * @param source 教材種類，以及可預先確定的教材 ID。
+ * @param options.playbackRate 播放速度；傳入 ref 時，播放中改速會立即生效。
  */
 export const useTtsAudio = (
   source: TtsMaterialSource,
@@ -84,19 +78,19 @@ export const useTtsAudio = (
   const playingAudioId = ref<string | null>(null)
   const { show: showToast } = useToast()
   let audio: HTMLAudioElement | null = null
-  // 守「一次請求」：每次停止或切換播放都 +1，讓比較晚回來的 TTS 回應自動作廢。
+  // 單次 API 請求版本：停止或切換內容後，舊回應即使較晚回來也不播放。
   let requestVersion = 0
-  // 守「還在等的播放」：playAll 的迴圈與 playAndWait 的等待都靠它知道自己是不是已經過期。
+  // 播放流程版本：停止後讓 playAll 迴圈和 playAndWait 等待一起失效。
   let pendingPlayVersion = 0
   let removeAudioListeners: (() => void) | null = null
 
-  // 速度收斂成合法正數。沒給或給了怪東西一律當 1，免得把 playbackRate 設成 0 或 NaN 讓音訊卡住。
+  // 速度必須是正數；未提供或不合法時使用正常速度 1。
   const getPlaybackRate = () => {
     const rate = toValue(options.playbackRate) ?? 1
     return Number.isFinite(rate) && rate > 0 ? rate : 1
   }
 
-  // 播到一半改速度：使用者拉了速度選單，正在唸的這句立刻變速，不用等下一句。
+  // 播放途中調整速度時，立即更新目前的 Audio。
   if (options.playbackRate !== undefined) {
     watch(getPlaybackRate, (rate) => {
       if (audio) audio.playbackRate = rate
@@ -104,7 +98,7 @@ export const useTtsAudio = (
   }
 
   /**
-   * 這句現在是什麼狀態，給按鈕決定要顯示轉圈、停止還是播放圖示。
+   * 回傳指定內容目前的播放狀態，供 AudioButton 選擇圖示。
    *
    *   audioState('sV7cL3pT1wF')  →  'idle' | 'loading' | 'playing'
    */
@@ -114,11 +108,11 @@ export const useTtsAudio = (
     return 'idle'
   }
 
-  /** 停掉目前這一段（不影響連播迴圈）。 */
+  /** 停止目前的聲音與 API 狀態，但不主動取消外層連播版本。 */
   const stopCurrentAudio = () => {
     requestVersion += 1
 
-    // 先拆掉上一段的事件，否則它結束時會回頭把現在這顆按鈕的狀態改掉。
+    // 移除上一段的事件，避免舊 Audio 事件修改新內容的按鈕狀態。
     removeAudioListeners?.()
     removeAudioListeners = null
 
@@ -132,24 +126,27 @@ export const useTtsAudio = (
     playingAudioId.value = null
   }
 
-  /** 全部停掉，包含還在跑的連播。 */
+  /** 停止目前聲音，並使整篇連播或角色扮演等待流程失效。 */
   const stopAudio = () => {
+    // 整個播放流程的版本號:目前還在等待或連播的流程，是不是最新那一輪？
     pendingPlayVersion += 1
     stopCurrentAudio()
   }
 
   /**
-   * 實際去要音訊並播放。回傳「有沒有真的開始播」。
+   * 呼叫 `/api/tts` 取得 MP3 並開始播放，回傳是否成功開始。
    *
-   * `toggleWhenActive` 決定「對著正在播的那句再呼叫一次」會怎樣：
-   * - true（逐句按鈕）：停止，當作使用者要關掉
-   * - false（連播中）：照播，因為那是流程推進不是使用者在按
+   * toggleWhenActive 為 true：再次點擊目前內容會停止。
+   * toggleWhenActive 為 false：這是 playAll／playAndWait 的流程呼叫，不當成手動切換。
    */
   const requestAudio = async (
     { audioId, materialId }: PlayTtsAudioPayload,
     { toggleWhenActive }: PlayAudioOptions,
   ) => {
-    // 兩邊都沒填是呼叫端寫錯，直接吵出來；靜默失敗只會變成「按了沒反應」很難查。
+    // materialId 有兩個可能來源：
+    // 1. 單字頁在這次播放的 payload 傳入 materialId。
+    // 2. 閱讀／對話在建立 useTtsAudio 時，已放進 source.materialId。
+    // 兩處都沒有時，API 無法知道要去哪份教材找內容，因此直接拋出明確錯誤。
     const targetMaterialId = materialId ?? source.materialId
     if (!targetMaterialId) {
       throw new Error(
@@ -187,10 +184,10 @@ export const useTtsAudio = (
         },
       })
 
-      // 等待期間使用者可能已經切走或按停，這時舊回應直接丟掉。
+      // 等 API 時若使用者已停止或改播其他內容，忽略這份過期回應。
       if (currentRequestVersion !== requestVersion) return
 
-      // 整個 composable 共用一顆 Audio，這是「同時只播一段」的實作方式。
+      // 延遲建立並重複使用同一個瀏覽器 Audio，避免同一實例內聲音重疊。
       audio ??= new Audio()
 
       const handlePlaying = () => {
@@ -218,8 +215,7 @@ export const useTtsAudio = (
       }
 
       audio.src = `data:audio/mp3;base64,${response.audioContent}`
-      // 兩個都設：defaultPlaybackRate 讓載入完成後仍套用，playbackRate 讓它立刻生效。
-      // 只設一個的話，部分瀏覽器會在載入音訊時把速度重設回 1。
+      // 同時設定預設與目前速度，避免部分瀏覽器載入音訊後把速度重設為 1。
       audio.defaultPlaybackRate = getPlaybackRate()
       audio.playbackRate = audio.defaultPlaybackRate
       await audio.play()
@@ -231,8 +227,8 @@ export const useTtsAudio = (
   }
 
   /**
-   * 播一句，不等它唸完就回來。給每句旁邊的小喇叭用。
-   * 對著正在播的那句再按一次＝停止。
+   * 手動播放一個內容。開始播放後函式即可結束，不等待聲音播完；
+   * 再次點擊同一內容時停止。
    */
   const togglePlay = async (payload: PlayTtsAudioPayload) => {
     pendingPlayVersion += 1
@@ -240,10 +236,8 @@ export const useTtsAudio = (
   }
 
   /**
-   * 等某一句唸完（或被打斷）。
-   *
-   * `<audio>` 的 ended 事件已經被 `requestAudio` 用掉了，所以這裡改成監看
-   * loading／playing 兩個 ref：只要這句不再是它們其中之一，就代表結束了。
+   * 等待指定內容離開 loading／playing 狀態。
+   * 自然播完、播放失敗、被停止或播放流程失效，都會結束等待。
    */
   const waitForAudioEnd = (audioId: string, currentPendingPlayVersion: number) =>
     new Promise<void>((resolve) => {
@@ -272,11 +266,12 @@ export const useTtsAudio = (
     })
 
   /**
-   * 一句接一句連播，給「播放整篇文章」「自動播放對話」用。
+   * 依清單順序連播文章句子或對話台詞。
    *
    *   playAll(sentences.map((sentence) => ({ audioId: sentence.id })))
    *
-   * 中途被停掉（使用者按停、切換模式、離開頁面）就直接結束，不會硬把剩下的唸完。
+   * 每次只請求一筆，等這筆結束後才請求下一筆。
+   * 使用者停止、切換模式或離開頁面後，版本失效，剩餘清單不再播放。
    */
   const playAll = async (items: PlayTtsAudioPayload[]) => {
     stopAudio()
@@ -293,13 +288,12 @@ export const useTtsAudio = (
   }
 
   /**
-   * 播一句並等到唸完，回傳「是不是好好唸完的」。
+   * 播放一筆並等待結束，供對話角色扮演控制下一步。
    *
    *   true   自然唸完 → 練習流程可以前進到下一句
    *   false  被停止、被切換、被手動點播打斷 → 停在原地
    *
-   * 對話的角色扮演逐句練習用這個：對方的台詞自動唸完才輪到你。
-   * 一般逐句小喇叭不走這裡（那個不該卡住畫面）。
+   * 一般播放鍵使用 togglePlay，不需要等待結果。
    */
   const playAndWait = async (payload: PlayTtsAudioPayload) => {
     stopAudio()
@@ -312,7 +306,7 @@ export const useTtsAudio = (
     return currentPendingPlayVersion === pendingPlayVersion
   }
 
-  // 離開頁面就停掉，不然聲音會在背景繼續唸。
+  // 頁面或使用此 composable 的元件卸載時，停止聲音與未完成流程。
   onScopeDispose(stopAudio)
 
   return {

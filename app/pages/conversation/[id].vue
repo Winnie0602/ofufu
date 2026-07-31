@@ -121,7 +121,20 @@ const stopPractice = () => {
   practiceIndex.value = null
   stopAudio()
 }
-// 依 practiceIndex 推進：別人台詞自動播、播畢自動前進；你的台詞停下不出聲，等掀開後手動繼續。
+/**
+ * 執行角色扮演
+ *
+ * practiceIndex 是流程游標，用來指出目前輪到 lines 裡的第幾句：
+ *
+ * 1. 超過最後一句 → stopPractice() 結束練習。
+ * 2. 輪到使用者扮演的角色 → stopAudio()，停在這句、不播放，
+ *    等使用者依序按「看答案」和「繼續對話」。
+ * 3. 輪到其他角色 → playAndWait() 播放這句並等待；
+ *    只有自然播完才將 practiceIndex 加 1，再執行下一步。
+ *
+ * 若播放被手動停止、切換或其他播放打斷，playAndWait() 會回傳 false，
+ * 此函式就停在目前進度，不會自己跳到下一句。
+ */
 const runPracticeStep = async () => {
   const index = practiceIndex.value
   if (index === null) return
@@ -150,7 +163,21 @@ const togglePractice = () => {
   if (isPracticing.value) stopPractice()
   else startPractice()
 }
-// 你的回合按鈕：未掀開＝看答案（掀開日文）；已掀開＝繼續對話（前進），最後一句改為結束練習。
+/**
+ * 處理使用者回合下方的同一顆操作按鈕。
+ *
+ * 第一次按「看答案」：
+ * - revealJapaneseLine() 掀開目前被遮住的日文。
+ * - 立即 return，不改 practiceIndex、不播放，也不前往下一句。
+ *
+ * 第二次按「繼續對話」：
+ * - practiceIndex 加 1，將游標移到下一句。
+ * - 再呼叫 runPracticeStep()。
+ * - 下一句是其他角色時會自動播放；是使用者台詞時會再次停下等待操作。
+ *
+ * 如果目前已是最後一句，第二次按鈕顯示「結束練習」：
+ * - stopPractice() 清除 practiceIndex 並停止音訊。
+ */
 const handlePracticeAction = (lineId: string) => {
   if (!isJapaneseRevealed(lineId)) {
     revealJapaneseLine(lineId)
@@ -164,10 +191,12 @@ const handlePracticeAction = (lineId: string) => {
   void runPracticeStep()
 }
 const practiceActionText = (lineId: string) => {
+  // 同一顆按鈕依狀態依序顯示：看答案 → 繼續對話；最後一步則顯示結束練習。
   if (!isJapaneseRevealed(lineId)) return '看答案'
   return isLastPracticeStep.value ? '結束練習' : '繼續對話'
 }
 const practiceActionIcon = (lineId: string) => {
+  // 按鈕文字與 icon 使用同一套狀態判斷：眼睛 → 下一步箭頭／停止。
   if (!isJapaneseRevealed(lineId)) return 'icon-[tabler--eye]'
   return isLastPracticeStep.value
     ? 'icon-[tabler--player-stop-filled]'
