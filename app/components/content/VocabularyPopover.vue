@@ -117,23 +117,42 @@ const triggerClass = computed(() => {
             {{ note.dictionaryForm }}
           </span>
         </span>
-        <span v-if="note.examples?.length" class="mt-5 block">
-          <span class="flex flex-wrap items-center gap-1.5">
-            <span
-              class="badge badge-soft badge-neutral badge-sm rounded-full px-2"
-            >
-              例句
-            </span>
-            <span
-              v-if="note.exampleSource === 'vocabulary'"
-              class="badge badge-soft badge-primary badge-sm rounded-full px-2"
-            >
-              來自單字教材
-            </span>
+        <span class="mt-5 block">
+          <span
+            class="badge badge-soft badge-neutral badge-sm rounded-full px-2"
+          >
+            本篇例句
           </span>
           <span class="mt-1.5 block space-y-2 pl-2">
             <span
               v-for="example in note.examples"
+              :key="example.id"
+              class="block"
+            >
+              <span class="block text-sm font-medium">
+                {{ example.japanese }}
+              </span>
+              <span class="mt-0.5 block text-xs text-neutral-500">
+                {{ example.translation }}
+              </span>
+            </span>
+            <span
+              v-if="!note.examples?.length"
+              class="block text-xs text-neutral-400"
+            >
+              目前沒有本篇例句
+            </span>
+          </span>
+        </span>
+        <span v-if="note.vocabularyExamples?.length" class="mt-5 block">
+          <span
+            class="badge badge-soft badge-primary badge-sm rounded-full px-2"
+          >
+            單字教材例句
+          </span>
+          <span class="mt-1.5 block space-y-2 pl-2">
+            <span
+              v-for="example in note.vocabularyExamples"
               :key="example.id"
               class="block"
             >

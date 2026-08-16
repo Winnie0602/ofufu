@@ -196,10 +196,10 @@ export type MaterialVocabularyNote = {
   partOfSpeech: VocabularyPartOfSpeechCode
   /** 這個字在**這一段**是什麼意思。單字表不會有這種上下文資訊，所以配對成功後仍然顯示。 */
   contextualMeaning: string
-  /** 還沒連上單字表時的備用例句。連上之後優先顯示單字表的例句。 */
+  /** 這篇教材依目前情境提供的本篇例句。 */
   examples?: MaterialExample[]
-  /** 詳情 API 併入例句後標示來源；省略表示使用註解自帶的備用例句。 */
-  exampleSource?: 'vocabulary'
+  /** 詳情 API 依 vocabularyItemId 併入的單字教材例句；不寫回教材正本。 */
+  vocabularyExamples?: MaterialExample[]
   /**
    * 配對成功後填入的單字表 id，沒配到就是 null。
    * 前端原型是執行時即時配對，所以假資料不用手寫；之後改由後端在匯入時填。

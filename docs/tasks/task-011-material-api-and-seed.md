@@ -509,13 +509,13 @@ seed 一次
 
 ---
 
-### 定案五：詳情 API 在伺服器端把單字例句併進註解
+### 定案五：詳情 API 在伺服器端把單字教材例句另外併進註解
 
-`context/content-model.md` 定的例句優先序：
+`context/content-model.md` 定的例句來源：
 
-1. 有配對到單字表 → 用**單字表的 `examples`**
-2. 沒配對到但註解自帶備用例句 → 用註解的
-3. 兩者皆無 → 不顯示例句區塊
+1. 註解的 `examples` 保留為**本篇例句**。
+2. 有配對到單字表 → 另外提供 `vocabularyExamples` 作為**單字教材例句**。
+3. 兩個來源的日文相同 → 保留本篇例句，單字教材例句去除重複句。
 
 **第 1 條由詳情 API 在回傳前完成**，不在前端做：
 
@@ -526,10 +526,10 @@ const material = await readingMaterials.findOne({ _id: id })
 const ids = allNotes(material).map((n) => n.vocabularyItemId).filter(Boolean)
 const items = await vocabularyItems.find({ _id: { $in: ids } }).toArray()
 
-// 配對成功的註解換成單字表的例句；沒配對的維持自己的備用例句
+// 配對成功時另外併入單字教材例句，不覆蓋本篇例句
 for (const note of allNotes(material)) {
   const item = itemMap.get(note.vocabularyItemId)
-  if (item) note.examples = item.examples
+  if (item) note.vocabularyExamples = item.examples
 }
 ```
 
@@ -537,15 +537,15 @@ for (const note of allNotes(material)) {
 
 - 前端不必為了幾個字載入整份單字表，payload 只含這篇實際用到的例句。
 - 詳情頁只有一個 `useFetch`，不需要處理兩個請求的 loading／error 組合與 SSR 時序。
-- 優先序規則只存在伺服器一處，之後收藏頁共用同一份行為。
-- Popover 維持原有資訊層級，只增加低干擾的收錄狀態與例句來源標示。
+- 來源合併與跨來源去重只存在伺服器一處。
+- Popover 以「本篇例句」與「單字教材例句」分區，來源不需靠附加 badge 猜測。
 
 只補 popover 需要的欄位，**不把整筆單字資料攤平進註解**——完整活用表與通用意思
 仍然只出現在單字列表頁與未來的收藏區，維持 `content-model.md` 的「參照優先」。
 
-詳情 API 同時以 `exampleSource: 'vocabulary'` 標示已換成單字教材例句；Popover
-顯示「已收錄於單字教材」，若表層形是活用形則帶出配對到的辭書形。未配對註解
-維持原有畫面與備用例句，不顯示來源標示。
+詳情 API 以 `vocabularyExamples` 承載單字教材例句；Popover 顯示「已收錄於單字教材」，
+若表層形是活用形則帶出配對到的辭書形。未配對註解仍顯示本篇例句；若本篇沒有例句，
+顯示「目前沒有本篇例句」。
 
 `vocabularyMatching.ts` 的 `favoriteVocabularyKey` 保留給收藏去重使用。
 

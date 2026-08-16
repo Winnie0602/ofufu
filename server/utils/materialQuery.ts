@@ -81,10 +81,10 @@ export const collectConversationNotes = (
   material.lines.flatMap((line) => line.vocabularyNotes ?? [])
 
 /**
- * 把配對成功的註解換成單字表的例句（`content-model.md` 的例句優先序第 1 條）。
+ * 把配對成功的單字教材例句併進註解，但保留本篇教材自己的例句。
  *
- * 沒配對到的註解維持自己的備用例句，兩者皆無就不顯示例句區塊。
- * 在伺服器做完，前端不必為了幾個字載入整份單字表，`VocabularyPopover` 也一行都不用改。
+ * 兩個來源若有相同日文，只保留本篇例句裡的那一則，避免 Popover 重複顯示。
+ * 在伺服器做完，前端不必為了幾個字載入整份單字表。
  */
 export const addExamplesToVocabularyNotes = async (
   notes: MaterialVocabularyNote[],
@@ -119,9 +119,13 @@ export const addExamplesToVocabularyNotes = async (
     const examples = note.vocabularyItemId
       ? examplesById.get(note.vocabularyItemId)
       : undefined
-    if (examples) {
-      note.examples = examples
-      note.exampleSource = 'vocabulary'
-    }
+    if (!examples) continue
+
+    const contextJapanese = new Set(
+      note.examples?.map((example) => example.japanese) ?? [],
+    )
+    note.vocabularyExamples = examples.filter(
+      (example) => !contextJapanese.has(example.japanese),
+    )
   }
 }
