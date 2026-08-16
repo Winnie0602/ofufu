@@ -28,6 +28,12 @@ const isInflected = computed(
   () => props.note.surface !== props.note.dictionaryForm,
 )
 
+const matchedVocabularyLabel = computed(() =>
+  isInflected.value
+    ? `已收錄為辭書形「${props.note.dictionaryForm}」`
+    : '已收錄於單字教材',
+)
+
 // 觸發樣式：badge 為側欄「重點單字」水平標籤；highlight 為內文可點字（查字模式開啟時才出現）。
 // 內文的底色標記改由 RubyText 只套在「底排文字」上（見 AnnotatedText highlightClass），
 // 此處的內文按鈕本身不再上底色，僅維持文字色與可點性，避免背景蓋到 furigana。
@@ -74,6 +80,13 @@ const triggerClass = computed(() => {
             <span class="mt-0.5 block text-xs text-neutral-500">
               {{ note.surfaceReading }}
             </span>
+            <span
+              v-if="note.vocabularyItemId"
+              class="text-primary mt-1.5 inline-flex items-center gap-1 text-xs font-medium"
+            >
+              <span class="icon-[tabler--circle-check] size-3.5"></span>
+              {{ matchedVocabularyLabel }}
+            </span>
           </span>
           <span class="flex gap-2">
             <AudioButton
@@ -105,10 +118,18 @@ const triggerClass = computed(() => {
           </span>
         </span>
         <span v-if="note.examples?.length" class="mt-5 block">
-          <span
-            class="badge badge-soft badge-neutral badge-sm rounded-full px-2"
-          >
-            例句
+          <span class="flex flex-wrap items-center gap-1.5">
+            <span
+              class="badge badge-soft badge-neutral badge-sm rounded-full px-2"
+            >
+              例句
+            </span>
+            <span
+              v-if="note.exampleSource === 'vocabulary'"
+              class="badge badge-soft badge-primary badge-sm rounded-full px-2"
+            >
+              來自單字教材
+            </span>
           </span>
           <span class="mt-1.5 block space-y-2 pl-2">
             <span

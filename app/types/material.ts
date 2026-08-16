@@ -198,6 +198,8 @@ export type MaterialVocabularyNote = {
   contextualMeaning: string
   /** 還沒連上單字表時的備用例句。連上之後優先顯示單字表的例句。 */
   examples?: MaterialExample[]
+  /** 詳情 API 併入例句後標示來源；省略表示使用註解自帶的備用例句。 */
+  exampleSource?: 'vocabulary'
   /**
    * 配對成功後填入的單字表 id，沒配到就是 null。
    * 前端原型是執行時即時配對，所以假資料不用手寫；之後改由後端在匯入時填。

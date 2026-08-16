@@ -14,8 +14,8 @@
 
 六大教材類型為單字、文章、對話、歌曲、文法、測驗。目前 v1 交付**單字、閱讀、對話**三種。
 
-三種教材的 MVP 工程主體（資料庫、API、頁面、受控語音）已完成；**尚未完成的是最後一輪
-瀏覽器人工走查，以及語音公開開啟前的防濫用（rate limit）**。進度以
+三種教材的 MVP 工程主體（資料庫、API、頁面、受控語音）與 Task 011 驗收皆已完成；
+下一步為 Task 009 的音檔保存、預產與公開播放流程。進度以
 `context/current-feature.md` 與 `docs/tasks/task-011-material-api-and-seed.md` 為準。
 
 | 教材 | 狀態 | 內容 |
@@ -140,7 +140,7 @@ curl -X POST http://localhost:3000/api/admin/seed -H "x-seed-token: $SEED_TOKEN"
 回應是一份匯入報告：upsert 筆數、重複的自然鍵、以及未配對的單字清單。
 
 > 語音**預設關閉**。`TTS_ENABLED` 未設時教材頁照常可讀，只有播放鍵會拿到 503。
-> 公開開啟前需要先加 rate limit——目前的保護擋得住任意文字，擋不住拿合法座標反覆請求。
+> Task 009 若只公開讀取預產音檔，付費合成入口可維持私有；若保留公開即時合成 fallback，再加入 rate limit。
 
 ---
 

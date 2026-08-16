@@ -119,6 +119,9 @@ export const addExamplesToVocabularyNotes = async (
     const examples = note.vocabularyItemId
       ? examplesById.get(note.vocabularyItemId)
       : undefined
-    if (examples) note.examples = examples
+    if (examples) {
+      note.examples = examples
+      note.exampleSource = 'vocabulary'
+    }
   }
 }
