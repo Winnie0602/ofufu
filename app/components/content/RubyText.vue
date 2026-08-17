@@ -13,9 +13,15 @@ defineProps<{
 </script>
 
 <template>
-  <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
-  <template v-for="(token, index) in tokens" :key="index"><ruby v-if="token.ruby"><span :class="highlightClass">{{ token.text }}</span><rt
-        v-if="showRuby"
-        class="text-[calc(0.4em+1px)] leading-none text-neutral-500"
-      >{{ token.ruby }}</rt></ruby><span v-else :class="highlightClass">{{ token.text }}</span></template>
+  <template v-for="(token, index) in tokens" :key="index">
+    <ruby v-if="token.ruby">
+      <span :class="highlightClass">{{ token.text }}</span>
+      <template v-if="showRuby">
+        <rp>（</rp>
+        <rt class="text-[calc(0.4em+1px)] leading-none text-neutral-500">{{ token.ruby }}</rt>
+        <rp>）</rp>
+      </template>
+    </ruby>
+    <span v-else :class="highlightClass">{{ token.text }}</span>
+  </template>
 </template>
