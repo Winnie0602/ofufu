@@ -1,6 +1,6 @@
 # Nuxt dev/build outputs
 .output
-.data
+.data/
 .nuxt
 .nitro
 .cache
@@ -12,6 +12,9 @@ node_modules
 # Logs
 logs
 *.log
+
+# 本機草稿與筆記
+temp/
 
 # Misc
 .DS_Store
@@ -27,8 +30,6 @@ logs
 server/tts-key.json
 server/data/songs/example.json
 
-# 面試簡報與講稿
-日文學習網站-技術面試簡報.pptx
-日文學習網站-逐頁講稿.md
+# 面試素材
 old-global-player.png
 ~$*
